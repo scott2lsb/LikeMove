@@ -18,4 +18,20 @@
 /**
  *  定义服务器接口字段
  */
-#define BaseURLString @"http://www.haoapp123.com/app/localuser/aidongdong/api.php?"
+#define BaseURLString @"http://www.haoapp123.com/app/localuser/aidongdong/api.php"
+/**
+ *  标注DEBUG模式
+ */
+#ifdef DEBUG
+#   define DLog(...) NSLog(__VA_ARGS__)
+#else
+#   define DLog(...)
+#endif
+/**
+ *  NSUserDefaults用来存储user的cookie
+ */
+#define mUserDefaultsCookie @"user_action_cookie"
+/**
+ *  NSUserDefaults用来存储user的info
+ */
+#define mUserInfo  @"user_info"

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A04AF0219C5D27C000212E7 /* LMUserActBL.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A04AF0119C5D27C000212E7 /* LMUserActBL.m */; };
+		8A04AF0519C5D28D000212E7 /* LMContactBL.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A04AF0419C5D28D000212E7 /* LMContactBL.m */; };
+		8A04AF0819C5D2A9000212E7 /* LMShopBL.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A04AF0719C5D2A9000212E7 /* LMShopBL.m */; };
+		8A04AF0B19C5D2E0000212E7 /* LMSportBL.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A04AF0A19C5D2E0000212E7 /* LMSportBL.m */; };
+		8A04AF0E19C5E8F4000212E7 /* CoreDataDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A04AF0D19C5E8F4000212E7 /* CoreDataDAO.m */; };
+		8A04AF1519C6C0E2000212E7 /* UserActDA.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A04AF1419C6C0E2000212E7 /* UserActDA.m */; };
+		8A04AF1819C6C1A1000212E7 /* CoreDateMoves.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A04AF1619C6C1A1000212E7 /* CoreDateMoves.xcdatamodeld */; };
+		8A04AF2219C6D42A000212E7 /* LMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A04AF2119C6D42A000212E7 /* LMLoginViewController.m */; };
+		8A04AF2B19C7E319000212E7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A04AF2A19C7E319000212E7 /* User.m */; };
 		8A33783919C5C656008B9AF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A33783819C5C656008B9AF5 /* Foundation.framework */; };
 		8A33783B19C5C656008B9AF5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A33783A19C5C656008B9AF5 /* CoreGraphics.framework */; };
 		8A33783D19C5C656008B9AF5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A33783C19C5C656008B9AF5 /* UIKit.framework */; };
@@ -14,8 +23,6 @@
 		8A33784519C5C656008B9AF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A33784419C5C656008B9AF5 /* main.m */; };
 		8A33784919C5C656008B9AF5 /* LMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A33784819C5C656008B9AF5 /* LMAppDelegate.m */; };
 		8A33784C19C5C656008B9AF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A33784A19C5C656008B9AF5 /* Main.storyboard */; };
-		8A33784F19C5C656008B9AF5 /* LMFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A33784E19C5C656008B9AF5 /* LMFirstViewController.m */; };
-		8A33785219C5C656008B9AF5 /* LMSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A33785119C5C656008B9AF5 /* LMSecondViewController.m */; };
 		8A33785419C5C656008B9AF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A33785319C5C656008B9AF5 /* Images.xcassets */; };
 		8A33785B19C5C656008B9AF5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A33785A19C5C656008B9AF5 /* XCTest.framework */; };
 		8A33785C19C5C656008B9AF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A33783819C5C656008B9AF5 /* Foundation.framework */; };
@@ -38,6 +45,28 @@
 /* Begin PBXFileReference section */
 		8537D76263BF40DE821C602A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		87037E4CF18F459E9DB69442 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A04AF0019C5D27C000212E7 /* LMUserActBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMUserActBL.h; sourceTree = "<group>"; };
+		8A04AF0119C5D27C000212E7 /* LMUserActBL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMUserActBL.m; sourceTree = "<group>"; };
+		8A04AF0319C5D28D000212E7 /* LMContactBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMContactBL.h; sourceTree = "<group>"; };
+		8A04AF0419C5D28D000212E7 /* LMContactBL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMContactBL.m; sourceTree = "<group>"; };
+		8A04AF0619C5D2A9000212E7 /* LMShopBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMShopBL.h; sourceTree = "<group>"; };
+		8A04AF0719C5D2A9000212E7 /* LMShopBL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMShopBL.m; sourceTree = "<group>"; };
+		8A04AF0919C5D2E0000212E7 /* LMSportBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMSportBL.h; sourceTree = "<group>"; };
+		8A04AF0A19C5D2E0000212E7 /* LMSportBL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMSportBL.m; sourceTree = "<group>"; };
+		8A04AF0C19C5E8F4000212E7 /* CoreDataDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataDAO.h; sourceTree = "<group>"; };
+		8A04AF0D19C5E8F4000212E7 /* CoreDataDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataDAO.m; sourceTree = "<group>"; };
+		8A04AF0F19C6BC01000212E7 /* LMUserBLDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMUserBLDelegate.h; sourceTree = "<group>"; };
+		8A04AF1019C6BC2C000212E7 /* LMSportBLDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMSportBLDelegate.h; sourceTree = "<group>"; };
+		8A04AF1119C6BC5E000212E7 /* LMContactBLDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMContactBLDelegate.h; sourceTree = "<group>"; };
+		8A04AF1219C6BC96000212E7 /* LMShopBLDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMShopBLDelegate.h; sourceTree = "<group>"; };
+		8A04AF1319C6C0E2000212E7 /* UserActDA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserActDA.h; sourceTree = "<group>"; };
+		8A04AF1419C6C0E2000212E7 /* UserActDA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserActDA.m; sourceTree = "<group>"; };
+		8A04AF1719C6C1A1000212E7 /* CoreDateMoves.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDateMoves.xcdatamodel; sourceTree = "<group>"; };
+		8A04AF1F19C6C9B1000212E7 /* LMUserActDADelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMUserActDADelegate.h; sourceTree = "<group>"; };
+		8A04AF2019C6D42A000212E7 /* LMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMLoginViewController.h; sourceTree = "<group>"; };
+		8A04AF2119C6D42A000212E7 /* LMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMLoginViewController.m; sourceTree = "<group>"; };
+		8A04AF2919C7E319000212E7 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		8A04AF2A19C7E319000212E7 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		8A33783519C5C656008B9AF5 /* LikeMoves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LikeMoves.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A33783819C5C656008B9AF5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8A33783A19C5C656008B9AF5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -49,10 +78,6 @@
 		8A33784719C5C656008B9AF5 /* LMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMAppDelegate.h; sourceTree = "<group>"; };
 		8A33784819C5C656008B9AF5 /* LMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LMAppDelegate.m; sourceTree = "<group>"; };
 		8A33784B19C5C656008B9AF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8A33784D19C5C656008B9AF5 /* LMFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMFirstViewController.h; sourceTree = "<group>"; };
-		8A33784E19C5C656008B9AF5 /* LMFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LMFirstViewController.m; sourceTree = "<group>"; };
-		8A33785019C5C656008B9AF5 /* LMSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMSecondViewController.h; sourceTree = "<group>"; };
-		8A33785119C5C656008B9AF5 /* LMSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LMSecondViewController.m; sourceTree = "<group>"; };
 		8A33785319C5C656008B9AF5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8A33785919C5C656008B9AF5 /* LikeMovesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LikeMovesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A33785A19C5C656008B9AF5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -89,10 +114,9 @@
 		8A04AEFB19C5CC37000212E7 /* UIL */ = {
 			isa = PBXGroup;
 			children = (
-				8A33784D19C5C656008B9AF5 /* LMFirstViewController.h */,
-				8A33784E19C5C656008B9AF5 /* LMFirstViewController.m */,
-				8A33785019C5C656008B9AF5 /* LMSecondViewController.h */,
-				8A33785119C5C656008B9AF5 /* LMSecondViewController.m */,
+				8A33784A19C5C656008B9AF5 /* Main.storyboard */,
+				8A04AF2019C6D42A000212E7 /* LMLoginViewController.h */,
+				8A04AF2119C6D42A000212E7 /* LMLoginViewController.m */,
 			);
 			name = UIL;
 			sourceTree = "<group>";
@@ -100,6 +124,18 @@
 		8A04AEFC19C5CC41000212E7 /* BLL */ = {
 			isa = PBXGroup;
 			children = (
+				8A04AF0F19C6BC01000212E7 /* LMUserBLDelegate.h */,
+				8A04AF1019C6BC2C000212E7 /* LMSportBLDelegate.h */,
+				8A04AF1119C6BC5E000212E7 /* LMContactBLDelegate.h */,
+				8A04AF1219C6BC96000212E7 /* LMShopBLDelegate.h */,
+				8A04AF0019C5D27C000212E7 /* LMUserActBL.h */,
+				8A04AF0119C5D27C000212E7 /* LMUserActBL.m */,
+				8A04AF0319C5D28D000212E7 /* LMContactBL.h */,
+				8A04AF0419C5D28D000212E7 /* LMContactBL.m */,
+				8A04AF0619C5D2A9000212E7 /* LMShopBL.h */,
+				8A04AF0719C5D2A9000212E7 /* LMShopBL.m */,
+				8A04AF0919C5D2E0000212E7 /* LMSportBL.h */,
+				8A04AF0A19C5D2E0000212E7 /* LMSportBL.m */,
 			);
 			name = BLL;
 			sourceTree = "<group>";
@@ -107,6 +143,13 @@
 		8A04AEFD19C5CC51000212E7 /* DAL */ = {
 			isa = PBXGroup;
 			children = (
+				8A04AF1F19C6C9B1000212E7 /* LMUserActDADelegate.h */,
+				8A04AF0C19C5E8F4000212E7 /* CoreDataDAO.h */,
+				8A04AF0D19C5E8F4000212E7 /* CoreDataDAO.m */,
+				8A04AF1319C6C0E2000212E7 /* UserActDA.h */,
+				8A04AF1419C6C0E2000212E7 /* UserActDA.m */,
+				8A04AF2919C7E319000212E7 /* User.h */,
+				8A04AF2A19C7E319000212E7 /* User.m */,
 			);
 			name = DAL;
 			sourceTree = "<group>";
@@ -160,14 +203,13 @@
 		8A33783E19C5C656008B9AF5 /* LikeMoves */ = {
 			isa = PBXGroup;
 			children = (
+				8A33784719C5C656008B9AF5 /* LMAppDelegate.h */,
+				8A33784819C5C656008B9AF5 /* LMAppDelegate.m */,
+				8A04AEFB19C5CC37000212E7 /* UIL */,
 				8A04AEFF19C5CC88000212E7 /* Dependency */,
 				8A04AEFE19C5CC7E000212E7 /* Entity */,
 				8A04AEFD19C5CC51000212E7 /* DAL */,
 				8A04AEFC19C5CC41000212E7 /* BLL */,
-				8A04AEFB19C5CC37000212E7 /* UIL */,
-				8A33784719C5C656008B9AF5 /* LMAppDelegate.h */,
-				8A33784819C5C656008B9AF5 /* LMAppDelegate.m */,
-				8A33784A19C5C656008B9AF5 /* Main.storyboard */,
 				8A33785319C5C656008B9AF5 /* Images.xcassets */,
 				8A33783F19C5C656008B9AF5 /* Supporting Files */,
 			);
@@ -177,6 +219,7 @@
 		8A33783F19C5C656008B9AF5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8A04AF1619C6C1A1000212E7 /* CoreDateMoves.xcdatamodeld */,
 				8A33784019C5C656008B9AF5 /* LikeMoves-Info.plist */,
 				8A33784119C5C656008B9AF5 /* InfoPlist.strings */,
 				8A33784419C5C656008B9AF5 /* main.m */,
@@ -337,9 +380,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A33784519C5C656008B9AF5 /* main.m in Sources */,
+				8A04AF0219C5D27C000212E7 /* LMUserActBL.m in Sources */,
+				8A04AF2219C6D42A000212E7 /* LMLoginViewController.m in Sources */,
+				8A04AF0519C5D28D000212E7 /* LMContactBL.m in Sources */,
 				8A33784919C5C656008B9AF5 /* LMAppDelegate.m in Sources */,
-				8A33784F19C5C656008B9AF5 /* LMFirstViewController.m in Sources */,
-				8A33785219C5C656008B9AF5 /* LMSecondViewController.m in Sources */,
+				8A04AF0819C5D2A9000212E7 /* LMShopBL.m in Sources */,
+				8A04AF2B19C7E319000212E7 /* User.m in Sources */,
+				8A04AF1819C6C1A1000212E7 /* CoreDateMoves.xcdatamodeld in Sources */,
+				8A04AF0E19C5E8F4000212E7 /* CoreDataDAO.m in Sources */,
+				8A04AF0B19C5D2E0000212E7 /* LMSportBL.m in Sources */,
+				8A04AF1519C6C0E2000212E7 /* UserActDA.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +608,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8A04AF1619C6C1A1000212E7 /* CoreDateMoves.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8A04AF1719C6C1A1000212E7 /* CoreDateMoves.xcdatamodel */,
+			);
+			currentVersion = 8A04AF1719C6C1A1000212E7 /* CoreDateMoves.xcdatamodel */;
+			path = CoreDateMoves.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8A33782D19C5C656008B9AF5 /* Project object */;
 }

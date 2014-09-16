@@ -13,6 +13,11 @@
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([LMAppDelegate class]));
+        @try{
+            return UIApplicationMain(argc, argv, nil, NSStringFromClass([LMAppDelegate class]));
+        }@catch(NSException* except){
+            DLog(@"name:%@,\nreason:%@,\nuserInfo:%@",except.name,except.reason,except.userInfo);
+        }
+        
     }
 }
