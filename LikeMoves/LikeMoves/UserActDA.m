@@ -35,26 +35,11 @@
         [[NSUserDefaults standardUserDefaults] setObject:cookie forKey:mUserDefaultsCookie];
         DLog(@"cookie:%@",cookie);
         //TODO: 使用jsonkit进行json解析
-        NSDictionary* resInfo=[operation.responseString objectFromJSONString];
-        NSDictionary* userInfo=[resInfo objectForKey:@"data"];
-        
-        User* user=[[User alloc]init];
-        user.userId=[userInfo objectForKey:@"id"];
-        user.nickName=[userInfo objectForKey:@"nickname"];
-        user.password=[userInfo objectForKey:@"password"];
-        user.phone=[userInfo objectForKey:@"phone"];
-        user.coins=[userInfo objectForKey:@"coins"];
-        user.balance=[userInfo objectForKey:@"balance"];
-        //TODO: 让服务器将birthday换为age int
-        user.age=[userInfo objectForKey:@"desc"];
-        
-        user.userType=[userInfo objectForKey:@"user_type"];
-        user.userName=[userInfo objectForKey:@"username"];
-        NSData *userObject = [NSKeyedArchiver archivedDataWithRootObject:user];
-        [[NSUserDefaults standardUserDefaults] setObject:userObject forKey:mUserInfo];
-        [[NSUserDefaults standardUserDefaults] synchronize];//同步NSUserDefaults中的数据
+        int result=[self jsonToUserDefault:operation];
         //TODO:使用BL的delegate loginFinished方法udObject
-        [_delegate loginSuccess];
+        if (result==1) {
+            [_delegate loginSuccess];
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //TODO: 使用Bl的 loginfailed方法
@@ -72,7 +57,7 @@
     NSString* suffix=[NSString stringWithFormat:@"?m=user&a=register&phone=%@&password=%@&user_type=4",phone,pwd];
     NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
     [manager POST:requestUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", operation.responseString);
+        DLog(@"JSON: %@", operation.responseString);
         //注册成功BL的delegate registSuccess
         [_delegate registSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -81,5 +66,36 @@
         [_delegate registFail];
     }];
     return 1;
+}
+/**
+ *  将获得的json形式user信息转化为user对象，存入NSUserDefaults中
+ *
+ *  @param operation AFNetworking请求返回AFHTTPRequestOperation对象
+ *
+ *  @return resultCode：{1，代表成功返回；0，代表失败
+ */
+-(int)jsonToUserDefault:(AFHTTPRequestOperation*) operation {
+    //TODO: 使用jsonkit进行json解析
+    NSDictionary* resInfo=[operation.responseString objectFromJSONString];
+    NSDictionary* userInfo=[resInfo objectForKey:@"data"];
+    int result=[[resInfo objectForKey:@"result"] intValue];
+    
+    User* user=[[User alloc]init];
+    user.userId=[userInfo objectForKey:@"id"];
+    user.nickName=[userInfo objectForKey:@"nickname"];
+    user.password=[userInfo objectForKey:@"password"];
+    user.phone=[userInfo objectForKey:@"phone"];
+    user.coins=[userInfo objectForKey:@"coins"];
+    user.balance=[userInfo objectForKey:@"balance"];
+    //TODO: 让服务器将birthday换为age int
+    user.age=[userInfo objectForKey:@"desc"];
+    
+    user.userType=[userInfo objectForKey:@"user_type"];
+    user.userName=[userInfo objectForKey:@"username"];
+    NSData *userObject = [NSKeyedArchiver archivedDataWithRootObject:user];
+    [[NSUserDefaults standardUserDefaults] setObject:userObject forKey:mUserInfo];
+    [[NSUserDefaults standardUserDefaults] synchronize];//同步NSUserDefaults中的数据
+    
+    return result;
 }
 @end

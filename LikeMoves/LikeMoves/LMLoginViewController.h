@@ -11,5 +11,5 @@
 #import "LMUserBLDelegate.h"
 @interface LMLoginViewController : UIViewController<LMUserBLDelegate>
 @property (nonatomic,strong) LMUserActBL* bl;
-
+@property (nonatomic,copy)   NSString* phoneNum;
 @end

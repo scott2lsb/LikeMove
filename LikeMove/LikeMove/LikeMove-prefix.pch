@@ -1,0 +1,33 @@
+//
+//  LikeMove-pre.h
+//  LikeMove
+//
+//  Created by 粒橙Leo on 14-9-13.
+//  Copyright (c) 2014年 Licheng Yang. All rights reserved.
+//
+
+
+#import <Availability.h>
+#import "AFNetworking.h"
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#endif
+
+/**
+ *  标注DEBUG模式
+ */
+#ifdef DEBUG
+#   define DLog(...) NSLog(_VA_ARGS_)
+#else
+#   define DLog(...)
+#endif
+
+/**
+ *  定义服务器接口字段
+ */
+#define BaseURLString @"http://www.haoapp123.com/app/localuser/aidongdong/api.php?"

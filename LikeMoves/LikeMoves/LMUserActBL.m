@@ -36,4 +36,10 @@
 -(void)loginFail{
     [_delegate loginFail];
 }
+-(void)registSuccess{
+    [_delegate registSuccess];
+}
+-(void)registFail{
+    
+}
 @end

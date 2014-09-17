@@ -200,7 +200,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2Av-NU-Jwd" kind="modal" id="021-3R-Ypo"/>
+                                    <action selector="toRegist:" destination="3Ey-Vb-4rf" eventType="touchUpInside" id="uhq-t3-9PY"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -218,7 +218,7 @@
         <!--Login View Controller - regist-->
         <scene sceneID="C3X-Z5-Qxr">
             <objects>
-                <viewController title="regist" id="2Av-NU-Jwd" customClass="LMLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistPage" title="regist" id="2Av-NU-Jwd" customClass="LMLoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qTz-5y-Pst"/>
                         <viewControllerLayoutGuide type="bottom" id="1NO-Xl-0Ng"/>
@@ -234,7 +234,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="密码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fpe-YY-B7c">
-                                <rect key="frame" x="70" y="208" width="34" height="21"/>
+                                <rect key="frame" x="32" y="218" width="34" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -246,7 +246,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Atz-ZS-4Vd">
-                                <rect key="frame" x="150" y="124" width="97" height="30"/>
+                                <rect key="frame" x="112" y="124" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -274,22 +274,29 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfL-z3-nyT">
+                                <rect key="frame" x="106" y="162" width="173" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="registPhone" destination="Atz-ZS-4Vd" id="YFQ-qe-dc8"/>
+                        <outlet property="registPhoneNum" destination="JfL-z3-nyT" id="TuB-3s-UAg"/>
                         <outlet property="registPwd" destination="Xos-sB-GwE" id="Dwe-Hh-Zn4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jR7-T0-Uwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-217" y="907"/>
+            <point key="canvasLocation" x="59" y="1015"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vex-rW-GRa">
             <objects>
-                <tabBarController storyboardIdentifier="mainTabPage" id="8YX-ce-x5E" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabPage" id="8YX-ce-x5E" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="JQR-rB-NYL">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
