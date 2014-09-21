@@ -8,6 +8,8 @@
 
 #import "LMLoginViewController.h"
 #import "RegViewController.h"
+#import "FUIButton.h"
+#import "UIColor+FlatUI.h"
 /// 登陆界面和注册界面
 @interface LMLoginViewController ()
 
@@ -16,6 +18,12 @@
  */
 @property (weak, nonatomic) IBOutlet UITextField *loginPhone;
 @property (weak, nonatomic) IBOutlet UITextField *loginPwd;
+@property (strong, nonatomic) IBOutlet UIView *loginView;
+@property (weak, nonatomic) IBOutlet FUIButton *loginFUI;
+@property (weak, nonatomic) IBOutlet FUIButton *resetPwdFUI;
+@property (weak, nonatomic) IBOutlet FUIButton *registFUI;
+- (IBAction)closeKeyboard:(id)sender;
+
 /**
  *  登陆界面注册按钮监听事件
  *
@@ -28,10 +36,10 @@
  *  @param sender 登陆按钮对象
  */
 - (IBAction)login:(id)sender;
+
 /**
  *  注册页面
  */
-@property (weak, nonatomic) IBOutlet UITextField *registPhone;
 @property (weak, nonatomic) IBOutlet UILabel *registPhoneNum;
 
 @property (weak, nonatomic) IBOutlet UITextField *registPwd;
@@ -49,6 +57,37 @@
     _bl=[LMUserActBL new];
     _bl.delegate=self;
     _registPhoneNum.text=phoneNum;
+    //背景图片设置
+    UIImageView* img=[[UIImageView alloc] initWithFrame:_loginView.bounds];
+    img.image=[[UIImage imageNamed:@"desert.jpg"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
+    [_loginView addSubview:img];
+    [_loginView sendSubviewToBack:img];
+    
+    /**
+     *  Login界面元素配置
+     */
+    //登陆按钮配置
+    self.loginFUI.buttonColor = [UIColor turquoiseColor];
+    self.loginFUI.shadowColor = [UIColor greenSeaColor];
+    self.loginFUI.shadowHeight = 3.0f;
+    self.loginFUI.cornerRadius = 6.0f;
+    [self.loginFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
+    [self.loginFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
+    //忘记密码按钮配置
+    self.resetPwdFUI.buttonColor = [UIColor turquoiseColor];
+    self.resetPwdFUI.shadowColor = [UIColor greenSeaColor];
+    self.resetPwdFUI.shadowHeight = 3.0f;
+    self.resetPwdFUI.cornerRadius = 6.0f;
+    [self.resetPwdFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
+    [self.resetPwdFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
+    //注册按钮配置
+    self.registFUI.buttonColor = [UIColor turquoiseColor];
+    self.registFUI.shadowColor = [UIColor greenSeaColor];
+    self.registFUI.shadowHeight = 3.0f;
+    self.registFUI.cornerRadius = 6.0f;
+    [self.registFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
+    [self.registFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,7 +123,10 @@
     UITabBarController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabPage"];
     [self presentViewController:tabVC animated:YES completion:^(void){
     }];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (![self.presentedViewController isBeingDismissed]) {
+        [self dismissViewControllerAnimated:NO completion:^{}];
+    }
+//    [self dismissViewControllerAnimated:NO completion:nil];
     
 }
 -(void)loginFail{
@@ -95,7 +137,7 @@
     UITabBarController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginPage"];
     [self presentViewController:tabVC animated:YES completion:^(void){
     }];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
     
 }
 
@@ -112,4 +154,8 @@
  // Pass the selected object to the new view controller.
  }
  */
+- (IBAction)closeKeyboard:(id)sender {
+    [_loginPhone resignFirstResponder];
+    [_loginPwd resignFirstResponder];
+}
 @end

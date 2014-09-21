@@ -35,7 +35,7 @@
 
 -(void) resetPwd:(NSString*)phone withNewPwd:(NSString*)pwd;
 
--(BOOL) editUserInfo:(NSString*)nickName sex:(int)sex age:(int)age ;
+-(BOOL) editUserInfo:(NSString*)nickName sex:(NSString*)sex age:(NSString*)age ;
 
 
 @end

@@ -35,5 +35,8 @@
  *  NSUserDefaults用来存储user的info
  */
 #define mUserInfo  @"user_info"
+/**
+ *  短信key和secret
+ */
 #define sms_appKey @"316448d445fc"
 #define sms_appSecret @"30520da8dfc8af1d789a56f4c187bf0c"

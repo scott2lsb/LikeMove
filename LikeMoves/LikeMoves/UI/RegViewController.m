@@ -61,7 +61,7 @@
     if (textField==_areaCodeField) {
         [self.view endEditing:YES];
     }
-    NSLog(@"textFieldDidBeginEditing");
+    DLog(@"textFieldDidBeginEditing");
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
@@ -72,7 +72,7 @@
 #pragma mark - SecondViewControllerDelegate的方法
 - (void)setSecondData:(CountryAndAreaCode *)data {
     _data2=data;
-    NSLog(@"从Second传过来的数据：%@,%@", data.areaCode,data.countryName);
+    DLog(@"从Second传过来的数据：%@,%@", data.areaCode,data.countryName);
     //self.areaCodeField.text=data.areaCode;
     self.areaCodeField.text=[NSString stringWithFormat:@"+%@",data.areaCode];
     [self.tableView reloadData];
@@ -84,11 +84,11 @@
     for (int i=0; i<_areaArray.count; i++) {
         NSDictionary* dict1=[_areaArray objectAtIndex:i];
         NSString* code1=[dict1 valueForKey:@"zone"];
-        NSLog(@"areacode:%@",code1);
+        DLog(@"areacode:%@",code1);
         if ([code1 isEqualToString:[_areaCodeField.text stringByReplacingOccurrencesOfString:@"+" withString:@""]]) {
             compareResult=1;
             NSString* rule1=[dict1 valueForKey:@"rule"];
-            NSLog(@"rule:%@",rule1);
+            DLog(@"rule:%@",rule1);
             NSPredicate* pred=[NSPredicate predicateWithFormat:@"SELF MATCHES %@",rule1];
             BOOL isMatch=[pred evaluateWithObject:self.telField.text];
             if (!isMatch) {
@@ -119,7 +119,7 @@
 {
     if (1==buttonIndex)
     {
-        NSLog(@"点击了确定按钮");
+        DLog(@"点击了确定按钮");
         VerifyViewController* verify=[[VerifyViewController alloc] init];
         NSString* str2=[self.areaCodeField.text stringByReplacingOccurrencesOfString:@"+" withString:@""];
         [verify setPhone:self.telField.text AndAreaCode:str2];
@@ -136,7 +136,7 @@
         
         [SMS_SDK getVerifyCodeByPhoneNumber:self.telField.text AndZone:str2 result:^(enum SMS_GetVerifyCodeResponseState state) {
             if (1==state) {
-                NSLog(@"block 获取验证码成功");
+                DLog(@"block 获取验证码成功");
                 [self presentViewController:verify animated:YES completion:^{
                     ;
                 }];
@@ -144,7 +144,7 @@
             }
             else if(0==state)
             {
-                NSLog(@"block 获取验证码失败");
+                DLog(@"block 获取验证码失败");
                 NSString* str=[NSString stringWithFormat:@"验证码发送失败 请稍后重试"];
                 UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"发送失败" message:str delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
@@ -166,7 +166,7 @@
         
     }
     if (0==buttonIndex) {
-        NSLog(@"点击了取消按钮");
+        DLog(@"点击了取消按钮");
     }
 }
 
@@ -202,7 +202,7 @@
                                                                   action:@selector(clickLeftButton)];
     
     //设置导航栏内容
-    [navigationItem setTitle:@"注册"];
+    [navigationItem setTitle:@"手机验证"];
     
     //把导航栏集合添加入导航栏中，设置动画关闭
     [navigationBar pushNavigationItem:navigationItem animated:NO];
@@ -270,13 +270,13 @@
     [SMS_SDK getZone:^(enum SMS_ResponseState state, NSArray *array) {
         if (1==state)
         {
-            NSLog(@"block 获取区号成功");
+            DLog(@"block 获取区号成功");
             //区号数据
             _areaArray=[NSMutableArray arrayWithArray:array];
         }
         else if (0==state)
         {
-            NSLog(@"block 获取区号失败");
+            DLog(@"block 获取区号失败");
         }
         
     }];
@@ -327,7 +327,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"弹出国家和地区列表用于选择区号");
+    DLog(@"弹出国家和地区列表用于选择区号");
     SectionsViewController* country2=[[SectionsViewController alloc] init];
     country2.delegate=self;
     [country2 setAreaArray:_areaArray];

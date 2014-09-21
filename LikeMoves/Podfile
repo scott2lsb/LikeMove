@@ -6,4 +6,4 @@ pod 'AMScrollingNavbar', '~> 1.0.3'
 pod 'PNChart', '~> 0.5'
 pod 'JSONKit', '~> 1.5pre' 
 pod 'FlatUIKit', '~> 1.4'
-pod 'Onboard', :git => 'https://github.com/mamaral/Onboard.git' 
+

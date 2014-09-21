@@ -22,6 +22,7 @@
 @synthesize age;
 @synthesize trainAddress;
 @synthesize homeAddress;
+@synthesize sex;
 -(id)init{
     if (!self) {
         self=[super init];
@@ -40,6 +41,7 @@
     [coder encodeObject:age  forKey:@"age"];
     [coder encodeObject:trainAddress forKey:@"trainAddress"];
     [coder encodeObject:homeAddress forKey:@"homeAddress"];
+    [coder encodeObject:sex forKey:@"sex"];
     
 };
 - (id)initWithCoder:(NSCoder *)coder {
@@ -57,6 +59,7 @@
         age      =[coder decodeObjectForKey:@"age"];
         trainAddress=[coder decodeObjectForKey:@"trainAddress"];
         homeAddress=[coder decodeObjectForKey:@"homeAddress"];
+        sex=[coder decodeObjectForKey:@"sex"];
     }
     return self;
 };

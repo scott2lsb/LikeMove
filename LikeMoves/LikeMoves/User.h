@@ -12,15 +12,16 @@
 
 @interface User : NSObject<NSCoding>
 
-@property (nonatomic, retain) NSNumber * userId;
+@property (nonatomic, retain) NSString * userId;
 @property (nonatomic, retain) NSString * userName;
 @property (nonatomic, retain) NSString * password;
-@property (nonatomic, retain) NSNumber * userType;
+@property (nonatomic, retain) NSString * userType;
 @property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSString * nickName;
-@property (nonatomic, retain) NSNumber * coins;
-@property (nonatomic, retain) NSNumber * balance;
+@property (nonatomic, retain) NSString * coins;
+@property (nonatomic, retain) NSString * balance;
 @property (nonatomic,retain ) NSString * age;
 @property (nonatomic,retain ) NSString * trainAddress;
 @property (nonatomic,retain ) NSString * homeAddress;
+@property (nonatomic,retain ) NSString * sex;
 @end
