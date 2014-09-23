@@ -29,6 +29,10 @@
     return 1;
 }
 
+-(void)editUserInfo:(NSString *)nickName sex:(NSString *)sex age:(NSString *)age{
+    _da.delegate=self;
+    [_da editUserInfo:nickName sex:sex age:age];
+}
 #pragma mark - LMUserActDADelegate
 -(void)loginSuccess{
     [_delegate loginSuccess];
@@ -40,6 +44,12 @@
     [_delegate registSuccess];
 }
 -(void)registFail{
-    
+    [_delegate registFail];
+}
+-(void)editUserInfoSuccess{
+    [_delegate editUserInfoSuccess];
+}
+-(void)editUserInfoFail{
+    [_delegate editUserInfoFail];
 }
 @end

@@ -18,6 +18,5 @@ int main(int argc, char * argv[])
         }@catch(NSException* except){
             DLog(@"name:%@,\nreason:%@,\nuserInfo:%@",except.name,except.reason,except.userInfo);
         }
-        
     }
 }

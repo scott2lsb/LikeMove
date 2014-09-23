@@ -27,10 +27,18 @@
 /**
  *  信息编辑界面
  */
-@property (weak, nonatomic) IBOutlet UIButton *btn;
+@property (weak, nonatomic) IBOutlet UIButton *trainBtn;
 @property (weak, nonatomic) IBOutlet UILabel *showLbl;
 //选择 区 的pickerview
 @property (weak, nonatomic) IBOutlet UIPickerView *districtPickerView;
+@property (weak, nonatomic) IBOutlet UITextField *editAge;
+
+@property (weak, nonatomic) IBOutlet UITextField *editNickname;
+
+- (IBAction)finishComplete:(id)sender;
+
+
+
 
 /**
  *  个人中心元素
@@ -67,6 +75,10 @@ NSArray* books;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //逻辑层注册
+    _bl=[LMUserActBL new];
+    _bl.delegate=self;
+    
     User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
     /**
      *  个人中心信息
@@ -98,16 +110,12 @@ NSArray* books;
     [_sHomeAdr setText:user.homeAddress];
     
     /**
-     用户信息编辑界面的锻炼地点选择框
+     *用户信息编辑界面的锻炼地点选择框
      */
-    
-    
     //初始化一下数据，分别为 所有源数据，和 已经选中的数据
 	entries = [[NSArray alloc] initWithObjects:@"广场", @"小区周边", @"健身房", @"上下班路上", @"公园",@"其他",nil];
     
     entriesSelected = [[NSArray alloc] init];
-    
-    
 	selectionStates = [[NSMutableDictionary alloc] init];
     
     // 配置是否选中状态
@@ -120,9 +128,7 @@ NSArray* books;
         }
         [selectionStates setObject:[NSNumber numberWithBool:isSelected] forKey:key];
     }
-    
-   
-    [_btn addTarget:self action:@selector(getData) forControlEvents:UIControlEventTouchUpInside];
+    [_trainBtn addTarget:self action:@selector(getData) forControlEvents:UIControlEventTouchUpInside];
     //收货地址 ”区“的选择
     // 创建、并初始化NSArray对象。
 	books = [NSArray arrayWithObjects:@"兰山区",@"河东区", @"罗庄区" ,nil];
@@ -156,15 +162,6 @@ NSArray* books;
     [multiPickerView pickerShow];
     
 }
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 - (IBAction)logout:(id)sender {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:mUserDefaultsCookie];
     [[NSUserDefaults standardUserDefaults]  removeObjectForKey:mUserInfo];
@@ -174,6 +171,10 @@ NSArray* books;
     }];
     [self dismissViewControllerAnimated:NO completion:nil];
 }
+- (IBAction)finishComplete:(id)sender {
+    [_bl editUserInfo:_editNickname.text sex:_editAge.text age:_editAge.text];
+}
+
 #pragma mark - Training_Place_Delegate
 //获取到选中的数据
 -(void)returnChoosedPickerString:(NSMutableArray *)selectedEntriesArr
@@ -221,12 +222,23 @@ numberOfRowsInComponent:(NSInteger)component
 	// 使用一个UIAlertView来显示用户选中的列表项
 	UIAlertView* alert = [[UIAlertView alloc]
                           initWithTitle:@"提示"
-                          message:[NSString stringWithFormat:@"你选中的图书是：%@"
+                          message:[NSString stringWithFormat:@"你选中的地区是：%@"
                                    , [books objectAtIndex:row]]
                           delegate:nil
                           cancelButtonTitle:@"确定"
                           otherButtonTitles:nil];
 	[alert show];
 }
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
+-(void)editUserInfoSuccess{
+    
+}
+-(void)editUserInfoFail{
+    
+}
 @end

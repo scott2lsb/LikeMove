@@ -758,12 +758,18 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="oIM-9H-PCJ">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="DXl-uH-Mmk"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="done" id="Lbu-C7-tTZ"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="done" id="Lbu-C7-tTZ">
+                            <connections>
+                                <action selector="finishComplete:" destination="Je8-gH-Vll" id="jWN-VZ-Wq4"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="btn" destination="k2o-JA-SH8" id="3UV-i4-dFw"/>
                         <outlet property="districtPickerView" destination="cfO-e2-OAM" id="L3y-As-O8x"/>
+                        <outlet property="editAge" destination="NeL-WG-pLJ" id="1YU-NQ-oEN"/>
+                        <outlet property="editNickname" destination="sf1-ib-DUY" id="iSe-Ph-h2K"/>
                         <outlet property="showLbl" destination="96d-23-Dbb" id="qLe-NQ-V0a"/>
+                        <outlet property="trainBtn" destination="k2o-JA-SH8" id="YWL-uk-Aqo"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZg-a6-Ev3" userLabel="First Responder" sceneMemberID="firstResponder"/>

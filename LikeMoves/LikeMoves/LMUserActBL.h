@@ -20,4 +20,6 @@
 -(User *)login:(NSString *)phone withPassword:(NSString *)pwd;
 
 -(BOOL)regist:(NSString *)phone withPassword:(NSString *)pwd;
+
+-(void)editUserInfo:(NSString*)nickName sex:(NSString*)sex age:(NSString*)age;
 @end

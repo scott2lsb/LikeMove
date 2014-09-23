@@ -10,6 +10,7 @@
 #import <AFNetworking.h>
 #import "JSONKit.h"
 #import "User.h"
+
 @implementation UserActDA
 
 //+(UserActDA *)sharedManager{
@@ -27,24 +28,19 @@
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
     NSString* suffix=[NSString stringWithFormat:@"?m=user&a=login&login_name=%@&login_password=%@",phone,pwd];
     NSString* requestUrl                                                 =[BaseURLString stringByAppendingString:suffix];
+    
     [manager POST:requestUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:BaseURLString]];
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
-        [[NSUserDefaults standardUserDefaults] setObject:data forKey:mUserDefaultsCookie];
-        
-        
-        
-                DLog(@"JSON: %@",operation.responseString);
-        
-       /*
-
-        //获得用户cookie，有效期一个月
+        /**
+         *  从response的HeaderField获得头文件，从头文件中通过NSHTTPCookie的cookiesWithResponseHeaderFields组成cookie的NSArray，将生成cookie的array，使用NSHttpCookie的reqeustHeaderFieldsWithCookies方法拼接成合法的http header field。最后set到request中即可。
+         [manager.requestSerializer setValue:[requestFields objectForKey:@"Cookie"] forHTTPHeaderField:@"Cookie"];
+         */
         NSDictionary *fields= [operation.response allHeaderFields];
-        NSString *cookie= [fields valueForKey:@"Set-Cookie"];// It is your cookie
-        [[NSUserDefaults standardUserDefaults] setObject:cookie forKey:mUserDefaultsCookie];
-        DLog(@"cookie:%@",cookie);
-        */
+        NSArray *cookies=[NSHTTPCookie cookiesWithResponseHeaderFields:fields forURL:[NSURL URLWithString:BaseURLString]];
+        NSDictionary* requestFields=[NSHTTPCookie requestHeaderFieldsWithCookies:cookies];
+        [[NSUserDefaults standardUserDefaults] setObject:[requestFields objectForKey:@"Cookie"] forKey:mUserDefaultsCookie];
+        
+        
+
         // 使用jsonkit进行json解析
         int result=[self jsonToUserDefault:operation];
         //使用BL的delegate loginFinished方法udObject
@@ -81,22 +77,14 @@
 -(BOOL)editUserInfo:(NSString *)nickName sex:(NSString*)sex age:(NSString*)age{
     AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer                       = [AFJSONResponseSerializer serializer];
+      [manager.requestSerializer setValue: [[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]forHTTPHeaderField:@"Cookie"];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
-    
-    /**添加cookie
-    NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie];
-    if([cookiesdata length]) {
-        NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
-        NSHTTPCookie *cookie;
-        for (cookie in cookies) {
-            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
-        }
-    }
-    */
-    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=edit&nickname=%@&sex=%@&age=%@",nickName,sex,age];
+    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=edit&nickname=%@&age=%@",nickName,age];
     NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
-    [manager POST:requestUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"JSON: %@", operation.responseString);
+
+    NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
+    [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        DLog(@"JSON: %@", operation.responseString);
         //编辑成功BL的delegate editSuccess
         [_delegate editUserInfoSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -10,8 +10,9 @@
 #import "CYCustomMultiSelectPickerView.h"
 #import "ALPickerView.h"
 #import "LMComBoxView.h"
-
-@interface UserCenterViewController : UITableViewController <CYCustomMultiSelectPickerViewDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
+#import "LMUserActBL.h"
+@interface UserCenterViewController : UITableViewController <CYCustomMultiSelectPickerViewDelegate,UIPickerViewDataSource, UIPickerViewDelegate,LMUserBLDelegate>
+@property (nonatomic,strong) LMUserActBL* bl;
 
 
 @end
