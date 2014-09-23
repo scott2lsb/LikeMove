@@ -126,6 +126,7 @@ NSArray* books;
     //收货地址 ”区“的选择
     // 创建、并初始化NSArray对象。
 	books = [NSArray arrayWithObjects:@"兰山区",@"河东区", @"罗庄区" ,nil];
+    //, @"郯城",@"苍山",@"莒南",@"临沭", @"费县",@"蒙阴","平邑",@"沂南",@"沂水"
 	// 为UIPickerView控件设置dataSource和delegate
 	self.districtPickerView.dataSource = self;
 	self.districtPickerView.delegate = self;

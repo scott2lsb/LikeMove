@@ -4,35 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller - Root View Controller-->
-        <scene sceneID="ZaR-Ii-d8j">
-            <objects>
-                <tableViewController id="Xs2-Bg-Lfa" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HTm-5c-cp5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="dh4-zF-kpt">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dh4-zF-kpt" id="ttd-fj-TPe">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Xs2-Bg-Lfa" id="qNb-fO-QiH"/>
-                            <outlet property="delegate" destination="Xs2-Bg-Lfa" id="pGO-xC-CvV"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="rUQ-6b-EdT"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kua-07-JT3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1224" y="-1008"/>
-        </scene>
         <!--Navigation Controller - 运动-->
         <scene sceneID="vy6-w1-lLO">
             <objects>
@@ -42,12 +13,41 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Xs2-Bg-Lfa" kind="relationship" relationship="rootViewController" id="pI2-qp-3KV"/>
+                        <segue destination="ir7-y9-rZC" kind="relationship" relationship="rootViewController" id="fAe-KE-C46"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lca-hO-bTL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="688" y="-1008"/>
+        </scene>
+        <!--Sport View Controller-->
+        <scene sceneID="FZm-ro-E2i">
+            <objects>
+                <viewController id="ir7-y9-rZC" customClass="SportViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="O6y-aT-UD0"/>
+                        <viewControllerLayoutGuide type="bottom" id="vNb-nk-J0j"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zgv-zs-ABm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="daM-aD-xCf">
+                                <rect key="frame" x="0.0" y="64" width="320" height="400"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="hOe-0B-Xhu"/>
+                    <connections>
+                        <outlet property="sportCircle" destination="daM-aD-xCf" id="8JJ-HY-5hh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dgK-jb-udE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1329" y="-989"/>
         </scene>
         <!--Table View Controller - Root View Controller-->
         <scene sceneID="tlM-lv-rJs">
@@ -78,11 +78,11 @@
             </objects>
             <point key="canvasLocation" x="1256" y="-88"/>
         </scene>
-        <!--Navigation Controller - 个人中心-->
+        <!--Navigation Controller - 我-->
         <scene sceneID="WvG-cs-Y7J">
             <objects>
                 <navigationController definesPresentationContext="YES" id="Zy9-Rx-YDG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="个人中心" id="fI3-gW-sk5"/>
+                    <tabBarItem key="tabBarItem" title="我" id="fI3-gW-sk5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z6e-rr-YjZ">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -770,11 +770,11 @@
             </objects>
             <point key="canvasLocation" x="2465" y="645"/>
         </scene>
-        <!--Navigation Controller - 朋友圈-->
+        <!--Navigation Controller - 好友-->
         <scene sceneID="5dr-fa-kkt">
             <objects>
                 <navigationController definesPresentationContext="YES" id="Ij1-wy-iPD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="朋友圈" id="Tmv-Fi-MPE"/>
+                    <tabBarItem key="tabBarItem" title="好友" id="Tmv-Fi-MPE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XCf-dI-g8I">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
