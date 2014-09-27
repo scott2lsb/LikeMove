@@ -11,5 +11,6 @@
 @protocol LMSportBLDelegate <NSObject>
 
 @optional
-
+-(void)stepCountChange:(NSString*) stepCount ;
+-(void)sportTimeChange:(int)sportTime;
 @end

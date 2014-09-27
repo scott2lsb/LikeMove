@@ -59,17 +59,18 @@
     _registPhoneNum.text=phoneNum;
     //背景图片设置
     UIImageView* img=[[UIImageView alloc] initWithFrame:_loginView.bounds];
-    img.image=[[UIImage imageNamed:@"desert.jpg"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
+    img.image=[[UIImage imageNamed:@"launch"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
     [_loginView addSubview:img];
     [_loginView sendSubviewToBack:img];
     
     /**
      *  Login界面元素配置
      */
+    
     //登陆按钮配置
     self.loginFUI.buttonColor = [UIColor turquoiseColor];
     self.loginFUI.shadowColor = [UIColor greenSeaColor];
-    self.loginFUI.shadowHeight = 3.0f;
+    self.loginFUI.shadowHeight = 5.0f;
     self.loginFUI.cornerRadius = 6.0f;
     [self.loginFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
     [self.loginFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];

@@ -36,6 +36,11 @@
  */
 #define mUserInfo  @"user_info"
 /**
+ *  NSUserDefaults用来存储user的运动时间
+ */
+#define mSportTime  @"sport_time"
+
+/**
  *  短信key和secret
  */
 #define sms_appKey @"316448d445fc"
