@@ -114,7 +114,7 @@ static int coinCount = 0;
     coin.center = CGPointMake(CGRectGetMidX(self.view.frame) + arc4random()%40 * (arc4random() %3 - 1) - 20, CGRectGetMidY(self.view.frame) - 40);
     coin.tag = [i intValue] + 1;
     //每生产一个金币,就把该金币对应的tag加入到数组中,用于判断当金币结束动画时和福袋交换层次关系,并从视图上移除
-    [_coinTagsArr addObject:[NSNumber numberWithInt:coin.tag]];
+    [_coinTagsArr addObject:[NSNumber numberWithLong:coin.tag]];
     
     [self.view addSubview:coin];
     
@@ -136,7 +136,7 @@ static int coinCount = 0;
     int fromY       = arc4random() % (int)positionY; //起始位置:生成位于福袋上方的随机一个y坐标
     
     CGFloat cpx = positionX + (fromX - positionX)/2;    //x控制点
-    CGFloat cpy = fromY / 2 - positionY;                //y控制点,确保抛向的最大高度在屏幕内,并且在福袋上方(负数)
+    CGFloat cpy = fromY / 2 - positionY+44;                //y控制点,确保抛向的最大高度在屏幕内,并且在福袋上方(负数)
     
     //动画的起始位置
     CGPathMoveToPoint(path, NULL, fromX, height);
