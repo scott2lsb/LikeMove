@@ -11,7 +11,14 @@
 #import "LMSportBLDelegate.h"
 #import "LMSportBL.h"
 #import "DKCircleButton.h"
-@interface SportViewController : UIViewController<LMSportBLDelegate>
+@interface SportViewController : UIViewController<LMSportBLDelegate>{
+    UIButton        *_getBtn;
+    UIImageView     *_bagView;      //福袋图层
+    NSMutableArray  *_coinTagsArr;  //存放生成的所有金币对应的tag值
+    BOOL  isBag;
+    CAAnimationGroup* group;
+    CABasicAnimation* shake;
+}
 @property (weak, nonatomic) IBOutlet UIView *sportCircle;
 @property(nonatomic) wendu_yuan2 * wdSport;
 @property (weak, nonatomic) IBOutlet UILabel *stepCount;
