@@ -7,9 +7,6 @@
 //
 
 #import "LMAppDelegate.h"
-#import <SMS_SDK/SMS_SDK.h>
-#import "OnboardingViewController.h"
-#import "OnboardingContentViewController.h"
 
 @implementation LMAppDelegate
 
@@ -22,18 +19,97 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    // obviously, only do one of these at a time
-    self.window.rootViewController = [self generateFirstDemoVC];
-    //    self.window.rootViewController = [self generateSecondDemoVC];
-    //    self.window.rootViewController = [self generateThirdDemoVC];
-    //    self.window.rootViewController = [self generateFourthDemoVC];
-    
+    self.window.rootViewController=[self showIntroWithCrossDissolve];
     application.statusBarStyle = UIStatusBarStyleLightContent;
     
     [self.window makeKeyAndVisible];
     
     return YES;
 }
+- (UIViewController*)showIntroWithCrossDissolve {
+    UIViewController* introPage=[[UIViewController alloc]init];
+    rootView=introPage.view;
+    /**
+     *  自定义闪烁效果字
+     */
+    
+    UIView *viewForPage = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:CGRectMake(0, 200, rootView.bounds.size.width, 44)];
+    shimmeringView.shimmeringBeginFadeDuration=0.3;
+    shimmeringView.shimmeringOpacity=0.0;
+    shimmeringView.shimmeringSpeed=130.0;
+    [viewForPage addSubview:shimmeringView];
+    
+    UILabel *loadingLabel = [[UILabel alloc] initWithFrame:shimmeringView.bounds];
+    loadingLabel.textAlignment = NSTextAlignmentCenter;
+    loadingLabel.text = NSLocalizedString(@"Change begins with movement", nil);
+    loadingLabel.textColor=[UIColor whiteColor];
+    loadingLabel.backgroundColor=[UIColor clearColor];
+    loadingLabel.font=[UIFont systemFontOfSize:20.0];
+    shimmeringView.contentView = loadingLabel;
+    // Start shimmering.
+    shimmeringView.shimmering = YES;
+    
+    UILabel *labelForPage = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, rootView.bounds.size.width, 50)];
+    labelForPage.text = @"改变从运动开始";
+    labelForPage.textAlignment = NSTextAlignmentCenter;
+    labelForPage.font = [UIFont systemFontOfSize:40];
+    labelForPage.textColor = [UIColor whiteColor];
+    labelForPage.backgroundColor = [UIColor clearColor];
+    
+    [viewForPage addSubview:labelForPage];
+    EAIntroPage *page1 = [EAIntroPage pageWithCustomView:viewForPage];
+    page1.bgImage = [UIImage imageNamed:@"launch-568h@2x.png"];
+    
+    
+    
+    
+    
+    EAIntroPage *page2 = [EAIntroPage page];
+    page2.title = @"为能量充值";
+    page2.titlePositionY=500;
+    page2.titleFont=[UIFont systemFontOfSize:30.0f];
+    page2.titleColor=[UIColor orangeColor];
+    page2.bgImage = [UIImage imageNamed:@"first-568h"];
+    
+    
+    EAIntroPage *page3 = [EAIntroPage page];
+    page3.title = @"给自己奖励";
+    page3.titleFont=[UIFont systemFontOfSize:30.0f];
+    page3.titlePositionY=500;
+    page3.titleColor=[UIColor orangeColor];
+    page3.bgImage = [UIImage imageNamed:@"sec-568h"];
+    
+    
+    EAIntroPage *page4 = [EAIntroPage page];
+    page4.title = @"传递动能量";
+    page4.titlePositionY=500;
+    page4.titleFont=[UIFont systemFontOfSize:30.0f];
+    page4.titleColor=[UIColor orangeColor];
+    page4.bgImage = [UIImage imageNamed:@"share-568h"];
+    
+    
+    EAIntroView *intro = [[EAIntroView alloc] initWithFrame:rootView.bounds andPages:@[page1,page2,page3,page4]];
+    [intro setDelegate:self];
+    SMPageControl *pageControl = [[SMPageControl alloc] init];
+    pageControl.pageIndicatorImage = [UIImage imageNamed:@"pageDot"];
+    pageControl.currentPageIndicatorImage = [UIImage imageNamed:@"selectedPageDot"];
+    [pageControl sizeToFit];
+    intro.pageControl = (UIPageControl *)pageControl;
+    intro.pageControlY = 110.0f;
+    [intro showInView:rootView animateDuration:0.3];
+    return introPage;
+}
+#pragma mark intro-delegate
+- (void)introDidFinish:(EAIntroView *)introView {
+    NSLog(@"introDidFinish callback");
+    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginPage"];
+    [self.window.rootViewController presentViewController:tabVC animated:YES completion:^(void){}];
+    
+}
+
 - (OnboardingViewController *)generateFirstDemoVC {
     
     OnboardingContentViewController *firstPage = [[OnboardingContentViewController alloc] initWithTitle:@"It's one small step for a man..." body:@"The first man on the moon, Buzz Aldrin, only had one photo taken of him while on the lunar surface due to an unexpected call from Dick Nixon." image:[UIImage imageNamed:@"space1"] buttonText:nil action:nil];
@@ -59,11 +135,6 @@
     return onboardingVC;
 }
 
--(void)toLoginPage{
-    
-
-    
-}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
