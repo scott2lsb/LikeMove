@@ -240,20 +240,20 @@ static NSMutableArray* _userData2;
     UILabel* label=[[UILabel alloc] init];
     label.frame=CGRectMake(20, 53+statusBarHeight, 280, 21);
     label.text=[NSString stringWithFormat:@"我们已发送验证码到这个号码"];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont fontWithName:@"Helvetica" size:17];
     [self.view addSubview:label];
     
     _telLabel=[[UILabel alloc] init];
     _telLabel.frame=CGRectMake(85, 82+statusBarHeight, 158, 21);
-    _telLabel.textAlignment = UITextAlignmentCenter;
+    _telLabel.textAlignment = NSTextAlignmentCenter;
     _telLabel.font = [UIFont fontWithName:@"Helvetica" size:17];
     [self.view addSubview:_telLabel];
     
     _verifyCodeField=[[UITextField alloc] init];
     _verifyCodeField.frame=CGRectMake(85, 111+statusBarHeight, 158, 46);
     _verifyCodeField.borderStyle=UITextBorderStyleBezel;
-    _verifyCodeField.textAlignment=UITextAlignmentCenter;
+    _verifyCodeField.textAlignment=NSTextAlignmentCenter;
     _verifyCodeField.placeholder=@"验证码";
     _verifyCodeField.font=[UIFont fontWithName:@"Helvetica" size:27];
     _verifyCodeField.keyboardType=UIKeyboardTypePhonePad;
@@ -262,7 +262,7 @@ static NSMutableArray* _userData2;
     
     _timeLabel=[[UILabel alloc] init];
     _timeLabel.frame=CGRectMake(64, 169+statusBarHeight, 200, 21);
-    _timeLabel.textAlignment = UITextAlignmentCenter;
+    _timeLabel.textAlignment = NSTextAlignmentCenter;
     _timeLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
     _timeLabel.text=@"接受短信大约需要60秒";
     [self.view addSubview:_timeLabel];

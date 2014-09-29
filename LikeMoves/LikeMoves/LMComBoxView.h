@@ -17,7 +17,7 @@
 @class LMComBoxView;
 @protocol LMComBoxViewDelegate <NSObject>
 
--(void)selectAtIndex:(int)index inCombox:(LMComBoxView *)_combox;
+-(void)selectAtIndex:(long)index inCombox:(LMComBoxView *)_combox;
 
 @end
 

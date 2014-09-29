@@ -125,7 +125,7 @@
     [self presentViewController:tabVC animated:YES completion:^(void){
     }];
     if (![self.presentedViewController isBeingDismissed]) {
-        [self dismissViewControllerAnimated:NO completion:^{}];
+        [self dismissViewControllerAnimated:NO completion:nil];
     }
 //    [self dismissViewControllerAnimated:NO completion:nil];
     
@@ -138,6 +138,7 @@
     UITabBarController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginPage"];
     [self presentViewController:tabVC animated:YES completion:^(void){
     }];
+    
     [self dismissViewControllerAnimated:NO completion:nil];
     
 }

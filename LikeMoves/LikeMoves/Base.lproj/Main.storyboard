@@ -8,7 +8,7 @@
         <scene sceneID="vy6-w1-lLO">
             <objects>
                 <navigationController definesPresentationContext="YES" id="e2O-aO-2cJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="运动" id="haT-VD-FBz"/>
+                    <tabBarItem key="tabBarItem" title="运动" image="sport.png" id="haT-VD-FBz"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ftw-xZ-eif">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -20,7 +20,7 @@
             </objects>
             <point key="canvasLocation" x="688" y="-1008"/>
         </scene>
-        <!--Sport View Controller-->
+        <!--Sport View Controller - Item-->
         <scene sceneID="FZm-ro-E2i">
             <objects>
                 <viewController id="ir7-y9-rZC" customClass="SportViewController" sceneMemberID="viewController">
@@ -59,7 +59,7 @@
                                 <rect key="frame" x="233" y="64" width="44" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFe-ig-woP">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFe-ig-woP">
                                 <rect key="frame" x="276" y="64" width="44" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -73,13 +73,13 @@
                                 <rect key="frame" x="0.0" y="431" width="44" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1J-iY-qKq">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="21" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1J-iY-qKq">
                                 <rect key="frame" x="276" y="431" width="44" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lb6-Q5-XLh">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1024" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lb6-Q5-XLh">
                                 <rect key="frame" x="44" y="431" width="44" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -88,17 +88,30 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="健康快乐每一天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7N-KK-Ban">
                                 <rect key="frame" x="0.0" y="475" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.81835701576975217" blue="0.27666517415379677" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="hOe-0B-Xhu"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="1TP-mq-top"/>
+                    <navigationItem key="navigationItem" id="hOe-0B-Xhu">
+                        <barButtonItem key="leftBarButtonItem" image="chartBtn.png" id="p2o-js-Myi">
+                            <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="cfb-uO-hcd" kind="push" id="J68-RH-5IY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="shareBtn.png" id="kSb-rm-Upa">
+                            <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="circleBtnView" destination="nGf-Yd-LbG" id="CTm-f9-LrS"/>
                         <outlet property="sportCircle" destination="daM-aD-xCf" id="8JJ-HY-5hh"/>
+                        <outlet property="sportNaviItem" destination="hOe-0B-Xhu" id="04y-Dy-vML"/>
                         <outlet property="stepCount" destination="tNA-VB-Av7" id="5Ok-tC-Fnv"/>
                         <outlet property="stepImg" destination="DB5-uX-VpS" id="4lK-f2-XJk"/>
                     </connections>
@@ -106,6 +119,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgK-jb-udE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1319" y="-939"/>
+        </scene>
+        <!--Sport Detail View Controller-->
+        <scene sceneID="uNt-7h-9BJ">
+            <objects>
+                <viewController id="cfb-uO-hcd" customClass="SportDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3e9-1I-xrW"/>
+                        <viewControllerLayoutGuide type="bottom" id="D5X-X2-Tso"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cMS-0z-f8M">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="EjF-mE-m7M">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="pgU-IY-quG">
+                            <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="backTo:" destination="cfb-uO-hcd" id="1FT-Yf-D00"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dPW-m8-q9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2001" y="-947"/>
         </scene>
         <!--Table View Controller - Root View Controller-->
         <scene sceneID="tlM-lv-rJs">
@@ -116,7 +155,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2C8-d4-lbL">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="friend" id="2C8-d4-lbL">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2C8-d4-lbL" id="hw7-Oc-6S8">
@@ -136,11 +175,11 @@
             </objects>
             <point key="canvasLocation" x="1256" y="-88"/>
         </scene>
-        <!--Navigation Controller - 我-->
+        <!--Navigation Controller - 个人中心-->
         <scene sceneID="WvG-cs-Y7J">
             <objects>
                 <navigationController definesPresentationContext="YES" id="Zy9-Rx-YDG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我" id="fI3-gW-sk5"/>
+                    <tabBarItem key="tabBarItem" title="个人中心" image="user.png" id="fI3-gW-sk5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z6e-rr-YjZ">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -816,7 +855,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="oIM-9H-PCJ">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="DXl-uH-Mmk"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="done" id="Lbu-C7-tTZ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Lbu-C7-tTZ">
                             <connections>
                                 <action selector="finishComplete:" destination="Je8-gH-Vll" id="jWN-VZ-Wq4"/>
                             </connections>
@@ -838,7 +877,7 @@
         <scene sceneID="5dr-fa-kkt">
             <objects>
                 <navigationController definesPresentationContext="YES" id="Ij1-wy-iPD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="好友" id="Tmv-Fi-MPE"/>
+                    <tabBarItem key="tabBarItem" title="好友" image="contact.png" id="Tmv-Fi-MPE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XCf-dI-g8I">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1010,17 +1049,19 @@
             </objects>
             <point key="canvasLocation" x="59" y="1015"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab View Controller-->
         <scene sceneID="Vex-rW-GRa">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabPage" id="8YX-ce-x5E" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabPage" id="8YX-ce-x5E" customClass="MainTabViewController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="JQR-rB-NYL">
+                    <tabBar key="tabBar" opaque="NO" contentMode="scaleToFill" id="JQR-rB-NYL">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="1" green="0.55851698000000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="1" green="0.55851698000000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
+                        <outlet property="tabBar" destination="JQR-rB-NYL" id="TLH-iA-0iV"/>
                         <segue destination="e2O-aO-2cJ" kind="relationship" relationship="viewControllers" id="AUX-Lo-sD9"/>
                         <segue destination="Ij1-wy-iPD" kind="relationship" relationship="viewControllers" id="cP4-oz-oIb"/>
                         <segue destination="Zy9-Rx-YDG" kind="relationship" relationship="viewControllers" id="o5j-EC-K6z"/>
@@ -1040,7 +1081,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2Ea-rM-QE8">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="more" id="2Ea-rM-QE8">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Ea-rM-QE8" id="oAJ-OG-4pn">
@@ -1060,11 +1101,11 @@
             </objects>
             <point key="canvasLocation" x="1392" y="1816"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - 更多-->
         <scene sceneID="ztc-VZ-1CR">
             <objects>
                 <navigationController definesPresentationContext="YES" id="1Dp-rH-QlZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="iAa-WD-eBV"/>
+                    <tabBarItem key="tabBarItem" title="更多" image="more.png" id="iAa-WD-eBV"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HWZ-Oz-Rds">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1079,9 +1120,15 @@
     </scenes>
     <resources>
         <image name="calendar.png" width="300" height="300"/>
+        <image name="chartBtn.png" width="30" height="30"/>
         <image name="coin.png" width="300" height="300"/>
+        <image name="contact.png" width="30" height="30"/>
         <image name="fire.png" width="300" height="300"/>
+        <image name="more.png" width="30" height="30"/>
+        <image name="shareBtn.png" width="30" height="30"/>
+        <image name="sport.png" width="30" height="30"/>
         <image name="step.png" width="300" height="300"/>
+        <image name="user.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

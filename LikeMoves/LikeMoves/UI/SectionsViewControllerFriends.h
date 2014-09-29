@@ -2,7 +2,7 @@
 
 #import <UIKit/UIKit.h>
 #import <SMS_SDK/SMS_SDKResultHanderDef.h>
-
+#import "CustomCell.h"
 @protocol CustomCellDelegate;
 
 @interface SectionsViewControllerFriends : UIViewController

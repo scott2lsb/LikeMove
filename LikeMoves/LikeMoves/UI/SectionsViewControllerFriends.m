@@ -244,7 +244,7 @@
 - (void)CustomCellBtnClick:(CustomCell *)cell
 {
     [self.view endEditing:YES];
-    NSLog(@"cell的按钮被点击了-第%i组,第%i行", cell.section,cell.index);
+    NSLog(@"cell的按钮被点击了-第%ld组,第%ld行", cell.section,cell.index);
     
     UIButton* btn=cell.btn;
     NSLog(@"%@",btn.titleLabel.text);
@@ -394,7 +394,7 @@ sectionForSectionIndexTitle:(NSString *)title
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"点击了第%i组的 第%i列",indexPath.section,indexPath.row);
+    NSLog(@"点击了第%ld组的 第%ld列",(long)indexPath.section,(long)indexPath.row);
     
     NSUInteger section = [indexPath section];
     NSString *key = [keys objectAtIndex:section];

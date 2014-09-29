@@ -18,6 +18,7 @@
     BOOL  isBag;
     CAAnimationGroup* group;
     CABasicAnimation* shake;
+
 }
 @property (weak, nonatomic) IBOutlet UIView *sportCircle;
 @property(nonatomic) wendu_yuan2 * wdSport;
@@ -25,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *stepImg;
 @property (nonatomic) DKCircleButton *fireBtn;
 @property (weak, nonatomic) IBOutlet UIView *circleBtnView;
+
+@property (weak, nonatomic) IBOutlet UINavigationItem *sportNaviItem;
 
 
 @property (nonatomic,strong) LMSportBL* bl;

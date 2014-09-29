@@ -244,7 +244,7 @@ sectionForSectionIndexTitle:(NSString *)title
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"点击了第%i组的 第%i列",indexPath.section,indexPath.row);
+//    NSLog(@"点击了第%i组的 第%i列",indexPath.section,indexPath.row);
     
     NSUInteger section = [indexPath section];
     NSString *key = [keys objectAtIndex:section];

@@ -171,7 +171,7 @@
     UILabel* label=[[UILabel alloc] init];
     label.frame=CGRectMake(0, 146+statusBarHeight, 320, 27);
     label.text=[NSString stringWithFormat:@"%@还未加入",_name];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont fontWithName:@"Helvetica" size:13];
     [self.view addSubview:label];
 

@@ -60,7 +60,7 @@
     
     [viewForPage addSubview:labelForPage];
     EAIntroPage *page1 = [EAIntroPage pageWithCustomView:viewForPage];
-    page1.bgImage = [UIImage imageNamed:@"launch-568h@2x.png"];
+    page1.bgImage = [UIImage imageNamed:@"launchP-568h@2x.png"];
     
     
     
@@ -71,7 +71,7 @@
     page2.titlePositionY=500;
     page2.titleFont=[UIFont systemFontOfSize:30.0f];
     page2.titleColor=[UIColor orangeColor];
-    page2.bgImage = [UIImage imageNamed:@"first-568h"];
+    page2.bgImage = [UIImage imageNamed:@"firstP-568h"];
     
     
     EAIntroPage *page3 = [EAIntroPage page];
@@ -79,7 +79,7 @@
     page3.titleFont=[UIFont systemFontOfSize:30.0f];
     page3.titlePositionY=500;
     page3.titleColor=[UIColor orangeColor];
-    page3.bgImage = [UIImage imageNamed:@"sec-568h"];
+    page3.bgImage = [UIImage imageNamed:@"secondP-568h"];
     
     
     EAIntroPage *page4 = [EAIntroPage page];
@@ -87,7 +87,7 @@
     page4.titlePositionY=500;
     page4.titleFont=[UIFont systemFontOfSize:30.0f];
     page4.titleColor=[UIColor orangeColor];
-    page4.bgImage = [UIImage imageNamed:@"share-568h"];
+    page4.bgImage = [UIImage imageNamed:@"shareP-568h"];
     
     
     EAIntroView *intro = [[EAIntroView alloc] initWithFrame:rootView.bounds andPages:@[page1,page2,page3,page4]];

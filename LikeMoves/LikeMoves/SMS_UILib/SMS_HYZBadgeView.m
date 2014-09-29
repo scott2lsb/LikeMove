@@ -49,7 +49,7 @@
         self.pad = 1;
         self.font = [UIFont boldSystemFontOfSize:14];
         self.shine = YES;
-        self.alignment = UITextAlignmentCenter;
+        self.alignment = NSTextAlignmentCenter;
         self.fillColor = [UIColor redColor];
         self.strokeColor = [UIColor whiteColor];
         self.textColor = [UIColor whiteColor];
@@ -97,8 +97,8 @@
 	
 	CGContextRef curContext = UIGraphicsGetCurrentContext();
 	
-	CGSize numberSize = [self.value sizeWithFont:self.font];
-    
+//	CGSize numberSize = [self.value sizeWithFont:self.font];
+    CGSize numberSize=[self.value sizeWithAttributes:@{NSFontAttributeName:self.font}];
 	CGPathRef badgePath = [self createBadgePathForTextSize:numberSize];
 	
 	CGRect badgeRect = CGPathGetBoundingBox(badgePath);
@@ -119,13 +119,13 @@
 	switch (self.alignment) 
 	{
 		default:
-		case UITextAlignmentCenter:
+		case NSTextAlignmentCenter:
 			ctm = CGPointMake( round((viewBounds.size.width - badgeRect.size.width)/2), round((viewBounds.size.height - badgeRect.size.height)/2) );
 			break;
-		case UITextAlignmentLeft:
+		case NSTextAlignmentLeft:
 			ctm = CGPointMake( 0, round((viewBounds.size.height - badgeRect.size.height)/2) );
 			break;
-		case UITextAlignmentRight:
+		case NSTextAlignmentRight:
 			ctm = CGPointMake( (viewBounds.size.width - badgeRect.size.width), round((viewBounds.size.height - badgeRect.size.height)/2) );
 			break;
 	}
@@ -206,8 +206,7 @@
     
 	CGPoint textPt = CGPointMake( ctm.x + (badgeRect.size.width - numberSize.width)/2 , ctm.y + (badgeRect.size.height - numberSize.height)/2 );
 	
-	[self.value drawAtPoint:textPt withFont:self.font];
-    
+    [self.value drawAtPoint:textPt withAttributes:@{NSFontAttributeName: self.font}];
 	CGContextRestoreGState( curContext );
     
 }
@@ -237,12 +236,12 @@
 - (void)setNumber:(NSUInteger)inValue
 {
     if( inValue == 0 ) {
-        _value = [[NSString alloc]initWithFormat:@"%d",inValue];
+        _value = [[NSString alloc]initWithFormat:@"%lu",(unsigned long)inValue];
         self.frame = CGRectZero;
         [self setNeedsLayout];
         return;
     }else {
-        [self setValue:[NSString stringWithFormat:@"%d", inValue]];
+        [self setValue:[NSString stringWithFormat:@"%lu", (unsigned long)inValue]];
     }
 }
 
@@ -258,9 +257,8 @@
 }
 
 - (CGSize)badgeSize
-{	
-	CGSize numberSize = [self.value sizeWithFont:self.font];
-	
+{
+	CGSize numberSize = [self.value sizeWithAttributes:@{NSFontAttributeName:self.font}];
 	CGPathRef badgePath = [self createBadgePathForTextSize:numberSize];
 	
 	CGRect badgeRect = CGPathGetBoundingBox(badgePath);

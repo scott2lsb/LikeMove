@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SectionsViewController.h"
 @protocol SecondViewControllerDelegate;
 
 @interface RegViewController : UIViewController <UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,SecondViewControllerDelegate,UITextFieldDelegate>

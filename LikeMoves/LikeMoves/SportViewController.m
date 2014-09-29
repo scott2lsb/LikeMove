@@ -62,6 +62,8 @@
     
     [_fireBtn addTarget:self action:@selector(getCoinAction:) forControlEvents:UIControlEventTouchUpInside];
     
+    
+//    _sportNaviItem.back
 }
 
 - (void)didReceiveMemoryWarning
@@ -203,7 +205,7 @@ static int coinCount = 0;
     shake.toValue   = [NSNumber numberWithFloat:+ 0.2];
     shake.duration = 0.1;
     shake.autoreverses = YES;
-    shake.repeatCount = 4;
+    shake.repeatCount = 3;
     shake.removedOnCompletion = YES;
     [_bagView.layer addAnimation:shake forKey:@"bagShakeAnimation"];
     

@@ -216,7 +216,7 @@
     UILabel* label=[[UILabel alloc] init];
     label.frame=CGRectMake(30, 56+statusBarHeight, 258, 21);
     label.text=[NSString stringWithFormat:@"请确认你的国家或地区并输入手机号"];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont fontWithName:@"Helvetica" size:16];
     label.textColor=[UIColor darkGrayColor];
     [self.view addSubview:label];
@@ -230,7 +230,7 @@
     areaCodeField.frame=CGRectMake(7, 147+statusBarHeight, 59, 35+statusBarHeight/4);
     areaCodeField.borderStyle=UITextBorderStyleBezel;
     areaCodeField.text=[NSString stringWithFormat:@"+86"];
-    areaCodeField.textAlignment=UITextAlignmentCenter;
+    areaCodeField.textAlignment=NSTextAlignmentCenter;
     areaCodeField.font=[UIFont fontWithName:@"Helvetica" size:18];
     areaCodeField.keyboardType=UIKeyboardTypePhonePad;
     [self.view addSubview:areaCodeField];

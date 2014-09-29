@@ -23,8 +23,8 @@
 
 @property(copy,nonatomic) NSString* nameDesc;
 
-@property (nonatomic, assign) int index;
-@property(nonatomic,assign) int section;
+@property (nonatomic, assign) long index;
+@property(nonatomic,assign) long section;
 
 
 - (void)btnClick;
