@@ -43,9 +43,9 @@
     
     //    _fireBtn.center = CGPointMake(160, 200);
     _fireBtn.titleLabel.font = [UIFont systemFontOfSize:22];
-    [_fireBtn setTitleColor:[UIColor peterRiverColor] forState:UIControlStateNormal];
-    [_fireBtn setTitleColor:[UIColor peterRiverColor]  forState:UIControlStateSelected];
-    [_fireBtn setTitleColor:[UIColor peterRiverColor] forState:UIControlStateHighlighted];
+    [_fireBtn setTitleColor:[UIColor emerlandColor] forState:UIControlStateNormal];
+    [_fireBtn setTitleColor:[UIColor emerlandColor]  forState:UIControlStateSelected];
+    [_fireBtn setTitleColor:[UIColor emerlandColor] forState:UIControlStateHighlighted];
     [self setFireBtnTitle:@"0m0s"];
     
     [_wdSport addSubview:_fireBtn];
@@ -62,8 +62,8 @@
     
     [_fireBtn addTarget:self action:@selector(getCoinAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    
-//    _sportNaviItem.back
+//    _wdSport.z=1;
+
 }
 
 - (void)didReceiveMemoryWarning

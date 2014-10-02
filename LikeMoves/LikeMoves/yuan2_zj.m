@@ -22,11 +22,11 @@
     
     //渐变范围
     _gradientlayer1.startPoint = CGPointMake(1, 0.08);
-    _gradientlayer1.endPoint = CGPointMake(1, 0.4);
+    _gradientlayer1.endPoint = CGPointMake(1, 0.3);
     _gradientlayer2.startPoint = CGPointMake(1, 0.3);
-    _gradientlayer2.endPoint = CGPointMake(1, 0.9);
+    _gradientlayer2.endPoint = CGPointMake(1, 0.6);
     
-    _array1 = [NSArray arrayWithObjects:(id)[[UIColor yellowColor] CGColor],(id)[[UIColor greenColor] CGColor], nil];
+    _array1 = [NSArray arrayWithObjects:(id)[[UIColor yellowColor] CGColor],(id)[[UIColor emerlandColor] CGColor], nil];
     _array2 = [NSArray arrayWithObjects:(id)[[UIColor yellowColor] CGColor],(id)[[UIColor redColor] CGColor], nil];
     
     //渐变开始

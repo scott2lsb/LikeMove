@@ -146,7 +146,7 @@
             </objects>
             <point key="canvasLocation" x="2001" y="-947"/>
         </scene>
-        <!--Table View Controller - Root View Controller-->
+        <!--Table View Controller - 好友-->
         <scene sceneID="tlM-lv-rJs">
             <objects>
                 <tableViewController id="3Gi-Xn-DZk" sceneMemberID="viewController">
@@ -169,7 +169,7 @@
                             <outlet property="delegate" destination="3Gi-Xn-DZk" id="fSe-Pa-U4T"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="9SD-Cb-3kR"/>
+                    <navigationItem key="navigationItem" title="好友" id="9SD-Cb-3kR"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DAO-jt-Kpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1072,7 +1072,7 @@
             </objects>
             <point key="canvasLocation" x="132" y="180"/>
         </scene>
-        <!--Table View Controller - Root View Controller-->
+        <!--Table View Controller - 更多-->
         <scene sceneID="FP9-Ni-AHm">
             <objects>
                 <tableViewController id="3r5-VD-6di" sceneMemberID="viewController">
@@ -1095,7 +1095,7 @@
                             <outlet property="delegate" destination="3r5-VD-6di" id="b0Y-jx-3pf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="Jhg-5Z-6I4"/>
+                    <navigationItem key="navigationItem" title="更多" id="Jhg-5Z-6I4"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YaR-HW-x9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
