@@ -27,9 +27,11 @@
 
 #include <tgmath.h>
 
-static const CGFloat kRTSpinKitViewDefaultSpinnerSize =   220.0;
+//static const CGFloat kRTSpinKitViewDefaultSpinnerSize =   220.0;
 
-@interface RTSpinKitView ()
+@interface RTSpinKitView (){
+    CGFloat kRTSpinKitViewDefaultSpinnerSize;
+}
 @end
 
 @implementation RTSpinKitView
@@ -56,6 +58,11 @@ static const CGFloat kRTSpinKitViewDefaultSpinnerSize =   220.0;
 }
 
 -(instancetype)initWithStyle:(RTSpinKitViewStyle)style color:(UIColor *)color {
+    if (style==RTSpinKitViewStylePulse) {
+        kRTSpinKitViewDefaultSpinnerSize=220.0;
+    } else {
+        kRTSpinKitViewDefaultSpinnerSize=70.0;
+    }
     return [self initWithStyle:style color:color spinnerSize:kRTSpinKitViewDefaultSpinnerSize];
 }
 

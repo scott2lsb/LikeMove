@@ -118,15 +118,15 @@
 
 - (IBAction)searchFriend:(id)sender {
     CHTumblrMenuView *menuView = [[CHTumblrMenuView alloc] init];
-    [menuView addMenuItemWithTitle:@"雷达" andIcon:[UIImage imageNamed:@"fire.png"] andSelectedBlock:^{
+    [menuView addMenuItemWithTitle:@"雷达" andIcon:[UIImage imageNamed:@"radar_friend.png"] andSelectedBlock:^{
         UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UIViewController *radarVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"RadarFriend"];
         [self.navigationController pushViewController:radarVC animated:YES];
     }];
-    [menuView addMenuItemWithTitle:@"通讯录" andIcon:[UIImage imageNamed:@"coin.png"] andSelectedBlock:^{
+    [menuView addMenuItemWithTitle:@"通讯录" andIcon:[UIImage imageNamed:@"contact_friend2.png"] andSelectedBlock:^{
         NSLog(@"Contace selected");
     }];
-    [menuView addMenuItemWithTitle:@"手机号" andIcon:[UIImage imageNamed:@"step.png"] andSelectedBlock:^{
+    [menuView addMenuItemWithTitle:@"手机号" andIcon:[UIImage imageNamed:@"phone_friend.png"] andSelectedBlock:^{
         NSLog(@"phone selected");
         
     }];
