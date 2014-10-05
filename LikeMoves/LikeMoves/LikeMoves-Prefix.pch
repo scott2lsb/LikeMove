@@ -39,7 +39,7 @@
  *  NSUserDefaults用来存储user的运动时间
  */
 #define mSportTime  @"sport_time"
-
+#define mUseTime    @"user_use_time"
 /**
  *  短信key和secret
  */

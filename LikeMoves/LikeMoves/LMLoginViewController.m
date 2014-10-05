@@ -10,8 +10,11 @@
 #import "RegViewController.h"
 #import "FUIButton.h"
 #import "UIColor+FlatUI.h"
+#import "RTSpinKitView.h"
 /// 登陆界面和注册界面
-@interface LMLoginViewController ()
+@interface LMLoginViewController (){
+    RTSpinKitView* spinner;
+}
 
 /**
  *  登陆页面
@@ -51,10 +54,20 @@
 @implementation LMLoginViewController
 
 @synthesize phoneNum;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _bl=[LMUserActBL new];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]) {
+        [self performSelector:@selector(presentMainTabPage) withObject:nil afterDelay:2.0];
+        //TODO: 添加等待指示框
+        spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor whiteColor]];
+        spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
+        [self.view addSubview:spinner];
+        self.view.layer.opaque=YES;
+    }
+
+        _bl=[LMUserActBL new];
     _bl.delegate=self;
     _registPhoneNum.text=phoneNum;
     //背景图片设置
@@ -90,7 +103,13 @@
     [self.registFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
     
 }
+-(void)presentMainTabPage{
+    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabPage"];
+    [self presentViewController:tabVC animated:YES completion:^(void){
+        [spinner stopAnimating];}];
 
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -124,9 +143,9 @@
     UITabBarController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabPage"];
     [self presentViewController:tabVC animated:YES completion:^(void){
     }];
-    if (![self.presentedViewController isBeingDismissed]) {
-        [self dismissViewControllerAnimated:NO completion:nil];
-    }
+//    if (![self.presentedViewController isBeingDismissed]) {
+//        [self dismissViewControllerAnimated:NO completion:nil];
+//    }
 //    [self dismissViewControllerAnimated:NO completion:nil];
     
 }
@@ -139,7 +158,7 @@
     [self presentViewController:tabVC animated:YES completion:^(void){
     }];
     
-    [self dismissViewControllerAnimated:NO completion:nil];
+//    [self dismissViewControllerAnimated:NO completion:nil];
     
 }
 

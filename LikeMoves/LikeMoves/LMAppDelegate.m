@@ -18,13 +18,77 @@
     //启动页面
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    
-    self.window.rootViewController=[self showIntroWithCrossDissolve];
+
+    if(   [[NSUserDefaults standardUserDefaults] objectForKey:mUseTime]){
+        self.window.rootViewController=[self showLaunchImage];
+        [self performSelector:@selector(presentLoginPage) withObject:nil afterDelay:2.5];
+    }else{
+            self.window.rootViewController=[self showIntroWithCrossDissolve];
+    }
+
     application.statusBarStyle = UIStatusBarStyleLightContent;
     
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+/**
+ *  跳转登陆界面
+ */
+-(void)presentLoginPage{
+    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginPage"];
+    [self.window.rootViewController presentViewController:tabVC animated:YES completion:^(void){}];
+
+}
+/**
+ *  返回登陆页面
+ *
+ *  @return 登陆页面
+ */
+-(UIViewController*)showLaunchImage{
+        UIViewController* introPage=[[UIViewController alloc]init];
+    UIImageView* imgView=[[UIImageView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [imgView setImage:[UIImage imageNamed:@"launchP-568h@2x.png"]];
+    [introPage.view addSubview:imgView];
+
+    /**
+     *  自定义闪烁效果字
+     */
+    
+    UIView *viewForPage = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:CGRectMake(0, 200, introPage.view.bounds.size.width, 44)];
+    shimmeringView.shimmeringBeginFadeDuration=0.3;
+    shimmeringView.shimmeringOpacity=0.0;
+    shimmeringView.shimmeringSpeed=130.0;
+    [viewForPage addSubview:shimmeringView];
+    
+    UILabel *loadingLabel = [[UILabel alloc] initWithFrame:shimmeringView.bounds];
+    loadingLabel.textAlignment = NSTextAlignmentCenter;
+    loadingLabel.text = NSLocalizedString(@"Change begins with movement", nil);
+    loadingLabel.textColor=[UIColor whiteColor];
+    loadingLabel.backgroundColor=[UIColor clearColor];
+    loadingLabel.font=[UIFont systemFontOfSize:20.0];
+    shimmeringView.contentView = loadingLabel;
+    // Start shimmering.
+    shimmeringView.shimmering = YES;
+    
+    UILabel *labelForPage = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, introPage.view.bounds.size.width, 50)];
+    labelForPage.text = @"改变从运动开始";
+    labelForPage.textAlignment = NSTextAlignmentCenter;
+    labelForPage.font = [UIFont systemFontOfSize:40];
+    labelForPage.textColor = [UIColor whiteColor];
+    labelForPage.backgroundColor = [UIColor clearColor];
+    
+    [viewForPage addSubview:labelForPage];
+    [introPage.view addSubview:viewForPage];
+//    EAIntroPage *page1 = [EAIntroPage pageWithCustomView:viewForPage];
+//    page1.bgImage = [UIImage imageNamed:@"launchP-568h@2x.png"];
+    
+    
+    
+    return introPage;
 }
 - (UIViewController*)showIntroWithCrossDissolve {
     UIViewController* introPage=[[UIViewController alloc]init];
@@ -99,6 +163,7 @@
     intro.pageControl = (UIPageControl *)pageControl;
     intro.pageControlY = 110.0f;
     [intro showInView:rootView animateDuration:0.3];
+    [[NSUserDefaults standardUserDefaults] setObject:@"123" forKey:mUseTime];
     return introPage;
 }
 #pragma mark intro-delegate
