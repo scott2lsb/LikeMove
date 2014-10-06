@@ -70,6 +70,9 @@
 		8A8504C319E1311900CB730E /* contact_friend1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A8504BF19E1311900CB730E /* contact_friend1.png */; };
 		8A8504C419E1311900CB730E /* contact_friend2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A8504C019E1311900CB730E /* contact_friend2.png */; };
 		8A8504C519E1311900CB730E /* radar_friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A8504C119E1311900CB730E /* radar_friend.png */; };
+		8A8504CB19E23D2E00CB730E /* SportDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A8504CA19E23D2E00CB730E /* SportDAO.m */; };
+		8A8504CE19E23D6F00CB730E /* ContactDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A8504CD19E23D6F00CB730E /* ContactDAO.m */; };
+		8A8504D119E23DF000CB730E /* ShopDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A8504D019E23DF000CB730E /* ShopDAO.m */; };
 		8AAF82C319D8ECCD000E118A /* contact.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF82B219D8ECCD000E118A /* contact.png */; };
 		8AAF82C419D8ECCD000E118A /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF82B319D8ECCD000E118A /* more.png */; };
 		8AAF82C519D8ECCD000E118A /* sport.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF82B419D8ECCD000E118A /* sport.png */; };
@@ -258,6 +261,15 @@
 		8A8504BF19E1311900CB730E /* contact_friend1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact_friend1.png; sourceTree = "<group>"; };
 		8A8504C019E1311900CB730E /* contact_friend2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact_friend2.png; sourceTree = "<group>"; };
 		8A8504C119E1311900CB730E /* radar_friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar_friend.png; sourceTree = "<group>"; };
+		8A8504C619E23BE800CB730E /* LMSportDAODelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMSportDAODelegate.h; sourceTree = "<group>"; };
+		8A8504C719E23C1F00CB730E /* LMContactDAODelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMContactDAODelegate.h; sourceTree = "<group>"; };
+		8A8504C819E23C4F00CB730E /* LMShopDAODelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMShopDAODelegate.h; sourceTree = "<group>"; };
+		8A8504C919E23D2E00CB730E /* SportDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SportDAO.h; sourceTree = "<group>"; };
+		8A8504CA19E23D2E00CB730E /* SportDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SportDAO.m; sourceTree = "<group>"; };
+		8A8504CC19E23D6F00CB730E /* ContactDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDAO.h; sourceTree = "<group>"; };
+		8A8504CD19E23D6F00CB730E /* ContactDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDAO.m; sourceTree = "<group>"; };
+		8A8504CF19E23DF000CB730E /* ShopDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopDAO.h; sourceTree = "<group>"; };
+		8A8504D019E23DF000CB730E /* ShopDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopDAO.m; sourceTree = "<group>"; };
 		8AAF82B219D8ECCD000E118A /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact.png; sourceTree = "<group>"; };
 		8AAF82B319D8ECCD000E118A /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
 		8AAF82B419D8ECCD000E118A /* sport.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sport.png; sourceTree = "<group>"; };
@@ -439,12 +451,17 @@
 			isa = PBXGroup;
 			children = (
 				8A04AF1F19C6C9B1000212E7 /* LMUserActDADelegate.h */,
-				8A04AF0C19C5E8F4000212E7 /* CoreDataDAO.h */,
-				8A04AF0D19C5E8F4000212E7 /* CoreDataDAO.m */,
+				8A8504C619E23BE800CB730E /* LMSportDAODelegate.h */,
+				8A8504C719E23C1F00CB730E /* LMContactDAODelegate.h */,
+				8A8504C819E23C4F00CB730E /* LMShopDAODelegate.h */,
 				8A04AF1319C6C0E2000212E7 /* UserActDA.h */,
 				8A04AF1419C6C0E2000212E7 /* UserActDA.m */,
-				8A04AF2919C7E319000212E7 /* User.h */,
-				8A04AF2A19C7E319000212E7 /* User.m */,
+				8A8504C919E23D2E00CB730E /* SportDAO.h */,
+				8A8504CA19E23D2E00CB730E /* SportDAO.m */,
+				8A8504CC19E23D6F00CB730E /* ContactDAO.h */,
+				8A8504CD19E23D6F00CB730E /* ContactDAO.m */,
+				8A8504CF19E23DF000CB730E /* ShopDAO.h */,
+				8A8504D019E23DF000CB730E /* ShopDAO.m */,
 			);
 			name = DAL;
 			sourceTree = "<group>";
@@ -452,6 +469,10 @@
 		8A04AEFE19C5CC7E000212E7 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				8A04AF0C19C5E8F4000212E7 /* CoreDataDAO.h */,
+				8A04AF0D19C5E8F4000212E7 /* CoreDataDAO.m */,
+				8A04AF2919C7E319000212E7 /* User.h */,
+				8A04AF2A19C7E319000212E7 /* User.m */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -1119,6 +1140,7 @@
 				8A04AF3B19C839E6000212E7 /* CustomCell.m in Sources */,
 				8AB1ABD619CFA42600017485 /* SportViewController.m in Sources */,
 				8AC7F82219DF8FA6008C2934 /* RTSpinKitCircleFlipAnimation.m in Sources */,
+				8A8504CE19E23D6F00CB730E /* ContactDAO.m in Sources */,
 				8A04AF3C19C839E6000212E7 /* InvitationViewControllerEx.m in Sources */,
 				8AC7F82F19DF9020008C2934 /* RadarFriendViewController.m in Sources */,
 				8AB1ABE119CFA79900017485 /* yuan2_sc.m in Sources */,
@@ -1137,9 +1159,11 @@
 				8AC7F81D19DF8FA6008C2934 /* RTSpinKitArcAltAnimation.m in Sources */,
 				8AB1AC1319D5388200017485 /* DKCircleButton.m in Sources */,
 				8A1D4C1619CD238E00F27A3C /* ALPickerView.m in Sources */,
+				8A8504CB19E23D2E00CB730E /* SportDAO.m in Sources */,
 				8A04AF1819C6C1A1000212E7 /* CoreDateMoves.xcdatamodeld in Sources */,
 				8AD3A49519C927F700B615A5 /* OnboardingContentViewController.m in Sources */,
 				8A1D4C1719CD238E00F27A3C /* ALPickerViewCell.m in Sources */,
+				8A8504D119E23DF000CB730E /* ShopDAO.m in Sources */,
 				8A04AF4D19C839FF000212E7 /* SMS_MBProgressHUD+Add.m in Sources */,
 				8AB1ABE019CFA79900017485 /* yuan2_zj.m in Sources */,
 				8A4113F119D92EA8002F2575 /* SportDetailViewController.m in Sources */,

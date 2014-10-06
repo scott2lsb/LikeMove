@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LMContactBLDelegate.h"
+#import "LMContactDAODelegate.h"
+#import "ContactDAO.h"
+@interface LMContactBL : NSObject<LMContactDAODelegate>
 
-@interface LMContactBL : NSObject
+@property (weak,nonatomic) id<LMContactBLDelegate> delegate;
+@property (strong,nonatomic)    ContactDAO* dao;
 
 @end

@@ -32,9 +32,22 @@
  *  @return 是否注册成功
  */
 -(BOOL) regist:(NSString*)phone withPassword:(NSString*)pwd;
-
+/**
+ *  通过手机号和新密码重置密码
+ *
+ *  @param phone 手机号
+ *  @param pwd   新的密码
+ */
 -(void) resetPwd:(NSString*)phone withNewPwd:(NSString*)pwd;
-
+/**
+ *  修改用户的信息
+ *
+ *  @param nickName 昵称
+ *  @param sex      性别
+ *  @param age      年里
+ *
+ *  @return 是否修改成功
+ */
 -(BOOL) editUserInfo:(NSString*)nickName sex:(NSString*)sex age:(NSString*)age ;
 
 

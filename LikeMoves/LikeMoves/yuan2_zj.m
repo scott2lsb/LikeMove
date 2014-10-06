@@ -16,7 +16,7 @@
     return self;
 }
 -(void)chushihua{
-    _zj_kd = 20;
+    _zj_kd = 15;
     _gradientlayer1 = [CAGradientLayer layer];
     _gradientlayer2 = [CAGradientLayer layer];
     
@@ -26,7 +26,7 @@
     _gradientlayer2.startPoint = CGPointMake(1, 0.3);
     _gradientlayer2.endPoint = CGPointMake(1, 0.6);
     
-    _array1 = [NSArray arrayWithObjects:(id)[[UIColor yellowColor] CGColor],(id)[[UIColor emerlandColor] CGColor], nil];
+    _array1 = [NSArray arrayWithObjects:(id)[[UIColor yellowColor] CGColor],(id)[[UIColor greenColor] CGColor], nil];
     _array2 = [NSArray arrayWithObjects:(id)[[UIColor yellowColor] CGColor],(id)[[UIColor redColor] CGColor], nil];
     
     //渐变开始

@@ -9,6 +9,7 @@
 #import "SportViewController.h"
 #import "UIColor+FlatUI.h"
 #define kCoinCountKey   100
+#define mFireBtnH 120
 @interface SportViewController ()
 @property (nonatomic) NSTimer* stopTimer;
 @property (nonatomic) NSTimer* countSportTime;
@@ -39,7 +40,7 @@
     [_stepImg setImage:[UIImage imageNamed:@"step"]];
     
     
-    _fireBtn = [[DKCircleButton alloc] initWithFrame:CGRectMake(95, 100, 130, 130)];
+    _fireBtn = [[DKCircleButton alloc] initWithFrame:CGRectMake(self.sportCircle.bounds.size.width/2-mFireBtnH/2, self.sportCircle.bounds.size.height/2-mFireBtnH/2, mFireBtnH, mFireBtnH)];
     
     //    _fireBtn.center = CGPointMake(160, 200);
     _fireBtn.titleLabel.font = [UIFont systemFontOfSize:22];

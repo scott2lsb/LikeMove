@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface LMShopBL : NSObject
-
+#import "ShopDAO.h"
+#import "LMShopDAODelegate.h"
+#import "LMShopBLDelegate.h"
+@interface LMShopBL : NSObject<LMShopDAODelegate>
+@property (strong,nonatomic) ShopDAO* dao;
+@property (weak,nonatomic) id<LMShopBLDelegate> delegate;
 @end
