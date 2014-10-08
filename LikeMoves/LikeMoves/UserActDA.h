@@ -31,7 +31,7 @@
  *
  *  @return 是否注册成功
  */
--(BOOL) regist:(NSString*)phone withPassword:(NSString*)pwd;
+-(BOOL) regist:(NSString*)phone withPassword:(NSString*)pwd withTrainPlace:(NSString*)trainPlace;
 /**
  *  通过手机号和新密码重置密码
  *

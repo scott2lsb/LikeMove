@@ -9,7 +9,26 @@
 #import <UIKit/UIKit.h>
 #import "LMUserActBL.h"
 #import "LMUserBLDelegate.h"
-@interface LMLoginViewController : UIViewController<LMUserBLDelegate>
+#import "CYCustomMultiSelectPickerView.h"
+@interface LMLoginViewController : UIViewController<LMUserBLDelegate,CYCustomMultiSelectPickerViewDelegate,UIAlertViewDelegate>
+/**
+ *  用户信息编辑界面锻炼地点多选器
+ */
+{
+    NSArray *entries;
+    NSArray *entriesSelected;
+    NSMutableDictionary *selectionStates;
+    
+    
+    CYCustomMultiSelectPickerView *multiPickerView;
+    
+    
+}
+@property (weak, nonatomic) IBOutlet UIButton *pickTrainPlace;
+@property (weak, nonatomic) IBOutlet UILabel *shouTrainPlace;
+- (IBAction)closeRegKeyboard:(id)sender;
+
+
 @property (nonatomic,strong) LMUserActBL* bl;
 @property (nonatomic,copy)   NSString* phoneNum;
 @end

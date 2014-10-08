@@ -23,15 +23,21 @@
     [_da login:phone withPassword:pwd];
     return nil;
 }
--(BOOL)regist:(NSString *)phone withPassword:(NSString *)pwd{
+-(BOOL)regist:(NSString *)phone withPassword:(NSString *)pwd withTrainPlace:(NSString *)trainPlace{
     _da.delegate=self;
-    [_da regist:phone withPassword:pwd];
+    [_da regist:phone withPassword:pwd withTrainPlace:trainPlace];
     return 1;
 }
 
 -(void)editUserInfo:(NSString *)nickName sex:(NSString *)sex age:(NSString *)age{
     _da.delegate=self;
+  
     [_da editUserInfo:nickName sex:sex age:age];
+}
+
+-(void)resetPwd:(NSString *)phone withNewPwd:(NSString *)pwd{
+    _da.delegate=self;
+    [_da resetPwd:phone withNewPwd:pwd];
 }
 #pragma mark - LMUserActDADelegate
 -(void)loginSuccess{
@@ -51,5 +57,11 @@
 }
 -(void)editUserInfoFail{
     [_delegate editUserInfoFail];
+}
+-(void)resetPwdSuccess{
+    [_delegate resetPwdSuccess];
+}
+-(void)resetPwdFail{
+    [_delegate resetPwdFail];
 }
 @end

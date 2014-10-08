@@ -57,11 +57,11 @@
     
 }
 
--(BOOL)regist:(NSString *)phone withPassword:(NSString *)pwd{
+-(BOOL)regist:(NSString *)phone withPassword:(NSString *)pwd withTrainPlace:(NSString *)trainPlace{
     AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer                       = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
-    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=register&phone=%@&password=%@&user_type=4",phone,pwd];
+    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=register&phone=%@&password=%@&training_address=%@&user_type=4",phone,pwd,[trainPlace stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
     [manager POST:requestUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"JSON: %@", operation.responseString);
@@ -100,7 +100,7 @@
     AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer                       = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
-    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=edit&password=%@",pwd];
+    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=resetPassword&phone=%@&password=%@",phone,pwd];
     NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
     [manager POST:requestUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"JSON: %@", operation.responseString);

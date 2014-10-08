@@ -21,7 +21,11 @@
 @property(nonatomic,strong) UIWindow* window;
 
 @property(nonatomic,strong) UIButton* next;
-
+/**
+ *  Yes为regist
+ No为reset
+ */
+@property (nonatomic) BOOL registOrReset;
 -(void)nextStep;
 
 @end

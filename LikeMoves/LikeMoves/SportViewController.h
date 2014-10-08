@@ -23,9 +23,9 @@
 @property (weak, nonatomic) IBOutlet UIView *sportCircle;
 @property(nonatomic) wendu_yuan2 * wdSport;
 @property (weak, nonatomic) IBOutlet UILabel *stepCount;
-@property (weak, nonatomic) IBOutlet UIImageView *stepImg;
+
 @property (nonatomic) DKCircleButton *fireBtn;
-@property (weak, nonatomic) IBOutlet UIView *circleBtnView;
+
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *sportNaviItem;
 

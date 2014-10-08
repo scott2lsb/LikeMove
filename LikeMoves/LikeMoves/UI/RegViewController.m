@@ -109,7 +109,20 @@
             return;
         }
     }
+    //TODO: 服务器验证是否已经注册，分为注册和重置密码两种情况进行判断
+    //判断服务器是否存在此手机号
+    //弹出提示框提示此号码已经存在
     
+    if (self.registOrReset) {
+        //regist手机号已经注册
+        
+        
+        
+    }else{
+        //reset手机号还未注册
+        
+        
+    }
     NSString* str=[NSString stringWithFormat:@"我们将发送验证码短信到这个号码:%@ %@",self.areaCodeField.text,self.telField.text];
     _str=[NSString stringWithFormat:@"%@",self.telField.text];
     UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"确认手机号码" message:str delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
@@ -126,11 +139,15 @@
         
         
         
-        //判断服务器是否存在此手机号
-        
-        
-        //弹出提示框提示此号码已经存在
-        
+        if (self.registOrReset) {
+            //regist
+            verify.registOrReset=YES;
+            
+            
+        }else{
+            //reset
+            verify.registOrReset=NO;
+        }
         
         
         
@@ -200,10 +217,10 @@
                                                                    style:UIBarButtonItemStyleBordered
                                                                   target:self
                                                                   action:@selector(clickLeftButton)];
-    
+    leftButton.tintColor=[UIColor orangeColor];
     //设置导航栏内容
     [navigationItem setTitle:@"手机验证"];
-    
+    //    navigationItem.titleView.tintColor=[UIColor orangeColor];
     //把导航栏集合添加入导航栏中，设置动画关闭
     [navigationBar pushNavigationItem:navigationItem animated:NO];
     

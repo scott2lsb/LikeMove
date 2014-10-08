@@ -20,7 +20,11 @@
 @property(nonatomic,strong)  UIButton* repeatSMSBtn;
 
 @property(nonatomic,strong)  UIButton* submitBtn;
-
+/**
+ *  Yes为regist
+ No为reset
+ */
+@property (nonatomic) BOOL registOrReset;
 //-(NSString*)setString:(NSString*) str;
 
 -(void)setPhone:(NSString*)phone AndAreaCode:(NSString*)areaCode;

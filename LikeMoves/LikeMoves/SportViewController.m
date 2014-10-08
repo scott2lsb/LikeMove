@@ -37,7 +37,7 @@
     /**
      *  界面元素
      */
-    [_stepImg setImage:[UIImage imageNamed:@"step"]];
+
     
     
     _fireBtn = [[DKCircleButton alloc] initWithFrame:CGRectMake(self.sportCircle.bounds.size.width/2-mFireBtnH/2, self.sportCircle.bounds.size.height/2-mFireBtnH/2, mFireBtnH, mFireBtnH)];

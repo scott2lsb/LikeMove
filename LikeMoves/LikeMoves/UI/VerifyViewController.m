@@ -182,16 +182,30 @@ static NSMutableArray* _userData2;
     }
     
     if (alertView==_alert3) {
-        
-        UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController *registVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"RegistPage"];
-        [registVC setValue:_phone forKey:@"phoneNum"];
-        [self presentViewController:registVC animated:YES completion:^(void){
-            //解决等待时间乱跳的问题
-            [_timer2 invalidate];
-            [_timer1 invalidate];
+        if (self.registOrReset) {
+            UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UIViewController *registVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"RegistPage"];
+            [registVC setValue:_phone forKey:@"phoneNum"];
+            [self presentViewController:registVC animated:YES completion:^(void){
+                //解决等待时间乱跳的问题
+                [_timer2 invalidate];
+                [_timer1 invalidate];
+                
+            }];
 
-        }];
+        } else {
+            UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UIViewController *resetVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"ResetPwd"];
+            [resetVC setValue:_phone forKey:@"phoneNum"];
+            [self presentViewController:resetVC animated:YES completion:^(void){
+                //解决等待时间乱跳的问题
+                [_timer2 invalidate];
+                [_timer1 invalidate];
+                
+            }];
+
+        }
+        
     }
 
 }
@@ -224,7 +238,7 @@ static NSMutableArray* _userData2;
                                                                    style:UIBarButtonItemStyleBordered
                                                                   target:self
                                                                   action:@selector(clickLeftButton)];
-    
+    leftButton.tintColor=[UIColor orangeColor];
     //设置导航栏内容
     [navigationItem setTitle:@"验证码"];
     

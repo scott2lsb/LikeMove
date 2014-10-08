@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "LMSportBLDelegate.h"
+#import "LMSportDAODelegate.h"
+#import "SportDAO.h"
 #import <CoreLocation/CoreLocation.h>
 #import <CoreMotion/CoreMotion.h>
-@interface LMSportBL : NSObject<CLLocationManagerDelegate>{
+@interface LMSportBL : NSObject<CLLocationManagerDelegate,LMSportDAODelegate>{
     float px;
     float py;
     float pz;
@@ -28,7 +30,10 @@
 @property (strong,nonatomic)CMMotionManager *motionManager;
 @property (nonatomic) NSTimer* stopTimeCount;
 @property (nonatomic) NSTimer* sportTimeCount;
+
+
 @property (weak, nonatomic) id <LMSportBLDelegate> delegate;
+@property (weak,nonatomic)SportDAO* dao;
 
 -(void)startMotionDetect;
 @end
