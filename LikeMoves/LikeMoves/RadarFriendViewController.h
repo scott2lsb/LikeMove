@@ -9,11 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "RTSpinKitView.h"
 #import "UIColor+FlatUI.h"
-
-@interface RadarFriendViewController : UIViewController{
+#import "LMContactBL.h"
+#import "LMContactBLDelegate.h"
+@interface RadarFriendViewController : UIViewController<LMContactBLDelegate,UITableViewDelegate,UITableViewDataSource>
+{
     RTSpinKitView *spinner;}
+@property (strong,nonatomic) LMContactBL* bl;
+@property (strong,nonatomic) NSArray* radarFriends;
+@property (weak, nonatomic) IBOutlet UITableView *radarTable;
+
 - (IBAction)backTo:(id)sender;
 
 - (IBAction)radarSearch:(id)sender;
+- (IBAction)addRadarFriend:(id)sender;
 
 @end

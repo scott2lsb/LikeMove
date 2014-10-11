@@ -51,7 +51,7 @@
     else
     {
         //[_sdk sendSMS:_phone?_phone:@"18927512076"];
-        [SMS_SDK sendSMS:_phone?_phone:@"18927512076" AndMessage:@"快加入SMS_SDK吧,网址为http://www.sharesdk.cn"];
+        [SMS_SDK sendSMS:_phone?_phone:@"18927512076" AndMessage:@"快来加入里环王，一起分享运动的乐趣吧！"];
     }
 }
 
@@ -60,12 +60,12 @@
     if (1==buttonIndex)
     {
         //[_sdk sendSMS:_phone2?_phone2:@"18927512076"];
-        [SMS_SDK sendSMS:_phone?_phone:@"18927512076" AndMessage:@"快加入SMS_SDK吧,网址为http://www.sharesdk.cn"];
+        [SMS_SDK sendSMS:_phone?_phone:@"18927512076" AndMessage:@"快来加入里环王，一起分享运动的乐趣吧！"];
     }
     if (0==buttonIndex)
     {
         //[_sdk sendSMS:_phone?_phone:@"18927512076"];
-        [SMS_SDK sendSMS:_phone?_phone:@"18927512076" AndMessage:@"快加入SMS_SDK吧,网址为http://www.sharesdk.cn"];
+        [SMS_SDK sendSMS:_phone?_phone:@"18927512076" AndMessage:@"快来加入里环王，一起分享运动的乐趣吧！"];
     }
 }
 
@@ -141,7 +141,7 @@
                                                                    style:UIBarButtonItemStyleBordered
                                                                   target:self
                                                                   action:@selector(clickLeftButton)];
-    
+    leftButton.tintColor=[UIColor orangeColor];
     
     //把导航栏集合添加入导航栏中，设置动画关闭
     [navigationBar pushNavigationItem:navigationItem animated:NO];

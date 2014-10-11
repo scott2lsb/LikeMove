@@ -3,6 +3,7 @@
 #import <UIKit/UIKit.h>
 #import <SMS_SDK/SMS_SDKResultHanderDef.h>
 #import "CustomCell.h"
+#import "LMContactBL.h"
 @protocol CustomCellDelegate;
 
 @interface SectionsViewControllerFriends : UIViewController
@@ -16,6 +17,7 @@
     
     BOOL    isSearching;
 }
+@property (nonatomic) LMContactBL* bl;
 @property (nonatomic, strong)  UITableView *table;
 @property (nonatomic, strong)  UISearchBar *search;
 @property (nonatomic, strong) NSDictionary *allNames;

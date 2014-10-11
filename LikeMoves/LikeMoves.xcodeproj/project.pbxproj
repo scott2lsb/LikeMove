@@ -77,6 +77,10 @@
 		8A8504D519E404B400CB730E /* button4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A8504D419E404B400CB730E /* button4.png */; };
 		8A8504D819E415FB00CB730E /* ResetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A8504D719E415FB00CB730E /* ResetPwdViewController.m */; };
 		8A8504DA19E4BDC600CB730E /* testuser2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A8504D919E4BDC600CB730E /* testuser2.png */; };
+		8A85053719E6288900CB730E /* PhoneFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A85053619E6288900CB730E /* PhoneFriendViewController.m */; };
+		8A85053A19E6325200CB730E /* testuser3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A85053919E6325200CB730E /* testuser3.png */; };
+		8A85053D19E63B5700CB730E /* SportRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A85053C19E63B5700CB730E /* SportRankViewController.m */; };
+		8A85054319E8217B00CB730E /* AcceptFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A85054219E8217B00CB730E /* AcceptFriendViewController.m */; };
 		8AAF82C319D8ECCD000E118A /* contact.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF82B219D8ECCD000E118A /* contact.png */; };
 		8AAF82C419D8ECCD000E118A /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF82B319D8ECCD000E118A /* more.png */; };
 		8AAF82C519D8ECCD000E118A /* sport.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF82B419D8ECCD000E118A /* sport.png */; };
@@ -271,6 +275,13 @@
 		8A8504D619E415FB00CB730E /* ResetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPwdViewController.h; sourceTree = "<group>"; };
 		8A8504D719E415FB00CB730E /* ResetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwdViewController.m; sourceTree = "<group>"; };
 		8A8504D919E4BDC600CB730E /* testuser2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testuser2.png; sourceTree = "<group>"; };
+		8A85053519E6288900CB730E /* PhoneFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneFriendViewController.h; sourceTree = "<group>"; };
+		8A85053619E6288900CB730E /* PhoneFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneFriendViewController.m; sourceTree = "<group>"; };
+		8A85053919E6325200CB730E /* testuser3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testuser3.png; sourceTree = "<group>"; };
+		8A85053B19E63B5700CB730E /* SportRankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SportRankViewController.h; sourceTree = "<group>"; };
+		8A85053C19E63B5700CB730E /* SportRankViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SportRankViewController.m; sourceTree = "<group>"; };
+		8A85054119E8217B00CB730E /* AcceptFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcceptFriendViewController.h; sourceTree = "<group>"; };
+		8A85054219E8217B00CB730E /* AcceptFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcceptFriendViewController.m; sourceTree = "<group>"; };
 		8AAF82B219D8ECCD000E118A /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact.png; sourceTree = "<group>"; };
 		8AAF82B319D8ECCD000E118A /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
 		8AAF82B419D8ECCD000E118A /* sport.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sport.png; sourceTree = "<group>"; };
@@ -415,10 +426,7 @@
 				8A4113ED19D90B1D002F2575 /* MainTabViewController.m */,
 				8A4113EF19D92EA8002F2575 /* SportDetailViewController.h */,
 				8A4113F019D92EA8002F2575 /* SportDetailViewController.m */,
-				8AC7F82D19DF9020008C2934 /* RadarFriendViewController.h */,
-				8AC7F82E19DF9020008C2934 /* RadarFriendViewController.m */,
-				8AC7F83019DFC535008C2934 /* FriendTableViewController.h */,
-				8AC7F83119DFC535008C2934 /* FriendTableViewController.m */,
+				8A85053819E6289400CB730E /* Contact */,
 			);
 			name = UIL;
 			sourceTree = "<group>";
@@ -679,6 +687,23 @@
 			name = Friend;
 			sourceTree = "<group>";
 		};
+		8A85053819E6289400CB730E /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				8AC7F82D19DF9020008C2934 /* RadarFriendViewController.h */,
+				8AC7F82E19DF9020008C2934 /* RadarFriendViewController.m */,
+				8A85053519E6288900CB730E /* PhoneFriendViewController.h */,
+				8A85053619E6288900CB730E /* PhoneFriendViewController.m */,
+				8AC7F83019DFC535008C2934 /* FriendTableViewController.h */,
+				8AC7F83119DFC535008C2934 /* FriendTableViewController.m */,
+				8A85053B19E63B5700CB730E /* SportRankViewController.h */,
+				8A85053C19E63B5700CB730E /* SportRankViewController.m */,
+				8A85054119E8217B00CB730E /* AcceptFriendViewController.h */,
+				8A85054219E8217B00CB730E /* AcceptFriendViewController.m */,
+			);
+			name = Contact;
+			sourceTree = "<group>";
+		};
 		8AAF82AF19D8ECCD000E118A /* PageElement */ = {
 			isa = PBXGroup;
 			children = (
@@ -902,6 +927,7 @@
 		8AD3A49819C92A6F00B615A5 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				8A85053919E6325200CB730E /* testuser3.png */,
 				8A8504D919E4BDC600CB730E /* testuser2.png */,
 				8A8504D419E404B400CB730E /* button4.png */,
 				8A8504D219E3EF3800CB730E /* testuser.png */,
@@ -1026,6 +1052,7 @@
 				8AC7F84B19E12066008C2934 /* coins.png in Resources */,
 				8AAF82CB19D8ECCD000E118A /* contact@2x.png in Resources */,
 				8AAF82C719D8ECCD000E118A /* 好友蓝色30.png in Resources */,
+				8A85053A19E6325200CB730E /* testuser3.png in Resources */,
 				8AB1AC4119D8270500017485 /* firstP-568h@2x.png in Resources */,
 				8A1D4C0D19CD234000F27A3C /* wheel_bg@2x.png in Resources */,
 				8AAF82D019D8ECCD000E118A /* 我的蓝色60.png in Resources */,
@@ -1133,6 +1160,8 @@
 				8A4113EE19D90B1D002F2575 /* MainTabViewController.m in Sources */,
 				8AB1ABE319CFA79900017485 /* wendu_yuan2.m in Sources */,
 				8A04AF2219C6D42A000212E7 /* LMLoginViewController.m in Sources */,
+				8A85053D19E63B5700CB730E /* SportRankViewController.m in Sources */,
+				8A85053719E6288900CB730E /* PhoneFriendViewController.m in Sources */,
 				8A04AF0519C5D28D000212E7 /* LMContactBL.m in Sources */,
 				8A33784919C5C656008B9AF5 /* LMAppDelegate.m in Sources */,
 				8A04AF0819C5D2A9000212E7 /* LMShopBL.m in Sources */,
@@ -1145,6 +1174,7 @@
 				8A8504D819E415FB00CB730E /* ResetPwdViewController.m in Sources */,
 				8AB1AC1319D5388200017485 /* DKCircleButton.m in Sources */,
 				8A1D4C1619CD238E00F27A3C /* ALPickerView.m in Sources */,
+				8A85054319E8217B00CB730E /* AcceptFriendViewController.m in Sources */,
 				8A8504CB19E23D2E00CB730E /* SportDAO.m in Sources */,
 				8A04AF1819C6C1A1000212E7 /* CoreDateMoves.xcdatamodeld in Sources */,
 				8AD3A49519C927F700B615A5 /* OnboardingContentViewController.m in Sources */,

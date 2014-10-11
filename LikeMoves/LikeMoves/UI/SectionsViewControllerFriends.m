@@ -7,7 +7,7 @@
 #import <SMS_SDK/SMS_AddressBook.h>
 #import "InvitationViewControllerEx.h"
 #import "VerifyViewController.h"
-
+#import <SMS_SDK/SMS_SDK.h>
 @interface SectionsViewControllerFriends ()
 {
     NSMutableArray* _testArray1;
@@ -19,7 +19,7 @@
     NSMutableArray* _friendsData2;
     
     NSMutableArray* _other;
-
+    
 }
 
 @end
@@ -37,9 +37,9 @@
     NSMutableDictionary *allNamesCopy = [self.allNames mutableDeepCopy];//deep copy
     self.names = allNamesCopy;
     NSMutableArray *keyArray = [[NSMutableArray alloc] init];
-
+    
     [keyArray addObject:UITableViewIndexSearch];//add the search icon to index bar
-    [keyArray addObjectsFromArray:[[self.allNames allKeys] 
+    [keyArray addObjectsFromArray:[[self.allNames allKeys]
                                    sortedArrayUsingSelector:@selector(compare:)]];
     self.keys = keyArray;
 }
@@ -52,17 +52,17 @@
         NSMutableArray *array = [names valueForKey:key];
         NSMutableArray *toRemove = [[NSMutableArray alloc] init];
         for (NSString *name in array) {
-            if ([name rangeOfString:searchTerm 
+            if ([name rangeOfString:searchTerm
                             options:NSCaseInsensitiveSearch].location == NSNotFound)
                 [toRemove addObject:name];//add the  unfit object to remove array
         }
         
-        //if all of the object in this section are unfit 
+        //if all of the object in this section are unfit
         //add whole array's key to  section remove array
         if ([array count] == [toRemove count])
             [sectionsToRemove addObject:key];
         
-        //remove the unfit objects in toRemove array 
+        //remove the unfit objects in toRemove array
         [array removeObjectsInArray:toRemove];
     }
     // remove the unfit sections in sectionsToRemove array
@@ -87,7 +87,7 @@
     if (_friendsBlock) {
         _friendsBlock(1,0);
     }
-
+    
 }
 
 
@@ -104,7 +104,7 @@
 
 -(void)setMyData:(NSArray*) array
 {
-    _friendsData=[NSMutableArray arrayWithArray:array];
+    _friendsData=[array mutableCopy];
 }
 
 -(void)setMyBlock:(ShowNewFriendsCountBlock)block
@@ -114,6 +114,8 @@
 
 - (void)viewDidLoad
 {
+    _bl=[[LMContactBL alloc] init];
+    
     self.view.backgroundColor=[UIColor whiteColor];
     
     CGFloat statusBarHeight=0;
@@ -129,17 +131,17 @@
     
     //创建一个左边按钮
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"返回"
-                                                                       style:UIBarButtonItemStyleBordered
-                                                                      target:self
-                                                                      action:@selector(clickLeftButton)];
+                                                                   style:UIBarButtonItemStyleBordered
+                                                                  target:self
+                                                                  action:@selector(clickLeftButton)];
     
-
+    
     //把导航栏集合添加入导航栏中，设置动画关闭
     [navigationBar pushNavigationItem:navigationItem animated:NO];
     
     //把左右两个按钮添加入导航栏集合中
     [navigationItem setLeftBarButtonItem:leftButton];
-
+    
     //把导航栏添加到视图中
     [self.view addSubview:navigationBar];
     
@@ -151,7 +153,7 @@
     [self.view addSubview:search];
     
     //添加table
-    table=[[UITableView alloc] initWithFrame:CGRectMake(0, 88+statusBarHeight, 320, self.view.bounds.size.height-(88+statusBarHeight)) style:UITableViewStylePlain];
+    table=[[UITableView alloc] initWithFrame:CGRectMake(0, 88+statusBarHeight, 320, self.view.bounds.size.height-(88+statusBarHeight+44)) style:UITableViewStylePlain];
     [self.view addSubview:table];
     
     table.dataSource=self;
@@ -164,9 +166,9 @@
     _addressBookData=[SMS_SDK addressBook];
     
     
-    NSLog(@"获取到了%zi条通讯录信息",_addressBookData.count);
+    DLog(@"获取到了%zi条通讯录信息",_addressBookData.count);
     
-    NSLog(@"获取到了%zi条好友信息",_friendsData.count);
+    DLog(@"获取到了%zi条好友信息",_friendsData.count);
     
     
     //双层循环 取出重复的通讯录信息
@@ -181,7 +183,7 @@
                     if (person1.name) {
                         NSString* str1=[NSString stringWithFormat:@"%@+%@",name1,person1.name];
                         NSString* str2=[str1 stringByAppendingString:@"@"];
-                
+                        
                         [_friendsData2 addObject:str2];
                     }
                     else
@@ -191,18 +193,18 @@
                     
                     [_addressBookData removeObjectAtIndex:j];
                 }
-
+                
             }
         }
     }
-    NSLog(@"_friends1:%zi",_friendsData.count);
-    NSLog(@"_friends2:%zi",_friendsData2.count);
+    DLog(@"_friends1:%zi",_friendsData.count);
+    DLog(@"_friends2:%zi",_friendsData2.count);
     
     for (int i=0; i<_addressBookData.count; i++) {
         SMS_AddressBook* person1=[_addressBookData objectAtIndex:i];
         NSString* str1=[NSString stringWithFormat:@"%@+%@",person1.name,person1.phones];
         NSString* str2=[str1 stringByAppendingString:@"#"];
-        NSLog(@"%@",str2);
+        DLog(@"%@",str2);
         [_other addObject:str2];
     }
     
@@ -214,7 +216,7 @@
         [dict setObject:_friendsData2 forKey:@"已加入的用户"];
     }
     if (_other.count>0) {
-         [dict setObject:_other forKey:@"待邀请的好友"];
+        [dict setObject:_other forKey:@"待邀请的好友"];
     }
     
     self.allNames = dict;
@@ -229,7 +231,7 @@
     return [keys count];
     
 }
-- (NSInteger)tableView:(UITableView *)tableView 
+- (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
     //for seaching mode,if not fit result return,nothing will be displayed
@@ -243,42 +245,49 @@
 
 - (void)CustomCellBtnClick:(CustomCell *)cell
 {
+    NSString* phone;
     [self.view endEditing:YES];
-    NSLog(@"cell的按钮被点击了-第%ld组,第%ld行", cell.section,cell.index);
+    DLog(@"cell的按钮被点击了-第%ld组,第%ld行", cell.section,cell.index);
     
     UIButton* btn=cell.btn;
-    NSLog(@"%@",btn.titleLabel.text);
+    DLog(@"%@",btn.titleLabel.text);
     
     NSString* newStr=btn.titleLabel.text;
     
     if ([newStr isEqualToString:@"添加"])
     {
-        NSLog(@"添加好友");
-        NSLog(@"添加好友回调 用户自行处理");
         
+        NSMutableArray* array=[SMS_SDK addressBook];
+        for (SMS_AddressBook* adr in array) {
+            if ([cell.name isEqualToString:adr.name]) {
+                DLog(@"RequestPhone:%@",adr.phones);
+                phone=adr.phones;
+            }
+        }
+        [_bl addFriendByPhone:phone];
         UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"添加好友" message:@"已经发送添加好友信息,请耐心等待好友回复" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
     
     if ([newStr isEqualToString:@"邀请"])
     {
-        NSLog(@"邀请好友");
+        DLog(@"邀请好友");
         InvitationViewControllerEx* invit=[[InvitationViewControllerEx alloc] init];
-//        
+        //
         [invit setData:cell.name];
-
+        
         [invit setPhone:cell.nameDesc AndPhone2:@""];
-//
+        //
         [self presentViewController:invit animated:YES completion:^{
             ;
         }];
-
+        
     }
-
-
+    
+    
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView 
+- (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger section = [indexPath section];
@@ -294,11 +303,11 @@
         
         cell.delegate = self;
     }
-
+    
     NSString* str1 = [nameSection objectAtIndex:indexPath.row];
     
     NSString* newStr1=[str1 substringFromIndex:(str1.length-1)];
-    //NSLog(@"%@",newStr1);
+    
     
     NSRange range=[str1 rangeOfString:@"+"];
     
@@ -309,13 +318,16 @@
     NSString *cccc = [phone substringToIndex:[phone length] - 1];
     
     NSString* name=[str1 substringToIndex:range.location];
-    
+    DLog(@"phone:%@",str1);
     if ([newStr1 isEqualToString:@"@"]) {
         UIButton* btn=cell.btn;
         
         [btn setTitle:@"添加" forState:UIControlStateNormal];
         
-        cell.nameDesc=[NSString stringWithFormat:@"手机联系人:%@",cccc];
+        cell.nameDesc=[NSString stringWithFormat:@"%@",cccc];
+        cell.nameDescLabel.hidden=YES;
+        cell.name=cccc;
+        
     }
     
     if ([newStr1 isEqualToString:@"#"]) {
@@ -325,16 +337,16 @@
         
         cell.nameDesc=[NSString stringWithFormat:@"%@",cccc];
         cell.nameDescLabel.hidden=YES;
+        cell.name=name;
     }
     
-    cell.name=name;
     
     cell.index = indexPath.row;
     
     cell.section =[indexPath section];
     
     int myindex=(cell.index)%14;
-    //NSLog(@"%i",myindex);
+    //DLog(@"%i",myindex);
     //NSString *icon = [NSString stringWithFormat:@"images.bundle/%i.jpg", i + 1];
     NSString* imagePath=[NSString stringWithFormat:@"smssdk.bundle/%i.png",myindex+1];
     //NSString* imagePath=[NSString stringWithFormat:@"%i.png",myindex+1];
@@ -356,7 +368,7 @@ titleForHeaderInSection:(NSInteger)section
 {
     if ([keys count] == 0)
         return nil;
-
+    
     NSString *key = [keys objectAtIndex:section];
     //the search bar section don't need header
     if (key == UITableViewIndexSearch)
@@ -366,7 +378,7 @@ titleForHeaderInSection:(NSInteger)section
 }
 
 #pragma mark Table View Delegate Methods
-- (NSIndexPath *)tableView:(UITableView *)tableView 
+- (NSIndexPath *)tableView:(UITableView *)tableView
   willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //you can selectd a row to exit the searching mode
@@ -376,8 +388,8 @@ titleForHeaderInSection:(NSInteger)section
     [tableView reloadData];
     return indexPath;
 }
-- (NSInteger)tableView:(UITableView *)tableView 
-sectionForSectionIndexTitle:(NSString *)title 
+- (NSInteger)tableView:(UITableView *)tableView
+sectionForSectionIndexTitle:(NSString *)title
                atIndex:(NSInteger)index
 {
     NSString *key = [keys objectAtIndex:index];
@@ -394,7 +406,7 @@ sectionForSectionIndexTitle:(NSString *)title
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"点击了第%ld组的 第%ld列",(long)indexPath.section,(long)indexPath.row);
+    DLog(@"点击了第%ld组的 第%ld列",(long)indexPath.section,(long)indexPath.row);
     
     NSUInteger section = [indexPath section];
     NSString *key = [keys objectAtIndex:section];
@@ -409,9 +421,10 @@ sectionForSectionIndexTitle:(NSString *)title
     NSString* areaCode=[str2 stringByReplacingOccurrencesOfString:@"+" withString:@""];
     
     NSString* countryName=[str1 substringToIndex:range.location];
-
     
-    NSLog(@"%@ %@",countryName,areaCode);
+    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+
+    DLog(@"%@ %@",countryName,areaCode);
 }
 
 #pragma mark -
@@ -427,7 +440,7 @@ sectionForSectionIndexTitle:(NSString *)title
     isSearching = YES;
     [table reloadData];
 }
-- (void)searchBar:(UISearchBar *)searchBar 
+- (void)searchBar:(UISearchBar *)searchBar
     textDidChange:(NSString *)searchTerm
 {
     if ([searchTerm length] == 0)
@@ -446,7 +459,7 @@ sectionForSectionIndexTitle:(NSString *)title
     //reset Search bar
     isSearching = NO;
     search.text = @"";
-
+    
     [self resetSearch];
     [table reloadData];
     

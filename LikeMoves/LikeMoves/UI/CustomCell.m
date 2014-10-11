@@ -30,17 +30,17 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        imageView=[[UIImageView alloc] init];
-        imageView.frame=CGRectMake(15, 5, 50, 50);
-        [self.contentView addSubview:imageView];
+//        imageView=[[UIImageView alloc] init];
+//        imageView.frame=CGRectMake(15, 5, 50, 50);
+//        [self.contentView addSubview:imageView];
         
         nameLabel=[[UILabel alloc] init];
-        nameLabel.frame=CGRectMake(73, 19, 98, 20);
-        nameLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
+        nameLabel.frame=CGRectMake(20, 19, 150, 20);
+        nameLabel.font = [UIFont fontWithName:@"Helvetica" size:16];
         [self.contentView addSubview:nameLabel];
         
         _nameDescLabel=[[UILabel alloc] init];
-        _nameDescLabel.frame=CGRectMake(73, 40, 150, 15);
+        _nameDescLabel.frame=CGRectMake(20, 40, 150, 15);
         _nameDescLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
         [self.contentView addSubview:_nameDescLabel];
         

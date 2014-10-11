@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "CHTumblrMenuView.h"
-@interface FriendTableViewController : UITableViewController
+#import "LMContactBLDelegate.h"
+#import "LMContactBL.h"
+#import <SMS_SDK/SMS_SDKResultHanderDef.h>
+@interface FriendTableViewController : UIViewController<LMContactBLDelegate,UITableViewDataSource,UITableViewDelegate>
+@property (strong,nonatomic) LMContactBL* bl;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property(nonatomic,strong) ShowNewFriendsCountBlock friendsBlock;
 - (IBAction)searchFriend:(id)sender;
 
 @end

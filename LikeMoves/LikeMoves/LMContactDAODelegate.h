@@ -9,5 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @protocol LMContactDAODelegate <NSObject>
-
+@optional
+-(void)getSportRankSuccess:(NSArray*)rank;
+-(void)getFriendsSuccess:(NSArray*)friends;
+-(void)getAcceptFriendSuccess:(NSArray*)friends;
+-(void)scanFriendSuccess:(NSArray*)scanFriend;
+-(void)addFriendByPhoneSuccess:(NSInteger)status;
 @end

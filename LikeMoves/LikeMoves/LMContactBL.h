@@ -18,7 +18,8 @@
 -(void)findFriendByID:(NSString*)friendID;
 -(void)findFriendByPhone:(NSString*)phone;
 
--(void)addFriend:(NSString*)friendID;
+-(void)addFriendByID:(NSString*)friendID;
+-(void)addFriendByPhone:(NSString*)phone;
 -(void)acceptFriend:(NSString*)friendID;
 -(void)rejectFriend:(NSString*)friendID;
 -(void)delFriend:(NSString*)friendID;
@@ -31,4 +32,12 @@
  *  @param perPage 每页有perPage项内容
  */
 -(void)getMyAccepts:(NSString*)page perPage:(NSString*)perPage;
+-(void)scanFriend:(NSString*)longitude withLatitude:(NSString*)latitude;
+-(void)stopScanFriend;
+/**
+ *  获得好友运动排行
+ *
+ *  @param date 运动排行的日期
+ */
+-(NSArray*)getFriendSportRank:(NSString*)date;
 @end

@@ -146,4 +146,31 @@
     int second=sec%60;
     return [NSString stringWithFormat:@"%dH%dS",hour,second];
 }
+#pragma mark - 运动模块网络请求
+/**
+ *  添加运动时间，运动时长
+ *
+ *  @param duration 运动的时长，秒钟
+ */
+-(void) addMoveRecord:(NSTimeInterval)duration{
+    
+};
+/**
+ *  查询过去7天的运动记录，返回内容？
+ *
+ *  @param startTime 开始时间：2014-09-07
+ *  @param endTime   结束时间：2014-09-07
+ */
+-(void) getMoveRecord:(NSString*)startTime withEndTime:(NSString*)endTime{
+    
+};
+/**
+ *  获得月份的运动天数
+ *
+ *  @param month @“2014-09”月份格式
+ */
+-(void) getMonthMoveDays:(NSString*)month{
+    
+};
+
 @end
