@@ -84,7 +84,8 @@
     
     NSDictionary*friend=[rankFriends objectAtIndex:indexPath.row];
     DLog(@"----------------%@----------------",[friend objectForKey:@"nickname"]);
-    rank.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+    NSInteger ranks=indexPath.row+1;
+    rank.text=[NSString stringWithFormat:@"%ld",(long)ranks];
     nickname.text=[friend objectForKey:@"nickname"];
     duration.text=[friend objectForKey:@"duration"];
 //    nickname.text=rankFriends

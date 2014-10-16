@@ -78,8 +78,8 @@ static UIAlertView* _alert1=nil;
     }
     //昵称、当天运动时长、当月已运动天数、金币数量
     UILabel* nickname=(UILabel*)[cell viewWithTag:1];
-    UILabel* duration=(UILabel*)[cell viewWithTag:2];
-    UILabel* monthMove=(UILabel*)[cell viewWithTag:3];
+//    UILabel* duration=(UILabel*)[cell viewWithTag:2];
+//    UILabel* monthMove=(UILabel*)[cell viewWithTag:3];
     UILabel* coins=(UILabel*)[cell viewWithTag:4];
     NSDictionary* friend=[friendsTable objectAtIndex:indexPath.row];
     nickname.text=[friend objectForKey:@"nickname"];
@@ -176,6 +176,7 @@ static UIAlertView* _alert1=nil;
         UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(10, 200, 300, 44)];
         label.textAlignment=NSTextAlignmentCenter;
         label.text=@"你还没有好友哦,快通过右上角添加吧！";
+        label.font=[UIFont fontWithName: @"Helvetica"   size: 17.0 ];
         label.textColor=[UIColor grayColor];
         [self.view addSubview:label];
 

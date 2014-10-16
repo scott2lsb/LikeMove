@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "PNChartDelegate.h"
 #import "PNChart.h"
-@interface SportDetailViewController : UIViewController<PNChartDelegate>
+#import "LMSportBL.h"
+#import "User.h"
+@interface SportDetailViewController : UIViewController<PNChartDelegate,LMSportBLDelegate>
 @property (nonatomic) PNBarChart * barChart;
+@property (weak, nonatomic) IBOutlet UILabel *monthMoveDays;
+@property (weak, nonatomic) IBOutlet UILabel *coinLabel;
+@property (nonatomic,strong) LMSportBL* bl;
 - (IBAction)backTo:(id)sender;
 
 @end

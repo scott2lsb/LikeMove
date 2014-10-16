@@ -16,15 +16,20 @@
 @end
 
 @implementation SportViewController
-
+static int kCal;
+static int stepNum;
+static int coinNum;
+static int sportSec;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    sportCircleNumber=0.0;
     /**
      逻辑层实例化
      */
     _bl=[[LMSportBL alloc]init];
     _bl.delegate=self;
+    _userBL=[[LMUserActBL alloc] init];
     [_bl startMotionDetect];
     /**
      能量环
@@ -32,12 +37,10 @@
     _wdSport = [[wendu_yuan2 alloc]initWithFrame:self.sportCircle.bounds];
     _wdSport.backgroundColor = [UIColor whiteColor];
     [self.sportCircle addSubview:_wdSport];
-    //    [_sportCircle bringSubviewToFront:_wdSport];
-    //    _wdSport.z=1;
     /**
      *  界面元素
      */
-
+    
     
     
     _fireBtn = [[DKCircleButton alloc] initWithFrame:CGRectMake(self.sportCircle.bounds.size.width/2-mFireBtnH/2, self.sportCircle.bounds.size.height/2-mFireBtnH/2, mFireBtnH, mFireBtnH)];
@@ -47,10 +50,11 @@
     [_fireBtn setTitleColor:[UIColor emerlandColor] forState:UIControlStateNormal];
     [_fireBtn setTitleColor:[UIColor emerlandColor]  forState:UIControlStateSelected];
     [_fireBtn setTitleColor:[UIColor emerlandColor] forState:UIControlStateHighlighted];
-    [self setFireBtnTitle:@"0m0s"];
+    [self setFireBtnTitle:@"0m 0s"];
     
     [_wdSport addSubview:_fireBtn];
-    
+    [_wdSport addSubview:_coinImg];
+    [_wdSport addSubview:_coinsCount];
     
     /**
      *  coins bags 福袋动画
@@ -61,12 +65,15 @@
     _bagView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_hongbao_bags"]];
     _bagView.center = CGPointMake(CGRectGetMidX(self.view.frame) + 10, CGRectGetMidY(self.view.frame) - 45);
     
-    [_fireBtn addTarget:self action:@selector(getCoinAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_fireBtn addTarget:self action:@selector(sportCircleClear) forControlEvents:UIControlEventTouchUpInside];
     
-//    _wdSport.z=1;
+    
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self refreshCoinsAndMonthDays];
 
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -75,29 +82,81 @@
 
 
 #pragma mark - SportDelegate
+-(void)getMonthMoveDaysSuccess:(NSInteger)days{
+    _monthMoveDays.text=[NSString stringWithFormat:@"%ld天",(long)days];
+}
 -(void) stepCountChange:(NSString *)stepCount {
-    _stepCount.text=stepCount;
-    _wdSport.z=[stepCount doubleValue]/100;
+    _stepCount.text=[NSString stringWithFormat:@"%@步",stepCount ];
+    kCal=kCal+755;
+    _calCount.text=[NSString stringWithFormat:@"%d千卡",kCal/1000];
 }
 -(void)sportTimeChange:(int)sportTime{
+    if(sportCircleNumber<10000){
+        sportCircleNumber=sportCircleNumber+1;
+    }
+    _wdSport.z=sportCircleNumber/10000;
+    sportSec=sportTime;
     int hour=sportTime/60;
     int second=sportTime%60;
-    [self setFireBtnTitle:[NSString stringWithFormat:@"%dm%ds",hour,second]];
+    [self setFireBtnTitle:[NSString stringWithFormat:@"%dm %ds",hour,second]];
 }
 #pragma mark - custom-method
+-(void) refreshCoinsAndMonthDays{
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyy-MM"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+    [_bl getMonthMoveDays:currentDateStr];
+    //NSUserDefaults刷新金币数量，使用NSUserDefaults中的数据
+    User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
+    _coinsCount.text=user.coins;
+}
 -(void) setFireBtnTitle:(NSString*) title{
     [_fireBtn setTitle:NSLocalizedString(title, nil) forState:UIControlStateNormal];
     [_fireBtn setTitle:NSLocalizedString(title, nil) forState:UIControlStateSelected];
     [_fireBtn setTitle:NSLocalizedString(title, nil) forState:UIControlStateHighlighted];
 }
+/**
+ *  当能量条清空时，调用此方法。
+ */
+-(void) sportCircleClear{
+    if(sportCircleNumber>5000){
+                //添加运动记录
+        [_bl addMoveRecord:sportSec withSteps:stepNum];
+        //userBL更新本地用户NSUserDefaults中的信息
+        [_userBL refreshMyself];
+        //userBL更新服务器中的金币信息
+        if(sportCircleNumber>10000){
+            [_userBL addCoins:100];
+        }else{
+            [_userBL addCoins:floor(sportCircleNumber/100)];
+        }
+        [self refreshCoinsAndMonthDays];
+        sportCircleNumber=0;
+        _wdSport.z=sportCircleNumber/10000;
+        [self getCoinAction];
+    }else{
+//        DLog(@"addCoins");
+//        [_userBL addCoins:100];
+
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"能量条超过一半才能释放" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+        
+        
+    }
+}
 #pragma mark - coins_bags
 //统计金币数量的变量
 static int coinCount = 0;
-- (void)getCoinAction:(UIButton *)btn
-{   [_fireBtn setEnabled:false];
+- (void)getCoinAction
+{
+    
+    [_fireBtn setEnabled:false];
     isBag=false;
     //"立即打开"按钮从视图上移除
-//    [btn removeFromSuperview];
+    //    [btn removeFromSuperview];
     [self.view addSubview:_bagView];
     
     //初始化金币生成的数量
@@ -107,6 +166,7 @@ static int coinCount = 0;
         //延迟调用函数
         [self performSelector:@selector(initCoinViewWithInt:) withObject:[NSNumber numberWithInt:i] afterDelay:i * 0.01];
     }
+    [self sportCircleClear];
 }
 
 - (void)initCoinViewWithInt:(NSNumber *)i
@@ -175,18 +235,18 @@ static int coinCount = 0;
         
         //动画完成后把金币和数组对应位置上的tag移除
         UIView *coinView = (UIView *)[self.view viewWithTag:[[_coinTagsArr firstObject] intValue]];
-
+        
         
         
         if (!isBag) {
-
-                    [coinView removeFromSuperview];
+            
+            [coinView removeFromSuperview];
             [_coinTagsArr removeObjectAtIndex:0];                    }else{
-
-                        [_bagView removeFromSuperview];
-                        isBag=false;
-
-        }
+                
+                [_bagView removeFromSuperview];
+                isBag=false;
+                
+            }
         //全部金币完成动画后执行的动作
         if (++coinCount == kCoinCountKey) {
             isBag=true;

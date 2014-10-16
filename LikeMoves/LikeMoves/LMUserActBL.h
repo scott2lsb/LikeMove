@@ -24,4 +24,6 @@
 -(void)editUserInfo:(NSString*)nickName sex:(NSString*)sex age:(NSString*)age;
 
 -(void)resetPwd:(NSString*)phone withNewPwd:(NSString *)pwd;
+-(void)refreshMyself;
+-(void)addCoins:(NSInteger)coins;
 @end

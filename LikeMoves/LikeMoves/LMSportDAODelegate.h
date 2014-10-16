@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol LMSportDAODelegate <NSObject>
-
+-(void)getMonthMoveDaysSuccess:(NSInteger)days;
+-(void)getWeekRecordSuccess:(NSArray*)steps withWeeks:(NSArray *)weeks;
 @end

@@ -420,12 +420,9 @@
 				8A04AF2119C6D42A000212E7 /* LMLoginViewController.m */,
 				8A1D4BF519CBD79700F27A3C /* UserCenterViewController.h */,
 				8A1D4BF619CBD79700F27A3C /* UserCenterViewController.m */,
-				8AB1ABD419CFA42600017485 /* SportViewController.h */,
-				8AB1ABD519CFA42600017485 /* SportViewController.m */,
 				8A4113EC19D90B1D002F2575 /* MainTabViewController.h */,
 				8A4113ED19D90B1D002F2575 /* MainTabViewController.m */,
-				8A4113EF19D92EA8002F2575 /* SportDetailViewController.h */,
-				8A4113F019D92EA8002F2575 /* SportDetailViewController.m */,
+				8A87EAE319EE14D000EBA885 /* Sport */,
 				8A85053819E6289400CB730E /* Contact */,
 			);
 			name = UIL;
@@ -702,6 +699,17 @@
 				8A85054219E8217B00CB730E /* AcceptFriendViewController.m */,
 			);
 			name = Contact;
+			sourceTree = "<group>";
+		};
+		8A87EAE319EE14D000EBA885 /* Sport */ = {
+			isa = PBXGroup;
+			children = (
+				8AB1ABD419CFA42600017485 /* SportViewController.h */,
+				8AB1ABD519CFA42600017485 /* SportViewController.m */,
+				8A4113EF19D92EA8002F2575 /* SportDetailViewController.h */,
+				8A4113F019D92EA8002F2575 /* SportDetailViewController.m */,
+			);
+			name = Sport;
 			sourceTree = "<group>";
 		};
 		8AAF82AF19D8ECCD000E118A /* PageElement */ = {

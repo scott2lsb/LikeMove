@@ -50,5 +50,11 @@
  */
 -(BOOL) editUserInfo:(NSString*)nickName sex:(NSString*)sex age:(NSString*)age ;
 
-
+-(void)refreshMyself;
+/**
+ *  增加coins个金币
+ *
+ *  @param coins 将要增加的金币
+ */
+-(void)addCoins:(NSInteger)coins;
 @end

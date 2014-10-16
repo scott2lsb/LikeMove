@@ -39,6 +39,12 @@
     _da.delegate=self;
     [_da resetPwd:phone withNewPwd:pwd];
 }
+-(void)refreshMyself{
+    [_da refreshMyself];
+}
+-(void)addCoins:(NSInteger)coins{
+    [_da addCoins:coins];
+};
 #pragma mark - LMUserActDADelegate
 -(void)loginSuccess{
     [_delegate loginSuccess];

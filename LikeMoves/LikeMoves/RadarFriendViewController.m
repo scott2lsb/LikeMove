@@ -32,7 +32,10 @@
     view.backgroundColor = [UIColor clearColor];
     [self.radarTable setTableFooterView:view];
 }
-
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [_bl stopScanFriend];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

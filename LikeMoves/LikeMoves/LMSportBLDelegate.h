@@ -13,4 +13,6 @@
 @optional
 -(void)stepCountChange:(NSString*) stepCount ;
 -(void)sportTimeChange:(int)sportTime;
+-(void)getMonthMoveDaysSuccess:(NSInteger)days;
+-(void)getWeekRecordSuccess:(NSArray *)steps withWeeks:(NSArray*)weeks;
 @end

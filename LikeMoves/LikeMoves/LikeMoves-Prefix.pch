@@ -43,5 +43,5 @@
 /**
  *  短信key和secret
  */
-#define sms_appKey @"316448d445fc"
-#define sms_appSecret @"30520da8dfc8af1d789a56f4c187bf0c"
+#define sms_appKey @"3d246c910e92"
+#define sms_appSecret @"19c3b610ddc6f09839359996d60ce47d"

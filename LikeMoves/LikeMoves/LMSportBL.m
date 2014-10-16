@@ -11,6 +11,61 @@
 
 @end
 @implementation LMSportBL
+#pragma mark - 运动模块网络请求
+-(id)init{
+    self = [super init];
+    if (self) {
+        _dao = [SportDAO new];
+        _dao.delegate=self;
+    }
+    return self;
+}
+
+/**
+ *  添加运动时间，运动时长
+ *
+ *  @param duration 运动的时长，秒钟
+ */
+-(void) addMoveRecord:(NSTimeInterval)duration withSteps:(NSInteger)steps{
+    [_dao addMoveRecord:duration withSteps:steps];
+};
+/**
+ *  查询过去7天的运动记录，返回内容？
+ *
+ *  @param startTime 开始时间：2014-09-07
+ *  @param endTime   结束时间：2014-09-07
+ */
+-(void) getMoveWeekRecords{
+    NSDate* start=[[NSDate date] dateByAddingTimeInterval:-86400.0*7];
+    NSDate* end=[NSDate date];
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    //用[NSDate date]可以获取系统当前时间
+    
+    [_dao getMoveWeekRecords:[dateFormatter stringFromDate:start] withEndTime:[dateFormatter stringFromDate:end]];
+};
+/**
+ *  获得月份的运动天数
+ *
+ *  @param month @“2014-09”月份格式
+ */
+-(void) getMonthMoveDays:(NSString*)month{
+    [_dao getMonthMoveDays:month];
+};
+#pragma mark - delegate
+-(void)getMonthMoveDaysSuccess:(NSInteger)days{
+    [_delegate getMonthMoveDaysSuccess:days];
+}
+-(void)getWeekRecordSuccess:(NSArray *)steps withWeeks:(NSArray *)weeks{
+    //取得前面7天的星期号组成数组
+    [_delegate getWeekRecordSuccess:steps withWeeks:weeks];
+}
+#pragma mark - 运动检测功能模块
+/**
+ *  运动检测功能模块
+ */
 -(void)startMotionDetect{
     
     // 创建CLLocationManager对象
@@ -26,10 +81,10 @@
     // 如果定位服务可用
 	if([CLLocationManager locationServicesEnabled])
 	{
-		NSLog( @"开始执行定位服务" );
+		DLog( @"开始执行定位服务" );
 		// 设置定位精度：最佳精度
 		self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-		// 设置距离过滤器为50米，表示每移动50米更新一次位置
+		// 设置距离过滤器为0米，表示每移动50米更新一次位置
 		self.locationManager.distanceFilter = kCLDistanceFilterNone;
 		// 将视图控制器自身设置为CLLocationManager的delegate
 		// 因此该视图控制器需要实现CLLocationManagerDelegate协议
@@ -39,7 +94,7 @@
 	}
 	else
 	{
-		NSLog( @"无法使用定位服务！" );
+		DLog( @"无法使用定位服务！" );
 	}
     
     //_________________________________
@@ -85,7 +140,7 @@
          }
          ];
     }else{
-        NSLog(@"加速器不可用");
+        DLog(@"加速器不可用");
         
     }
     _stopTimeCount=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(stopTimeCount:) userInfo:nil repeats:YES];
@@ -109,7 +164,7 @@
     //                             location.altitude];
     //	self.speedTxt.text = [NSString stringWithFormat:@"%g",
     //                          location.speed];
-    //	NSLog(@"~~~~%g" , location.speed);
+    //	DLog(@"~~~~%g" , location.speed);
     //	self.courseTxt.text = [NSString stringWithFormat:@"%g",
     //                           location.course];
 }
@@ -117,14 +172,13 @@
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error
 {
-    NSLog(@"定位失败: %@",error);
+    DLog(@"定位失败: %@",error);
 }
 #pragma mark - custom-method
 -(void) stopTimeCount:(NSTimer*) timer{
     if (numSteps<=pastSteps) {
         [_sportTimeCount invalidate];
         isChange=FALSE;
-        
     }else{
         pastSteps=numSteps;
     }
@@ -134,43 +188,24 @@
     
     [_delegate sportTimeChange:sportTime];
 }
-/**
- *  将秒数转化为“xxxHxxS”
- *
- *  @param sec 秒数
- *
- *  @return “xxxHxxS”式样的字符串
- */
--(NSString*) formatSecToString:(int) sec{
-    int hour=sec/60;
-    int second=sec%60;
-    return [NSString stringWithFormat:@"%dH%dS",hour,second];
-}
-#pragma mark - 运动模块网络请求
-/**
- *  添加运动时间，运动时长
- *
- *  @param duration 运动的时长，秒钟
- */
--(void) addMoveRecord:(NSTimeInterval)duration{
-    
-};
-/**
- *  查询过去7天的运动记录，返回内容？
- *
- *  @param startTime 开始时间：2014-09-07
- *  @param endTime   结束时间：2014-09-07
- */
--(void) getMoveRecord:(NSString*)startTime withEndTime:(NSString*)endTime{
-    
-};
-/**
- *  获得月份的运动天数
- *
- *  @param month @“2014-09”月份格式
- */
--(void) getMonthMoveDays:(NSString*)month{
-    
-};
 
+
+
+
+
+
+
+
+///**
+// *  将秒数转化为“xxxHxxS”
+// *
+// *  @param sec 秒数
+// *
+// *  @return “xxxHxxS”式样的字符串
+// */
+//-(NSString*) formatSecToString:(int) sec{
+//    int hour=sec/60;
+//    int second=sec%60;
+//    return [NSString stringWithFormat:@"%dH%dS",hour,second];
+//}
 @end
