@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *coinLabel;
 @property (nonatomic,strong) LMSportBL* bl;
 - (IBAction)backTo:(id)sender;
+- (IBAction)toMarket:(id)sender;
 
 @end

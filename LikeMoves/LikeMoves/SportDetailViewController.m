@@ -61,7 +61,7 @@
     
     DLog(@"Click on bar %@", @(barIndex));
     
-    PNBar * bar = [self.barChart.bars objectAtIndex:barIndex];
+//    PNBar * bar = [self.barChart.bars objectAtIndex:barIndex];
     
     CABasicAnimation *animation= [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     
@@ -81,7 +81,7 @@
     
     animation.fillMode=kCAFillModeForwards;
     
-    [bar.layer addAnimation:animation forKey:@"Float"];
+//    [bar.layer addAnimation:animation forKey:@"Float"];
 }
 
 -(void)userClickedOnLineKeyPoint:(CGPoint)point lineIndex:(NSInteger)lineIndex andPointIndex:(NSInteger)pointIndex{
@@ -113,7 +113,7 @@
     [self.barChart setYValues:steps];
     [self.barChart setStrokeColors:@[PNFreshGreen,PNFreshGreen,PNFreshGreen,PNFreshGreen,PNFreshGreen,PNFreshGreen,PNFreshGreen]];
     // Adding gradient
-    self.barChart.barColorGradientStart = [UIColor blueColor];
+//    self.barChart.barColorGradientStart = [UIColor blueColor];
     
     [self.barChart strokeChart];
     self.barChart.delegate = self;
@@ -131,5 +131,8 @@
 }
 - (IBAction)backTo:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES ];
+}
+
+- (IBAction)toMarket:(id)sender {
 }
 @end

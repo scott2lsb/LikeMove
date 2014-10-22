@@ -8,6 +8,7 @@
 
 #import "SportViewController.h"
 #import "UIColor+FlatUI.h"
+#import "UMSocial.h"
 #define kCoinCountKey   100
 #define mFireBtnH 120
 @interface SportViewController ()
@@ -18,7 +19,7 @@
 @implementation SportViewController
 static int kCal;
 static int stepNum;
-static int coinNum;
+//static int coinNum;
 static int sportSec;
 - (void)viewDidLoad
 {
@@ -272,4 +273,13 @@ static int coinCount = 0;
     
 }
 
+- (IBAction)share:(id)sender {
+    //注意：分享到微信好友、微信朋友圈、微信收藏、QQ空间、QQ好友、来往好友、来往朋友圈、易信好友、易信朋友圈、Facebook、Twitter、Instagram等平台需要参考各自的集成方法
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:nil
+                                      shareText:@"你要分享的文字"
+                                     shareImage:[UIImage imageNamed:@"coins.png"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQzone,UMShareToQQ,nil]
+                                       delegate:nil];
+}
 @end

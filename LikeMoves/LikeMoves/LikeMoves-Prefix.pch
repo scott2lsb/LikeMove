@@ -45,3 +45,4 @@
  */
 #define sms_appKey @"3d246c910e92"
 #define sms_appSecret @"19c3b610ddc6f09839359996d60ce47d"
+#define um_appkey @"5440d3aafd98c5a72a00567b"

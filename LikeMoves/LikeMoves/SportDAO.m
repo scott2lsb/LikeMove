@@ -79,7 +79,7 @@
     
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"JSON: %@", operation.responseString);
+        DLog(@"month-move-days-JSON: %@", operation.responseString);
         NSDictionary* resInfo=[operation.responseString objectFromJSONString];
         //        NSDictionary* userInfo=[resInfo objectForKey:@"data"];
         NSInteger total=[[resInfo objectForKey:@"total_count"] intValue];

@@ -7,11 +7,13 @@
 //
 
 #import "LMAppDelegate.h"
-
+#import "UMSocial.h"
 @implementation LMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //友盟注册AppKey
+    [UMSocialData setAppKey:um_appkey];
     //短信验证key注册
     [SMS_SDK	registerApp:sms_appKey withSecret:sms_appSecret];
     

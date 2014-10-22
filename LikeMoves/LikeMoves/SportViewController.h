@@ -35,6 +35,7 @@
 @property (nonatomic) DKCircleButton *fireBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *coinImg;
 
+- (IBAction)share:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *sportNaviItem;
 
