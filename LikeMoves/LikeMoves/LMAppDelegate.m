@@ -8,26 +8,77 @@
 
 #import "LMAppDelegate.h"
 #import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
+#import "UMessage.h"
+#define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice]systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define _IPHONE80_ 80000
 @implementation LMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    /**
+     *  友盟远程推送集成
+     */
+    //set AppKey and LaunchOptions
+    [UMessage startWithAppkey:@"5440d3aafd98c5a72a00567b" launchOptions:launchOptions];
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < _IPHONE80_
+    //register remoteNotification types
+    [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
+     |UIRemoteNotificationTypeSound
+     |UIRemoteNotificationTypeAlert];
+#else
+    //register remoteNotification types
+    UIMutableUserNotificationAction *action1 = [[UIMutableUserNotificationAction alloc] init];
+    action1.identifier = @"action1_identifier";
+    action1.title=@"Accept";
+    action1.activationMode = UIUserNotificationActivationModeForeground;//当点击的时候启动程序
+    
+    UIMutableUserNotificationAction *action2 = [[UIMutableUserNotificationAction alloc] init];  //第二按钮
+    action2.identifier = @"action2";
+    action2.title=@"Reject";
+    action2.activationMode = UIUserNotificationActivationModeBackground;//当点击的时候不启动程序，在后台处理
+    action2.authenticationRequired = YES;//需要解锁才能处理，如果action.activationMode = UIUserNotificationActivationModeForeground;则这个属性被忽略；
+    action2.destructive = YES;
+    
+    UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
+    categorys.identifier = @"alert";//这组动作的唯一标示
+    [categorys setActions:@[action1,action2] forContext:(UIUserNotificationActionContextMinimal)];
+    
+    UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
+                                                                                 categories:[NSSet setWithObject:categorys]];
+    [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
+#endif
+    
+    //for log
+    [UMessage setLogEnabled:YES];
+
+    
+    
+    
+    
     //友盟注册AppKey
     [UMSocialData setAppKey:um_appkey];
+    //设置微信AppId，设置分享url，默认使用友盟的网址
+    [UMSocialWechatHandler setWXAppId:@"wxb63a8a59702e5ddb" appSecret:@"abe6cc00ca7a6fab78009545da6cd449" url:@"http://www.kaidechuanmei.com"];
+    //    //设置分享到QQ和QQ空间的应用Id，和分享url 链接
+    [UMSocialQQHandler setQQWithAppId:@"1103374241" appKey:@"ODe0qJKSqfWItJph" url:@"http://www.kaidechuanmei.com"];
+
     //短信验证key注册
     [SMS_SDK	registerApp:sms_appKey withSecret:sms_appSecret];
     
     //启动页面
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-
+    
     if(   [[NSUserDefaults standardUserDefaults] objectForKey:mUseTime]){
         self.window.rootViewController=[self showLaunchImage];
         [self performSelector:@selector(presentLoginPage) withObject:nil afterDelay:2.5];
     }else{
-            self.window.rootViewController=[self showIntroWithCrossDissolve];
+        self.window.rootViewController=[self showIntroWithCrossDissolve];
     }
-
+    
     application.statusBarStyle = UIStatusBarStyleLightContent;
     
     [self.window makeKeyAndVisible];
@@ -41,7 +92,7 @@
     UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginPage"];
     [self.window.rootViewController presentViewController:tabVC animated:YES completion:^(void){}];
-
+    
 }
 /**
  *  返回登陆页面
@@ -49,11 +100,11 @@
  *  @return 登陆页面
  */
 -(UIViewController*)showLaunchImage{
-        UIViewController* introPage=[[UIViewController alloc]init];
+    UIViewController* introPage=[[UIViewController alloc]init];
     UIImageView* imgView=[[UIImageView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [imgView setImage:[UIImage imageNamed:@"launchP-568h@2x.png"]];
     [introPage.view addSubview:imgView];
-
+    
     /**
      *  自定义闪烁效果字
      */
@@ -85,8 +136,8 @@
     
     [viewForPage addSubview:labelForPage];
     [introPage.view addSubview:viewForPage];
-//    EAIntroPage *page1 = [EAIntroPage pageWithCustomView:viewForPage];
-//    page1.bgImage = [UIImage imageNamed:@"launchP-568h@2x.png"];
+    //    EAIntroPage *page1 = [EAIntroPage pageWithCustomView:viewForPage];
+    //    page1.bgImage = [UIImage imageNamed:@"launchP-568h@2x.png"];
     
     
     
@@ -126,34 +177,34 @@
     
     [viewForPage addSubview:labelForPage];
     EAIntroPage *page1 = [EAIntroPage pageWithCustomView:viewForPage];
-    page1.bgImage = [UIImage imageNamed:@"launchP-568h@2x.png"];
+    page1.bgImage = [UIImage imageNamed:@"launch"];
     
     
     
     
-    
+
     EAIntroPage *page2 = [EAIntroPage page];
     page2.title = @"为能量充值";
-    page2.titlePositionY=500;
+    page2.titlePositionY=    [[UIScreen mainScreen] bounds].size.height-50;
     page2.titleFont=[UIFont systemFontOfSize:30.0f];
     page2.titleColor=[UIColor orangeColor];
-    page2.bgImage = [UIImage imageNamed:@"firstP-568h"];
+    page2.bgImage = [UIImage imageNamed:@"first"];
     
-    
+
     EAIntroPage *page3 = [EAIntroPage page];
     page3.title = @"给自己奖励";
     page3.titleFont=[UIFont systemFontOfSize:30.0f];
-    page3.titlePositionY=500;
+    page3.titlePositionY=[[UIScreen mainScreen] bounds].size.height-50;
     page3.titleColor=[UIColor orangeColor];
-    page3.bgImage = [UIImage imageNamed:@"secondP-568h"];
+    page3.bgImage = [UIImage imageNamed:@"sec"];
     
     
     EAIntroPage *page4 = [EAIntroPage page];
     page4.title = @"传递动能量";
-    page4.titlePositionY=500;
+    page4.titlePositionY=[[UIScreen mainScreen] bounds].size.height-50;
     page4.titleFont=[UIFont systemFontOfSize:30.0f];
     page4.titleColor=[UIColor orangeColor];
-    page4.bgImage = [UIImage imageNamed:@"shareP-568h"];
+    page4.bgImage = [UIImage imageNamed:@"share"];
     
     
     EAIntroView *intro = [[EAIntroView alloc] initWithFrame:rootView.bounds andPages:@[page1,page2,page3,page4]];
@@ -170,38 +221,35 @@
 }
 #pragma mark intro-delegate
 - (void)introDidFinish:(EAIntroView *)introView {
-    NSLog(@"introDidFinish callback");
+    DLog(@"introDidFinish callback");
     UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginPage"];
     [self.window.rootViewController presentViewController:tabVC animated:YES completion:^(void){}];
     
 }
 
-- (OnboardingViewController *)generateFirstDemoVC {
-    
-    OnboardingContentViewController *firstPage = [[OnboardingContentViewController alloc] initWithTitle:@"It's one small step for a man..." body:@"The first man on the moon, Buzz Aldrin, only had one photo taken of him while on the lunar surface due to an unexpected call from Dick Nixon." image:[UIImage imageNamed:@"space1"] buttonText:nil action:nil];
-    firstPage.bodyFontSize = 25;
-    
-    OnboardingContentViewController *secondPage = [[OnboardingContentViewController alloc] initWithTitle:@"The Drake Equation" body:@"In 1961, Frank Drake proposed a probabilistic formula to help estimate the number of potential active and radio-capable extraterrestrial civilizations in the Milky Way Galaxy." image:[UIImage imageNamed:@"space2"] buttonText:nil action:nil];
-    secondPage.bodyFontSize = 24;
-    
-    OnboardingContentViewController *thirdPage = [[OnboardingContentViewController alloc] initWithTitle:@"Cold Welding" body:@"Two pieces of metal without any coating on them will form into one piece in the vacuum of space." image:[UIImage imageNamed:@"space3"] buttonText:nil action:nil];
-    
-    OnboardingContentViewController *fourthPage = [[OnboardingContentViewController alloc] initWithTitle:@"Goodnight Moon" body:@"Every year the moon moves about 3.8cm further away from the Earth." image:[UIImage imageNamed:@"space4"] buttonText:@"See Ya Later!" action:^{
-        
-        UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginPage"];
-        [self.window.rootViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-        [self.window.rootViewController presentViewController:tabVC animated:YES completion:^(void){
-        }];
-    }];
-    
-    OnboardingViewController *onboardingVC = [[OnboardingViewController alloc] initWithBackgroundImage:[UIImage imageNamed:@"milky_way.jpg"] contents:@[firstPage, secondPage, thirdPage, fourthPage]];
-    onboardingVC.shouldMaskBackground = NO;
-    onboardingVC.shouldBlurBackground = YES;
-    return onboardingVC;
-}
 
+#pragma mark - UMPush
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [UMessage registerDeviceToken:deviceToken];
+    DLog(@"%@",deviceToken);
+
+}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [UMessage didReceiveRemoteNotification:userInfo];
+}
+#pragma mark - UMShare
+-(BOOL)application:(UIApplication*)application handleOpenURL:(NSURL*)url
+{
+    return[UMSocialSnsService handleOpenURL:url];
+}
+-(BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation
+{
+    return[UMSocialSnsService handleOpenURL:url];
+}
+#pragma mark - ApplicationDelegate
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -210,8 +258,18 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    ACPReminder * localNotifications = [ACPReminder sharedManager];
+    
+    //Settings
+    localNotifications.messages = @[@"改变从运动开始",@"每天为能量充值",@"每天给自己一个奖励"];
+    localNotifications.timePeriods = @[@(1)]; //days
+    localNotifications.appDomain = @"com.mydomain.appName";
+    localNotifications.randomMessage = NO; //By default is NO (optional)
+    localNotifications.testFlagInSeconds = NO; //By default is NO (optional) --> For testing purpose only!
+    localNotifications.circularTimePeriod = YES; // By default is NO (optional)
+    
+    [localNotifications createLocalNotification];
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -221,7 +279,10 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    [[ACPReminder sharedManager] checkIfLocalNotificationHasBeenTriggered];
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

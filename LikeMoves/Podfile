@@ -7,4 +7,5 @@ pod 'JSONKit','~>1.5pre'
 pod 'FlatUIKit','~>1.4'
 pod 'EAIntroView','~>2.6.3'
 pod 'Shimmer','~>1.0.1'
+pod 'ACPReminder', '~> 1.0.1'
 

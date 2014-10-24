@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "EAIntroView.h"
 #import <SMS_SDK/SMS_SDK.h>
-#import "OnboardingViewController.h"
-#import "OnboardingContentViewController.h"
+
 #import "SMPageControl.h"
 #import "UIColor+FlatUI.h"
 #import "FBShimmeringView.h"
+#import "ACPReminder.h"
 @interface LMAppDelegate : UIResponder <UIApplicationDelegate,EAIntroDelegate>{
     UIView *rootView;
     UIImageView *_wallpaperView;

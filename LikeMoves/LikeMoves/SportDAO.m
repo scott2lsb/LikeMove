@@ -98,12 +98,13 @@
     //TODO: 使用jsonkit进行json解析
     NSDictionary* resInfo=[operation.responseString objectFromJSONString];
     NSArray* weeks=[resInfo objectForKey:@"list"];
-    if([weeks isKindOfClass:[NSNull class]]){
+    
         
-    }
+
     NSMutableArray* target=[[NSMutableArray alloc] init];
     int num=0;
     for(int i=0;i<7;i++){
+        if(![weeks isKindOfClass:[NSNull class]]){
         NSDictionary* week=[weeks objectAtIndex:num];
         int weekn;
         if((weekday+i)%7==0){
@@ -117,6 +118,9 @@
             if(num<weeks.count-1){
                 num++;
             }
+        }else{
+            [target addObject:@0];
+        }
         }else{
             [target addObject:@0];
         }
