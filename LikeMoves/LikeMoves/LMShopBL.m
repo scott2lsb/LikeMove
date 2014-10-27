@@ -200,7 +200,10 @@
 -(void)getOrderByOrderID:(NSString*)orderID{
     
 };
-
+#pragma mark - DaoDelegate
+-(void)getProductInPromotionSuccess:(NSArray *)array{
+    [_delegate getProductInPromotionSuccess:array];
+}
 @end
 
 

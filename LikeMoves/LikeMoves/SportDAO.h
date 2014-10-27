@@ -10,8 +10,15 @@
 #import "AFNetworking.h"
 #import "LMSportDAODelegate.h"
 #import "JSONKit.h"
+#import "User.h"
 @interface SportDAO : NSObject
 @property (strong,nonatomic) id<LMSportDAODelegate> delegate;
+/**
+ *  添加金币
+ *
+ *  @param coinsNum 要添加的金币数量
+ */
+-(void)addCoins:(NSString*)coinsNum;
 /**
  *  添加运动时间，运动时长
  *

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ShopListViewController : UIViewController
+#import "LMShopBLDelegate.h"
+#import "LMShopBL.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+@interface ShopListViewController : UIViewController<LMShopBLDelegate,UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic,strong) LMShopBL* bl;
+@property(strong)NSArray* products;
+//界面元素
+@property (weak, nonatomic) IBOutlet UITableView *productTable;
 
 @end

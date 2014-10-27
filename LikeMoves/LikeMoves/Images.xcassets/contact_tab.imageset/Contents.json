@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "coin_bag.png"
+      "filename" : "contact30.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "coin_bag@2x.png"
+      "filename" : "contact60.png"
     }
   ],
   "info" : {

@@ -19,6 +19,9 @@
     [super viewDidLoad];
     self.tabBar.opaque=NO;
     self.tabBar.selectedImageTintColor=[UIColor orangeColor];
+//    UIViewController* vc= (UIViewController*)[self.viewControllers objectAtIndex:0];
+//    [vc.tabBarItem setImage:[UIImage imageNamed:@"1"]];
+//    [vc.tabBarItem setSelectedImage:[UIImage imageNamed:@"10"]];
     
 }
 

@@ -79,6 +79,37 @@ NSArray* books;
     _bl=[LMUserActBL new];
     _bl.delegate=self;
     
+    
+    /**
+     *用户信息编辑界面的锻炼地点选择框
+     */
+    //初始化一下数据，分别为 所有源数据，和 已经选中的数据
+	entries = [[NSArray alloc] initWithObjects:@"广场", @"小区周边", @"健身房", @"上下班路上", @"公园",@"其他",nil];
+    
+    entriesSelected = [[NSArray alloc] init];
+	selectionStates = [[NSMutableDictionary alloc] init];
+    
+    // 配置是否选中状态
+	for (NSString *key in entries){
+        BOOL isSelected = NO;
+        for (NSString *keyed in entriesSelected) {
+            if ([key isEqualToString:keyed]) {
+                isSelected = YES;
+            }
+        }
+        [selectionStates setObject:[NSNumber numberWithBool:isSelected] forKey:key];
+    }
+    [_trainBtn addTarget:self action:@selector(getData) forControlEvents:UIControlEventTouchUpInside];
+    //收货地址 ”区“的选择
+    // 创建、并初始化NSArray对象。
+	books = [NSArray arrayWithObjects:@"兰山区",@"河东区", @"罗庄区" ,nil];
+    //, @"郯城",@"苍山",@"莒南",@"临沭", @"费县",@"蒙阴","平邑",@"沂南",@"沂水"
+	// 为UIPickerView控件设置dataSource和delegate
+	self.districtPickerView.dataSource = self;
+	self.districtPickerView.delegate = self;
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
     /**
      *  个人中心信息
@@ -109,35 +140,7 @@ NSArray* books;
     [_sTrainAdr setText:user.trainAddress];
     [_sHomeAdr setText:user.homeAddress];
     
-    /**
-     *用户信息编辑界面的锻炼地点选择框
-     */
-    //初始化一下数据，分别为 所有源数据，和 已经选中的数据
-	entries = [[NSArray alloc] initWithObjects:@"广场", @"小区周边", @"健身房", @"上下班路上", @"公园",@"其他",nil];
-    
-    entriesSelected = [[NSArray alloc] init];
-	selectionStates = [[NSMutableDictionary alloc] init];
-    
-    // 配置是否选中状态
-	for (NSString *key in entries){
-        BOOL isSelected = NO;
-        for (NSString *keyed in entriesSelected) {
-            if ([key isEqualToString:keyed]) {
-                isSelected = YES;
-            }
-        }
-        [selectionStates setObject:[NSNumber numberWithBool:isSelected] forKey:key];
-    }
-    [_trainBtn addTarget:self action:@selector(getData) forControlEvents:UIControlEventTouchUpInside];
-    //收货地址 ”区“的选择
-    // 创建、并初始化NSArray对象。
-	books = [NSArray arrayWithObjects:@"兰山区",@"河东区", @"罗庄区" ,nil];
-    //, @"郯城",@"苍山",@"莒南",@"临沭", @"费县",@"蒙阴","平邑",@"沂南",@"沂水"
-	// 为UIPickerView控件设置dataSource和delegate
-	self.districtPickerView.dataSource = self;
-	self.districtPickerView.delegate = self;
 }
-
 /**
  *  锻炼地点信息多选框
  */
@@ -169,7 +172,7 @@ NSArray* books;
     UITabBarController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginPage"];
     [self presentViewController:tabVC animated:YES completion:^(void){
     }];
-    [self dismissViewControllerAnimated:NO completion:nil];
+//    [self dismissViewControllerAnimated:NO completion:nil];
 }
 - (IBAction)finishComplete:(id)sender {
     [_bl editUserInfo:_editNickname.text sex:_editAge.text age:_editAge.text];
@@ -240,5 +243,8 @@ numberOfRowsInComponent:(NSInteger)component
 }
 -(void)editUserInfoFail{
     
+}
+- (IBAction)editCancel:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

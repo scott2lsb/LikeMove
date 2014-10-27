@@ -11,5 +11,5 @@
 @protocol LMShopBLDelegate <NSObject>
 
 @optional
-
+-(void)getProductInPromotionSuccess:(NSArray*)array;
 @end

@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol LMShopDAODelegate <NSObject>
+@optional
+-(void)getProductInPromotionSuccess:(NSArray*)array;
 
 @end

@@ -14,5 +14,6 @@
 @interface UserCenterViewController : UITableViewController <CYCustomMultiSelectPickerViewDelegate,UIPickerViewDataSource, UIPickerViewDelegate,LMUserBLDelegate>
 @property (nonatomic,strong) LMUserActBL* bl;
 
+- (IBAction)editCancel:(id)sender;
 
 @end

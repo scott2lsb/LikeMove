@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "coin_bag.png"
+      "filename" : "shareBtn.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "coin_bag@2x.png"
+      "filename" : "shareBtn60.png"
     }
   ],
   "info" : {

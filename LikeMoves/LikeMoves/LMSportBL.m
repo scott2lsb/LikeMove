@@ -20,6 +20,14 @@
     }
     return self;
 }
+/**
+ *  添加金币
+ *
+ *  @param coinsNum 要添加的金币数量
+ */
+-(void)addCoins:(NSString*)coinsNum{
+    [_dao addCoins:coinsNum];
+};
 
 /**
  *  添加运动时间，运动时长

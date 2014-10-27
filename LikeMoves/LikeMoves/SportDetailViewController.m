@@ -24,7 +24,7 @@
     [_bl getMoveWeekRecords];
     _bl.delegate=self;
     UILabel * barChartLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 90, SCREEN_WIDTH, 30)];
-    barChartLabel.text = @"星期运动量";
+    barChartLabel.text = @"一星期运动量";
     barChartLabel.textColor = PNFreshGreen;
     barChartLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:23.0];
     barChartLabel.textAlignment = NSTextAlignmentCenter;
@@ -93,14 +93,20 @@
 }
 #pragma mark - SportBLDelegate
 -(void)getWeekRecordSuccess:(NSArray *)steps withWeeks:(NSArray *)weeks{
-    self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, 135.0, SCREEN_WIDTH, 200.0)];
+    CGFloat height;
+    if ([[UIScreen mainScreen] bounds].size.height>500) {
+        height=250.0;
+    }else{
+        height=200.0;
+    }
+    self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, 120.0, SCREEN_WIDTH, height)];
     self.barChart.backgroundColor = [UIColor clearColor];
     self.barChart.yLabelFormatter = ^(CGFloat yValue){
         int sporttime=yValue;
         int min=sporttime/60;
+        int sec=sporttime%60;
 
-
-        NSString * labelText = [NSString stringWithFormat:@"%dm ",min];
+        NSString * labelText = [NSString stringWithFormat:@"%dm%ds",min,sec];
         return labelText;
     };
     self.barChart.labelMarginTop = 15.0;

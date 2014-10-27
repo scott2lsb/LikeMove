@@ -1,11 +1,18 @@
 platform :ios,'7.0'
 pod 'SDWebImage','~>3.7.1'
 pod 'AFNetworking','~>2.3.1'
-pod 'pop','~>1.0.6'
 pod 'PNChart','~>0.5'
 pod 'JSONKit','~>1.5pre'
 pod 'FlatUIKit','~>1.4'
 pod 'EAIntroView','~>2.6.3'
 pod 'Shimmer','~>1.0.1'
 pod 'ACPReminder', '~> 1.0.1'
+pod 'HMSegmentedControl', '~> 1.4.0'
+post_install do |installer|
+installer.project.targets.each do |target|
+target.build_configurations.each do |config|
+config.build_settings['ARCHS'] = "armv7s armv7"
+end
+end
+end
 

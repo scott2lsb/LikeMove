@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet FUIButton *registFUI;
 /**
  *  Yes为regist
-    No为reset
+ No为reset
  */
 @property (nonatomic) BOOL registOrReset;
 - (IBAction)closeKeyboard:(id)sender;
@@ -66,15 +66,15 @@
 {
     [super viewDidLoad];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]) {
-        [self performSelector:@selector(presentMainTabPage) withObject:nil afterDelay:2.0];
+        [self performSelector:@selector(presentMainTabPage) withObject:nil afterDelay:1.5];
         //TODO: 添加等待指示框
         spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor whiteColor]];
         spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
         [self.view addSubview:spinner];
         self.view.layer.opaque=YES;
     }
-
-        _bl=[LMUserActBL new];
+    
+    _bl=[LMUserActBL new];
     _bl.delegate=self;
     _registPhoneNum.text=phoneNum;
     //背景图片设置
@@ -165,7 +165,7 @@
     UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainTabPage"];
     [self presentViewController:tabVC animated:YES completion:^(void){
         [spinner stopAnimating];}];
-
+    
 }
 - (void)didReceiveMemoryWarning
 {
@@ -189,7 +189,7 @@
     [self presentViewController:reg animated:YES completion:^{
         
     }];
-
+    
 }
 #pragma mark - 用户逻辑操作
 - (IBAction)login:(id)sender {
@@ -205,7 +205,7 @@
     if (_shouTrainPlace.text.length==0||_registPwd.text.length==0) {
         UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"注册失败" message:@"密码或日常活动地点不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
-
+        
     } else if(_registPwd.text.length<8) {
         UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"注册失败" message:@"密码长度不能小于8位" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
@@ -256,7 +256,7 @@
     UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"注册成功" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alert show];
     
-
+    
     
 }
 
@@ -270,7 +270,7 @@
         UITabBarController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginPage"];
         [self presentViewController:tabVC animated:YES completion:^(void){
         }];
-
+        
     }
 }
 /*

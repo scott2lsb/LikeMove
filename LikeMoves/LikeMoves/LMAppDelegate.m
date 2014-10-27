@@ -214,7 +214,7 @@
     pageControl.currentPageIndicatorImage = [UIImage imageNamed:@"selectedPageDot"];
     [pageControl sizeToFit];
     intro.pageControl = (UIPageControl *)pageControl;
-    intro.pageControlY = 110.0f;
+//    intro.pageControlY = 100.0f;
     [intro showInView:rootView animateDuration:0.3];
     [[NSUserDefaults standardUserDefaults] setObject:@"123" forKey:mUseTime];
     return introPage;
@@ -233,8 +233,6 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     [UMessage registerDeviceToken:deviceToken];
-    DLog(@"%@",deviceToken);
-
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {

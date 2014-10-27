@@ -115,14 +115,15 @@
     [manager.requestSerializer setValue: [[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]forHTTPHeaderField:@"Cookie"];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
     //TODO: 进行排序，添加promotion字段
-    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=getProducts"];//在请求的后面添加请求参数
+    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=getProducts&promotion=1"];//在请求的后面添加请求参数
     NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
     
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"推广商品-JSON: %@", operation.responseString);
+        
         //请求成功，回调的BL的delegate
-        //[_delegate XXX];
+        [_delegate getProductInPromotionSuccess:[self jsonListToFriendArray:operation.responseString]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate
@@ -569,6 +570,17 @@
     
 
 };
-
+/**
+ *  json字符串转化为数组
+ *
+ *  @param json json字符串
+ *
+ *  @return 数组
+ */
+-(NSArray*)jsonListToFriendArray:(NSString*)json{
+    NSDictionary* dict=[json objectFromJSONString];
+    NSArray* friends=[dict objectForKey:@"list"];
+    return friends;
+}
 @end
 

@@ -10,6 +10,32 @@
 
 @implementation SportDAO
 /**
+ *  添加金币
+ *
+ *  @param coinsNum 要添加的金币数量
+ */
+-(void)addCoins:(NSString*)coinsNum{
+    AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer                      = [AFJSONResponseSerializer serializer];
+    [manager.requestSerializer setValue: [[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]forHTTPHeaderField:@"Cookie"];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
+    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=addCoins&coins=%@",coinsNum];//在请求的后面添加请求参数
+    NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
+    
+    NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
+    [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"add-coin-JSON: %@", operation.responseString);
+        [self jsonToUserDefault:operation];
+        //请求成功，回调的BL的delegate
+        //[_delegate XXX];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DLog(@"Error: %@", error);
+        //请求失败，回调BL的delegate
+        //[_delegate XXX];
+    }];
+    
+};
+/**
  *  添加运动时间，运动时长
  *
  *  @param duration 运动的时长，秒钟
@@ -24,7 +50,7 @@
     
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"JSON: %@", operation.responseString);
+        DLog(@"move-record-JSON: %@", operation.responseString);
         //编辑成功BL的delegate editSuccess
         //        [_delegate editUserInfoSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -164,4 +190,39 @@
     DLog(@"%@==%ld,today is%@,,,,%@",date,weekday,[NSDate date],dateString);
     return (int)weekday;
 }
+/**
+ *  将获得的json形式user信息转化为user对象，存入NSUserDefaults中
+ *
+ *  @param operation AFNetworking请求返回AFHTTPRequestOperation对象
+ *
+ *  @return resultCode：{1，代表成功返回；0，代表失败
+ */
+-(int)jsonToUserDefault:(AFHTTPRequestOperation*) operation {
+    // 使用jsonkit进行json解析
+    NSDictionary* resInfo=[operation.responseString objectFromJSONString];
+    NSDictionary* userInfo=[resInfo objectForKey:@"data"];
+    int result=[[resInfo objectForKey:@"result"] intValue];
+    
+    User* user=[[User alloc]init];
+    user.userId=[userInfo objectForKey:@"id"];
+    user.nickName=[userInfo objectForKey:@"nickname"];
+    user.password=[userInfo objectForKey:@"password"];
+    user.phone=[userInfo objectForKey:@"phone"];
+    user.coins=[userInfo objectForKey:@"coins"];
+    user.balance=[userInfo objectForKey:@"balance"];
+    
+    user.age=[userInfo objectForKey:@"age"];
+    
+    user.userType=[userInfo objectForKey:@"user_type"];
+    user.userName=[userInfo objectForKey:@"username"];
+    user.sex=[userInfo objectForKey:@"sex"];
+    user.homeAddress=[userInfo objectForKey:@"home_address"];
+    user.trainAddress=[userInfo objectForKey:@"training_address"];
+    NSData *userObject = [NSKeyedArchiver archivedDataWithRootObject:user];
+    [[NSUserDefaults standardUserDefaults] setObject:userObject forKey:mUserInfo];
+    [[NSUserDefaults standardUserDefaults] synchronize];//同步NSUserDefaults中的数据
+    
+    return result;
+}
+
 @end

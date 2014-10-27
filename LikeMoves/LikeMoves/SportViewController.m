@@ -66,7 +66,7 @@ static int sportSec;
     
     //主福袋层
     _bagView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_hongbao_bags"]];
-    _bagView.center = CGPointMake(CGRectGetMidX(self.view.frame) + 10, CGRectGetMidY(self.view.frame) - 45);
+    _bagView.center = CGPointMake(CGRectGetMidX(self.view.frame) + 5, CGRectGetMidY(self.view.frame)+5 );
     
     [_fireBtn addTarget:self action:@selector(sportCircleClear) forControlEvents:UIControlEventTouchUpInside];
     
@@ -75,7 +75,7 @@ static int sportSec;
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self refreshCoinsAndMonthDays];
-
+    
 }
 - (void)didReceiveMemoryWarning
 {
@@ -125,25 +125,24 @@ static int sportSec;
  *  当能量条清空时，调用此方法。
  */
 -(void) sportCircleClear{
-    if(sportCircleNumber>5000){
-                //添加运动记录
+    if(sportCircleNumber>5){
+        //添加运动记录
         [_bl addMoveRecord:sportSec withSteps:stepNum];
-        //userBL更新本地用户NSUserDefaults中的信息
-        [_userBL refreshMyself];
+//        //userBL更新本地用户NSUserDefaults中的信息
+//        [_userBL refreshMyself];
         //userBL更新服务器中的金币信息
         if(sportCircleNumber>10000){
-            [_userBL addCoins:100];
+            [_bl addCoins:@"100"];
         }else{
-            [_userBL addCoins:floor(sportCircleNumber/100)];
+            [_bl addCoins:[NSString stringWithFormat:@"%f",floor(sportCircleNumber/10)]];
         }
         [self refreshCoinsAndMonthDays];
         sportCircleNumber=0;
         _wdSport.z=sportCircleNumber/10000;
         [self getCoinAction];
     }else{
-//        DLog(@"addCoins");
-//        [_userBL addCoins:100];
-
+        //        [_userBL addCoins:100];
+        
         UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"能量条超过一半才能释放" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
         
@@ -159,7 +158,7 @@ static int coinCount = 0;
     [_fireBtn setEnabled:false];
     isBag=false;
     //"立即打开"按钮从视图上移除
-    //    [btn removeFromSuperview];
+
     [self.view addSubview:_bagView];
     
     //初始化金币生成的数量
@@ -169,7 +168,7 @@ static int coinCount = 0;
         //延迟调用函数
         [self performSelector:@selector(initCoinViewWithInt:) withObject:[NSNumber numberWithInt:i] afterDelay:i * 0.01];
     }
-    [self sportCircleClear];
+
 }
 
 - (void)initCoinViewWithInt:(NSNumber *)i
