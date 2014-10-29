@@ -93,8 +93,6 @@
 		8A4113EE19D90B1D002F2575 /* MainTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4113ED19D90B1D002F2575 /* MainTabViewController.m */; };
 		8A4113F119D92EA8002F2575 /* SportDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4113F019D92EA8002F2575 /* SportDetailViewController.m */; };
 		8A41C8E019FA199600FBAD37 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A41C8DF19FA199600FBAD37 /* Reachability.m */; };
-		8A41C8EB19FA69A700FBAD37 /* PSCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A41C8E519FA69A700FBAD37 /* PSCollectionView.m */; };
-		8A41C8EC19FA69A700FBAD37 /* PSCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A41C8E719FA69A700FBAD37 /* PSCollectionViewCell.m */; };
 		8A41C8F119FB414800FBAD37 /* user30.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A41C8EF19FB414800FBAD37 /* user30.png */; };
 		8A41C8F519FB418000FBAD37 /* user60.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A41C8F319FB418000FBAD37 /* user60.png */; };
 		8A41C8F719FB429700FBAD37 /* shareBtn60.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A41C8F619FB429700FBAD37 /* shareBtn60.png */; };
@@ -337,10 +335,6 @@
 		8A4113F019D92EA8002F2575 /* SportDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SportDetailViewController.m; sourceTree = "<group>"; };
 		8A41C8DE19FA199600FBAD37 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		8A41C8DF19FA199600FBAD37 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		8A41C8E419FA69A700FBAD37 /* PSCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCollectionView.h; sourceTree = "<group>"; };
-		8A41C8E519FA69A700FBAD37 /* PSCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCollectionView.m; sourceTree = "<group>"; };
-		8A41C8E619FA69A700FBAD37 /* PSCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCollectionViewCell.h; sourceTree = "<group>"; };
-		8A41C8E719FA69A700FBAD37 /* PSCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCollectionViewCell.m; sourceTree = "<group>"; };
 		8A41C8EF19FB414800FBAD37 /* user30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user30.png; sourceTree = "<group>"; };
 		8A41C8F319FB418000FBAD37 /* user60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user60.png; sourceTree = "<group>"; };
 		8A41C8F619FB429700FBAD37 /* shareBtn60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareBtn60.png; sourceTree = "<group>"; };
@@ -597,7 +591,6 @@
 		8A04AEFF19C5CC88000212E7 /* Dependency */ = {
 			isa = PBXGroup;
 			children = (
-				8A41C8E119FA69A600FBAD37 /* PSCollectionView */,
 				8A41C8DD19FA198100FBAD37 /* Reachability */,
 				8ADD880A19F92BC200402C77 /* UMessage_Sdk_1.1.0 */,
 				8A3AF26119F176E2008E3CD3 /* UMSocial_Sdk_Extra_Frameworks */,
@@ -915,17 +908,6 @@
 				8A41C8DF19FA199600FBAD37 /* Reachability.m */,
 			);
 			name = Reachability;
-			sourceTree = "<group>";
-		};
-		8A41C8E119FA69A600FBAD37 /* PSCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				8A41C8E419FA69A700FBAD37 /* PSCollectionView.h */,
-				8A41C8E519FA69A700FBAD37 /* PSCollectionView.m */,
-				8A41C8E619FA69A700FBAD37 /* PSCollectionViewCell.h */,
-				8A41C8E719FA69A700FBAD37 /* PSCollectionViewCell.m */,
-			);
-			path = PSCollectionView;
 			sourceTree = "<group>";
 		};
 		8A8504BD19E1310900CB730E /* Friend */ = {
@@ -1473,7 +1455,6 @@
 				8A8504D119E23DF000CB730E /* ShopDAO.m in Sources */,
 				8A04AF4D19C839FF000212E7 /* SMS_MBProgressHUD+Add.m in Sources */,
 				8AB1ABE019CFA79900017485 /* yuan2_zj.m in Sources */,
-				8A41C8EB19FA69A700FBAD37 /* PSCollectionView.m in Sources */,
 				8A4113F119D92EA8002F2575 /* SportDetailViewController.m in Sources */,
 				8A04AF0E19C5E8F4000212E7 /* CoreDataDAO.m in Sources */,
 				8AC7F82419DF8FA6008C2934 /* RTSpinKitFadingCircleAnimation.m in Sources */,
@@ -1484,7 +1465,6 @@
 				8ABA42F719FDEE4700ED9220 /* ShopDetailViewController.m in Sources */,
 				8A94D24519F650B3000CB514 /* ShopListViewController.m in Sources */,
 				8A04AF4119C839E6000212E7 /* VerifyViewController.m in Sources */,
-				8A41C8EC19FA69A700FBAD37 /* PSCollectionViewCell.m in Sources */,
 				8AC7F81F19DF8FA6008C2934 /* RTSpinKitBounceAnimation.m in Sources */,
 				8A04AF4E19C839FF000212E7 /* SMS_MBProgressHUD.m in Sources */,
 				8A04AF1519C6C0E2000212E7 /* UserActDA.m in Sources */,

@@ -88,7 +88,7 @@ NSDictionary* selectProduct;
         url=nil;
     }else{
         NSDictionary*dict=(NSDictionary*)[pics objectAtIndex:0];
-        url=[NSString stringWithFormat:@"http://www.haoapp123.com/app/localuser/aidongdong/%@",[dict objectForKey:@"pic"]];
+        url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
     }
     [proImg sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"UMS_email_off"]];
     return cell;

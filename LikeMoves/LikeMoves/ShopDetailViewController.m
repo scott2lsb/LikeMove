@@ -32,13 +32,16 @@ NSArray *prices;
 	// 创建、并初始化NSArray对象。
 	prices = [NSArray arrayWithObjects:
               @"99", @"79" , @"79" , @"69" , nil];
-
+    
+    
     /**
      *  界面元素
      */
-//    _titleLabel
-//    _priceLabel
-//    _soldLabel
+    _titleLabel.text=(NSString*)[_selectProduct objectForKey:@"name"];
+    _priceLabel.text=
+    [NSString stringWithFormat:@"价格:￥%@",[_selectProduct objectForKey:@"price"]];
+    _soldLabel.text=[NSString stringWithFormat:@"销量:%@",[_selectProduct objectForKey:@"sold_num"]];
+    
     pics=(NSArray*)[_selectProduct objectForKey:@"pics"];
     rollPics=(NSArray*)[_selectProduct objectForKey:@"roll_pics"];
     
@@ -101,7 +104,7 @@ NSArray *prices;
         url=@"";
     }else if(pics.count>0){
         NSDictionary*dict=(NSDictionary*)[pics objectAtIndex:0];
-        url=[NSString stringWithFormat:@"http://www.haoapp123.com/app/localuser/aidongdong/%@",[dict objectForKey:@"pic"]];
+        url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
     }
     [img1 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testuser3"]];
     
@@ -109,7 +112,7 @@ NSArray *prices;
         url=@"";
     }else if(pics.count>1){
         NSDictionary*dict=(NSDictionary*)[pics objectAtIndex:1];
-        url=[NSString stringWithFormat:@"http://www.haoapp123.com/app/localuser/aidongdong/%@",[dict objectForKey:@"pic"]];
+        url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
     }
     [img2 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testuser3"]];
     
@@ -117,7 +120,7 @@ NSArray *prices;
         url=@"";
     }else if(pics.count>2){
         NSDictionary*dict=(NSDictionary*)[pics objectAtIndex:2];
-        url=[NSString stringWithFormat:@"http://www.haoapp123.com/app/localuser/aidongdong/%@",[dict objectForKey:@"pic"]];
+        url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
     }
     [img3 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testuser3"]];
     
@@ -126,7 +129,7 @@ NSArray *prices;
         url=@"";
     }else if(pics.count>3){
         NSDictionary*dict=(NSDictionary*)[pics objectAtIndex:3];
-        url=[NSString stringWithFormat:@"http://www.haoapp123.com/app/localuser/aidongdong/%@",[dict objectForKey:@"pic"]];
+        url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
     }
     [img4 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testuser3"]];
     
@@ -135,7 +138,7 @@ NSArray *prices;
         url=@"";
     }else if(pics.count>4){
         NSDictionary*dict=(NSDictionary*)[pics objectAtIndex:4];
-        url=[NSString stringWithFormat:@"http://www.haoapp123.com/app/localuser/aidongdong/%@",[dict objectForKey:@"pic"]];
+        url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
     }
     [img5 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testuser3"]];
     
@@ -196,7 +199,7 @@ NSArray *prices;
             url=@"";
         }else{
             NSDictionary*dict=(NSDictionary*)[rollPics objectAtIndex:i];
-            url=[NSString stringWithFormat:@"http://www.haoapp123.com/app/localuser/aidongdong/%@",[dict objectForKey:@"pic"]];
+            url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
         }
         
         
@@ -226,6 +229,16 @@ NSArray *prices;
     self.pageControl.pageIndicatorTintColor=[UIColor grayColor];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    _productDetail.frame=CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height-108-44);
+    _productDetail.showsVerticalScrollIndicator=YES;
+    _productDetail.backgroundColor=[UIColor whiteColor];
+    _productDetail.pagingEnabled=NO;
+//    _productDetail.delegate=self;
+    [_productDetail setContentSize:CGSizeMake(320, 411)];
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

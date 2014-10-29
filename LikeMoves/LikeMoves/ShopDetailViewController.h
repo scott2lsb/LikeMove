@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HMSegmentedControl.h"
 @interface ShopDetailViewController : UIViewController<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
-@property (strong, nonatomic) IBOutlet UIView *productDetail;
+@property (strong, nonatomic) IBOutlet UIScrollView *productDetail;
 @property(nonatomic)UIScrollView* imgDetail;
 @property(nonatomic)UITableView* comment;
 //轮播图
