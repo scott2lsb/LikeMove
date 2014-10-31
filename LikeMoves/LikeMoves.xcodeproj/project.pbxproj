@@ -119,6 +119,17 @@
 		8A85053D19E63B5700CB730E /* SportRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A85053C19E63B5700CB730E /* SportRankViewController.m */; };
 		8A85054319E8217B00CB730E /* AcceptFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A85054219E8217B00CB730E /* AcceptFriendViewController.m */; };
 		8A94D24519F650B3000CB514 /* ShopListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A94D24419F650B3000CB514 /* ShopListViewController.m */; };
+		8AAABDB51A00BAFB006BF58A /* MoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAABDB41A00BAFB006BF58A /* MoreTableViewController.m */; };
+		8AAABDB71A00C1D6006BF58A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AAABDB61A00C1D6006BF58A /* MapKit.framework */; };
+		8AAABDBA1A00C2DF006BF58A /* MapCompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAABDB91A00C2DF006BF58A /* MapCompanyViewController.m */; };
+		8AAABDC61A00E92D006BF58A /* ShopCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAABDC51A00E92D006BF58A /* ShopCartViewController.m */; };
+		8AAABDC91A01C323006BF58A /* company_detail.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDC71A01C323006BF58A /* company_detail.png */; };
+		8AAABDCA1A01C323006BF58A /* company_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDC81A01C323006BF58A /* company_map.png */; };
+		8AAABDCE1A01C7D9006BF58A /* ReceiverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAABDCD1A01C7D9006BF58A /* ReceiverViewController.m */; };
+		8AAABDD11A01E16F006BF58A /* AddReceiverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAABDD01A01E16F006BF58A /* AddReceiverViewController.m */; };
+		8AAABDD41A021023006BF58A /* CrowdfundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAABDD31A021023006BF58A /* CrowdfundViewController.m */; };
+		8AAABDD71A02202A006BF58A /* CrowdfundTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAABDD61A02202A006BF58A /* CrowdfundTableViewCell.m */; };
+		8AAABDD91A0229C3006BF58A /* coins@100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDD81A0229C3006BF58A /* coins@100.png */; };
 		8AAF82C319D8ECCD000E118A /* contact.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF82B219D8ECCD000E118A /* contact.png */; };
 		8AAF82C419D8ECCD000E118A /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF82B319D8ECCD000E118A /* more.png */; };
 		8AAF82C519D8ECCD000E118A /* sport.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF82B419D8ECCD000E118A /* sport.png */; };
@@ -171,7 +182,6 @@
 		8AC7F82F19DF9020008C2934 /* RadarFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC7F82E19DF9020008C2934 /* RadarFriendViewController.m */; };
 		8AC7F83219DFC535008C2934 /* FriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC7F83119DFC535008C2934 /* FriendTableViewController.m */; };
 		8AC7F83619DFEEC9008C2934 /* CHTumblrMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC7F83519DFEEC9008C2934 /* CHTumblrMenuView.m */; };
-		8AC7F84B19E12066008C2934 /* coins.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AC7F84A19E12066008C2934 /* coins.png */; };
 		8AC7F84F19E12A2C008C2934 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AC7F84C19E12A2C008C2934 /* calendar.png */; };
 		8AC7F85019E12A2C008C2934 /* steps.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AC7F84D19E12A2C008C2934 /* steps.png */; };
 		8AC7F85119E12A2C008C2934 /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AC7F84E19E12A2C008C2934 /* fire.png */; };
@@ -372,6 +382,24 @@
 		8A85054219E8217B00CB730E /* AcceptFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcceptFriendViewController.m; sourceTree = "<group>"; };
 		8A94D24319F650B3000CB514 /* ShopListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopListViewController.h; sourceTree = "<group>"; };
 		8A94D24419F650B3000CB514 /* ShopListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopListViewController.m; sourceTree = "<group>"; };
+		8AAABDB31A00BAFB006BF58A /* MoreTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreTableViewController.h; sourceTree = "<group>"; };
+		8AAABDB41A00BAFB006BF58A /* MoreTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreTableViewController.m; sourceTree = "<group>"; };
+		8AAABDB61A00C1D6006BF58A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8AAABDB81A00C2DF006BF58A /* MapCompanyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCompanyViewController.h; sourceTree = "<group>"; };
+		8AAABDB91A00C2DF006BF58A /* MapCompanyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCompanyViewController.m; sourceTree = "<group>"; };
+		8AAABDC41A00E92D006BF58A /* ShopCartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCartViewController.h; sourceTree = "<group>"; };
+		8AAABDC51A00E92D006BF58A /* ShopCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopCartViewController.m; sourceTree = "<group>"; };
+		8AAABDC71A01C323006BF58A /* company_detail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = company_detail.png; sourceTree = "<group>"; };
+		8AAABDC81A01C323006BF58A /* company_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = company_map.png; sourceTree = "<group>"; };
+		8AAABDCC1A01C7D9006BF58A /* ReceiverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiverViewController.h; sourceTree = "<group>"; };
+		8AAABDCD1A01C7D9006BF58A /* ReceiverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiverViewController.m; sourceTree = "<group>"; };
+		8AAABDCF1A01E16F006BF58A /* AddReceiverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddReceiverViewController.h; sourceTree = "<group>"; };
+		8AAABDD01A01E16F006BF58A /* AddReceiverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddReceiverViewController.m; sourceTree = "<group>"; };
+		8AAABDD21A021023006BF58A /* CrowdfundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrowdfundViewController.h; sourceTree = "<group>"; };
+		8AAABDD31A021023006BF58A /* CrowdfundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrowdfundViewController.m; sourceTree = "<group>"; };
+		8AAABDD51A02202A006BF58A /* CrowdfundTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrowdfundTableViewCell.h; sourceTree = "<group>"; };
+		8AAABDD61A02202A006BF58A /* CrowdfundTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrowdfundTableViewCell.m; sourceTree = "<group>"; };
+		8AAABDD81A0229C3006BF58A /* coins@100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coins@100.png"; sourceTree = "<group>"; };
 		8AAF82B219D8ECCD000E118A /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact.png; sourceTree = "<group>"; };
 		8AAF82B319D8ECCD000E118A /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
 		8AAF82B419D8ECCD000E118A /* sport.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sport.png; sourceTree = "<group>"; };
@@ -454,7 +482,6 @@
 		8AC7F83119DFC535008C2934 /* FriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewController.m; sourceTree = "<group>"; };
 		8AC7F83419DFEEC9008C2934 /* CHTumblrMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTumblrMenuView.h; sourceTree = "<group>"; };
 		8AC7F83519DFEEC9008C2934 /* CHTumblrMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTumblrMenuView.m; sourceTree = "<group>"; };
-		8AC7F84A19E12066008C2934 /* coins.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coins.png; sourceTree = "<group>"; };
 		8AC7F84C19E12A2C008C2934 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
 		8AC7F84D19E12A2C008C2934 /* steps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steps.png; sourceTree = "<group>"; };
 		8AC7F84E19E12A2C008C2934 /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
@@ -469,6 +496,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AAABDB71A00C1D6006BF58A /* MapKit.framework in Frameworks */,
 				8A264FDA19F8E193003893E1 /* libstdc++.dylib in Frameworks */,
 				8ADD880D19F92BC200402C77 /* libUMessage_Sdk_1.1.0.a in Frameworks */,
 				8A264FD819F8E176003893E1 /* CoreTelephony.framework in Frameworks */,
@@ -524,14 +552,9 @@
 			isa = PBXGroup;
 			children = (
 				8A33784A19C5C656008B9AF5 /* Main.storyboard */,
-				8A8504D619E415FB00CB730E /* ResetPwdViewController.h */,
-				8A8504D719E415FB00CB730E /* ResetPwdViewController.m */,
-				8A04AF2019C6D42A000212E7 /* LMLoginViewController.h */,
-				8A04AF2119C6D42A000212E7 /* LMLoginViewController.m */,
-				8A1D4BF519CBD79700F27A3C /* UserCenterViewController.h */,
-				8A1D4BF619CBD79700F27A3C /* UserCenterViewController.m */,
 				8A4113EC19D90B1D002F2575 /* MainTabViewController.h */,
 				8A4113ED19D90B1D002F2575 /* MainTabViewController.m */,
+				8AAABDCB1A01C721006BF58A /* User */,
 				8A94D24219F64DAE000CB514 /* Shop */,
 				8A87EAE319EE14D000EBA885 /* Sport */,
 				8A85053819E6289400CB730E /* Contact */,
@@ -724,6 +747,7 @@
 		8A33783719C5C656008B9AF5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8AAABDB61A00C1D6006BF58A /* MapKit.framework */,
 				8A264FD919F8E193003893E1 /* libstdc++.dylib */,
 				8A264FD719F8E176003893E1 /* CoreTelephony.framework */,
 				8A264FD519F8E13E003893E1 /* SystemConfiguration.framework */,
@@ -958,8 +982,44 @@
 				8ABA42F619FDEE4700ED9220 /* ShopDetailViewController.m */,
 				8ABA42F819FE2CB500ED9220 /* ProductCommentTableViewCell.h */,
 				8ABA42F919FE2CB500ED9220 /* ProductCommentTableViewCell.m */,
+				8AAABDB81A00C2DF006BF58A /* MapCompanyViewController.h */,
+				8AAABDB91A00C2DF006BF58A /* MapCompanyViewController.m */,
+				8AAABDC41A00E92D006BF58A /* ShopCartViewController.h */,
+				8AAABDC51A00E92D006BF58A /* ShopCartViewController.m */,
 			);
 			name = Shop;
+			sourceTree = "<group>";
+		};
+		8AAABDBB1A00D440006BF58A /* shopCOM */ = {
+			isa = PBXGroup;
+			children = (
+				8AAABDC71A01C323006BF58A /* company_detail.png */,
+				8AAABDC81A01C323006BF58A /* company_map.png */,
+			);
+			name = shopCOM;
+			sourceTree = "<group>";
+		};
+		8AAABDCB1A01C721006BF58A /* User */ = {
+			isa = PBXGroup;
+			children = (
+				8AAABDB31A00BAFB006BF58A /* MoreTableViewController.h */,
+				8AAABDB41A00BAFB006BF58A /* MoreTableViewController.m */,
+				8A8504D619E415FB00CB730E /* ResetPwdViewController.h */,
+				8A8504D719E415FB00CB730E /* ResetPwdViewController.m */,
+				8A04AF2019C6D42A000212E7 /* LMLoginViewController.h */,
+				8A04AF2119C6D42A000212E7 /* LMLoginViewController.m */,
+				8A1D4BF519CBD79700F27A3C /* UserCenterViewController.h */,
+				8A1D4BF619CBD79700F27A3C /* UserCenterViewController.m */,
+				8AAABDCC1A01C7D9006BF58A /* ReceiverViewController.h */,
+				8AAABDCD1A01C7D9006BF58A /* ReceiverViewController.m */,
+				8AAABDCF1A01E16F006BF58A /* AddReceiverViewController.h */,
+				8AAABDD01A01E16F006BF58A /* AddReceiverViewController.m */,
+				8AAABDD21A021023006BF58A /* CrowdfundViewController.h */,
+				8AAABDD31A021023006BF58A /* CrowdfundViewController.m */,
+				8AAABDD51A02202A006BF58A /* CrowdfundTableViewCell.h */,
+				8AAABDD61A02202A006BF58A /* CrowdfundTableViewCell.m */,
+			);
+			name = User;
 			sourceTree = "<group>";
 		};
 		8AAF82AF19D8ECCD000E118A /* PageElement */ = {
@@ -1156,13 +1216,13 @@
 		8AC7F84819E11E6D008C2934 /* Sport */ = {
 			isa = PBXGroup;
 			children = (
+				8AAABDD81A0229C3006BF58A /* coins@100.png */,
 				8A8504D419E404B400CB730E /* button4.png */,
 				8A41C8FA19FB449600FBAD37 /* coin_bag.png */,
 				8A41C8FB19FB449600FBAD37 /* coin_bag@2x.png */,
 				8AC7F84C19E12A2C008C2934 /* calendar.png */,
 				8AC7F84D19E12A2C008C2934 /* steps.png */,
 				8AC7F84E19E12A2C008C2934 /* fire.png */,
-				8AC7F84A19E12066008C2934 /* coins.png */,
 			);
 			name = Sport;
 			sourceTree = "<group>";
@@ -1177,6 +1237,7 @@
 		8AD3A49819C92A6F00B615A5 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				8AAABDBB1A00D440006BF58A /* shopCOM */,
 				8A85053919E6325200CB730E /* testuser3.png */,
 				8A8504D919E4BDC600CB730E /* testuser2.png */,
 				8A8504D219E3EF3800CB730E /* testuser1.png */,
@@ -1303,6 +1364,7 @@
 				8A33784319C5C656008B9AF5 /* InfoPlist.strings in Resources */,
 				8A41C90419FB52A600FBAD37 /* contact60.png in Resources */,
 				8AAF82CD19D8ECCD000E118A /* sport@2x.png in Resources */,
+				8AAABDC91A01C323006BF58A /* company_detail.png in Resources */,
 				8A41C90519FB52A600FBAD37 /* sport60.png in Resources */,
 				8A41C90019FB529C00FBAD37 /* contact30.png in Resources */,
 				8A3AF25E19F17618008E3CD3 /* UMSnsAccountViewController.xib in Resources */,
@@ -1318,7 +1380,6 @@
 				8A41C8FD19FB449600FBAD37 /* coin_bag@2x.png in Resources */,
 				8A8504D319E3EF3800CB730E /* testuser1.png in Resources */,
 				8A3AF25B19F17618008E3CD3 /* UMShareEditViewController.xib in Resources */,
-				8AC7F84B19E12066008C2934 /* coins.png in Resources */,
 				8A41C8FC19FB449600FBAD37 /* coin_bag.png in Resources */,
 				8A3AF25F19F17618008E3CD3 /* UMSShareListController.xib in Resources */,
 				8AAF82CB19D8ECCD000E118A /* contact@2x.png in Resources */,
@@ -1331,6 +1392,7 @@
 				8AB1AC0D19D51B0800017485 /* launch@2x.png in Resources */,
 				8AAF82C419D8ECCD000E118A /* more.png in Resources */,
 				8A33784C19C5C656008B9AF5 /* Main.storyboard in Resources */,
+				8AAABDCA1A01C323006BF58A /* company_map.png in Resources */,
 				8A3AF25A19F17618008E3CD3 /* UMSCommentInputControlleriPad.xib in Resources */,
 				8AAF82C519D8ECCD000E118A /* sport.png in Resources */,
 				8A1D4C0E19CD234000F27A3C /* wheel_shadow@2x.png in Resources */,
@@ -1348,6 +1410,7 @@
 				8A1D4C0B19CD234000F27A3C /* frame_middle@2x.png in Resources */,
 				8AC7F84F19E12A2C008C2934 /* calendar.png in Resources */,
 				8A4113E919D903F9002F2575 /* chartBtn.png in Resources */,
+				8AAABDD91A0229C3006BF58A /* coins@100.png in Resources */,
 				8A8504D519E404B400CB730E /* button4.png in Resources */,
 				8A4113E519D8F6C6002F2575 /* navi.png in Resources */,
 				8AC7F85019E12A2C008C2934 /* steps.png in Resources */,
@@ -1420,6 +1483,7 @@
 				8AC7F83219DFC535008C2934 /* FriendTableViewController.m in Sources */,
 				8A04AF4C19C839FF000212E7 /* SMS_HYZBadgeView.m in Sources */,
 				8ABA42FA19FE2CB500ED9220 /* ProductCommentTableViewCell.m in Sources */,
+				8AAABDD11A01E16F006BF58A /* AddReceiverViewController.m in Sources */,
 				8AC7F82119DF8FA6008C2934 /* RTSpinKitCircleAnimation.m in Sources */,
 				8A1D4C2119CD683E00F27A3C /* LMComBoxView.m in Sources */,
 				8A04AF3B19C839E6000212E7 /* CustomCell.m in Sources */,
@@ -1438,19 +1502,23 @@
 				8A04AF0519C5D28D000212E7 /* LMContactBL.m in Sources */,
 				8A33784919C5C656008B9AF5 /* LMAppDelegate.m in Sources */,
 				8A04AF0819C5D2A9000212E7 /* LMShopBL.m in Sources */,
+				8AAABDBA1A00C2DF006BF58A /* MapCompanyViewController.m in Sources */,
 				8AC7F82919DF8FA6008C2934 /* RTSpinKitWaveAnimation.m in Sources */,
 				8A04AF2B19C7E319000212E7 /* User.m in Sources */,
+				8AAABDC61A00E92D006BF58A /* ShopCartViewController.m in Sources */,
 				8A1D4BF719CBD79700F27A3C /* UserCenterViewController.m in Sources */,
 				8AC7F82C19DF8FA6008C2934 /* RTSpinKitView.m in Sources */,
 				8AC7F82719DF8FA6008C2934 /* RTSpinKitThreeBounceAnimation.m in Sources */,
 				8AC7F81D19DF8FA6008C2934 /* RTSpinKitArcAltAnimation.m in Sources */,
 				8A8504D819E415FB00CB730E /* ResetPwdViewController.m in Sources */,
 				8AB1AC1319D5388200017485 /* DKCircleButton.m in Sources */,
+				8AAABDCE1A01C7D9006BF58A /* ReceiverViewController.m in Sources */,
 				8A1D4C1619CD238E00F27A3C /* ALPickerView.m in Sources */,
 				8A85054319E8217B00CB730E /* AcceptFriendViewController.m in Sources */,
 				8A8504CB19E23D2E00CB730E /* SportDAO.m in Sources */,
 				8A41C8E019FA199600FBAD37 /* Reachability.m in Sources */,
 				8A04AF1819C6C1A1000212E7 /* CoreDateMoves.xcdatamodeld in Sources */,
+				8AAABDD41A021023006BF58A /* CrowdfundViewController.m in Sources */,
 				8A1D4C1719CD238E00F27A3C /* ALPickerViewCell.m in Sources */,
 				8A8504D119E23DF000CB730E /* ShopDAO.m in Sources */,
 				8A04AF4D19C839FF000212E7 /* SMS_MBProgressHUD+Add.m in Sources */,
@@ -1471,6 +1539,8 @@
 				8AC7F82019DF8FA6008C2934 /* RTSpinKitChasingDotsAnimation.m in Sources */,
 				8AC7F81E19DF8FA6008C2934 /* RTSpinKitArcAnimation.m in Sources */,
 				8A04AF3E19C839E6000212E7 /* SectionsViewController.m in Sources */,
+				8AAABDB51A00BAFB006BF58A /* MoreTableViewController.m in Sources */,
+				8AAABDD71A02202A006BF58A /* CrowdfundTableViewCell.m in Sources */,
 				8AC7F82B19DF8FA6008C2934 /* RTSpinKitUtils.m in Sources */,
 				8AB1AC3719D80A0A00017485 /* SMPageControl.m in Sources */,
 				8AC7F82519DF8FA6008C2934 /* RTSpinKitPlaneAnimation.m in Sources */,
@@ -1638,7 +1708,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "armv7s armv7";
+				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1677,7 +1747,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "armv7s armv7";
+				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

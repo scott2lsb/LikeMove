@@ -25,6 +25,8 @@ NSArray *prices;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _bl=[LMShopBL new];
+    _bl.delegate=self;
     //轮播图和详情图
     // 创建、并初始化NSArray对象。
 	books = [NSArray arrayWithObjects:@"疯狂Android讲义",
@@ -33,7 +35,7 @@ NSArray *prices;
 	prices = [NSArray arrayWithObjects:
               @"99", @"79" , @"79" , @"69" , nil];
     
-    
+
     /**
      *  界面元素
      */
@@ -256,7 +258,7 @@ NSArray *prices;
  }
  */
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-	NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
+	DLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
 }
 #pragma mark - UIScrollViewDelegate
 
@@ -367,5 +369,18 @@ NSArray *prices;
 {
     [self.timer invalidate];
 }
-
+#pragma mark 添加到购物车
+/**
+ *  添加商品到购物车
+ */
+- (IBAction)addToCart:(id)sender {
+    
+    [_bl addShoppingCartWithProductID:[_selectProduct objectForKey:@"id"] number:@"1" comment:nil];
+}
+#pragma mark ShopBLDelegate
+-(void)addToCartSuccess{
+    // 提示添加购物车成功
+    UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"添加购物车成功" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
+}
 @end

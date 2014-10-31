@@ -7,7 +7,7 @@
 //
 
 #import "ShopListViewController.h"
-
+#import "ShopDetailViewController.h"
 @interface ShopListViewController ()
 
 @end
@@ -118,9 +118,9 @@ NSDictionary* selectProduct;
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
+{if([segue.destinationViewController isKindOfClass:[ShopDetailViewController class]]){
      UIViewController* view = segue.destinationViewController;
     [view setValue:selectProduct forKey:@"selectProduct"];
  }
-
+}
 @end

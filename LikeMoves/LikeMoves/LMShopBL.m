@@ -31,13 +31,13 @@
  *  获得赠送金币的记录
  */
 -(void)getGivedCoinsRecord{
-    
+    [_dao getGivedCoinsRecord];
 };
 /**
  *  获得接收金币的记录
  */
 -(void)getRecievedCoinsRecord{
-    
+    [_dao getRecievedCoinsRecord];
 };
 
 /**
@@ -102,7 +102,7 @@
  *  获得收货人信息
  */
 -(void)getReceiver{
-    
+    [_dao getReceiver];
 };
 /**
  *  将商品添加到购物车中
@@ -112,7 +112,7 @@
  *  @param comment   商品备注
  */
 -(void)addShoppingCartWithProductID:(NSString*)productID number:(NSString*)num comment:(NSString*)comment{
-    
+    [_dao addShoppingCartWithProductID:productID number:num comment:comment];
 };
 /**
  *  从购物车中删除商品
@@ -136,7 +136,7 @@
  *  获得所有购物车信息
  */
 -(void)getShoppingCarts{
-    
+    [_dao getShoppingCarts];
 };
 
 /**
@@ -204,6 +204,22 @@
 -(void)getProductInPromotionSuccess:(NSArray *)array{
     [_delegate getProductInPromotionSuccess:array];
 }
+-(void)addToCartSuccess{
+    [_delegate addToCartSuccess];
+}
+-(void)getShopingCartsSuccess:(NSArray*)array{
+    [_delegate getShopingCartsSuccess:array];
+};
+-(void)getReceiversSuccess:(NSArray *)array{
+    [_delegate getReceiversSuccess:array];
+}
+-(void)getGivedCoinsRecordSuccess:(NSArray*)array{
+    [_delegate getGivedCoinsRecordSuccess:array];
+};
+-(void)getReceivedCoinsRecordSuccess:(NSArray*)array{
+    [_delegate getReceivedCoinsRecordSuccess:array];
+};
+
 @end
 
 

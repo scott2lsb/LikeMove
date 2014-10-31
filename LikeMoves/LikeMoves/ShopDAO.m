@@ -50,8 +50,9 @@
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"give-coin-record-JSON: %@", operation.responseString);
+        NSArray* array=[self jsonListToFriendArray:operation.responseString];
         //请求成功，回调的BL的delegate
-        //[_delegate XXX];
+        [_delegate getGivedCoinsRecordSuccess:array];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate
@@ -73,8 +74,9 @@
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"recie-coin-JSON: %@", operation.responseString);
+        NSArray* array=[self jsonListToFriendArray:operation.responseString];
         //请求成功，回调的BL的delegate
-        //[_delegate XXX];
+        [_delegate getReceivedCoinsRecordSuccess:array];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate
@@ -277,7 +279,9 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"获得收货人JSON: %@", operation.responseString);
         //请求成功，回调的BL的delegate
-        //[_delegate XXX];
+        //if result为1进行这个操作，不是1则操作失败
+        NSArray* array=[self jsonListToFriendArray:operation.responseString];
+        [_delegate getReceiversSuccess:array];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate
@@ -305,6 +309,7 @@
         DLog(@"添加商品到购物车JSON: %@", operation.responseString);
         //请求成功，回调的BL的delegate
         //[_delegate XXX];
+        [_delegate addToCartSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate
@@ -378,8 +383,9 @@
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"获得购物车信息JSON: %@", operation.responseString);
+        NSArray* array=[self jsonListToFriendArray:operation.responseString];
         //请求成功，回调的BL的delegate
-        //[_delegate XXX];
+        [_delegate getShopingCartsSuccess:array];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate

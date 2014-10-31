@@ -1,0 +1,59 @@
+PODS:
+  - ACPReminder (1.0.1)
+  - AFNetworking (2.3.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.3.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.3.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.3.1)
+  - AFNetworking/Security (2.3.1)
+  - AFNetworking/Serialization (2.3.1)
+  - AFNetworking/UIKit (2.3.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - EAIntroView (2.6.4)
+  - FlatUIKit (1.5)
+  - HMSegmentedControl (1.4.0)
+  - JSONKit (1.5pre)
+  - PNChart (0.5):
+    - UICountingLabel (~> 1.0.0)
+  - SDWebImage (3.7.1):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.7.1)
+  - Shimmer (1.0.1)
+  - UICountingLabel (1.0.0)
+
+DEPENDENCIES:
+  - ACPReminder (~> 1.0.1)
+  - AFNetworking (~> 2.3.1)
+  - EAIntroView (~> 2.6.3)
+  - FlatUIKit (~> 1.4)
+  - HMSegmentedControl (~> 1.4.0)
+  - JSONKit (~> 1.5pre)
+  - PNChart (~> 0.5)
+  - SDWebImage (~> 3.7.1)
+  - Shimmer (~> 1.0.1)
+
+SPEC CHECKSUMS:
+  ACPReminder: e02ff174a352a343cb34d1e41b4950c8d222cd4a
+  AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
+  EAIntroView: 8f66dc6b79f2d52db26af8fc5476a05ffc549d4c
+  FlatUIKit: 5452fa3fca41e6f04014cca6e81b4c2f961f623c
+  HMSegmentedControl: c0517a8d4b80c978b8386f863f1c44729cfd7d6f
+  JSONKit: efef3bbd3372ff33f96b9c6f34cf4fe18e74ab69
+  PNChart: 0d0cf4531de3aa7f2b12434a54845d70d9c9cfe3
+  SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
+  Shimmer: 35aa2a57b8fbc17f9e16706021665966fd93dbd1
+  UICountingLabel: 0a0e9e34bf4690dbd127aaec552d19ed938087a9
+
+COCOAPODS: 0.34.4

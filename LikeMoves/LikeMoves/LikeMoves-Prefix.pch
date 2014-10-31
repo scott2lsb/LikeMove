@@ -19,6 +19,7 @@
  *  定义服务器接口字段
  */
 #define BaseURLString @"http://www.haoapp123.com/app/localuser/aidongdong/api.php"
+//服务器图片地址
 #define PicUrlString @"http://www.haoapp123.com/app/localuser/aidongdong/%@"
 /**
  *  标注DEBUG模式

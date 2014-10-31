@@ -284,9 +284,11 @@ static int coinCount = 0;
     UIImage *image = [[UMSocialScreenShoterDefault screenShoter] getScreenShot];
     
     //注意：分享到微信好友、微信朋友圈、微信收藏、QQ空间、QQ好友、来往好友、来往朋友圈、易信好友、易信朋友圈、Facebook、Twitter、Instagram等平台需要参考各自的集成方法
+    User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
+    NSString* name=user.nickName;
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:nil
-                                      shareText:@"你要分享的文字"
+                                      shareText:[NSString stringWithFormat:@"每天给自己一个奖励，快来加入里环王吧！%@",name]
                                      shareImage:image                                shareToSnsNames:array
                                        delegate:nil];
 }

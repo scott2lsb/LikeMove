@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "HMSegmentedControl.h"
-@interface ShopDetailViewController : UIViewController<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
+#import "LMShopBLDelegate.h"
+#import "LMShopBL.h"
+@interface ShopDetailViewController : UIViewController<LMShopBLDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic,strong) LMShopBL* bl;
 @property (strong, nonatomic) IBOutlet UIScrollView *productDetail;
 @property(nonatomic)UIScrollView* imgDetail;
 @property(nonatomic)UITableView* comment;
@@ -21,4 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *soldLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sizeSeg;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *colorSeg;
+//添加到购物车
+- (IBAction)addToCart:(id)sender;
+
 @end

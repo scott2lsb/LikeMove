@@ -12,4 +12,9 @@
 
 @optional
 -(void)getProductInPromotionSuccess:(NSArray*)array;
+-(void)addToCartSuccess;
+-(void)getShopingCartsSuccess:(NSArray*)array;
+-(void)getReceiversSuccess:(NSArray*)array;
+-(void)getGivedCoinsRecordSuccess:(NSArray*)array;
+-(void)getReceivedCoinsRecordSuccess:(NSArray*)array;
 @end
