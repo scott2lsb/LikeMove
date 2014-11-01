@@ -47,7 +47,10 @@ static int sportSec;
     
     
     _fireBtn = [[DKCircleButton alloc] initWithFrame:CGRectMake(self.sportCircle.bounds.size.width/2-mFireBtnH/2, self.sportCircle.bounds.size.height/2-mFireBtnH/2, mFireBtnH, mFireBtnH)];
-    
+    [_fireBtn setImage:[UIImage imageNamed:@"test4.png"] forState:UIControlStateNormal];
+        [_fireBtn setImage:[UIImage imageNamed:@"test4.png"] forState:UIControlStateHighlighted];
+        [_fireBtn setImage:[UIImage imageNamed:@"test4.png"] forState:UIControlStateSelected];
+        [_fireBtn setImage:[UIImage imageNamed:@"test4.png"] forState:UIControlStateDisabled];
     //    _fireBtn.center = CGPointMake(160, 200);
     _fireBtn.titleLabel.font = [UIFont systemFontOfSize:22];
     [_fireBtn setTitleColor:[UIColor emerlandColor] forState:UIControlStateNormal];
@@ -69,13 +72,47 @@ static int sportSec;
     _bagView.center = CGPointMake(CGRectGetMidX(self.view.frame) + 5, CGRectGetMidY(self.view.frame)+5 );
     
     [_fireBtn addTarget:self action:@selector(sportCircleClear) forControlEvents:UIControlEventTouchUpInside];
-    
+    /**
+     *  使用自定义创建控件的方式使控件自适应，autolayout开启，在storyboard中建立的控件，必须已经显示才能在viewDidAppear中进行操作
+     */
+    if([UIScreen mainScreen].bounds.size.height<500){
+        DLog(@"size-fit-test-3.5inch");
+        _calCount=[[UILabel alloc]initWithFrame:CGRectMake(123 , 380, 77, 44)];
+        _calCount.text=@"0千卡";
+        _calCount.font=[UIFont systemFontOfSize:15];
+        _calCount.textAlignment=NSTextAlignmentCenter;
+        
+        _calImg=[[UIImageView alloc] initWithFrame:CGRectMake(139, 342, 44, 44)];
+        _calImg.image=[UIImage imageNamed:@"fire.png"];
+        _calImg.contentMode=UIViewContentModeScaleToFill;
+        [self.view addSubview:_calImg];
+        [self.view addSubview:_calCount];
+    }else{
+                DLog(@"size-fit-test-4.0inch");
+        _calCount=[[UILabel alloc]initWithFrame:CGRectMake(123, 419, 77, 44)];
+        _calCount.text=@"0千卡";
+        _calCount.font=[UIFont systemFontOfSize:15];
+        _calCount.textAlignment=NSTextAlignmentCenter;
+        
+        _calImg=[[UIImageView alloc] initWithFrame:CGRectMake(139, 380, 44, 44)];
+        _calImg.image=[UIImage imageNamed:@"fire.png"];
+        _calImg.contentMode=UIViewContentModeScaleToFill;
+        [self.view addSubview:_calImg];
+        [self.view addSubview:_calCount];
+
+    }
     
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+
     [self refreshCoinsAndMonthDays];
     
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+
 }
 - (void)didReceiveMemoryWarning
 {
@@ -275,9 +312,12 @@ static int coinCount = 0;
 }
 
 - (IBAction)share:(id)sender {
+
+    [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
     NSArray* array;
     if ([WXApi isWXAppInstalled]) {
-        array=[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToQzone,UMShareToQQ,nil];
+        array=[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone,nil];
     }else{
         array=[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToQQ,nil];
     }

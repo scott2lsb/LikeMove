@@ -12,6 +12,7 @@
 #import "LMSportBL.h"
 #import "DKCircleButton.h"
 #import "LMUserActBL.h"
+
 @interface SportViewController : UIViewController<LMSportBLDelegate>{
     UIButton        *_getBtn;
     UIImageView     *_bagView;      //福袋图层
@@ -29,7 +30,14 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *stepCount;
 @property (weak, nonatomic) IBOutlet UILabel *monthMoveDays;
-@property (weak, nonatomic) IBOutlet UILabel *calCount;
+
+
+
+@property (strong, nonatomic)  UIImageView *calImg;
+@property (strong, nonatomic)  UILabel *calCount;
+
+
+
 
 @property (weak, nonatomic) IBOutlet UILabel *coinsCount;
 @property (nonatomic) DKCircleButton *fireBtn;

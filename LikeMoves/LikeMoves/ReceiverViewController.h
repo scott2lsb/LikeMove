@@ -12,6 +12,6 @@
 @interface ReceiverViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,LMShopBLDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong,nonatomic) NSArray* receivers;
+@property (strong,nonatomic) NSMutableArray* receivers;
 @property(strong,nonatomic)LMShopBL* bl;
 @end

@@ -77,7 +77,7 @@
  *  @param phone 收货人手机号
  */
 -(void)addReceiverWithName:(NSString*)name address:(NSString*)addr phone:(NSString*)phone{
-    
+    [_dao addReceiverWithName:name address:addr phone:phone];
 };
 /**
  *  删除收货人信息
@@ -85,7 +85,7 @@
  *  @param receiverID 收货人信息的ID
  */
 -(void)delReceiver:(NSString*)receiverID{
-    
+    [_dao delReceiver:receiverID];
 };
 /**
  *  编辑收货人信息
@@ -168,7 +168,7 @@
  *  @param status 订单状态0:保留, 1:未付款, 2:已付款 3:已发货 4:已收货 5:已取消
  */
 -(void)getOrdersWithStatus:(NSString*)status{
-    
+    [_dao getOrdersWithStatus:status];
 };
 /**
  *  确认收货
@@ -219,7 +219,18 @@
 -(void)getReceivedCoinsRecordSuccess:(NSArray*)array{
     [_delegate getReceivedCoinsRecordSuccess:array];
 };
-
+-(void)getNoPayOrdersSuccess:(NSArray*)array{
+    [_delegate getNoPayOrdersSuccess:array];
+};
+-(void)getPaidOrdersSuccess:(NSArray*)array{
+    [_delegate getPaidOrdersSuccess:array];
+};
+-(void)getSendOrdersSuccess:(NSArray*)array{
+    [_delegate getSendOrdersSuccess:array];
+};
+-(void)getReceivedOrdersSuccess:(NSArray*)array{
+    [_delegate getReceivedOrdersSuccess:array];
+};
 @end
 
 

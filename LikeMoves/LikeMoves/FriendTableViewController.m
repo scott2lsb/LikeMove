@@ -35,6 +35,8 @@ static UIAlertView* _alert1=nil;
      */
     UIView *view =[ [UIView alloc]init];
     view.backgroundColor = [UIColor clearColor];
+    UIImageView* img=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button4.png"]];
+    [self.tableView setTableHeaderView:img];
     [self.tableView setTableFooterView:view];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -78,11 +80,13 @@ static UIAlertView* _alert1=nil;
     }
     //昵称、当天运动时长、当月已运动天数、金币数量
     UILabel* nickname=(UILabel*)[cell viewWithTag:1];
-//    UILabel* duration=(UILabel*)[cell viewWithTag:2];
-//    UILabel* monthMove=(UILabel*)[cell viewWithTag:3];
+    UILabel* duration=(UILabel*)[cell viewWithTag:2];
+    UILabel* monthMove=(UILabel*)[cell viewWithTag:3];
     UILabel* coins=(UILabel*)[cell viewWithTag:4];
     NSDictionary* friend=[friendsTable objectAtIndex:indexPath.row];
     nickname.text=[friend objectForKey:@"nickname"];
+    duration.text=[friend objectForKey:@"day_move_duration"];
+    monthMove.text=[friend objectForKey:@"month_move_days"];
     coins.text=[friend objectForKey:@"coins"];
     return cell;
 }

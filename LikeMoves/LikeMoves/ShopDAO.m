@@ -468,6 +468,24 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"order-status-JSON: %@", operation.responseString);
         //请求成功，回调的BL的delegate
+        NSArray* array=[self jsonListToFriendArray:operation.responseString];
+        switch ([status intValue]) {
+            case 1:
+                [_delegate getNoPayOrdersSuccess:array];
+                break;
+            case 2:
+                [_delegate getPaidOrdersSuccess:array];
+                break;
+            case 3:
+                [_delegate getSendOrdersSuccess:array];
+                break;
+            case 4:
+                [_delegate getReceivedOrdersSuccess:array];
+                break;
+                
+            default:
+                break;
+        }
         //[_delegate XXX];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);

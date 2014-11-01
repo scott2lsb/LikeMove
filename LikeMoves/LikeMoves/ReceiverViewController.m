@@ -59,19 +59,19 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //TODO: 处理删除收货地址操作
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        NSDictionary* dict=[friendsTable objectAtIndex:indexPath.row];
-//        NSString* friend_id=[dict objectForKey:@"id"];
-//        [_bl delFriend:friend_id];
-//        
-//        [friendsTable removeObjectAtIndex:indexPath.row];
-//        
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//        
-//        DLog(@"delete");
-//    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//    }
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSDictionary* dict=[_receivers objectAtIndex:indexPath.row];
+        NSString* friend_id=[dict objectForKey:@"id"];
+        [_bl delReceiver:friend_id];
+        
+        [_receivers removeObjectAtIndex:indexPath.row];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        DLog(@"delete");
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
 }
 #pragma mark - TableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -106,7 +106,7 @@
 }
 #pragma mark - ShopBLDelegate
 -(void)getReceiversSuccess:(NSArray *)array{
-    _receivers=array;
+    _receivers=[array mutableCopy];
     [_tableView reloadData];
 }
 @end

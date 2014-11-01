@@ -17,4 +17,10 @@
 -(void)getReceiversSuccess:(NSArray*)array;
 -(void)getGivedCoinsRecordSuccess:(NSArray*)array;
 -(void)getReceivedCoinsRecordSuccess:(NSArray*)array;
+
+
+-(void)getNoPayOrdersSuccess:(NSArray*)array;
+-(void)getPaidOrdersSuccess:(NSArray*)array;
+-(void)getSendOrdersSuccess:(NSArray*)array;
+-(void)getReceivedOrdersSuccess:(NSArray*)array;
 @end

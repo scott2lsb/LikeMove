@@ -14,18 +14,13 @@
 
 @implementation AddReceiverViewController
 NSArray* books;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _bl=[[LMShopBL alloc] init];
+    _bl.delegate=self;
+    district=@"兰山区";
     //收货地址 ”区“的选择
     // 创建、并初始化NSArray对象。
 	books = [NSArray arrayWithObjects:@"兰山区",@"河东区", @"罗庄区" ,nil];
@@ -83,6 +78,7 @@ numberOfRowsInComponent:(NSInteger)component
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:
 (NSInteger)row inComponent:(NSInteger)component
 {
+    district=[books objectAtIndex:row];
 	// 使用一个UIAlertView来显示用户选中的列表项
 	UIAlertView* alert = [[UIAlertView alloc]
                           initWithTitle:@"提示"
@@ -92,5 +88,20 @@ numberOfRowsInComponent:(NSInteger)component
                           cancelButtonTitle:@"确定"
                           otherButtonTitles:nil];
 	[alert show];
+}
+- (IBAction)addReceiver:(id)sender {
+    NSString* name=_receiverName.text;
+    NSString* phoneNum=_phone.text;
+    NSString* addr=[NSString stringWithFormat:@"山东省临沂市 %@ %@",district,_detailAdr.text];
+    [_bl addReceiverWithName:name address:addr phone:phoneNum];
+    UIAlertView* alert = [[UIAlertView alloc]
+                          initWithTitle:@"提示"
+                          message:[NSString stringWithFormat:@"%@"
+                                   , @"添加收货人地址成功"]
+                          delegate:nil
+                          cancelButtonTitle:@"确定"
+                          otherButtonTitles:nil];
+	[alert show];
+
 }
 @end

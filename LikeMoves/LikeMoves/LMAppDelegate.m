@@ -10,6 +10,7 @@
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
+#import "UMSocialSinaHandler.h"
 #import "UMessage.h"
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice]systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define _IPHONE80_ 80000
@@ -61,10 +62,11 @@
     //友盟注册AppKey
     [UMSocialData setAppKey:um_appkey];
     //设置微信AppId，设置分享url，默认使用友盟的网址
-    [UMSocialWechatHandler setWXAppId:@"wxb63a8a59702e5ddb" appSecret:@"abe6cc00ca7a6fab78009545da6cd449" url:@"http://www.kaidechuanmei.com"];
+    [UMSocialWechatHandler setWXAppId:@"wxb63a8a59702e5ddb" appSecret:@"abe6cc00ca7a6fab78009545da6cd449" url:nil];
     //    //设置分享到QQ和QQ空间的应用Id，和分享url 链接
     [UMSocialQQHandler setQQWithAppId:@"1103374241" appKey:@"ODe0qJKSqfWItJph" url:@"http://www.kaidechuanmei.com"];
-
+    [UMSocialSinaHandler openSSOWithRedirectURL:nil];
+    
     //短信验证key注册
     [SMS_SDK	registerApp:sms_appKey withSecret:sms_appSecret];
     

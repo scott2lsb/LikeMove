@@ -130,6 +130,18 @@
 		8AAABDD41A021023006BF58A /* CrowdfundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAABDD31A021023006BF58A /* CrowdfundViewController.m */; };
 		8AAABDD71A02202A006BF58A /* CrowdfundTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAABDD61A02202A006BF58A /* CrowdfundTableViewCell.m */; };
 		8AAABDD91A0229C3006BF58A /* coins@100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDD81A0229C3006BF58A /* coins@100.png */; };
+		8AAABDDC1A030D42006BF58A /* OrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAABDDB1A030D42006BF58A /* OrdersViewController.m */; };
+		8AAABDEB1A0489C5006BF58A /* zenpb_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDDF1A0489C5006BF58A /* zenpb_bg.png */; };
+		8AAABDEC1A0489C5006BF58A /* zenpb_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDE01A0489C5006BF58A /* zenpb_bg@2x.png */; };
+		8AAABDED1A0489C5006BF58A /* zenpb_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDE11A0489C5006BF58A /* zenpb_circle.png */; };
+		8AAABDEE1A0489C5006BF58A /* zenpb_circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDE21A0489C5006BF58A /* zenpb_circle@2x.png */; };
+		8AAABDEF1A0489C5006BF58A /* zenpb_pausebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDE31A0489C5006BF58A /* zenpb_pausebutton.png */; };
+		8AAABDF01A0489C5006BF58A /* zenpb_pausebutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDE41A0489C5006BF58A /* zenpb_pausebutton@2x.png */; };
+		8AAABDF11A0489C5006BF58A /* zenpb_playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDE51A0489C5006BF58A /* zenpb_playbutton.png */; };
+		8AAABDF21A0489C5006BF58A /* zenpb_playbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDE61A0489C5006BF58A /* zenpb_playbutton@2x.png */; };
+		8AAABDF31A0489C5006BF58A /* zenpb_progress.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDE71A0489C5006BF58A /* zenpb_progress.png */; };
+		8AAABDF41A0489C5006BF58A /* zenpb_progress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAABDE81A0489C5006BF58A /* zenpb_progress@2x.png */; };
+		8AAABDF51A0489C5006BF58A /* ZenPlayerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAABDEA1A0489C5006BF58A /* ZenPlayerButton.m */; };
 		8AAF82C319D8ECCD000E118A /* contact.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF82B219D8ECCD000E118A /* contact.png */; };
 		8AAF82C419D8ECCD000E118A /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF82B319D8ECCD000E118A /* more.png */; };
 		8AAF82C519D8ECCD000E118A /* sport.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAF82B419D8ECCD000E118A /* sport.png */; };
@@ -400,6 +412,20 @@
 		8AAABDD51A02202A006BF58A /* CrowdfundTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrowdfundTableViewCell.h; sourceTree = "<group>"; };
 		8AAABDD61A02202A006BF58A /* CrowdfundTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrowdfundTableViewCell.m; sourceTree = "<group>"; };
 		8AAABDD81A0229C3006BF58A /* coins@100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coins@100.png"; sourceTree = "<group>"; };
+		8AAABDDA1A030D42006BF58A /* OrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersViewController.h; sourceTree = "<group>"; };
+		8AAABDDB1A030D42006BF58A /* OrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersViewController.m; sourceTree = "<group>"; };
+		8AAABDDF1A0489C5006BF58A /* zenpb_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zenpb_bg.png; sourceTree = "<group>"; };
+		8AAABDE01A0489C5006BF58A /* zenpb_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zenpb_bg@2x.png"; sourceTree = "<group>"; };
+		8AAABDE11A0489C5006BF58A /* zenpb_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zenpb_circle.png; sourceTree = "<group>"; };
+		8AAABDE21A0489C5006BF58A /* zenpb_circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zenpb_circle@2x.png"; sourceTree = "<group>"; };
+		8AAABDE31A0489C5006BF58A /* zenpb_pausebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zenpb_pausebutton.png; sourceTree = "<group>"; };
+		8AAABDE41A0489C5006BF58A /* zenpb_pausebutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zenpb_pausebutton@2x.png"; sourceTree = "<group>"; };
+		8AAABDE51A0489C5006BF58A /* zenpb_playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zenpb_playbutton.png; sourceTree = "<group>"; };
+		8AAABDE61A0489C5006BF58A /* zenpb_playbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zenpb_playbutton@2x.png"; sourceTree = "<group>"; };
+		8AAABDE71A0489C5006BF58A /* zenpb_progress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zenpb_progress.png; sourceTree = "<group>"; };
+		8AAABDE81A0489C5006BF58A /* zenpb_progress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zenpb_progress@2x.png"; sourceTree = "<group>"; };
+		8AAABDE91A0489C5006BF58A /* ZenPlayerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZenPlayerButton.h; sourceTree = "<group>"; };
+		8AAABDEA1A0489C5006BF58A /* ZenPlayerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZenPlayerButton.m; sourceTree = "<group>"; };
 		8AAF82B219D8ECCD000E118A /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact.png; sourceTree = "<group>"; };
 		8AAF82B319D8ECCD000E118A /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
 		8AAF82B419D8ECCD000E118A /* sport.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sport.png; sourceTree = "<group>"; };
@@ -614,6 +640,7 @@
 		8A04AEFF19C5CC88000212E7 /* Dependency */ = {
 			isa = PBXGroup;
 			children = (
+				8AAABDDE1A0489C5006BF58A /* ZenPlayerButton */,
 				8A41C8DD19FA198100FBAD37 /* Reachability */,
 				8ADD880A19F92BC200402C77 /* UMessage_Sdk_1.1.0 */,
 				8A3AF26119F176E2008E3CD3 /* UMSocial_Sdk_Extra_Frameworks */,
@@ -1016,10 +1043,39 @@
 				8AAABDD01A01E16F006BF58A /* AddReceiverViewController.m */,
 				8AAABDD21A021023006BF58A /* CrowdfundViewController.h */,
 				8AAABDD31A021023006BF58A /* CrowdfundViewController.m */,
+				8AAABDDA1A030D42006BF58A /* OrdersViewController.h */,
+				8AAABDDB1A030D42006BF58A /* OrdersViewController.m */,
+				8AAABDDD1A0348A1006BF58A /* CustomTableCell */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		8AAABDDD1A0348A1006BF58A /* CustomTableCell */ = {
+			isa = PBXGroup;
+			children = (
 				8AAABDD51A02202A006BF58A /* CrowdfundTableViewCell.h */,
 				8AAABDD61A02202A006BF58A /* CrowdfundTableViewCell.m */,
 			);
-			name = User;
+			name = CustomTableCell;
+			sourceTree = "<group>";
+		};
+		8AAABDDE1A0489C5006BF58A /* ZenPlayerButton */ = {
+			isa = PBXGroup;
+			children = (
+				8AAABDDF1A0489C5006BF58A /* zenpb_bg.png */,
+				8AAABDE01A0489C5006BF58A /* zenpb_bg@2x.png */,
+				8AAABDE11A0489C5006BF58A /* zenpb_circle.png */,
+				8AAABDE21A0489C5006BF58A /* zenpb_circle@2x.png */,
+				8AAABDE31A0489C5006BF58A /* zenpb_pausebutton.png */,
+				8AAABDE41A0489C5006BF58A /* zenpb_pausebutton@2x.png */,
+				8AAABDE51A0489C5006BF58A /* zenpb_playbutton.png */,
+				8AAABDE61A0489C5006BF58A /* zenpb_playbutton@2x.png */,
+				8AAABDE71A0489C5006BF58A /* zenpb_progress.png */,
+				8AAABDE81A0489C5006BF58A /* zenpb_progress@2x.png */,
+				8AAABDE91A0489C5006BF58A /* ZenPlayerButton.h */,
+				8AAABDEA1A0489C5006BF58A /* ZenPlayerButton.m */,
+			);
+			path = ZenPlayerButton;
 			sourceTree = "<group>";
 		};
 		8AAF82AF19D8ECCD000E118A /* PageElement */ = {
@@ -1352,6 +1408,7 @@
 				8A04AF5019C83A2D000212E7 /* country.plist in Resources */,
 				8A8504C519E1311900CB730E /* radar_friend.png in Resources */,
 				8A1D4C1C19CD681600F27A3C /* area.plist in Resources */,
+				8AAABDF41A0489C5006BF58A /* zenpb_progress@2x.png in Resources */,
 				8AB1AC0F19D51B0800017485 /* share@2x.png in Resources */,
 				8A41C8F919FB42B200FBAD37 /* chartBtn60.png in Resources */,
 				8A1D4C0919CD234000F27A3C /* check_selected@2x.png in Resources */,
@@ -1364,11 +1421,14 @@
 				8A33784319C5C656008B9AF5 /* InfoPlist.strings in Resources */,
 				8A41C90419FB52A600FBAD37 /* contact60.png in Resources */,
 				8AAF82CD19D8ECCD000E118A /* sport@2x.png in Resources */,
+				8AAABDEB1A0489C5006BF58A /* zenpb_bg.png in Resources */,
 				8AAABDC91A01C323006BF58A /* company_detail.png in Resources */,
 				8A41C90519FB52A600FBAD37 /* sport60.png in Resources */,
 				8A41C90019FB529C00FBAD37 /* contact30.png in Resources */,
 				8A3AF25E19F17618008E3CD3 /* UMSnsAccountViewController.xib in Resources */,
 				8AB1AC3519D80A0A00017485 /* LICENSE in Resources */,
+				8AAABDF31A0489C5006BF58A /* zenpb_progress.png in Resources */,
+				8AAABDEE1A0489C5006BF58A /* zenpb_circle@2x.png in Resources */,
 				8AAF82C619D8ECCD000E118A /* user.png in Resources */,
 				8AB1AC0C19D51B0800017485 /* first@2x.png in Resources */,
 				8AAF82C319D8ECCD000E118A /* contact.png in Resources */,
@@ -1376,6 +1436,7 @@
 				8A04AF4019C839E6000212E7 /* smssdk.bundle in Resources */,
 				8A41C8F119FB414800FBAD37 /* user30.png in Resources */,
 				8A3AF25D19F17618008E3CD3 /* UMSLoginViewController.xib in Resources */,
+				8AAABDEF1A0489C5006BF58A /* zenpb_pausebutton.png in Resources */,
 				8A41C90119FB529C00FBAD37 /* sport30.png in Resources */,
 				8A41C8FD19FB449600FBAD37 /* coin_bag@2x.png in Resources */,
 				8A8504D319E3EF3800CB730E /* testuser1.png in Resources */,
@@ -1384,12 +1445,15 @@
 				8A3AF25F19F17618008E3CD3 /* UMSShareListController.xib in Resources */,
 				8AAF82CB19D8ECCD000E118A /* contact@2x.png in Resources */,
 				8A3AF25519F17618008E3CD3 /* UMSocialLocalizable.strings in Resources */,
+				8AAABDF21A0489C5006BF58A /* zenpb_playbutton@2x.png in Resources */,
 				8A85053A19E6325200CB730E /* testuser3.png in Resources */,
 				8A3AF26019F17618008E3CD3 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				8AB1AC4119D8270500017485 /* first-568h@2x.png in Resources */,
 				8A1D4C0D19CD234000F27A3C /* wheel_bg@2x.png in Resources */,
+				8AAABDEC1A0489C5006BF58A /* zenpb_bg@2x.png in Resources */,
 				8AC7F85119E12A2C008C2934 /* fire.png in Resources */,
 				8AB1AC0D19D51B0800017485 /* launch@2x.png in Resources */,
+				8AAABDF01A0489C5006BF58A /* zenpb_pausebutton@2x.png in Resources */,
 				8AAF82C419D8ECCD000E118A /* more.png in Resources */,
 				8A33784C19C5C656008B9AF5 /* Main.storyboard in Resources */,
 				8AAABDCA1A01C323006BF58A /* company_map.png in Resources */,
@@ -1403,6 +1467,7 @@
 				8AB1AC4219D8270500017485 /* sec-568h@2x.png in Resources */,
 				8A4113EB19D90453002F2575 /* shareBtn.png in Resources */,
 				8A8504C419E1311900CB730E /* contact_friend2.png in Resources */,
+				8AAABDED1A0489C5006BF58A /* zenpb_circle.png in Resources */,
 				8A8504C219E1311900CB730E /* phone_friend.png in Resources */,
 				8AB1AC0B19D51B0800017485 /* share.png in Resources */,
 				8AB1AC0A19D51B0800017485 /* sec.png in Resources */,
@@ -1415,6 +1480,7 @@
 				8A4113E519D8F6C6002F2575 /* navi.png in Resources */,
 				8AC7F85019E12A2C008C2934 /* steps.png in Resources */,
 				8AC7F7F519DF8D2C008C2934 /* Radar.png in Resources */,
+				8AAABDF11A0489C5006BF58A /* zenpb_playbutton.png in Resources */,
 				8A8504DA19E4BDC600CB730E /* testuser2.png in Resources */,
 				8AAF82CE19D8ECCD000E118A /* user@2x.png in Resources */,
 				8A1D4C0819CD234000F27A3C /* check@2x.png in Resources */,
@@ -1494,6 +1560,7 @@
 				8AC7F82F19DF9020008C2934 /* RadarFriendViewController.m in Sources */,
 				8AB1ABE119CFA79900017485 /* yuan2_sc.m in Sources */,
 				8AC7F82319DF8FA6008C2934 /* RTSpinKitFadingCircleAltAnimation.m in Sources */,
+				8AAABDDC1A030D42006BF58A /* OrdersViewController.m in Sources */,
 				8A4113EE19D90B1D002F2575 /* MainTabViewController.m in Sources */,
 				8AB1ABE319CFA79900017485 /* wendu_yuan2.m in Sources */,
 				8A04AF2219C6D42A000212E7 /* LMLoginViewController.m in Sources */,
@@ -1529,6 +1596,7 @@
 				8A04AF3F19C839E6000212E7 /* SectionsViewControllerFriends.m in Sources */,
 				8A04AF0B19C5D2E0000212E7 /* LMSportBL.m in Sources */,
 				8AC7F82819DF8FA6008C2934 /* RTSpinKitWanderingCubesAnimation.m in Sources */,
+				8AAABDF51A0489C5006BF58A /* ZenPlayerButton.m in Sources */,
 				8AC7F83619DFEEC9008C2934 /* CHTumblrMenuView.m in Sources */,
 				8ABA42F719FDEE4700ED9220 /* ShopDetailViewController.m in Sources */,
 				8A94D24519F650B3000CB514 /* ShopListViewController.m in Sources */,
