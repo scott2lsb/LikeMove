@@ -46,17 +46,9 @@ static int sportSec;
     
     
     
-    _fireBtn = [[DKCircleButton alloc] initWithFrame:CGRectMake(self.sportCircle.bounds.size.width/2-mFireBtnH/2, self.sportCircle.bounds.size.height/2-mFireBtnH/2, mFireBtnH, mFireBtnH)];
-    [_fireBtn setImage:[UIImage imageNamed:@"test4.png"] forState:UIControlStateNormal];
-        [_fireBtn setImage:[UIImage imageNamed:@"test4.png"] forState:UIControlStateHighlighted];
-        [_fireBtn setImage:[UIImage imageNamed:@"test4.png"] forState:UIControlStateSelected];
-        [_fireBtn setImage:[UIImage imageNamed:@"test4.png"] forState:UIControlStateDisabled];
-    //    _fireBtn.center = CGPointMake(160, 200);
-    _fireBtn.titleLabel.font = [UIFont systemFontOfSize:22];
-    [_fireBtn setTitleColor:[UIColor emerlandColor] forState:UIControlStateNormal];
-    [_fireBtn setTitleColor:[UIColor emerlandColor]  forState:UIControlStateSelected];
-    [_fireBtn setTitleColor:[UIColor emerlandColor] forState:UIControlStateHighlighted];
-    [self setFireBtnTitle:@"0m 0s"];
+    _fireBtn = [[ZenPlayerButton alloc]initWithFrame:CGRectMake(self.sportCircle.bounds.size.width/2-mFireBtnH/2, self.sportCircle.bounds.size.height/2-mFireBtnH/2, mFireBtnH, mFireBtnH)];
+            [_fireBtn addTarget:self action:@selector(sportCircleClear) forControlEvents:UIControlEventTouchUpInside];
+//    [self setFireBtnTitle:@"0m 0s"];
     
     [_wdSport addSubview:_fireBtn];
     [_wdSport addSubview:_coinImg];
@@ -71,7 +63,7 @@ static int sportSec;
     _bagView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_hongbao_bags"]];
     _bagView.center = CGPointMake(CGRectGetMidX(self.view.frame) + 5, CGRectGetMidY(self.view.frame)+5 );
     
-    [_fireBtn addTarget:self action:@selector(sportCircleClear) forControlEvents:UIControlEventTouchUpInside];
+
     /**
      *  使用自定义创建控件的方式使控件自适应，autolayout开启，在storyboard中建立的控件，必须已经显示才能在viewDidAppear中进行操作
      */
@@ -138,7 +130,7 @@ static int sportSec;
     sportSec=sportTime;
     int hour=sportTime/60;
     int second=sportTime%60;
-    [self setFireBtnTitle:[NSString stringWithFormat:@"%dm %ds",hour,second]];
+//    [self setFireBtnTitle:[NSString stringWithFormat:@"%dm %ds",hour,second]];
 }
 #pragma mark - custom-method
 -(void) refreshCoinsAndMonthDays{
@@ -153,15 +145,12 @@ static int sportSec;
     User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
     _coinsCount.text=user.coins;
 }
--(void) setFireBtnTitle:(NSString*) title{
-    [_fireBtn setTitle:NSLocalizedString(title, nil) forState:UIControlStateNormal];
-    [_fireBtn setTitle:NSLocalizedString(title, nil) forState:UIControlStateSelected];
-    [_fireBtn setTitle:NSLocalizedString(title, nil) forState:UIControlStateHighlighted];
-}
 /**
  *  当能量条清空时，调用此方法。
  */
 -(void) sportCircleClear{
+    self.fireBtn.progress = 0.4f;
+
     if(sportCircleNumber>5){
         //添加运动记录
         [_bl addMoveRecord:sportSec withSteps:stepNum];
@@ -180,8 +169,8 @@ static int sportSec;
     }else{
         //        [_userBL addCoins:100];
         
-        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"能量条超过一半才能释放" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alert show];
+//        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"能量条超过一半才能释放" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+//        [alert show];
         
         
     }

@@ -48,7 +48,7 @@
 
 @synthesize layerBackground=_layerBackground;
 @synthesize layerContainer=_layerContainer;
-@synthesize state=_state;
+@synthesize stateBtn=_state;
 @synthesize progress=_progress;
 
 - (id)initWithFrame:(CGRect)frame
@@ -138,11 +138,14 @@
             if(pos.x>=0 &&
                pos.y>=0 &&
                pos.x<self.bounds.size.width &&
-               pos.y<self.bounds.size.height)
+               pos.y<self.bounds.size.height){
                 [self tapDone];
+                [self setEnabled:false];
+            }
             else
                 [self tapCancelled];
         }
+    [self performSelector:@selector(touch) withObject:nil afterDelay:1.5];
     [super touchesEnded:touches withEvent:event];
 }
 
@@ -152,7 +155,11 @@
 }
 
 #pragma mark customized tap event
-
+-(void)touch{
+    [self setEnabled:YES];
+    [self tapBegan];
+    [self tapDone];
+}
 /**
  * Invoked when the tap began in the view
  */

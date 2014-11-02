@@ -12,7 +12,7 @@
 #import "LMSportBL.h"
 #import "DKCircleButton.h"
 #import "LMUserActBL.h"
-
+#import "ZenPlayerButton.h"
 @interface SportViewController : UIViewController<LMSportBLDelegate>{
     UIButton        *_getBtn;
     UIImageView     *_bagView;      //福袋图层
@@ -40,7 +40,7 @@
 
 
 @property (weak, nonatomic) IBOutlet UILabel *coinsCount;
-@property (nonatomic) DKCircleButton *fireBtn;
+@property (nonatomic) ZenPlayerButton *fireBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *coinImg;
 
 - (IBAction)share:(id)sender;
