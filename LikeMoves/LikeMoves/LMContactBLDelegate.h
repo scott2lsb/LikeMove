@@ -13,6 +13,11 @@
 @optional
 -(void)getSportRankSuccess:(NSArray*)rank;
 -(void)getFriendsSuccess:(NSArray*)friends;
+/**
+ *  获得众筹好友
+ */
+-(void)getCrowdfundFriendsSuccess:(NSArray*)friends;
+
 -(void)getAcceptFriendSuccess:(NSArray*)friends;
 -(void)scanFriendSuccess:(NSArray*)scanFriend;
 -(void)addFriendByPhoneSuccess:(NSInteger)status;

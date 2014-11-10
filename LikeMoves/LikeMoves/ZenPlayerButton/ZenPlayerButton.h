@@ -35,7 +35,7 @@ typedef enum {
 /**
  * State of the button
  */
-@property (nonatomic, assign) ZenPlayerButtonState stateBtn;
+@property (nonatomic, assign) ZenPlayerButtonState state;
 /**
  * Progress in range from 0.0f to 1.0f
  */

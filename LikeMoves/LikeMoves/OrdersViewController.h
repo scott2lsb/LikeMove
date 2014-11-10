@@ -11,10 +11,10 @@
 #import "LMShopBLDelegate.h"
 #import "HMSegmentedControl.h"
 @interface OrdersViewController : UIViewController<LMShopBLDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
-@property(strong,nonatomic)NSArray* noPayArray;
-@property(strong,nonatomic)NSArray* paidArray;
-@property(strong,nonatomic)NSArray* sendArray;
-@property(strong,nonatomic)NSArray* receivedArray;
+@property(strong,nonatomic)NSMutableArray* noPayArray;
+@property(strong,nonatomic)NSMutableArray* paidArray;
+@property(strong,nonatomic)NSMutableArray* sendArray;
+@property(strong,nonatomic)NSMutableArray* receivedArray;
 @property(strong,nonatomic)UITableView* noPayTableView;
 @property(strong,nonatomic)UITableView* paidTableView;
 @property(strong,nonatomic)UITableView* sendTableView;

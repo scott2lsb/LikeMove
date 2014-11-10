@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LMShopBL.h"
 #import "LMShopBLDelegate.h"
+#import "ShopCartConfirmTableViewController.h"
 @interface ReceiverViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,LMShopBLDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

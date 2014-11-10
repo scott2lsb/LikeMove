@@ -14,28 +14,24 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic,weak)NSDictionary* selectProduct;
+@property(nonatomic,strong)NSMutableArray* commentsArray;
 @end
 
 @implementation ShopDetailViewController
 NSArray *pics;
 NSArray *rollPics;
-
-NSArray *books;
-NSArray *prices;
+NSString* selectedColor;
+NSString* selectedSize;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     _bl=[LMShopBL new];
     _bl.delegate=self;
+    /**
+     *  请求商品评论
+     */
+    [_bl getProductComments:[_selectProduct objectForKey:@"id"]];
     //轮播图和详情图
-    // 创建、并初始化NSArray对象。
-	books = [NSArray arrayWithObjects:@"疯狂Android讲义",
-             @"疯狂iOS讲义", @"疯狂Ajax讲义" , @"疯狂XML讲义", nil];
-	// 创建、并初始化NSArray对象。
-	prices = [NSArray arrayWithObjects:
-              @"99", @"79" , @"79" , @"69" , nil];
-    
-
     /**
      *  界面元素
      */
@@ -43,6 +39,7 @@ NSArray *prices;
     _priceLabel.text=
     [NSString stringWithFormat:@"价格:￥%@",[_selectProduct objectForKey:@"price"]];
     _soldLabel.text=[NSString stringWithFormat:@"销量:%@",[_selectProduct objectForKey:@"sold_num"]];
+    
     
     pics=(NSArray*)[_selectProduct objectForKey:@"pics"];
     rollPics=(NSArray*)[_selectProduct objectForKey:@"roll_pics"];
@@ -100,7 +97,7 @@ NSArray *prices;
     UIImageView* img3=[[UIImageView alloc] initWithFrame:CGRectMake(10, 530, 300, 200)];
     UIImageView* img4=[[UIImageView alloc] initWithFrame:CGRectMake(10, 740, 300, 200)];
     UIImageView* img5=[[UIImageView alloc] initWithFrame:CGRectMake(10, 950, 300, 200)];
-
+    
     NSString* url;
     if ([pics isKindOfClass:[NSNull class]]) {
         url=@"";
@@ -108,7 +105,7 @@ NSArray *prices;
         NSDictionary*dict=(NSDictionary*)[pics objectAtIndex:0];
         url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
     }
-    [img1 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testuser3"]];
+    [img1 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"img_nil.png"]];
     
     if ([pics isKindOfClass:[NSNull class]]) {
         url=@"";
@@ -116,7 +113,7 @@ NSArray *prices;
         NSDictionary*dict=(NSDictionary*)[pics objectAtIndex:1];
         url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
     }
-    [img2 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testuser3"]];
+    [img2 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"img_nil.png"]];
     
     if ([pics isKindOfClass:[NSNull class]]) {
         url=@"";
@@ -124,7 +121,7 @@ NSArray *prices;
         NSDictionary*dict=(NSDictionary*)[pics objectAtIndex:2];
         url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
     }
-    [img3 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testuser3"]];
+    [img3 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"img_nil.png"]];
     
     
     if ([pics isKindOfClass:[NSNull class]]) {
@@ -133,7 +130,7 @@ NSArray *prices;
         NSDictionary*dict=(NSDictionary*)[pics objectAtIndex:3];
         url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
     }
-    [img4 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testuser3"]];
+    [img4 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"img_nil.png"]];
     
     
     if ([pics isKindOfClass:[NSNull class]]) {
@@ -142,7 +139,7 @@ NSArray *prices;
         NSDictionary*dict=(NSDictionary*)[pics objectAtIndex:4];
         url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
     }
-    [img5 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testuser3"]];
+    [img5 sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"img_nil.png"]];
     
     
     [img1 setContentMode:UIViewContentModeScaleToFill];
@@ -205,7 +202,7 @@ NSArray *prices;
         }
         
         
-        [imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"testuser3"]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"img_nil.png"]];
         //        隐藏指示条
         self.imgScroll.showsHorizontalScrollIndicator = NO;
         
@@ -213,7 +210,8 @@ NSArray *prices;
     }
     
     //    2.设置scrollview的滚动范围
-    CGFloat contentW = pics.count *imageW;
+    CGFloat contentW = rollPics.count *imageW;
+    
     //不允许在垂直方向上进行滚动
     self.imgScroll.contentSize = CGSizeMake(contentW, 0);
     
@@ -233,11 +231,12 @@ NSArray *prices;
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [self segmentSetting];
     _productDetail.frame=CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height-108-44);
     _productDetail.showsVerticalScrollIndicator=YES;
     _productDetail.backgroundColor=[UIColor whiteColor];
     _productDetail.pagingEnabled=NO;
-//    _productDetail.delegate=self;
+    //    _productDetail.delegate=self;
     [_productDetail setContentSize:CGSizeMake(320, 411)];
     
 }
@@ -247,19 +246,36 @@ NSArray *prices;
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
 	DLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
 }
+-(void)segmentSetting{
+    NSString* size=[_selectProduct objectForKey:@"size"];
+    NSString* color=[_selectProduct objectForKey:@"color"];
+    
+    NSArray *sizes = [size componentsSeparatedByString:@","];
+    NSArray*colors=[color componentsSeparatedByString:@","];
+    [_sizeSeg removeAllSegments];
+    [_colorSeg removeAllSegments];
+    for(int i =0;i<sizes.count;i++){
+        [_sizeSeg insertSegmentWithTitle:[sizes objectAtIndex:i] atIndex:i animated:YES];
+    }
+    for(int i=0;i<colors.count;i++){
+        [_colorSeg insertSegmentWithTitle:[colors objectAtIndex:i] atIndex:i animated:YES];
+    }
+    [_sizeSeg setSelectedSegmentIndex:0];
+    [_colorSeg setSelectedSegmentIndex:0];
+    selectedColor=[_colorSeg titleForSegmentAtIndex:0];
+    selectedSize=[_sizeSeg titleForSegmentAtIndex:0];
+    
+}
+- (IBAction)colorChange:(id)sender {
+    selectedColor=[_colorSeg titleForSegmentAtIndex:[sender selectedSegmentIndex]];
+}
+- (IBAction)sizeChange:(id)sender {
+    selectedSize=[_sizeSeg titleForSegmentAtIndex:[sender selectedSegmentIndex]];
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -286,21 +302,26 @@ NSArray *prices;
 		cell = [[ProductCommentTableViewCell alloc]
                 initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
 	}
-	// 从IndexPath参数中获取当前行的行号
-	NSUInteger rowNo = indexPath.row;
+    //	// 从IndexPath参数中获取当前行的行号
+    //	NSUInteger rowNo = indexPath.row;
 	//将单元格的边框设置为圆角
 	cell.layer.cornerRadius = 12;
 	cell.layer.masksToBounds = YES;
+    NSDictionary* dict=[_commentsArray objectAtIndex:indexPath.row];
+    
 	// 为表格行的nameField、priceField的text设置值
-	cell.nameField.text = [books objectAtIndex:rowNo];
-	cell.timeField.text = [prices objectAtIndex:rowNo];
-    cell.content.text=[books objectAtIndex:rowNo];
+	cell.nameField.text =[dict objectForKey:@"nickname"];
+	cell.timeField.text = [dict objectForKey:@"create_time"];
+    cell.content.text=[dict objectForKey:@"desc"];
 	return cell;
     
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return books.count;
+    if(_commentsArray==nil){
+        return 0;
+    }
+    return _commentsArray.count;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -375,12 +396,29 @@ NSArray *prices;
  */
 - (IBAction)addToCart:(id)sender {
     
-    [_bl addShoppingCartWithProductID:[_selectProduct objectForKey:@"id"] number:@"1" comment:nil];
+    [_bl addShoppingCartWithProductID:[_selectProduct objectForKey:@"id"] number:@"1" comment:[NSString stringWithFormat:@"规格:%@,颜色:%@  ",selectedSize,selectedColor]];
 }
 #pragma mark ShopBLDelegate
 -(void)addToCartSuccess{
     // 提示添加购物车成功
     UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"添加购物车成功" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alert show];
+}
+-(void)getProductCommentsSuccess:(NSArray *)comments{
+    if([comments isKindOfClass:[NSNull class]]){
+        _commentsArray=nil;
+        _comment.hidden=YES;
+        UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(640, 0, 320, [UIScreen mainScreen].bounds.size.height-108-49)];
+        label.font=[UIFont systemFontOfSize:18.0];
+        label.textAlignment=NSTextAlignmentCenter;
+        label.text=@"此商品还没有评论哦！";
+        label.backgroundColor=[UIColor whiteColor];
+        label.textColor=[UIColor grayColor];
+        [self.scrollView addSubview:label];
+        
+    }else{
+        _commentsArray=[comments mutableCopy];
+    }
+    [_comment reloadData];
 }
 @end

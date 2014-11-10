@@ -14,7 +14,6 @@
 
 @implementation ReceiverViewController
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -27,7 +26,11 @@
     UIView* view =[ [UIView alloc]init];
     view.backgroundColor= [UIColor clearColor];
     [self.tableView setTableFooterView:view];
+    int index=[[self.navigationController viewControllers]indexOfObject:self];
     
+    if([[self.navigationController.viewControllers objectAtIndex:index-1] isKindOfClass:[ShopCartConfirmTableViewController class]]){
+        DLog(@"test");
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,8 +51,18 @@
 */
 
 #pragma mark - TableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+    int index=[[self.navigationController viewControllers]indexOfObject:self];
+    
+    if([[self.navigationController.viewControllers objectAtIndex:index-1] isKindOfClass:[ShopCartConfirmTableViewController class]]){
+        NSDictionary* receiver=[_receivers objectAtIndex:indexPath.row];
+        ShopCartConfirmTableViewController* shop=[self.navigationController.viewControllers objectAtIndex:index-1] ;
+        shop.receiverAdr.text=[receiver objectForKey:@"address"];
+        shop.receiverName.text=[receiver objectForKey:@"receiver"] ;
+        shop.receiverPhone.text=[receiver objectForKey:@"phone"];
+        shop.receiverID=[receiver objectForKey:@"id"];
+    }//    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {

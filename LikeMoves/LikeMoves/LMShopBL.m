@@ -25,7 +25,7 @@
  *  @param coinNum  赠送的金币数量
  */
 -(void)giveCoinsToFriend:(NSString*)friendID withCoins:(NSString*)coinNum{
-    
+    [_dao giveCoinsToFriend:friendID withCoins:coinNum];
 };
 /**
  *  获得赠送金币的记录
@@ -39,7 +39,12 @@
 -(void)getRecievedCoinsRecord{
     [_dao getRecievedCoinsRecord];
 };
-
+/**
+ *  开启众筹
+ */
+-(void)startCrowdfund{
+    [_dao startCrowdfund];
+};
 /**
  *  获得商品类别
  */
@@ -67,7 +72,7 @@
  *  @param productID 商品的id
  */
 -(void)getProductComments:(NSString*)productID{
-    
+    [_dao getProductComments:productID];
 };
 /**
  *  添加收货人信息
@@ -120,7 +125,7 @@
  *  @param shopID 购物车中商品编号
  */
 -(void)delShoppingCartWithShopID:(NSString*)shopID{
-    
+    [_dao delShoppingCartWithShopID:shopID];
 };
 /**
  *  编辑购物车信息
@@ -130,7 +135,7 @@
  *  @param comment 备注
  */
 -(void)modifyShoppingCartWithShopID:(NSString*)shopID number:(NSString*)number comment:(NSString*)comment{
-    
+    [_dao modifyShoppingCartWithShopID:shopID number:number comment:comment];
 };
 /**
  *  获得所有购物车信息
@@ -151,7 +156,7 @@
  *  @param userID       用户id
  */
 -(void)addOrderWithShopIds:(NSString*)shopIDs receiverID:(NSString*)receiverID coins:(NSString*)coinNum comment:(NSString*)comment shipingMethod:(NSString*)shipMethod phoneConfirm:(NSString*)phoneConfirm userID:(NSString*)userID{
-    
+    [_dao addOrderWithShopIds:shopIDs receiverID:receiverID coins:coinNum comment:comment shipingMethod:shipMethod phoneConfirm:phoneConfirm userID:userID];
 };
 /**
  *  订单付费
@@ -160,7 +165,7 @@
  */
 //TODO: 暂时存在问题
 -(void)payOrderWithOrderID:(NSString*)orderID {
-    
+    [_dao payOrderWithOrderID:orderID alipay:@"1"];
 };
 /**
  *  获得各种状态订单
@@ -176,7 +181,7 @@
  *  @param orderID 订单id
  */
 -(void)confirmReceiptWithOrderID:(NSString*)orderID{
-    
+    [_dao confirmReceiptWithOrderID:orderID];
 };
 /**
  *  获得金币折算比例
@@ -231,6 +236,21 @@
 -(void)getReceivedOrdersSuccess:(NSArray*)array{
     [_delegate getReceivedOrdersSuccess:array];
 };
+-(void)giveCoinsToFriendSuccess{
+    [_delegate giveCoinsToFriendSuccess];
+}
+-(void)getProductCommentsSuccess:(NSArray *)comments{
+    [_delegate getProductCommentsSuccess:comments];
+}
+-(void)modifyShoppingCartSuccess{
+    [_delegate modifyShoppingCartSuccess];
+};
+-(void)delShoppingCartSuccess{
+    [_delegate delShoppingCartSuccess];
+};
+-(void)addCartToOrderSuccess{
+    [_delegate addCartToOrderSuccess];
+}
 @end
 
 

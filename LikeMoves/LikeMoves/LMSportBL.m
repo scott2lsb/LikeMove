@@ -62,6 +62,23 @@
 -(void) getMonthMoveDays:(NSString*)month{
     [_dao getMonthMoveDays:month];
 };
+/**
+ *  30天的运动时间
+ *
+ *  @param startDate 开始时间“2014-09-12”
+ *  @param endDate   结束时间“2014-09-18”
+ */
+-(void)getThirtyDaysOfMove{
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *currentDateStr = [dateFormatter stringFromDate:[[NSDate date] dateByAddingTimeInterval:86400.0*1]];
+    NSDate* start=[[NSDate date] dateByAddingTimeInterval:-86400.0*30];
+    NSString* startTime=[dateFormatter stringFromDate:start];
+    [_dao getThirtyDaysMoveWithStart:startTime end:currentDateStr];
+};
 #pragma mark - delegate
 -(void)getMonthMoveDaysSuccess:(NSInteger)days{
     [_delegate getMonthMoveDaysSuccess:days];

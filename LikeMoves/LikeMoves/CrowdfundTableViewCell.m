@@ -16,7 +16,7 @@
     if (self) {
         // 创建一个用于显示昵称的标签
 		self.nickname = [[UILabel alloc]
-                        initWithFrame:CGRectMake(10 , 10 , 100 , 40)];
+                        initWithFrame:CGRectMake(10 , 10 , 150 , 40)];
 		// 设置左对齐
 		self.nickname.textAlignment = NSTextAlignmentLeft;
 		// 设置字体
@@ -29,7 +29,7 @@
         
         // 创建一个用于显示金币数量的标签
 		self.coinNum = [[UILabel alloc]
-                         initWithFrame:CGRectMake(200, 10 , 50 , 40)];
+                         initWithFrame:CGRectMake(200, 10 , 80 , 40)];
 		// 设置左对齐
 		self.coinNum.textAlignment = NSTextAlignmentLeft;
 		// 设置字体

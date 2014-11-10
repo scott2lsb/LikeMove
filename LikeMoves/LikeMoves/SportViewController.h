@@ -41,6 +41,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *coinsCount;
 @property (nonatomic) ZenPlayerButton *fireBtn;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
 @property (weak, nonatomic) IBOutlet UIImageView *coinImg;
 
 - (IBAction)share:(id)sender;

@@ -14,6 +14,7 @@
 #import "UIColor+FlatUI.h"
 #import "FBShimmeringView.h"
 #import "ACPReminder.h"
+
 @interface LMAppDelegate : UIResponder <UIApplicationDelegate,EAIntroDelegate>{
     UIView *rootView;
     UIImageView *_wallpaperView;
@@ -29,5 +30,10 @@
 }
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic) NSString *appId;
+@property (strong, nonatomic) NSString *channelId;
+@property (strong, nonatomic) NSString *userId;
+
 
 @end

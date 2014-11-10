@@ -48,7 +48,9 @@ static int sportSec;
     
     _fireBtn = [[ZenPlayerButton alloc]initWithFrame:CGRectMake(self.sportCircle.bounds.size.width/2-mFireBtnH/2, self.sportCircle.bounds.size.height/2-mFireBtnH/2, mFireBtnH, mFireBtnH)];
             [_fireBtn addTarget:self action:@selector(sportCircleClear) forControlEvents:UIControlEventTouchUpInside];
-//    [self setFireBtnTitle:@"0m 0s"];
+    [self setSportTime:@"0m 0s"];
+//    _timeLabel.text=@"123m 50s";
+
     
     [_wdSport addSubview:_fireBtn];
     [_wdSport addSubview:_coinImg];
@@ -130,17 +132,22 @@ static int sportSec;
     sportSec=sportTime;
     int hour=sportTime/60;
     int second=sportTime%60;
-//    [self setFireBtnTitle:[NSString stringWithFormat:@"%dm %ds",hour,second]];
+    [self setSportTime:[NSString stringWithFormat:@"%dm %ds",hour,second]];
 }
 #pragma mark - custom-method
+-(void)setSportTime:(NSString*)time{
+    _timeLabel.text=time;
+}
 -(void) refreshCoinsAndMonthDays{
-    //实例化一个NSDateFormatter对象
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    //设定时间格式,这里可以设置成自己需要的格式
-    [dateFormatter setDateFormat:@"yyyy-MM"];
-    //用[NSDate date]可以获取系统当前时间
-    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
-    [_bl getMonthMoveDays:currentDateStr];
+    //一整个月的天数
+//    //实例化一个NSDateFormatter对象
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    //设定时间格式,这里可以设置成自己需要的格式
+//    [dateFormatter setDateFormat:@"yyyy-MM"];
+//    //用[NSDate date]可以获取系统当前时间
+//    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+//    [_bl getMonthMoveDays:currentDateStr];
+    [_bl getThirtyDaysOfMove];
     //NSUserDefaults刷新金币数量，使用NSUserDefaults中的数据
     User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
     _coinsCount.text=user.coins;
@@ -169,8 +176,8 @@ static int sportSec;
     }else{
         //        [_userBL addCoins:100];
         
-//        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"能量条超过一半才能释放" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-//        [alert show];
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"能量条超过一半才能释放" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
         
         
     }

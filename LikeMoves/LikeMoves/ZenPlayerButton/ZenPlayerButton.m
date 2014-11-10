@@ -7,7 +7,7 @@
 //
 
 #import "ZenPlayerButton.h"
-#import "debug.h"
+//#import "debug.h"
 
 @interface ZenPlayerButton ()
 {
@@ -48,7 +48,7 @@
 
 @synthesize layerBackground=_layerBackground;
 @synthesize layerContainer=_layerContainer;
-@synthesize stateBtn=_state;
+@synthesize state=_state;
 @synthesize progress=_progress;
 
 - (id)initWithFrame:(CGRect)frame
@@ -73,7 +73,7 @@
 
 -(void)dealloc
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
 
     self.layerBackground = nil;
     self.layerContainer = nil;
@@ -84,7 +84,7 @@
  */
 - (void) initLayers
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     if(!initialized)
     {
         self.layer.sublayers = nil;
@@ -140,12 +140,11 @@
                pos.x<self.bounds.size.width &&
                pos.y<self.bounds.size.height){
                 [self tapDone];
-                [self setEnabled:false];
-            }
+                [self setEnabled:false];}
             else
                 [self tapCancelled];
         }
-    [self performSelector:@selector(touch) withObject:nil afterDelay:1.5];
+    [self performSelector:@selector(touch) withObject:nil afterDelay:1.0];
     [super touchesEnded:touches withEvent:event];
 }
 
@@ -302,7 +301,7 @@
  */
 + (ZenLayerBackground*) layerWithFrame: (CGRect) frame
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     ZenLayerBackground* instance = [super layer];
     if(instance)
     {
@@ -315,7 +314,7 @@
 
 - (void)dealloc
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     self.imgBackground = nil;
 }
 
@@ -353,7 +352,7 @@
  */
 + (ZenLayerContainer*) layerWithFrame: (CGRect) frame
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     ZenLayerContainer* instance = [super layer];
     if(instance)
     {
@@ -382,7 +381,7 @@
 
 - (void)dealloc
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     self.layerCircle = nil;
     self.layerPauseButton = nil;
     self.layerPlayButton = nil;
@@ -429,7 +428,7 @@
  */
 + (ZenLayerCircle*) layerWithFrame: (CGRect) frame
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     ZenLayerCircle* instance = [super layer];
     if(instance)
     {
@@ -454,7 +453,7 @@
 
 - (void)dealloc
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     self.contents = nil;
     self.imgCircle = nil;
     self.rotateBackKey = nil;
@@ -473,17 +472,17 @@
 - (void)layoutSublayers
 {
     [super layoutSublayers];
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
 
 }
 */
 - (void)drawInContext:(CGContextRef)ctx
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     [super drawInContext:ctx];
 
     CGRect r = CGContextGetClipBoundingBox(ctx);
-    LOG(@"%f, %f", r.size.width, r.size.height);
+//    LOG(@"%f, %f", r.size.width, r.size.height);
 
     // draw image
     CGContextSaveGState(ctx);
@@ -692,7 +691,7 @@
  */
 + (ZenLayerProgress*) layerWithFrame: (CGRect) frame
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     ZenLayerProgress* instance = [super layer];
     if(instance)
     {
@@ -705,7 +704,7 @@
 
 - (void)dealloc
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     self.contents = nil;
     self.imgProgress = nil;
 }
@@ -719,11 +718,11 @@
 
 - (void)drawInContext:(CGContextRef)ctx
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     [super drawInContext:ctx];
     
     CGRect r = CGContextGetClipBoundingBox(ctx);
-    LOG(@"%f, %f", r.size.width, r.size.height);
+//    LOG(@"%f, %f", r.size.width, r.size.height);
     
     // draw image
     CGContextSaveGState(ctx);
@@ -790,7 +789,7 @@
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
 {
-//    LOG_CURRENT_METHOD;
+//    //LOG_CURRENT_METHOD;
     CABasicAnimation* ani = (CABasicAnimation*)theAnimation;
     NSNumber* angle = (NSNumber*)ani.toValue;
     if(angle.floatValue>2.0f * M_PI)
@@ -823,7 +822,7 @@
  */
 + (ZenLayerPlayButton*) layerWithFrame: (CGRect) frame
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     ZenLayerPlayButton* instance = [super layer];
     if(instance)
     {
@@ -839,7 +838,7 @@
 
 - (void)dealloc
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     self.contents = nil;
     self.imgPlayButton = nil;
 }
@@ -955,7 +954,7 @@
  */
 + (ZenLayerPauseButton*) layerWithFrame: (CGRect) frame
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     ZenLayerPauseButton* instance = [super layer];
     if(instance)
     {
@@ -968,7 +967,7 @@
 
 - (void)dealloc
 {
-    LOG_CURRENT_METHOD;
+    //LOG_CURRENT_METHOD;
     self.contents = nil;
     self.imgPauseButton = nil;
 }

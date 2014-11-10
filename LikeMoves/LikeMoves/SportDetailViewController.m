@@ -43,14 +43,14 @@
     [super didReceiveMemoryWarning];
 }
 -(void) refreshCoinsAndMonthDays{
-    //实例化一个NSDateFormatter对象
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    //设定时间格式,这里可以设置成自己需要的格式
-    [dateFormatter setDateFormat:@"yyyy-MM"];
-    //用[NSDate date]可以获取系统当前时间
-    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
-    [_bl getMonthMoveDays:currentDateStr];
-
+//    //实例化一个NSDateFormatter对象
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    //设定时间格式,这里可以设置成自己需要的格式
+//    [dateFormatter setDateFormat:@"yyyy-MM"];
+//    //用[NSDate date]可以获取系统当前时间
+//    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+//    [_bl getMonthMoveDays:currentDateStr];
+    [_bl getThirtyDaysOfMove];
     //NSUserDefaults刷新金币数量，使用NSUserDefaults中的数据
     User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
     _coinLabel.text=user.coins;
@@ -102,11 +102,19 @@
     self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, 120.0, SCREEN_WIDTH, height)];
     self.barChart.backgroundColor = [UIColor clearColor];
     self.barChart.yLabelFormatter = ^(CGFloat yValue){
+        NSString * labelText;
+        if(yValue>600){
         int sporttime=yValue;
         int min=sporttime/60;
-        int sec=sporttime%60;
 
-        NSString * labelText = [NSString stringWithFormat:@"%dm%ds",min,sec];
+        labelText = [NSString stringWithFormat:@"%dm",min];
+        }else{
+            int sporttime=yValue;
+            int min=sporttime/60;
+            int sec=sporttime%60;
+            labelText = [NSString stringWithFormat:@"%dm%ds",min,sec];
+
+        }
         return labelText;
     };
     self.barChart.labelMarginTop = 15.0;

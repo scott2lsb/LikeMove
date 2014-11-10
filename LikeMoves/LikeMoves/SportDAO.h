@@ -33,6 +33,13 @@
  */
 -(void) getMoveWeekRecords:(NSString*)startTime withEndTime:(NSString*)endTime;
 /**
+ *  30天的运动时间
+ *
+ *  @param startDate 开始时间“2014-09-12”
+ *  @param endDate   结束时间“2014-09-18”
+ */
+-(void)getThirtyDaysMoveWithStart:(NSString*)startDate end:(NSString*)endDate;
+/**
  *  获得月份的运动天数
  *
  *  @param month @“2014-09”月份格式

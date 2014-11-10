@@ -11,10 +11,22 @@
 #import "LMContactBLDelegate.h"
 #import "LMContactBL.h"
 #import <SMS_SDK/SMS_SDKResultHanderDef.h>
-@interface FriendTableViewController : UIViewController<LMContactBLDelegate,UITableViewDataSource,UITableViewDelegate>
+#import "HMSegmentedControl.h"
+#import "LMShopBL.h"
+#import "LMShopBLDelegate.h"
+#import "User.h"
+@interface FriendTableViewController : UIViewController<LMContactBLDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate,LMShopBLDelegate>
 @property (strong,nonatomic) LMContactBL* bl;
+@property(strong,nonatomic)LMShopBL* shopBL;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property(strong,nonatomic)UITableView* crowdfundFriendTableView;
+
 @property(nonatomic,strong) ShowNewFriendsCountBlock friendsBlock;
 - (IBAction)searchFriend:(id)sender;
 
+
+@property(nonatomic,strong)UIScrollView* scrollView;
+@property(nonatomic,strong)HMSegmentedControl* segmentedControl;
+@property(nonatomic,strong)NSMutableArray* rankFriends;
+@property(nonatomic,strong)NSMutableArray* crowdfundFriends;;
 @end

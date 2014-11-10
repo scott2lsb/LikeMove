@@ -7,7 +7,7 @@
 //
 
 #import "CrowdfundViewController.h"
-
+#import "UMSocial_Sdk_Extra_Frameworks/UMSocial_ScreenShot_Sdk/UMSocialScreenShoter.h"
 @interface CrowdfundViewController ()
 
 @end
@@ -25,7 +25,7 @@
     /**
      *  自定义赠送列表
      */
-    _givedTableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height-64-49)];
+    _givedTableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height-64-44-49)];
     _givedTableView.tag=0;
     _givedTableView.delegate=self;
     _givedTableView.dataSource=self;
@@ -35,11 +35,13 @@
     /**
      自定义收取列表
      */
-    _receivedTableView=[[UITableView alloc]initWithFrame:CGRectMake(320, 0, 320, [UIScreen mainScreen].bounds.size.height-64-49)];
+    _receivedTableView=[[UITableView alloc]initWithFrame:CGRectMake(320, 0, 320, [UIScreen mainScreen].bounds.size.height-64-44-49)];
     _receivedTableView.tag=1;
     _receivedTableView.delegate=self;
     _receivedTableView.dataSource=self;
     [self.receivedTableView setTableFooterView:view];
+    
+    
     
     self.view.backgroundColor = [UIColor whiteColor];
     CGFloat yDelta;
@@ -58,7 +60,9 @@
     _segmentedControl.frame = CGRectMake(0, 0 +44+ yDelta, 320, 44);
     _segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     _segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+    _segmentedControl.selectionIndicatorColor=[UIColor orangeColor];
     [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    
     [self.view addSubview:_segmentedControl];
     
     
@@ -111,8 +115,8 @@
             cell = [[CrowdfundTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                           reuseIdentifier: cellIdentifier];
         }
-        NSDictionary* dict=[_givedArray objectAtIndex:indexPath.row];
-        cell.nickname.text=[NSString stringWithFormat:@"赠予->%@",[dict objectForKey:@"nickname"]];
+        NSDictionary* dict=[_givedArray objectAtIndex:_givedArray.count-1-indexPath.row];
+        cell.nickname.text=[NSString stringWithFormat:@"赠予 -> %@",[dict objectForKey:@"nickname"]];
         cell.coinNum.text=[NSString stringWithFormat:@"- %@",[dict objectForKey:@"coins_paid"]];
         cell.coinNum.textColor=[UIColor redColor];
         
@@ -120,17 +124,17 @@
     }else{
         //TODO: received-tableview
         // 为表格行定义一个静态字符串作为标识符
-        static NSString* cellIdentifier = @"ReceiveCell";
+        static NSString* cellIdentifierReceiver = @"ReceiveCell";
         // 从可重用表格行的队列中取出一个表格行
         cell = [tableView dequeueReusableCellWithIdentifier:
-                                 cellIdentifier ];
+                                 cellIdentifierReceiver ];
         if (cell == nil) {
             cell = [[CrowdfundTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                          reuseIdentifier: cellIdentifier];
+                                          reuseIdentifier: cellIdentifierReceiver];
         }
-        NSDictionary* dict=[_givedArray objectAtIndex:indexPath.row];
-        cell.nickname.text=[NSString stringWithFormat:@"接收<-%@",[dict objectForKey:@"nickname"]];
-        cell.coinNum.text=[NSString stringWithFormat:@"+ %@",[dict objectForKey:@"coins_paid"]];
+        NSDictionary* dict=[_receivedArray objectAtIndex:_receivedArray.count-1-indexPath.row];
+        cell.nickname.text=[NSString stringWithFormat:@"接收 <- %@",[dict objectForKey:@"nickname"]];
+        cell.coinNum.text=[NSString stringWithFormat:@"+ %@",[dict objectForKey:@"coins_received"]];
         cell.coinNum.textColor=[UIColor greenColor];
         
 
@@ -160,7 +164,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     CGFloat pageWidth = scrollView.frame.size.width;
-    NSInteger page = scrollView.contentOffset.x / pageWidth;
+    NSInteger page = scrollView.contentOffset.x/ pageWidth;
     
     [self.segmentedControl setSelectedSegmentIndex:page animated:YES];
 }
@@ -177,22 +181,28 @@
     [_givedTableView reloadData];
 }
 - (IBAction)share:(id)sender {
+    [_bl startCrowdfund];
+    
+    //注意：分享到微信好友、微信朋友圈、微信收藏、QQ空间、QQ好友、来往好友、来往朋友圈、易信好友、易信朋友圈、Facebook、Twitter、Instagram等平台需要参考各自的集成方法
+    
+    [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
     NSArray* array;
     if ([WXApi isWXAppInstalled]) {
-        array=[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToQzone,UMShareToQQ,nil];
+        array=[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone,nil];
     }else{
         array=[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToQQ,nil];
     }
-    
+    UIImage *image = [[UMSocialScreenShoterDefault screenShoter] getScreenShot];
     
     //注意：分享到微信好友、微信朋友圈、微信收藏、QQ空间、QQ好友、来往好友、来往朋友圈、易信好友、易信朋友圈、Facebook、Twitter、Instagram等平台需要参考各自的集成方法
     User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
     NSString* name=user.nickName;
-
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:nil
                                       shareText:[NSString stringWithFormat:@"木有金币啦，求赞助，求包养，快来加入里环王吧！%@",name]
-                                     shareImage:nil                                shareToSnsNames:array
+                                     shareImage:image
+                                shareToSnsNames:array
                                        delegate:nil];
 }
 @end

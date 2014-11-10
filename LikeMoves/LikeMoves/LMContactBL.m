@@ -63,6 +63,18 @@
 -(NSArray*)getFriendSportRank:(NSString*)date{
     return  [_dao getFriendSportRank:date];
 };
+/**
+ *  获得众筹好友
+ */
+-(void)getCrowdfundFriends;{
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+    [_dao getCrowdfundFriends:currentDateStr];
+}
 #pragma mark - 代理Delegate
 -(void)getSportRankSuccess:(NSArray *)rank{
     [_delegate getSportRankSuccess:rank];
@@ -78,5 +90,8 @@
 }
 -(void)addFriendByPhoneSuccess:(NSInteger)status{
     [_delegate addFriendByPhoneSuccess:status];
+}
+-(void)getCrowdfundFriendSuccess:(NSArray *)friends{
+    [_delegate getCrowdfundFriendsSuccess:friends];
 }
 @end

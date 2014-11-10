@@ -259,6 +259,29 @@
 //    rankFriend=[dict objectForKey:@"list"];
     return nil;
 };
+/**
+ *  获得众筹好友
+ */
+-(void)getCrowdfundFriends:(NSString*)expiredTime{
+    AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer                      = [AFJSONResponseSerializer serializer];
+    [manager.requestSerializer setValue: [[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]forHTTPHeaderField:@"Cookie"];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
+    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=getFriends&crowdfund_expire_time=%@",expiredTime];
+    NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
+    
+    NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
+    [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"crowdfund-friend-JSON: %@", operation.responseString);
+        NSArray* friends=[self jsonToFriendArray:operation.responseString];
+        //编辑成功BL的delegate editSuccess
+        [_delegate getCrowdfundFriendSuccess:friends];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        //编辑失败BL的delegate editFail
+        //        [_delegate editUserInfoFail];
+    }];
+};
 -(NSArray*)jsonToFriendArray:(NSString*)json{
     NSDictionary* dict=[json objectFromJSONString];
     NSArray* friends=[dict objectForKey:@"list"];

@@ -7,7 +7,7 @@
 //
 
 #import "OrdersViewController.h"
-
+#import "OrderTableViewCell.h"
 @interface OrdersViewController ()
 
 @end
@@ -39,6 +39,7 @@
     _segmentedControl.frame = CGRectMake(0, 0 +44+ yDelta, 320, 44);
     _segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     _segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+    _segmentedControl.selectionIndicatorColor=[UIColor orangeColor];
     [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_segmentedControl];
     
@@ -98,7 +99,7 @@
     _receivedTableView.dataSource=self;
     _receivedTableView.separatorInset=UIEdgeInsetsZero;
     [_receivedTableView setTableFooterView:view];
-
+    
     [self.scrollView addSubview:_noPayTableView];
     [self.scrollView addSubview:_paidTableView];
     [self.scrollView addSubview:_sendTableView];
@@ -128,61 +129,90 @@
 
 #pragma mark - TableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    CrowdfundTableViewCell *cell ;
-//    if (tableView.tag==0) {
-//        //TODO: givedtableview
-//        // 为表格行定义一个静态字符串作为标识符
-//        static NSString* cellIdentifier = @"GivedCell";
-//        // 从可重用表格行的队列中取出一个表格行
-//        cell = [tableView dequeueReusableCellWithIdentifier:
-//                cellIdentifier ];
-//        if (cell == nil) {
-//            cell = [[CrowdfundTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-//                                                 reuseIdentifier: cellIdentifier];
-//        }
-//        NSDictionary* dict=[_givedArray objectAtIndex:indexPath.row];
-//        cell.nickname.text=[NSString stringWithFormat:@"赠予->%@",[dict objectForKey:@"nickname"]];
-//        cell.coinNum.text=[NSString stringWithFormat:@"- %@",[dict objectForKey:@"coins_paid"]];
-//        cell.coinNum.textColor=[UIColor redColor];
-//        
-//        
-//    }else{
-//        //TODO: received-tableview
-//        // 为表格行定义一个静态字符串作为标识符
-//        static NSString* cellIdentifier = @"ReceiveCell";
-//        // 从可重用表格行的队列中取出一个表格行
-//        cell = [tableView dequeueReusableCellWithIdentifier:
-//                cellIdentifier ];
-//        if (cell == nil) {
-//            cell = [[CrowdfundTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-//                                                 reuseIdentifier: cellIdentifier];
-//        }
-//        NSDictionary* dict=[_givedArray objectAtIndex:indexPath.row];
-//        cell.nickname.text=[NSString stringWithFormat:@"接收<-%@",[dict objectForKey:@"nickname"]];
-//        cell.coinNum.text=[NSString stringWithFormat:@"+ %@",[dict objectForKey:@"coins_paid"]];
-//        cell.coinNum.textColor=[UIColor greenColor];
-//        
-//        
-//    }
+    OrderTableViewCell*cell;
+    static NSString*              cellIdentifier;
     switch (tableView.tag) {
-        case 1:
-            ;
-            break;
-        case 2:
-            ;
-            break;
-        case 3:
-            ;
-            break;
-        case 4:
-            ;
-            break;
+        case 1:{
             
+        
+            cellIdentifier = @"noPaidCell";
+            cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            if (cell == nil) {
+                cell = [[OrderTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                              reuseIdentifier: cellIdentifier];
+            }
+            NSDictionary* dictNO=            [_noPayArray objectAtIndex:indexPath.row];
+            cell.orderNO.text=[NSString stringWithFormat:@"订单号：%@",[dictNO objectForKey:@"order_no"]];
+            cell.createTime.text=[NSString stringWithFormat:@"创建时间：%@",[dictNO objectForKey:@"create_time"]];
+            cell.totalPrice.text=[NSString stringWithFormat:@"总价：%@",[dictNO objectForKey:@"total_price"]];
+            NSArray* num=(NSArray*)[dictNO objectForKey:@"shopping_carts"];
+            if(![num isKindOfClass:[NSNull class]]){
+            cell.productNO.text=[NSString stringWithFormat:@"商品数量：%d",num.count];
+            }else{
+              cell.productNO.text=@"商品数量：0";
+            }
+            break;
+            }
+        case 2:{
+            cellIdentifier = @"paidCell";
+            cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            if (cell == nil) {
+                cell = [[OrderTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                              reuseIdentifier: cellIdentifier];
+            }
+            NSDictionary* dictNO=            [_paidArray objectAtIndex:indexPath.row];
+            cell.orderNO.text=[NSString stringWithFormat:@"订单号：%@",[dictNO objectForKey:@"order_no"]];
+            cell.createTime.text=[NSString stringWithFormat:@"创建时间：%@",[dictNO objectForKey:@"create_time"]];
+            cell.totalPrice.text=[NSString stringWithFormat:@"总价：%@",[dictNO objectForKey:@"total_price"]];
+            NSArray* num=(NSArray*)[dictNO objectForKey:@"shopping_carts"];
+            if(![num isKindOfClass:[NSNull class]]){
+                cell.productNO.text=[NSString stringWithFormat:@"商品数量：%d",num.count];
+            }else{
+                cell.productNO.text=@"商品数量：0";
+            }
+            break;
+            }
+        case 3:{
+            cellIdentifier = @"sendCell";
+            cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            if (cell == nil) {
+                cell = [[OrderTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                              reuseIdentifier: cellIdentifier];
+            }
+            NSDictionary* dictNO=            [_sendArray objectAtIndex:indexPath.row];
+            cell.orderNO.text=[NSString stringWithFormat:@"订单号：%@",[dictNO objectForKey:@"order_no"]];
+            cell.createTime.text=[NSString stringWithFormat:@"创建时间：%@",[dictNO objectForKey:@"create_time"]];
+            cell.totalPrice.text=[NSString stringWithFormat:@"总价：%@",[dictNO objectForKey:@"total_price"]];
+            NSArray* num=(NSArray*)[dictNO objectForKey:@"shopping_carts"];
+            if(![num isKindOfClass:[NSNull class]]){
+                cell.productNO.text=[NSString stringWithFormat:@"商品数量：%d",num.count];
+            }else{
+                cell.productNO.text=@"商品数量：0";
+            }            break;}
+        case 4:{
+            cellIdentifier = @"receivedCell";
+            cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            if (cell == nil) {
+                cell = [[OrderTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                              reuseIdentifier: cellIdentifier];
+            }
+            NSDictionary* dictNO=            [_receivedArray objectAtIndex:indexPath.row];
+            cell.orderNO.text=[NSString stringWithFormat:@"订单号：%@",[dictNO objectForKey:@"order_no"]];
+            cell.createTime.text=[NSString stringWithFormat:@"创建时间：%@",[dictNO objectForKey:@"create_time"]];
+            cell.totalPrice.text=[NSString stringWithFormat:@"总价：￥%@",[dictNO objectForKey:@"total_price"]];
+            NSArray* num=(NSArray*)[dictNO objectForKey:@"shopping_carts"];
+            if(![num isKindOfClass:[NSNull class]]){
+                cell.productNO.text=[NSString stringWithFormat:@"商品数量：%d",num.count];
+            }else{
+                cell.productNO.text=@"商品数量：0";
+            }
+            break;
+        }
         default:
             break;
     }
-
-    return nil;
+    return cell;
+    
     
     
     
@@ -218,19 +248,42 @@
 }
 #pragma mark - BLDelegate
 -(void)getNoPayOrdersSuccess:(NSArray*)array{
-    _noPayArray=array;
-    [_noPayTableView reloadData];
+    if ([array isKindOfClass:[NSNull class]]) {
+        _noPayArray=nil;
+    }else{
+        _noPayArray=[array mutableCopy];
+        [_noPayTableView reloadData];
+        
+    }
+    
 };
 -(void)getPaidOrdersSuccess:(NSArray*)array{
-    _paidArray=array;
-    [_paidTableView reloadData];
+    if ([array isKindOfClass:[NSNull class]]) {
+        _noPayArray=nil;
+    }else{
+        _paidArray=[array mutableCopy];
+        [_paidTableView reloadData];
+        
+    }
+    
 };
 -(void)getSendOrdersSuccess:(NSArray*)array{
-    _sendArray=array;
-    [_sendTableView reloadData];
+    if ([array isKindOfClass:[NSNull class]]) {
+        _sendArray=nil;
+    }else{
+        _sendArray=[array mutableCopy];
+        [_sendTableView reloadData];
+    }
+    
+    
 };
 -(void)getReceivedOrdersSuccess:(NSArray*)array{
-    _receivedArray=array;
-    [_receivedTableView reloadData];
+    if ([array isKindOfClass:[NSNull class]]) {
+        _receivedArray=nil;
+        //TODO: 提示没有订单
+    }else{
+        _receivedArray=[array mutableCopy];
+        [_receivedTableView reloadData];
+    }
 };
 @end

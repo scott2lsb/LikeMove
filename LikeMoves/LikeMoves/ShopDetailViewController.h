@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *soldLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sizeSeg;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *colorSeg;
+
 //添加到购物车
 - (IBAction)addToCart:(id)sender;
 

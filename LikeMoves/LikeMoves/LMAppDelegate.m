@@ -11,7 +11,7 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
 #import "UMSocialSinaHandler.h"
-#import "UMessage.h"
+#import "BPush.h"
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice]systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define _IPHONE80_ 80000
 @implementation LMAppDelegate
@@ -19,42 +19,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     /**
-     *  友盟远程推送集成
+     *  百度云推送
      */
-    //set AppKey and LaunchOptions
-    [UMessage startWithAppkey:@"5440d3aafd98c5a72a00567b" launchOptions:launchOptions];
+    [BPush setupChannel:launchOptions]; // 必须
     
-#if __IPHONE_OS_VERSION_MAX_ALLOWED < _IPHONE80_
-    //register remoteNotification types
-    [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
-     |UIRemoteNotificationTypeSound
-     |UIRemoteNotificationTypeAlert];
-#else
-    //register remoteNotification types
-    UIMutableUserNotificationAction *action1 = [[UIMutableUserNotificationAction alloc] init];
-    action1.identifier = @"action1_identifier";
-    action1.title=@"Accept";
-    action1.activationMode = UIUserNotificationActivationModeForeground;//当点击的时候启动程序
+    [BPush setDelegate:self]; // 必须。参数对象必须实现onMethod: response:方法，本示例中为self
     
-    UIMutableUserNotificationAction *action2 = [[UIMutableUserNotificationAction alloc] init];  //第二按钮
-    action2.identifier = @"action2";
-    action2.title=@"Reject";
-    action2.activationMode = UIUserNotificationActivationModeBackground;//当点击的时候不启动程序，在后台处理
-    action2.authenticationRequired = YES;//需要解锁才能处理，如果action.activationMode = UIUserNotificationActivationModeForeground;则这个属性被忽略；
-    action2.destructive = YES;
+    // [BPush setAccessToken:@"3.ad0c16fa2c6aa378f450f54adb08039.2592000.1367133742.282335-602025"];  // 可选。api key绑定时不需要，也可在其它时机调用
     
-    UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
-    categorys.identifier = @"alert";//这组动作的唯一标示
-    [categorys setActions:@[action1,action2] forContext:(UIUserNotificationActionContextMinimal)];
-    
-    UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
-                                                                                 categories:[NSSet setWithObject:categorys]];
-    [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
-#endif
-    
-    //for log
-    [UMessage setLogEnabled:YES];
-
+    [application registerForRemoteNotificationTypes:
+     UIRemoteNotificationTypeAlert
+     | UIRemoteNotificationTypeBadge
+     | UIRemoteNotificationTypeSound];
     
     
     
@@ -231,15 +207,40 @@
 }
 
 
-#pragma mark - UMPush
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+#pragma mark - BDPush
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    [UMessage registerDeviceToken:deviceToken];
+    
+    [BPush registerDeviceToken:deviceToken]; // 必须
+    
+    [BPush bindChannel]; // 必须。可以在其它时机调用，只有在该方法返回（通过onMethod:response:回调）绑定成功时，app才能接收到Push消息。一个app绑定成功至少一次即可（如果access token变更请重新绑定）。
 }
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+- (void) onMethod:(NSString*)method response:(NSDictionary*)data
 {
-    [UMessage didReceiveRemoteNotification:userInfo];
+    if ([BPushRequestMethod_Bind isEqualToString:method])
+    {
+        NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
+        DLog(@"BDPush-%@",res);
+            }
 }
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [BPush handleNotification:userInfo]; // 可选
+    NSString* msg=[[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    UIAlertView* alert=[[UIAlertView alloc] initWithTitle:msg message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
+
+}
+//- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+//{
+//    [UMessage registerDeviceToken:deviceToken];
+//}
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+//{
+//    [UMessage didReceiveRemoteNotification:userInfo];
+//}
 #pragma mark - UMShare
 -(BOOL)application:(UIApplication*)application handleOpenURL:(NSURL*)url
 {

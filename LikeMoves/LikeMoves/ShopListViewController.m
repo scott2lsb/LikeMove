@@ -108,10 +108,10 @@ NSDictionary* selectProduct;
         selectProduct=[_products objectAtIndex:indexPath.row];
     return indexPath;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100.0;
-}
-
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 100.0;
+//}
+//
 
 
  #pragma mark - Navigation

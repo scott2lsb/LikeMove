@@ -23,4 +23,9 @@
 -(void)getPaidOrdersSuccess:(NSArray*)array;
 -(void)getSendOrdersSuccess:(NSArray*)array;
 -(void)getReceivedOrdersSuccess:(NSArray*)array;
+-(void)giveCoinsToFriendSuccess;
+-(void)getProductCommentsSuccess:(NSArray*)comments;
+-(void)modifyShoppingCartSuccess;
+-(void)delShoppingCartSuccess;
+-(void)addCartToOrderSuccess;
 @end

@@ -28,6 +28,10 @@
  *  获得接收金币的记录
  */
 -(void)getRecievedCoinsRecord;
+/**
+ *  开启众筹
+ */
+-(void)startCrowdfund;
 
 /**
  *  获得商品类别

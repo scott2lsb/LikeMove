@@ -91,6 +91,38 @@
     
 };
 /**
+ *  30天的运动时间
+ *
+ *  @param startDate 开始时间“2014-09-12”
+ *  @param endDate   结束时间“2014-09-18”
+ */
+-(void)getThirtyDaysMoveWithStart:(NSString*)startDate end:(NSString*)endDate{
+    AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer                      = [AFJSONResponseSerializer serializer];
+    [manager.requestSerializer setValue: [[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]forHTTPHeaderField:@"Cookie"];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
+    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=getMonthMoveDays&start_time=%@&end_time=%@",startDate,endDate];
+    NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
+    
+    NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
+    DLog(@"month-move-days:%@",utf8);
+    [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"30-days-move-JSON: %@", operation.responseString);
+        NSDictionary* resInfo=[operation.responseString objectFromJSONString];
+        //        NSDictionary* userInfo=[resInfo objectForKey:@"data"];
+        NSInteger total=[[resInfo objectForKey:@"total_count"] intValue];
+        
+        //编辑成功BL的delegate editSuccess
+        [_delegate getMonthMoveDaysSuccess:total];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        //编辑失败BL的delegate editFail
+        //        [_delegate editUserInfoFail];
+    }];
+    
+
+};
+/**
  *  获得月份的运动天数
  *
  *  @param month @“2014-09”月份格式
@@ -104,6 +136,7 @@
     NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
     
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
+    DLog(@"month-move-days:%@",utf8);
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"month-move-days-JSON: %@", operation.responseString);
         NSDictionary* resInfo=[operation.responseString objectFromJSONString];

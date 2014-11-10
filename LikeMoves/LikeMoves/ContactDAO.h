@@ -43,4 +43,8 @@
  *  @param date 运动排行的日期
  */
 -(NSArray*)getFriendSportRank:(NSString*)date;
+/**
+ *  获得众筹好友
+ */
+-(void)getCrowdfundFriends:(NSString*)expiredTime;
 @end

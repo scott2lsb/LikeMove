@@ -28,7 +28,7 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"give-coin-JSON: %@", operation.responseString);
         //请求成功，回调的BL的delegate
-        //[_delegate XXX];
+        [_delegate giveCoinsToFriendSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate
@@ -68,7 +68,7 @@
     manager.responseSerializer                      = [AFJSONResponseSerializer serializer];
     [manager.requestSerializer setValue: [[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]forHTTPHeaderField:@"Cookie"];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
-    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=getRecievedCoins"];//在请求的后面添加请求参数
+    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=getReceivedCoins"];//在请求的后面添加请求参数
     NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
     
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
@@ -84,7 +84,36 @@
     }];
 
 };
+/**
+ *  开启众筹
+ */
+-(void)startCrowdfund{
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    //用[NSDate date]可以获取系统当前时间
+    NSDate* date=[[NSDate date] dateByAddingTimeInterval:86400*2];
+    NSString *crowdfundExpiredTime = [dateFormatter stringFromDate:date];
+    AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer                       = [AFJSONResponseSerializer serializer];
+    [manager.requestSerializer setValue: [[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]forHTTPHeaderField:@"Cookie"];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
+    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=edit&crowdfund_expire_time=%@",crowdfundExpiredTime];
+    NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
+    
+    NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
+    [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"crowdfund-start-JSON: %@", operation.responseString);
+        //编辑成功BL的delegate editSuccess
+//        [_delegate editUserInfoSuccess];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+       
+    }];
 
+    
+
+};
 /**
  *  获得商品类别
  */
@@ -175,8 +204,9 @@
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"获得商品评论-JSON: %@", operation.responseString);
+        NSArray* array=[self jsonListToFriendArray:operation.responseString];
         //请求成功，回调的BL的delegate
-        //[_delegate XXX];
+        [_delegate getProductCommentsSuccess:array];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate
@@ -301,7 +331,7 @@
     manager.responseSerializer                      = [AFJSONResponseSerializer serializer];
     [manager.requestSerializer setValue: [[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]forHTTPHeaderField:@"Cookie"];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
-    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=addShoppingCart&product_id=%@&number=%@",productID,num];//在请求的后面添加请求参数
+    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=addShoppingCart&product_id=%@&number=%@&comment=%@",productID,num,comment];//在请求的后面添加请求参数
     NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
     
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
@@ -334,7 +364,7 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"从购物车中删除商品JSON: %@", operation.responseString);
         //请求成功，回调的BL的delegate
-        //[_delegate XXX];
+        [_delegate delShoppingCartSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate
@@ -361,7 +391,7 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"编辑购物车信息JSON: %@", operation.responseString);
         //请求成功，回调的BL的delegate
-        //[_delegate XXX];
+        [_delegate modifyShoppingCartSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate
@@ -417,7 +447,7 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"将购物车添加到订单JSON: %@", operation.responseString);
         //请求成功，回调的BL的delegate
-        //[_delegate XXX];
+        [_delegate addCartToOrderSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate
