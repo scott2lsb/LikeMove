@@ -128,6 +128,13 @@
 //TODO: 暂时存在问题
 -(void)payOrderWithOrderID:(NSString*)orderID ;
 /**
+ *  通过支付宝付款
+ *
+ *  @param orderID   订单ID
+ *  @param alipayNum 支付宝单号
+ */
+-(void)payOrderWithOrderID:(NSString *)orderID alipay:(NSString *)alipayNum;
+/**
  *  获得各种状态订单
  *
  *  @param status 订单状态0:保留, 1:未付款, 2:已付款 3:已发货 4:已收货 5:已取消

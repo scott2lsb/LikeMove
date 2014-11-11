@@ -58,7 +58,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  获得接收金币的记录
@@ -82,7 +82,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  开启众筹
@@ -106,13 +106,13 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"crowdfund-start-JSON: %@", operation.responseString);
         //编辑成功BL的delegate editSuccess
-//        [_delegate editUserInfoSuccess];
+        //        [_delegate editUserInfoSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-       
+        
     }];
-
     
-
+    
+    
 };
 /**
  *  获得商品类别
@@ -135,7 +135,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  获得推广的商品内容
@@ -160,7 +160,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  将商品评论添加到商品中
@@ -186,7 +186,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  获得商品的评论
@@ -212,7 +212,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  添加收货人信息
@@ -239,7 +239,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  删除收货人信息
@@ -264,7 +264,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  编辑收货人信息
@@ -292,7 +292,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  获得收货人信息
@@ -317,7 +317,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  将商品添加到购物车中
@@ -345,7 +345,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  从购物车中删除商品
@@ -370,7 +370,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  编辑购物车信息
@@ -397,7 +397,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  获得所有购物车信息
@@ -421,7 +421,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 
 /**
@@ -447,13 +447,21 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"将购物车添加到订单JSON: %@", operation.responseString);
         //请求成功，回调的BL的delegate
-        [_delegate addCartToOrderSuccess];
+        NSDictionary* dict=[self jsonToDict:operation.responseString];
+        int d=        [[dict objectForKey:@"result"] intValue];
+        if (d ==1) {
+            NSDictionary* detail=[dict objectForKey:@"data"];
+            [_delegate addCartToOrderSuccess:detail];
+        }else{
+            //TODO 失败调用
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  订单付费
@@ -479,8 +487,42 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
+/**
+ *  订单付费
+ *
+ *  @param orderID 订单号
+ */
+
+-(void)payOrderWithOrderID:(NSString*)orderID {
+    AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer                      = [AFJSONResponseSerializer serializer];
+    [manager.requestSerializer setValue: [[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]forHTTPHeaderField:@"Cookie"];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
+    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=payOrder&order_id=%@",orderID];//在请求的后面添加请求参数
+    NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
+    
+    NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
+    DLog(@"pay-with-balance=%@",utf8);
+    [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DLog(@"pay-JSON: %@", operation.responseString);
+        //请求成功，回调的BL的delegate
+        NSDictionary* dict=[self jsonToDict:operation.responseString];
+        int result=[[dict objectForKey:@"result"] intValue];
+        if (result==1) {
+            [_delegate payWithBalanceSuccess];
+            DLog(@"pay-with-balance-success");
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DLog(@"Error: %@", error);
+        //请求失败，回调BL的delegate
+        //[_delegate XXX];
+    }];
+    
+};
+
 /**
  *  获得各种状态订单
  *
@@ -522,7 +564,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 
 /**
@@ -548,7 +590,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  获得金币折算比例
@@ -571,7 +613,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  添加金币
@@ -596,7 +638,7 @@
         //请求失败，回调BL的delegate
         //[_delegate XXX];
     }];
-
+    
 };
 /**
  *  通过订单ID获得订单
@@ -622,7 +664,7 @@
         //[_delegate XXX];
     }];
     
-
+    
 };
 /**
  *  json字符串转化为数组
@@ -635,6 +677,9 @@
     NSDictionary* dict=[json objectFromJSONString];
     NSArray* friends=[dict objectForKey:@"list"];
     return friends;
+}
+-(NSDictionary*)jsonToDict:(NSString*)json{
+    return (NSDictionary*)[json objectFromJSONString];
 }
 @end
 

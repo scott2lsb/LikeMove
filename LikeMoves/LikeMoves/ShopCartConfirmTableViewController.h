@@ -10,6 +10,7 @@
 #import "User.h"
 #import "LMShopBL.h"
 #import "LMShopBLDelegate.h"
+#import "PayToOrderTableViewController.h"
 @interface ShopCartConfirmTableViewController : UITableViewController<UITextFieldDelegate,LMShopBLDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *receiverName;
 @property (weak, nonatomic) IBOutlet UILabel *receiverPhone;

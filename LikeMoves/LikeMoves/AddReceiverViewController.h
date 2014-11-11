@@ -18,5 +18,5 @@
 @property (weak, nonatomic) IBOutlet UITextField *detailAdr;
 @property(strong,nonatomic)LMShopBL* bl;
 - (IBAction)addReceiver:(id)sender;
-
+@property (strong,nonatomic)NSArray* books;
 @end

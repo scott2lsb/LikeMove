@@ -85,7 +85,10 @@ NSString* shipingMethod=@"2";
     
     
 }
-
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [_coinNum resignFirstResponder];
+}
 #pragma mark - TextField Delegate
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
@@ -123,9 +126,17 @@ NSString* shipingMethod=@"2";
 
     [_bl addOrderWithShopIds:ids receiverID:_receiverID coins:coinNum comment:nil shipingMethod:shipingMethod phoneConfirm:nil userID:nil];
 }
--(void)addCartToOrderSuccess{
+-(void)addCartToOrderSuccess:(NSDictionary *)data{
     //TODO: 跳转支付页面
-    UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"123" message:nil delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
-    [alert show];
+    NSMutableDictionary* dict=[[NSMutableDictionary alloc] init];
+    [dict setValue:[data objectForKey:@"total_price"] forKey:@"total_price"];
+    [dict setValue:[data objectForKey:@"id"]  forKey:@"order_id"];
+    [dict setValue:[data objectForKey:@"need_coins"]  forKey:@"deduction_coins"];
+    [dict setValue:[data objectForKey:@"need_cash"]  forKey:@"real_price" ];
+    
+    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PayToOrderTableViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"PayToOrderPage"];
+    tabVC.dict=dict;
+    [self.navigationController pushViewController:tabVC animated:YES];
 }
 @end

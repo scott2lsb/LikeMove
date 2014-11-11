@@ -26,5 +26,6 @@
 -(void)getProductCommentsSuccess:(NSArray*)comments;
 -(void)modifyShoppingCartSuccess;
 -(void)delShoppingCartSuccess;
--(void)addCartToOrderSuccess;
+-(void)addCartToOrderSuccess:(NSDictionary*)data;
+-(void)payWithBalanceSuccess;
 @end

@@ -19,7 +19,7 @@
     [super viewDidLoad];
     _bl=[[LMShopBL alloc] init];
     _bl.delegate=self;
-    [_bl getReceiver];
+//    [_bl getReceiver];
     
     _tableView.delegate=self;
     _tableView.dataSource=self;
@@ -32,7 +32,10 @@
         DLog(@"test");
     }
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [_bl getReceiver];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -111,6 +114,9 @@
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (_receivers==nil) {
+        return 0;
+    }
     return _receivers.count;
 }
 
@@ -119,7 +125,19 @@
 }
 #pragma mark - ShopBLDelegate
 -(void)getReceiversSuccess:(NSArray *)array{
-    _receivers=[array mutableCopy];
-    [_tableView reloadData];
+    if([array isKindOfClass:[NSNull class]]){
+        _receivers=nil;
+        _tableView.hidden=YES;
+        UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(10, 200, 300, 44)];
+        label.textAlignment=NSTextAlignmentCenter;
+        label.text=@"您还没有添加收货地址哦！";
+        label.textColor=[UIColor grayColor];
+        [self.view addSubview:label];
+    }
+    else{
+        _tableView.hidden=NO;
+          _receivers=[array mutableCopy];
+        [_tableView reloadData];
+    }
 }
 @end

@@ -10,6 +10,8 @@
 #import "LMShopBL.h"
 #import "LMShopBLDelegate.h"
 #import "HMSegmentedControl.h"
+#import "ReceiverOrderDetailTableViewController.h"
+#import "SendOrderTableViewController.h"
 @interface OrdersViewController : UIViewController<LMShopBLDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)NSMutableArray* noPayArray;
 @property(strong,nonatomic)NSMutableArray* paidArray;

@@ -124,8 +124,16 @@
  *  @param orderID 订单号
     @param 支付宝付款
  */
- //TODO: 暂时存在问题
+
 -(void)payOrderWithOrderID:(NSString*)orderID  alipay:(NSString*)alipayNum;
+/**
+ *  订单付费
+ *
+ *  @param orderID 订单号
+ */
+
+-(void)payOrderWithOrderID:(NSString*)orderID ;
+
 /**
  *  获得各种状态订单
  *

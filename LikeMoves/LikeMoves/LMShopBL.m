@@ -64,7 +64,7 @@
  *  @param desc      商品评论
  */
 -(void)addProductCommentToProduct:(NSString*)productID withDesc:(NSString*)desc{
-    
+    [_dao addProductCommentToProduct:productID withDesc:desc];
 };
 /**
  *  获得商品的评论
@@ -165,7 +165,10 @@
  */
 //TODO: 暂时存在问题
 -(void)payOrderWithOrderID:(NSString*)orderID {
-    [_dao payOrderWithOrderID:orderID alipay:@"1"];
+    [_dao payOrderWithOrderID:orderID];
+};
+-(void)payOrderWithOrderID:(NSString *)orderID alipay:(NSString *)alipayNum{
+    [_dao payOrderWithOrderID:orderID alipay:alipayNum];
 };
 /**
  *  获得各种状态订单
@@ -248,8 +251,11 @@
 -(void)delShoppingCartSuccess{
     [_delegate delShoppingCartSuccess];
 };
--(void)addCartToOrderSuccess{
-    [_delegate addCartToOrderSuccess];
+-(void)addCartToOrderSuccess:(NSDictionary*)data{
+    [_delegate addCartToOrderSuccess:(NSDictionary*)data];
+}
+-(void)payWithBalanceSuccess{
+    [_delegate payWithBalanceSuccess];
 }
 @end
 

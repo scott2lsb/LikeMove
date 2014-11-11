@@ -21,12 +21,16 @@ NSMutableDictionary* detail;
     detail=[[NSMutableDictionary alloc] init];
     _bl=[[LMShopBL alloc]init];
     _bl.delegate=self;
-    [_bl getShoppingCarts];
+
     _tableView.delegate=self;
     _tableView.dataSource=self;
     UIView* view =[ [UIView alloc]init];
     view.backgroundColor= [UIColor clearColor];
     [self.tableView setTableFooterView:view];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [_bl getShoppingCarts];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -136,6 +140,10 @@ NSMutableDictionary* detail;
         label.backgroundColor=[UIColor whiteColor];
         label.textColor=[UIColor grayColor];
         
+        CGFloat deducion=0.0;
+        CGFloat total=0.0;
+        _countNum.text=[NSString stringWithFormat:@"￥%0.2f",total];
+        _deductionNum.text=[NSString stringWithFormat:@"￥%0.2f",deducion];
         _payBtn.enabled=false;
         
         [self.view addSubview:label];

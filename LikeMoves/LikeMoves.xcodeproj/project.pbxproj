@@ -200,6 +200,11 @@
 		8AC7F85019E12A2C008C2934 /* steps.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AC7F84D19E12A2C008C2934 /* steps.png */; };
 		8AC7F85119E12A2C008C2934 /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AC7F84E19E12A2C008C2934 /* fire.png */; };
 		8AD3A49019C918E000B615A5 /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD3A48F19C918E000B615A5 /* SMS_SDK.framework */; };
+		8AE377B41A11BFD50017118C /* ReceiverOrderDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE377B31A11BFD50017118C /* ReceiverOrderDetailTableViewController.m */; };
+		8AE377B71A11DBC00017118C /* SendOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE377B61A11DBC00017118C /* SendOrderTableViewController.m */; };
+		8AE377BA1A11E1510017118C /* PaidOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE377B91A11E1510017118C /* PaidOrderTableViewController.m */; };
+		8AE377BE1A1205400017118C /* PayToOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE377BD1A1205400017118C /* PayToOrderTableViewController.m */; };
+		8AE377C11A123ABC0017118C /* NoPaidTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE377C01A123ABC0017118C /* NoPaidTableViewController.m */; };
 		8AE4E43F1A08A7D000E6C473 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE4E4301A08A7D000E6C473 /* libBPush.a */; };
 		8AE4E4401A08A7D000E6C473 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE4E4331A08A7D000E6C473 /* Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8AE4E4411A08A7D000E6C473 /* BPushClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE4E4361A08A7D000E6C473 /* BPushClass.m */; };
@@ -526,6 +531,16 @@
 		8AC7F84D19E12A2C008C2934 /* steps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steps.png; sourceTree = "<group>"; };
 		8AC7F84E19E12A2C008C2934 /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
 		8AD3A48F19C918E000B615A5 /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMS_SDK.framework; sourceTree = "<group>"; };
+		8AE377B21A11BFD50017118C /* ReceiverOrderDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiverOrderDetailTableViewController.h; sourceTree = "<group>"; };
+		8AE377B31A11BFD50017118C /* ReceiverOrderDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiverOrderDetailTableViewController.m; sourceTree = "<group>"; };
+		8AE377B51A11DBC00017118C /* SendOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendOrderTableViewController.h; sourceTree = "<group>"; };
+		8AE377B61A11DBC00017118C /* SendOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendOrderTableViewController.m; sourceTree = "<group>"; };
+		8AE377B81A11E1510017118C /* PaidOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaidOrderTableViewController.h; sourceTree = "<group>"; };
+		8AE377B91A11E1510017118C /* PaidOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaidOrderTableViewController.m; sourceTree = "<group>"; };
+		8AE377BC1A1205400017118C /* PayToOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayToOrderTableViewController.h; sourceTree = "<group>"; };
+		8AE377BD1A1205400017118C /* PayToOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayToOrderTableViewController.m; sourceTree = "<group>"; };
+		8AE377BF1A123ABC0017118C /* NoPaidTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoPaidTableViewController.h; sourceTree = "<group>"; };
+		8AE377C01A123ABC0017118C /* NoPaidTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoPaidTableViewController.m; sourceTree = "<group>"; };
 		8AE4E42F1A08A7D000E6C473 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
 		8AE4E4301A08A7D000E6C473 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
 		8AE4E4321A08A7D000E6C473 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
@@ -1075,8 +1090,7 @@
 				8AAABDD01A01E16F006BF58A /* AddReceiverViewController.m */,
 				8AAABDD21A021023006BF58A /* CrowdfundViewController.h */,
 				8AAABDD31A021023006BF58A /* CrowdfundViewController.m */,
-				8AAABDDA1A030D42006BF58A /* OrdersViewController.h */,
-				8AAABDDB1A030D42006BF58A /* OrdersViewController.m */,
+				8AE377BB1A1204DB0017118C /* Order */,
 				8AAABDDD1A0348A1006BF58A /* CustomTableCell */,
 			);
 			name = User;
@@ -1337,6 +1351,25 @@
 				8AAF82AF19D8ECCD000E118A /* PageElement */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		8AE377BB1A1204DB0017118C /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				8AAABDDA1A030D42006BF58A /* OrdersViewController.h */,
+				8AAABDDB1A030D42006BF58A /* OrdersViewController.m */,
+				8AE377B81A11E1510017118C /* PaidOrderTableViewController.h */,
+				8AE377B91A11E1510017118C /* PaidOrderTableViewController.m */,
+				8AE377B21A11BFD50017118C /* ReceiverOrderDetailTableViewController.h */,
+				8AE377B31A11BFD50017118C /* ReceiverOrderDetailTableViewController.m */,
+				8AE377B51A11DBC00017118C /* SendOrderTableViewController.h */,
+				8AE377B61A11DBC00017118C /* SendOrderTableViewController.m */,
+				8AE377BC1A1205400017118C /* PayToOrderTableViewController.h */,
+				8AE377BD1A1205400017118C /* PayToOrderTableViewController.m */,
+				8AE377BF1A123ABC0017118C /* NoPaidTableViewController.h */,
+				8AE377C01A123ABC0017118C /* NoPaidTableViewController.m */,
+			);
+			name = Order;
 			sourceTree = "<group>";
 		};
 		8AE4E42E1A08A7D000E6C473 /* LibBPush */ = {
@@ -1615,6 +1648,7 @@
 				8AB1ABE119CFA79900017485 /* yuan2_sc.m in Sources */,
 				8AC7F82319DF8FA6008C2934 /* RTSpinKitFadingCircleAltAnimation.m in Sources */,
 				8AAABDDC1A030D42006BF58A /* OrdersViewController.m in Sources */,
+				8AE377BA1A11E1510017118C /* PaidOrderTableViewController.m in Sources */,
 				8A4113EE19D90B1D002F2575 /* MainTabViewController.m in Sources */,
 				8AB1ABE319CFA79900017485 /* wendu_yuan2.m in Sources */,
 				8A04AF2219C6D42A000212E7 /* LMLoginViewController.m in Sources */,
@@ -1633,6 +1667,7 @@
 				8AC7F82719DF8FA6008C2934 /* RTSpinKitThreeBounceAnimation.m in Sources */,
 				8AC7F81D19DF8FA6008C2934 /* RTSpinKitArcAltAnimation.m in Sources */,
 				8A8504D819E415FB00CB730E /* ResetPwdViewController.m in Sources */,
+				8AE377B41A11BFD50017118C /* ReceiverOrderDetailTableViewController.m in Sources */,
 				8AB1AC1319D5388200017485 /* DKCircleButton.m in Sources */,
 				8AAABDCE1A01C7D9006BF58A /* ReceiverViewController.m in Sources */,
 				8A1D4C1619CD238E00F27A3C /* ALPickerView.m in Sources */,
@@ -1642,6 +1677,7 @@
 				8AE4E4441A08A7D000E6C473 /* OpenUDID.m in Sources */,
 				8A04AF1819C6C1A1000212E7 /* CoreDateMoves.xcdatamodeld in Sources */,
 				8AAABDD41A021023006BF58A /* CrowdfundViewController.m in Sources */,
+				8AE377BE1A1205400017118C /* PayToOrderTableViewController.m in Sources */,
 				8A1D4C1719CD238E00F27A3C /* ALPickerViewCell.m in Sources */,
 				8A8504D119E23DF000CB730E /* ShopDAO.m in Sources */,
 				8A04AF4D19C839FF000212E7 /* SMS_MBProgressHUD+Add.m in Sources */,
@@ -1665,8 +1701,10 @@
 				8A04AF1519C6C0E2000212E7 /* UserActDA.m in Sources */,
 				8AC7F82019DF8FA6008C2934 /* RTSpinKitChasingDotsAnimation.m in Sources */,
 				8AC7F81E19DF8FA6008C2934 /* RTSpinKitArcAnimation.m in Sources */,
+				8AE377B71A11DBC00017118C /* SendOrderTableViewController.m in Sources */,
 				8A04AF3E19C839E6000212E7 /* SectionsViewController.m in Sources */,
 				8AAABDB51A00BAFB006BF58A /* MoreTableViewController.m in Sources */,
+				8AE377C11A123ABC0017118C /* NoPaidTableViewController.m in Sources */,
 				8A096C361A105C3D00DC783D /* ShopCartConfirmTableViewController.m in Sources */,
 				8AAABDD71A02202A006BF58A /* CrowdfundTableViewCell.m in Sources */,
 				8AC7F82B19DF8FA6008C2934 /* RTSpinKitUtils.m in Sources */,
