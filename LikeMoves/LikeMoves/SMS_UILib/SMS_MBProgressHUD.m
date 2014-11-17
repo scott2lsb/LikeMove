@@ -256,7 +256,7 @@
 		[NSException raise:@"MBProgressHUDViewIsNillException" 
 					format:@"The view used in the MBProgressHUD initializer is nil."];
 	}
-	id me = [self initWithFrame:view.bounds];
+	id me = [self initWithFrame:CGRectMake(view.bounds.origin.x, view.bounds.origin.y+80, view.bounds.size.width, view.bounds.size.height)];
 	// We need to take care of rotation ourselfs if we're adding the HUD to a window
 	if ([view isKindOfClass:[UIWindow class]]) {
 		[self setTransformForCurrentOrientation:NO];
@@ -284,7 +284,7 @@
         self.mode = MBProgressHUDModeIndeterminate;
         self.labelText = nil;
         self.detailsLabelText = nil;
-        self.opacity = 0.8f;
+        self.opacity = 0.01f;
         self.labelFont = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
         self.detailsLabelFont = [UIFont boldSystemFontOfSize:LABELDETAILSFONTSIZE];
         self.xOffset = 0.0f;
@@ -370,7 +370,7 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.opaque = NO;
         label.backgroundColor = [UIColor clearColor];
-        label.textColor = [UIColor whiteColor];
+        label.textColor = [UIColor orangeColor];
         label.text = self.labelText;
 		
         // Update HUD size

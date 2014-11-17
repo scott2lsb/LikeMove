@@ -20,8 +20,8 @@
     int numSteps;
     int pastSteps;
     
-    BOOL isChange;
-    BOOL isSleeping;
+
+    
     BOOL timeCharge;
     int sportTime;//运动时长
 }
@@ -29,7 +29,9 @@
 @property (strong,nonatomic)CMMotionManager *motionManager;
 @property (nonatomic) NSTimer* stopTimeCount;
 @property (nonatomic) NSTimer* sportTimeCount;
-
+//不运动三分钟后进行运动检测关闭
+@property BOOL isSleeping;
+@property BOOL isChange;
 -(void)startMotionDetect;
 #pragma mark - 运动网络接口
 @property (weak, nonatomic) id <LMSportBLDelegate> delegate;

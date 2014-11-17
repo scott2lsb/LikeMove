@@ -7,16 +7,27 @@
 //
 
 #import "PayToOrderTableViewController.h"
-
+#import "PartnerConfig.h"
+#import "DataSigner.h"
+#import "AlixPayResult.h"
+#import "DataVerifier.h"
+#import "AlixPayOrder.h"
+#import "AlixLibService.h"
 @interface PayToOrderTableViewController ()
-
+{
+    SEL _result;
+}
 @end
 
 @implementation PayToOrderTableViewController
+@synthesize result = _result;
 NSString* orderID;
+CGFloat realPrice;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _result = @selector(paymentResult:);
+    
     _bl=[[LMShopBL alloc] init];
     _bl.delegate=self;
     UIView*view =[ [UIView alloc]init];
@@ -27,7 +38,8 @@ NSString* orderID;
     _userBalance.text=[NSString stringWithFormat:@"￥%0.2f",[user.balance floatValue]];
     _totalPrice.text=[NSString stringWithFormat:@"￥%0.2f",[[_dict objectForKey:@"total_price"] floatValue]];
     _deduction.text=[NSString stringWithFormat:@"￥%0.2f",[[_dict objectForKey:@"deduction_coins"] floatValue]/100];
-    _realPrice.text=[NSString stringWithFormat:@"￥%0.2f",[[_dict objectForKey:@"real_price"] floatValue]];
+    realPrice=[[_dict objectForKey:@"real_price"] floatValue];
+    _realPrice.text=[NSString stringWithFormat:@"￥%0.2f",realPrice];
     orderID=[_dict objectForKey:@"order_id"];
 }
 
@@ -39,30 +51,7 @@ NSString* orderID;
 
 #pragma mark - Table view data source
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//
-//    // Return the number of sections.
-//    return 0;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//
-//    // Return the number of rows in the section.
-//    return 0;
-//}
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
 #pragma mark - TableView Delegate
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     if (indexPath.section==1&indexPath.row==0) {
@@ -72,6 +61,21 @@ NSString* orderID;
     }else if (indexPath.section==1&indexPath.row==1){
         //TODO:支付宝支付
         DLog(@"支付宝支付");
+        /*
+         *生成订单信息及签名
+         *由于demo的局限性，采用了将私钥放在本地签名的方法，商户可以根据自身情况选择签名方法(为安全起见，在条件允许的前提下，我们推荐从商户服务器获取完整的订单信息)
+         */
+        
+        NSString *appScheme = @"LikeMoves";
+        NSString* orderInfo = [self getOrderInfo:indexPath.row];
+        NSString* signedStr = [self doRsa:orderInfo];
+        
+        
+        NSString *orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                                 orderInfo, signedStr, @"RSA"];
+
+        [AlixLibService payOrder:orderString AndScheme:appScheme seletor:_result target:self];
+
     }else{
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow]animated:YES];
     }
@@ -94,7 +98,7 @@ NSString* orderID;
 }
 #pragma mark - SHOPBL Delegate
 -(void)payWithBalanceSuccess{
-    UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"付款成功" message:nil delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
+    UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"付款成功!" message:nil delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
     alert.tag=0;
     [alert show];
 }
@@ -107,4 +111,90 @@ NSString* orderID;
     }
 
 }
+-(void)payWithAlipaySuccess{
+    UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"付款成功!" message:nil delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
+    alert.tag=0;
+    [alert show];
+}
+#pragma mark - alipay-method
+
+-(NSString*)getOrderInfo:(NSInteger)index
+{
+    /*
+	 *点击获取prodcut实例并初始化订单信息
+	 */
+
+    AlixPayOrder *order = [[AlixPayOrder alloc] init];
+    order.partner = PartnerID;
+    order.seller = SellerID;
+    
+    order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
+	order.productName = @"里环王特价优惠商品"; //商品标题
+	order.productDescription = @"里环王特价优惠折扣商品"; //商品描述
+	order.amount = [NSString stringWithFormat:@"%.2f",realPrice]; //商品价格
+	order.notifyURL =  @"http%3A%2F%2Fwwww.xxx.com"; //回调URL
+	
+	return [order description];
+}
+
+- (NSString *)generateTradeNO
+{
+	return orderID;
+}
+
+-(NSString*)doRsa:(NSString*)orderInfo
+{
+    id<DataSigner> signer;
+    signer = CreateRSADataSigner(PartnerPrivKey);
+    NSString *signedString = [signer signString:orderInfo];
+    return signedString;
+}
+
+-(void)paymentResultDelegate:(NSString *)result
+{
+    DLog(@"pay-result-Delegate=%@",result);
+}
+//wap回调函数
+-(void)paymentResult:(NSString *)resultd
+{
+    //结果处理
+
+    AlixPayResult* result = [[AlixPayResult alloc] initWithString:resultd];
+
+	if (result)
+    {
+		
+		if (result.statusCode == 9000)
+        {
+			/*
+			 *用公钥验证签名 严格验证请使用result.resultString与result.signString验签
+			 */
+            
+            //交易成功
+            NSString* key = AlipayPubKey;//签约帐户后获取到的支付宝公钥
+			id<DataVerifier> verifier;
+            verifier = CreateRSADataVerifier(key);
+            
+			if ([verifier verifyString:result.resultString withSign:result.signString])
+            {
+                //验证签名成功，交易结果无篡改
+                DLog(@"交易成功！");
+                [_bl payOrderWithOrderID:orderID alipay:_realPrice.text];
+//                int index=[[self.navigationController viewControllers]indexOfObject:self];
+//                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2]animated:YES];
+			}
+        }
+        else
+        {
+            //TODO:交易失败
+        }
+    }
+    else
+    {
+        //失败
+    }
+    
+}
+
+
 @end

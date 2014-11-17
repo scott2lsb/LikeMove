@@ -22,4 +22,9 @@
 
 - (IBAction)cancelPayTo:(id)sender;
 @property NSDictionary* dict;
+
+
+
+@property (nonatomic,assign) SEL result;//这里声明为属性方便在于外部传入。
+
 @end

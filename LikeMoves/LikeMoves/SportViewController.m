@@ -11,6 +11,8 @@
 #import "UMSocial.h"
 #import "UMSocial_Sdk_Extra_Frameworks/UMSocial_ScreenShot_Sdk/UMSocialScreenShoter.h"
 #import "WXApi.h"
+#import "SMS_MBProgressHUD+Add.h"
+#import "SMS_MBProgressHUD.h"
 #define kCoinCountKey   100
 #define mFireBtnH 120
 @interface SportViewController ()
@@ -26,6 +28,7 @@ static int sportSec;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     sportCircleNumber=0.0;
     /**
      逻辑层实例化
@@ -47,10 +50,10 @@ static int sportSec;
     
     
     _fireBtn = [[ZenPlayerButton alloc]initWithFrame:CGRectMake(self.sportCircle.bounds.size.width/2-mFireBtnH/2, self.sportCircle.bounds.size.height/2-mFireBtnH/2, mFireBtnH, mFireBtnH)];
-            [_fireBtn addTarget:self action:@selector(sportCircleClear) forControlEvents:UIControlEventTouchUpInside];
+    [_fireBtn addTarget:self action:@selector(sportCircleClear) forControlEvents:UIControlEventTouchUpInside];
     [self setSportTime:@"0m 0s"];
-//    _timeLabel.text=@"123m 50s";
-
+    
+    
     
     [_wdSport addSubview:_fireBtn];
     [_wdSport addSubview:_coinImg];
@@ -65,7 +68,7 @@ static int sportSec;
     _bagView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_hongbao_bags"]];
     _bagView.center = CGPointMake(CGRectGetMidX(self.view.frame) + 5, CGRectGetMidY(self.view.frame)+5 );
     
-
+    
     /**
      *  使用自定义创建控件的方式使控件自适应，autolayout开启，在storyboard中建立的控件，必须已经显示才能在viewDidAppear中进行操作
      */
@@ -82,7 +85,7 @@ static int sportSec;
         [self.view addSubview:_calImg];
         [self.view addSubview:_calCount];
     }else{
-                DLog(@"size-fit-test-4.0inch");
+        DLog(@"size-fit-test-4.0inch");
         _calCount=[[UILabel alloc]initWithFrame:CGRectMake(123, 419, 77, 44)];
         _calCount.text=@"0千卡";
         _calCount.font=[UIFont systemFontOfSize:15];
@@ -93,20 +96,20 @@ static int sportSec;
         _calImg.contentMode=UIViewContentModeScaleToFill;
         [self.view addSubview:_calImg];
         [self.view addSubview:_calCount];
-
+        
     }
     
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    
     [self refreshCoinsAndMonthDays];
     
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-
+    
 }
 - (void)didReceiveMemoryWarning
 {
@@ -140,13 +143,13 @@ static int sportSec;
 }
 -(void) refreshCoinsAndMonthDays{
     //一整个月的天数
-//    //实例化一个NSDateFormatter对象
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    //设定时间格式,这里可以设置成自己需要的格式
-//    [dateFormatter setDateFormat:@"yyyy-MM"];
-//    //用[NSDate date]可以获取系统当前时间
-//    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
-//    [_bl getMonthMoveDays:currentDateStr];
+    //    //实例化一个NSDateFormatter对象
+    //    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //    //设定时间格式,这里可以设置成自己需要的格式
+    //    [dateFormatter setDateFormat:@"yyyy-MM"];
+    //    //用[NSDate date]可以获取系统当前时间
+    //    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+    //    [_bl getMonthMoveDays:currentDateStr];
     [_bl getThirtyDaysOfMove];
     //NSUserDefaults刷新金币数量，使用NSUserDefaults中的数据
     User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
@@ -157,26 +160,45 @@ static int sportSec;
  */
 -(void) sportCircleClear{
     self.fireBtn.progress = 0.4f;
-
+    
     if(sportCircleNumber>5){
         //添加运动记录
         [_bl addMoveRecord:sportSec withSteps:stepNum];
-//        //userBL更新本地用户NSUserDefaults中的信息
-//        [_userBL refreshMyself];
+        //        //userBL更新本地用户NSUserDefaults中的信息
+        //        [_userBL refreshMyself];
         //userBL更新服务器中的金币信息
-        if(sportCircleNumber>10000){
-            [_bl addCoins:@"100"];
+        SMS_MBProgressHUD *hud = [SMS_MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Configure for text only and offset down
+        hud.mode = MBProgressHUDModeDeterminate;
+        UIView*view =[ [UIView alloc]init];
+        view.backgroundColor= [UIColor clearColor];
+        
+        [hud setCustomView:view];
+        hud.margin = 10.f;
+        hud.removeFromSuperViewOnHide = YES;
+        hud.backgroundColor=[UIColor clearColor];
+        hud.tintColor=[UIColor orangeColor];
+        
+        
+        if(sportCircleNumber>3600){
+            [_bl addCoins:@"36"];
+            hud.labelText = [NSString stringWithFormat:@"恭喜您获得了%@个金币",@"36"];
         }else{
-            [_bl addCoins:[NSString stringWithFormat:@"%f",floor(sportCircleNumber/10)]];
+            double i=floor(sportCircleNumber/10);
+            [_bl addCoins:[NSString stringWithFormat:@"%f",i]];
+            hud.labelText = [NSString stringWithFormat:@"恭喜您获得了%0.0f个金币",i];
         }
+        [hud hide:YES afterDelay:3];
+        
         [self refreshCoinsAndMonthDays];
         sportCircleNumber=0;
-        _wdSport.z=sportCircleNumber/10000;
+        _wdSport.z=sportCircleNumber/3600;
         [self getCoinAction];
     }else{
         //        [_userBL addCoins:100];
         
-        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"能量条超过一半才能释放" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"能量条超过四分之一才能释放" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
         
         
@@ -191,7 +213,7 @@ static int coinCount = 0;
     [_fireBtn setEnabled:false];
     isBag=false;
     //"立即打开"按钮从视图上移除
-
+    
     [self.view addSubview:_bagView];
     
     //初始化金币生成的数量
@@ -201,7 +223,7 @@ static int coinCount = 0;
         //延迟调用函数
         [self performSelector:@selector(initCoinViewWithInt:) withObject:[NSNumber numberWithInt:i] afterDelay:i * 0.01];
     }
-
+    
 }
 
 - (void)initCoinViewWithInt:(NSNumber *)i
@@ -308,7 +330,7 @@ static int coinCount = 0;
 }
 
 - (IBAction)share:(id)sender {
-
+    
     [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
     [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
     NSArray* array;

@@ -22,10 +22,15 @@
 @end
 static UIAlertView* _alert1=nil;
 @implementation FriendTableViewController
-
+RTSpinKitView* spinner;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor whiteColor]];
+    spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
+    [self.view addSubview:spinner];
+    [spinner startAnimating];
+    //初始化
     _bl=[[LMContactBL alloc] init];
     _bl.delegate=self;
     _shopBL=[[LMShopBL alloc] init];
@@ -341,7 +346,7 @@ NSString* friendID;
 }
 #pragma mark - 运动模块Delegate
 -(void) getSportRankSuccess:(NSArray *)rank{
-    //    [spinner stopAnimating];
+    [spinner stopAnimating];
     if([rank isKindOfClass:[NSNull class]]){
         _rankFriends=nil;
     }else{
@@ -353,6 +358,14 @@ NSString* friendID;
 -(void) getCrowdfundFriendsSuccess:(NSArray *)friends{
     if([friends isKindOfClass:[NSNull class]]){
         _crowdfundFriends=nil;
+        _crowdfundFriendTableView.hidden=YES;
+        UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(320, 0, 320, [UIScreen mainScreen].bounds.size.height-108-49)];
+        label.font=[UIFont systemFontOfSize:18.0];
+        label.textAlignment=NSTextAlignmentCenter;
+        label.text=@"还没有人众筹哦！";
+        label.backgroundColor=[UIColor whiteColor];
+        label.textColor=[UIColor grayColor];
+        [self.scrollView addSubview:label];
     }else{
         _crowdfundFriends=[friends mutableCopy];
     }

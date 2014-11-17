@@ -80,7 +80,7 @@ NSDictionary* selectProduct;
     UILabel* sold=(UILabel*)[cell viewWithTag:4];
     NSDictionary* product=[_products objectAtIndex:indexPath.row];
     title.text=[product objectForKey:@"name"];
-    price.text=[NSString stringWithFormat:@"￥%@",[product objectForKey:@"price"] ];
+    price.text=[NSString stringWithFormat:@"￥%0.2f",[[product objectForKey:@"price"] floatValue]];
     sold.text=[NSString stringWithFormat:@"销量:%@",[product objectForKey:@"sold_num"]];
     NSString* url;
     NSArray* pics=(NSArray*)[product objectForKey:@"pics"];

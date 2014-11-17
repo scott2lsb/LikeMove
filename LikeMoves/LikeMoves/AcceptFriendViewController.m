@@ -21,12 +21,19 @@
     _bl.delegate=self;
     _acceptFriend.delegate=self;
     _acceptFriend.dataSource=self;
+    UIView*view =[ [UIView alloc]init];
+    view.backgroundColor= [UIColor clearColor];
+    [self.acceptFriend setTableFooterView:view];
+//    [_bl getMyAccepts:@"1" perPage:@"20"];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor orangeColor]];
+    _spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
+    [self.view addSubview:_spinner];
+
     [_bl getMyAccepts:@"1" perPage:@"20"];
 }
-//-(void)viewWillAppear:(BOOL)animated{
-//    [super viewWillAppear:animated];
-//    [_bl getMyAccepts:@"1" perPage:@"20"];
-//}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -82,6 +89,7 @@
 
 #pragma mark - ContactBLDelegate
 -(void)getAcceptFriendSuccess:(NSArray *)friends{
+    [_spinner stopAnimating];
     if([friends isKindOfClass:[NSNull class]]){
         _acceptFriend.hidden=YES;
         UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(10, 200, 300, 44)];
@@ -92,15 +100,23 @@
     }
     else{
         _acceptFriend.hidden=NO;
-        acceptFriends=friends;
+        acceptFriends=[friends mutableCopy];
         [_acceptFriend reloadData];
     }
 }
 #pragma mark - 界面元素
 - (IBAction)acceptFriend:(id)sender {
-    NSInteger row=[self.acceptFriend indexPathForCell:((UITableViewCell*)[[sender superview]superview])].row;
+    [_spinner startAnimating];
+    NSIndexPath* index=[self.acceptFriend indexPathForCell:((UITableViewCell*)[[sender superview]superview])];
+    NSInteger row=index.row;
     NSDictionary*dict=[acceptFriends objectAtIndex:row];
     NSString* user_id=[dict objectForKey:@"id"];
     [_bl acceptFriend:user_id];
+//    [acceptFriends removeObjectAtIndex:row];
+//    [_acceptFriend deleteRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+-(void)acceptFriendSuccess{
+    
+    [_bl getMyAccepts:@"1" perPage:@"20"];
 }
 @end

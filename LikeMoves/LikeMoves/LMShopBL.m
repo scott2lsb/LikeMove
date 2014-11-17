@@ -257,6 +257,9 @@
 -(void)payWithBalanceSuccess{
     [_delegate payWithBalanceSuccess];
 }
+-(void)payWithAlipaySuccess{
+    [_delegate payWithAlipaySuccess];
+}
 @end
 
 

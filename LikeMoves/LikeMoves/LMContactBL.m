@@ -94,4 +94,10 @@
 -(void)getCrowdfundFriendSuccess:(NSArray *)friends{
     [_delegate getCrowdfundFriendsSuccess:friends];
 }
+-(void)acceptFriendSuccess{
+    [_delegate acceptFriendSuccess];
+}
+-(void)addFriendByIDSuccess:(NSInteger)status{
+    [_delegate addFriendByIDSuccess:(NSInteger)status];
+}
 @end

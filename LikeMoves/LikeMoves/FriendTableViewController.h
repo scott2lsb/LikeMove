@@ -15,6 +15,7 @@
 #import "LMShopBL.h"
 #import "LMShopBLDelegate.h"
 #import "User.h"
+#import "RTSpinKitView.h"
 @interface FriendTableViewController : UIViewController<LMContactBLDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate,LMShopBLDelegate>
 @property (strong,nonatomic) LMContactBL* bl;
 @property(strong,nonatomic)LMShopBL* shopBL;

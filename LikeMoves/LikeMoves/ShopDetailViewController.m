@@ -37,9 +37,9 @@ NSString* selectedSize;
      */
     _titleLabel.text=(NSString*)[_selectProduct objectForKey:@"name"];
     _priceLabel.text=
-    [NSString stringWithFormat:@"价格:￥%@",[_selectProduct objectForKey:@"price"]];
+    [NSString stringWithFormat:@"价格:￥%0.2f",[[_selectProduct objectForKey:@"price"] floatValue]];
     _soldLabel.text=[NSString stringWithFormat:@"销量:%@",[_selectProduct objectForKey:@"sold_num"]];
-    
+    _deductionLabel.text=[NSString stringWithFormat:@"可抵扣额:￥%0.2f",[[_selectProduct objectForKey:@"max_deduction"]floatValue]];
     
     pics=(NSArray*)[_selectProduct objectForKey:@"pics"];
     rollPics=(NSArray*)[_selectProduct objectForKey:@"roll_pics"];

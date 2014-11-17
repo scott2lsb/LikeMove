@@ -111,10 +111,10 @@ NSArray* books;
     [_phone setText:user.phone];
     [_nickname setText:user.nickName];
     [_coins setText:user.coins ];
-    [_balance setText:user.balance] ;
+    [_balance setText:[NSString stringWithFormat:@"￥%0.2f",[user.balance floatValue]]] ;
     
     [_sPhone setText:user.phone];
-    [_sBalance setText:user.balance];
+    [_sBalance setText:[NSString stringWithFormat:@"￥%0.2f",[user.balance floatValue]]];
     [_sCoins setText:user.coins];
     [_sNickname setText:user.nickName];
     switch ([user.sex intValue]) {
@@ -176,7 +176,7 @@ NSArray* books;
 //获取到选中的数据
 -(void)returnChoosedPickerString:(NSMutableArray *)selectedEntriesArr
 {
-    NSLog(@"selectedArray=%@",selectedEntriesArr);
+    DLog(@"selectedArray=%@",selectedEntriesArr);
     
     NSString *dataStr = [selectedEntriesArr componentsJoinedByString:@","];
     

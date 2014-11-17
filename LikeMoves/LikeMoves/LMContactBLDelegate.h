@@ -21,4 +21,6 @@
 -(void)getAcceptFriendSuccess:(NSArray*)friends;
 -(void)scanFriendSuccess:(NSArray*)scanFriend;
 -(void)addFriendByPhoneSuccess:(NSInteger)status;
+-(void)acceptFriendSuccess;
+-(void)addFriendByIDSuccess:(NSInteger)status;
 @end

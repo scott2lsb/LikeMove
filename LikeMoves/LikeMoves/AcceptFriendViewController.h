@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "LMContactBL.h"
 #import "LMContactBLDelegate.h"
+#import "RTSpinKitView.h"
 @interface AcceptFriendViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,LMContactBLDelegate>{
-    NSArray* acceptFriends;
+    NSMutableArray* acceptFriends;
 }
 @property (weak, nonatomic) IBOutlet UITableView *acceptFriend;
 @property (strong,nonatomic) LMContactBL* bl;
-
+@property RTSpinKitView* spinner;
 - (IBAction)acceptFriend:(id)sender;
 @end

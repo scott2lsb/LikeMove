@@ -29,4 +29,5 @@
 -(void)delShoppingCartSuccess;
 -(void)addCartToOrderSuccess:(NSDictionary*)data;
 -(void)payWithBalanceSuccess;
+-(void)payWithAlipaySuccess;
 @end

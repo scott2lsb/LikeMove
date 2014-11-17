@@ -147,15 +147,15 @@
              dot /= (a * b);
              
              if (dot <= 0.82) {
-                 if (!isSleeping) {
-                     if (!isChange) {
+                 if (!_isSleeping) {
+                     if (!_isChange) {
                          _sportTimeCount=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sportTimeCount:) userInfo:nil repeats:YES];
-                         isChange=YES;
+                         _isChange=YES;
                      }
                      /**
                       *  步数计数
                       */
-                     isSleeping = YES;
+                     _isSleeping = YES;
                      [self performSelector:@selector(wakeUp) withObject:nil afterDelay:0.4];
                      numSteps += 1;
                      [_delegate stepCountChange:[NSString stringWithFormat:@"%d", numSteps]];
@@ -172,7 +172,7 @@
     
 }
 - (void)wakeUp {
-    isSleeping = NO;
+    _isSleeping = NO;
 }
 // 成功获取定位数据后将会激发该方法
 -(void)locationManager:(CLLocationManager *)manager
@@ -203,7 +203,7 @@
 -(void) stopTimeCount:(NSTimer*) timer{
     if (numSteps<=pastSteps) {
         [_sportTimeCount invalidate];
-        isChange=FALSE;
+        _isChange=FALSE;
     }else{
         pastSteps=numSteps;
     }

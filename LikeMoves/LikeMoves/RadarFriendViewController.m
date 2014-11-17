@@ -13,10 +13,16 @@
 
 @implementation RadarFriendViewController
 
-
+RTSpinKitView* spinnerIndicator;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //指示框
+    spinnerIndicator = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor orangeColor]];
+    spinnerIndicator.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
+    [self.view addSubview:spinnerIndicator];
+    [spinnerIndicator stopAnimating];
+    //初始化
     _bl=[[LMContactBL alloc] init];
     _bl.delegate=self;
     _radarTable.delegate=self;
@@ -61,9 +67,9 @@
     [_bl addFriendByID:user_id];
     UIButton* btn=(UIButton*)sender;
     btn.titleLabel.text=@"已添加";
-
+    [spinnerIndicator startAnimating];
     btn.enabled=NO;
-
+    
 }
 #pragma mark - TableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -107,5 +113,24 @@
 -(void)scanFriendSuccess:(NSArray *)scanFriend{
     _radarFriends=scanFriend;
     [_radarTable reloadData];
+}
+-(void)addFriendByIDSuccess:(NSInteger)status{
+    switch (status) {
+        case 1:{
+            //TODO: 成功加好友
+            [spinnerIndicator stopAnimating];
+            UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"添加好友成功！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+            break;}
+        case 6202:{
+            //TODO: 已经添加此好友
+            [spinnerIndicator stopAnimating];
+            UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"此好友已添加！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+            break;}
+        default:
+            break;
+    }
+    
 }
 @end

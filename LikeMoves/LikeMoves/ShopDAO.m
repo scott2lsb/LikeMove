@@ -479,10 +479,14 @@
     
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"pay-JSON: %@", operation.responseString);
+        DLog(@"pay-alipay-JSON: %@", operation.responseString);
         //请求成功，回调的BL的delegate
-        //[_delegate XXX];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSDictionary* dict=[self jsonToDict:operation.responseString];
+        int result=[[dict objectForKey:@"result"] intValue];
+        if (result==1) {
+            [_delegate payWithAlipaySuccess];
+            DLog(@"pay-with-alipay-success");
+        }    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate
         //[_delegate XXX];

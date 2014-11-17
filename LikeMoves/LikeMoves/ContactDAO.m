@@ -28,14 +28,19 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"JSON: %@", operation.responseString);
         //编辑成功BL的delegate editSuccess
-//        [_delegate editUserInfoSuccess];
+        NSDictionary* dict=[operation.responseString objectFromJSONString];
+        int result=        [[dict objectForKey:@"result"] intValue];
+
+            [_delegate addFriendByIDSuccess:(NSInteger)result];
+        
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
-//        [_delegate editUserInfoFail];
+        //        [_delegate editUserInfoFail];
     }];
-
-
+    
+    
 };
 -(void)addFriendByPhone:(NSString*)phone{
     AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
@@ -57,7 +62,7 @@
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
-
+    
     
 };
 -(void)acceptFriend:(NSString*)friendID{
@@ -72,13 +77,13 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"Accept-Friend-JSON: %@", operation.responseString);
         //编辑成功BL的delegate editSuccess
-//        [_delegate editUserInfoSuccess];
+        [_delegate acceptFriendSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
-//        [_delegate editUserInfoFail];
+        //        [_delegate editUserInfoFail];
     }];
-
+    
 };
 -(void)rejectFriend:(NSString*)friendID{
     AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
@@ -92,13 +97,13 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //        DLog(@"JSON: %@", operation.responseString);
         //编辑成功BL的delegate editSuccess
-//        [_delegate editUserInfoSuccess];
+        //        [_delegate editUserInfoSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
-//        [_delegate editUserInfoFail];
+        //        [_delegate editUserInfoFail];
     }];
-
+    
 };
 -(void)delFriend:(NSString*)friendID{
     AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
@@ -112,13 +117,13 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"JSON: %@", operation.responseString);
         //编辑成功BL的delegate editSuccess
-//        [_delegate editUserInfoSuccess];
+        //        [_delegate editUserInfoSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
-//        [_delegate editUserInfoFail];
+        //        [_delegate editUserInfoFail];
     }];
-
+    
 };
 -(void)getFriends:(NSString*)page perPage:(NSString*)perPage{
     AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
@@ -137,9 +142,9 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
-//        [_delegate editUserInfoFail];
+        //        [_delegate editUserInfoFail];
     }];
-
+    
 };
 -(void)getMyFriendRequests:(NSString*)page perPage:(NSString*)perPage{
     AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
@@ -153,13 +158,13 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //        DLog(@"JSON: %@", operation.responseString);
         //编辑成功BL的delegate editSuccess
-//        [_delegate editUserInfoSuccess];
+        //        [_delegate editUserInfoSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
-//        [_delegate editUserInfoFail];
+        //        [_delegate editUserInfoFail];
     }];
-
+    
 };
 /**
  *  我的待接受好友列表
@@ -178,15 +183,15 @@
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"Accept-Friend-JSON: %@", operation.responseString);
-//        [self jsonToFriendArray:operation.responseString];
+        //        [self jsonToFriendArray:operation.responseString];
         //编辑成功BL的delegate editSuccess
         [_delegate getAcceptFriendSuccess:[self jsonToFriendArray:operation.responseString]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
-//        [_delegate editUserInfoFail];
+        //        [_delegate editUserInfoFail];
     }];
-
+    
 };
 -(void)scanFriend:(NSString *)longitude withLatitude:(NSString *)latitude{
     AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
@@ -206,7 +211,7 @@
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
-
+    
 }
 -(void)stopScanFriend{
     AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
@@ -226,7 +231,7 @@
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
-
+    
 }
 /**
  *  获得好友运动排行
@@ -234,8 +239,8 @@
  *  @param date 运动排行的日期
  */
 -(NSArray*)getFriendSportRank:(NSString*)date{
-//    __block NSArray* rankFriend;
-//    __block NSDictionary* dict;
+    //    __block NSArray* rankFriend;
+    //    __block NSDictionary* dict;
     AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer                      = [AFJSONResponseSerializer serializer];
     [manager.requestSerializer setValue: [[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]forHTTPHeaderField:@"Cookie"];
@@ -256,7 +261,7 @@
         //        [_delegate editUserInfoFail];
     }];
     
-//    rankFriend=[dict objectForKey:@"list"];
+    //    rankFriend=[dict objectForKey:@"list"];
     return nil;
 };
 /**

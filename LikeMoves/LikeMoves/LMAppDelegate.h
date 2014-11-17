@@ -14,7 +14,9 @@
 #import "UIColor+FlatUI.h"
 #import "FBShimmeringView.h"
 #import "ACPReminder.h"
-
+#import "AlixPayResult.h"
+#import "DataVerifier.h"
+#import "PartnerConfig.h"
 @interface LMAppDelegate : UIResponder <UIApplicationDelegate,EAIntroDelegate>{
     UIView *rootView;
     UIImageView *_wallpaperView;

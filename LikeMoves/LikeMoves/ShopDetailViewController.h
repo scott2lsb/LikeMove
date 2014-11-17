@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *soldLabel;
+@property (weak, nonatomic) IBOutlet UILabel *deductionLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sizeSeg;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *colorSeg;
 

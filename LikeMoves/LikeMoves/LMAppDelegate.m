@@ -14,6 +14,7 @@
 #import "BPush.h"
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice]systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define _IPHONE80_ 80000
+#define SUPPORT_IOS8 0
 @implementation LMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -27,12 +28,17 @@
     
     // [BPush setAccessToken:@"3.ad0c16fa2c6aa378f450f54adb08039.2592000.1367133742.282335-602025"];  // 可选。api key绑定时不需要，也可在其它时机调用
     
-    [application registerForRemoteNotificationTypes:
-     UIRemoteNotificationTypeAlert
-     | UIRemoteNotificationTypeBadge
-     | UIRemoteNotificationTypeSound];
-    
-    
+#if SUPPORT_IOS8
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        UIUserNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }else
+#endif
+    {
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound;
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
+    }
     
     
     //友盟注册AppKey
@@ -160,7 +166,7 @@
     
     
     
-
+    
     EAIntroPage *page2 = [EAIntroPage page];
     page2.title = @"为能量充值";
     page2.titlePositionY=    [[UIScreen mainScreen] bounds].size.height-50;
@@ -168,7 +174,7 @@
     page2.titleColor=[UIColor orangeColor];
     page2.bgImage = [UIImage imageNamed:@"first"];
     
-
+    
     EAIntroPage *page3 = [EAIntroPage page];
     page3.title = @"给自己奖励";
     page3.titleFont=[UIFont systemFontOfSize:30.0f];
@@ -192,7 +198,7 @@
     pageControl.currentPageIndicatorImage = [UIImage imageNamed:@"selectedPageDot"];
     [pageControl sizeToFit];
     intro.pageControl = (UIPageControl *)pageControl;
-//    intro.pageControlY = 100.0f;
+    //    intro.pageControlY = 100.0f;
     [intro showInView:rootView animateDuration:0.3];
     [[NSUserDefaults standardUserDefaults] setObject:@"123" forKey:mUseTime];
     return introPage;
@@ -208,6 +214,13 @@
 
 
 #pragma mark - BDPush
+#if SUPPORT_IOS8
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    //register to receive notifications
+    [application registerForRemoteNotifications];
+}
+#endif
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
@@ -222,7 +235,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
     {
         NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
         DLog(@"BDPush-%@",res);
-            }
+    }
 }
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -231,7 +244,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     NSString* msg=[[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     UIAlertView* alert=[[UIAlertView alloc] initWithTitle:msg message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alert show];
-
+    
 }
 //- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 //{
@@ -241,15 +254,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 //{
 //    [UMessage didReceiveRemoteNotification:userInfo];
 //}
-#pragma mark - UMShare
--(BOOL)application:(UIApplication*)application handleOpenURL:(NSURL*)url
-{
-    return[UMSocialSnsService handleOpenURL:url];
-}
--(BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation
-{
-    return[UMSocialSnsService handleOpenURL:url];
-}
+
 #pragma mark - ApplicationDelegate
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -270,7 +275,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     localNotifications.circularTimePeriod = YES; // By default is NO (optional)
     
     [localNotifications createLocalNotification];
-
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -283,12 +288,87 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [[ACPReminder sharedManager] checkIfLocalNotificationHasBeenTriggered];
-
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+#pragma mark - UMShare
+-(BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation
+{
+    if ([sourceApplication hasPrefix:@"com.alipay"]){
+        [self parse:url application:application];
+        return YES;
+    }
+    return[UMSocialSnsService handleOpenURL:url];
+}
+#pragma mark - Alipay-result
+-(BOOL)application:(UIApplication*)application handleOpenURL:(NSURL*)url
+{
+    if([[url host] isEqualToString:@"safepay"]){
+        [self parse:url application:application];
+        return YES;
+    }
+    return[UMSocialSnsService handleOpenURL:url];
+}
+
+
+
+- (void)parse:(NSURL *)url application:(UIApplication *)application {
+    
+    //结果处理
+    AlixPayResult* result = [self handleOpenURL:url];
+    
+	if (result)
+    {
+		
+		if (result.statusCode == 9000)
+        {
+			/*
+			 *用公钥验证签名 严格验证请使用result.resultString与result.signString验签
+			 */
+            
+            //交易成功
+            NSString* key = AlipayPubKey;
+            id<DataVerifier> verifier;
+            verifier = CreateRSADataVerifier(key);
+            
+            if ([verifier verifyString:result.resultString withSign:result.signString])
+            {
+                //验证签名成功，交易结果无篡改
+                //交易成功
+                DLog(@"客户端交易成功");
+                
+            }
+            
+        }
+        else
+        {
+            //交易失败
+        }
+    }
+    else
+    {
+        //失败
+    }
+    
+}
+- (AlixPayResult *)handleOpenURL:(NSURL *)url {
+	AlixPayResult * result = nil;
+	
+	if (url != nil && [[url host] compare:@"safepay"] == 0) {
+		result = [self resultFromURL:url];
+	}
+    
+	return result;
+}
+- (AlixPayResult *)resultFromURL:(NSURL *)url {
+	NSString * query = [[url query] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	return [[AlixPayResult alloc] initWithString:query];
+}
+
+
 
 @end
