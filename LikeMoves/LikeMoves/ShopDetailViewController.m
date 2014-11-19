@@ -58,6 +58,7 @@ NSString* selectedSize;
     _segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     _segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    _segmentedControl.selectionIndicatorColor=[UIColor orangeColor];
     [self.view addSubview:_segmentedControl];
     
     
@@ -72,6 +73,7 @@ NSString* selectedSize;
     self.scrollView.backgroundColor = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1];
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.scrollEnabled=NO;
     self.scrollView.contentSize = CGSizeMake(960, [[UIScreen mainScreen]bounds].size.height-20-44-44-49);
     self.scrollView.delegate = self;
     [self.scrollView scrollRectToVisible:CGRectMake(0, 0, 320, [[UIScreen mainScreen]bounds].size.height-20-44-44-49) animated:NO];
@@ -278,12 +280,7 @@ NSString* selectedSize;
 
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    CGFloat pageWidth = scrollView.frame.size.width;
-    NSInteger page = scrollView.contentOffset.x / pageWidth;
-    
-    [self.segmentedControl setSelectedSegmentIndex:page animated:YES];
-}
+
 #pragma mark - TableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
@@ -397,6 +394,12 @@ NSString* selectedSize;
 - (IBAction)addToCart:(id)sender {
     
     [_bl addShoppingCartWithProductID:[_selectProduct objectForKey:@"id"] number:@"1" comment:[NSString stringWithFormat:@"规格:%@,颜色:%@  ",selectedSize,selectedColor]];
+}
+
+- (IBAction)pushToShopCart:(id)sender {
+    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShopCartPage"];
+    [self.navigationController pushViewController:tabVC animated:YES];
 }
 #pragma mark ShopBLDelegate
 -(void)addToCartSuccess{

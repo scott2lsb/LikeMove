@@ -23,10 +23,12 @@
 @synthesize result = _result;
 NSString* orderID;
 CGFloat realPrice;
+User* user;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     _result = @selector(paymentResult:);
+    _userBl=[[LMUserActBL alloc] init];
     
     _bl=[[LMShopBL alloc] init];
     _bl.delegate=self;
@@ -34,7 +36,7 @@ CGFloat realPrice;
     view.backgroundColor= [UIColor clearColor];
     [self.tableView setTableFooterView:view];
     
-    User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults                                                            standardUserDefaults] objectForKey:mUserInfo]];
+    user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults                                                            standardUserDefaults] objectForKey:mUserInfo]];
     _userBalance.text=[NSString stringWithFormat:@"￥%0.2f",[user.balance floatValue]];
     _totalPrice.text=[NSString stringWithFormat:@"￥%0.2f",[[_dict objectForKey:@"total_price"] floatValue]];
     _deduction.text=[NSString stringWithFormat:@"￥%0.2f",[[_dict objectForKey:@"deduction_coins"] floatValue]/100];
@@ -56,8 +58,15 @@ CGFloat realPrice;
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     if (indexPath.section==1&indexPath.row==0) {
         //TODO:余额支付
-        DLog(@"余额支付");
-        [_bl payOrderWithOrderID:orderID];
+        NSString* md5=@"111111";
+        NSString*pwd=[self md5:md5];
+        DLog(@"余额支付=%@=%@",user.password,pwd);
+        UIAlertView* alertDesc=[[UIAlertView alloc] initWithTitle:@"请输入登陆密码" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alertDesc.alertViewStyle=UIAlertViewStyleSecureTextInput;
+        alertDesc.delegate=self;
+        alertDesc.tag=1024;
+        [alertDesc show];
+
     }else if (indexPath.section==1&indexPath.row==1){
         //TODO:支付宝支付
         DLog(@"支付宝支付");
@@ -98,16 +107,26 @@ CGFloat realPrice;
 }
 #pragma mark - SHOPBL Delegate
 -(void)payWithBalanceSuccess{
+    [_userBl refreshMyself];
     UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"付款成功!" message:nil delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
-    alert.tag=0;
+    alert.tag=1025;
     [alert show];
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag==0&buttonIndex==0) {
+    if (alertView.tag==1025&buttonIndex==0) {
         
         int index=[[self.navigationController viewControllers]indexOfObject:self];
         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2]animated:YES];
         
+    }else if(alertView.tag==1024&buttonIndex==1){//输入密码进行付费
+        NSString* pwd=[self md5:[alertView textFieldAtIndex:0].text];
+        DLog(@"md5-----%@===%@",[alertView textFieldAtIndex:0].text,pwd);
+        if([user.password isEqualToString:pwd]){
+            [_bl payOrderWithOrderID:orderID];
+        }else{
+            UIAlertView* alertWaring=[[UIAlertView alloc] initWithTitle:@"密码错误!" message:nil delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
+            [alertWaring show];
+        }
     }
 
 }
@@ -196,5 +215,32 @@ CGFloat realPrice;
     
 }
 
-
+//md5 32位 加密 （小写）
+-(NSString *)md5:(NSString *)str {
+    
+    
+    
+    const char *cStr = [str UTF8String];
+    
+    
+    
+    unsigned char result[32];
+    
+    
+    
+    CC_MD5( cStr, strlen(cStr), result );
+    
+    
+    
+    return [NSString stringWithFormat:
+            @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+            result[0],result[1],result[2],result[3],
+            
+            result[4],result[5],result[6],result[7],
+            
+            result[8],result[9],result[10],result[11],
+            
+            result[12],result[13],result[14],result[15]];
+    
+}
 @end

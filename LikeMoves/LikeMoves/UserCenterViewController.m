@@ -18,12 +18,12 @@
     NSArray *entries;
     NSArray *entriesSelected;
     NSMutableDictionary *selectionStates;
-
+    
     
     CYCustomMultiSelectPickerView *multiPickerView;
-
-
-    }
+    
+    
+}
 /**
  *  信息编辑界面
  */
@@ -32,8 +32,13 @@
 //选择 区 的pickerview
 @property (weak, nonatomic) IBOutlet UIPickerView *districtPickerView;
 @property (weak, nonatomic) IBOutlet UITextField *editAge;
+@property (weak, nonatomic) IBOutlet UILabel *editPhone;
 
 @property (weak, nonatomic) IBOutlet UITextField *editNickname;
+
+@property (weak, nonatomic) IBOutlet UITextField *oldPwd;
+@property (weak, nonatomic) IBOutlet UITextField *nPwd;
+@property (weak, nonatomic) IBOutlet UITextField *confirmPwd;
 
 - (IBAction)finishComplete:(id)sender;
 
@@ -75,11 +80,21 @@ NSArray* books;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //关闭虚拟键盘
+    
+    //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]   initWithTarget:self action:@selector(dismissKeyboard)];
+    //    [self.view addGestureRecognizer:tap];
+    //去掉table的多余横线
+    UIView*view =[ [UIView alloc]init];
+    view.backgroundColor= [UIColor clearColor];
+    [self.tableView setTableFooterView:view];
+    self.tableView.delegate=self;
     //逻辑层注册
     _bl=[LMUserActBL new];
     _bl.delegate=self;
-    
-    
+    [_bl refreshMyself];
+    User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults                                                            standardUserDefaults] objectForKey:mUserInfo]];
+    _editPhone.text=user.phone;
     /**
      *用户信息编辑界面的锻炼地点选择框
      */
@@ -102,6 +117,19 @@ NSArray* books;
     [_trainBtn addTarget:self action:@selector(getData) forControlEvents:UIControlEventTouchUpInside];
     
 }
+
+
+-(void)dismissKeyboard {
+    NSArray *subviews = [self.view subviews];
+    for (id objInput in subviews) {
+        if ([objInput isKindOfClass:[UITextField class]]) {
+            UITextField *theTextField = objInput;
+            if ([objInput isFirstResponder]) {
+                [theTextField resignFirstResponder];
+            }
+        }
+    }  }
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
@@ -166,7 +194,7 @@ NSArray* books;
     UITabBarController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginPage"];
     [self presentViewController:tabVC animated:YES completion:^(void){
     }];
-//    [self dismissViewControllerAnimated:NO completion:nil];
+    //    [self dismissViewControllerAnimated:NO completion:nil];
 }
 - (IBAction)finishComplete:(id)sender {
     [_bl editUserInfo:_editNickname.text sex:_editAge.text age:_editAge.text];
@@ -205,5 +233,18 @@ NSArray* books;
 
 - (IBAction)back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+#pragma mark - TableViewDelegate
+- (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
+    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow]animated:YES];
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [_editPhone resignFirstResponder];
+    [_editAge resignFirstResponder];
+    [_editNickname resignFirstResponder];
+    [_oldPwd resignFirstResponder];
+    [_nPwd resignFirstResponder];
+    [_confirmPwd resignFirstResponder];
 }
 @end

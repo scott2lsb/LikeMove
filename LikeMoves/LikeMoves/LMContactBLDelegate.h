@@ -23,4 +23,5 @@
 -(void)addFriendByPhoneSuccess:(NSInteger)status;
 -(void)acceptFriendSuccess;
 -(void)addFriendByIDSuccess:(NSInteger)status;
+-(void)delFriendByIDSuccess:(NSInteger)status;
 @end

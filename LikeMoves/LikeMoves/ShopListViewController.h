@@ -13,7 +13,11 @@
 @interface ShopListViewController : UIViewController<LMShopBLDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) LMShopBL* bl;
 @property(strong)NSArray* products;
+@property (weak, nonatomic) IBOutlet UIButton *companyIntro;
+@property (weak, nonatomic) IBOutlet UIButton *companyMap;
+
 //界面元素
 @property (weak, nonatomic) IBOutlet UITableView *productTable;
 
+- (IBAction)pushToShopCart:(id)sender;
 @end

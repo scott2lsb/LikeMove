@@ -100,4 +100,8 @@
 -(void)addFriendByIDSuccess:(NSInteger)status{
     [_delegate addFriendByIDSuccess:(NSInteger)status];
 }
+-(void)delFriendByIDSuccess:(NSInteger)status{
+    [_delegate delFriendByIDSuccess:status];
+}
+
 @end

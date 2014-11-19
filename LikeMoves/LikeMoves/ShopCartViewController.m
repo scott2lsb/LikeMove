@@ -130,10 +130,11 @@ NSMutableDictionary* detail;
 
 #pragma mark BLDelegate
 -(void)getShopingCartsSuccess:(NSArray *)array{
+    UILabel* label;
     if([array isKindOfClass:[NSNull class]]){
         _carts=nil;
         _tableView.hidden=YES;
-        UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0, 44, 320, [UIScreen mainScreen].bounds.size.height-108-49)];
+        label=[[UILabel alloc] initWithFrame:CGRectMake(0, 44, 320, [UIScreen mainScreen].bounds.size.height-108-49)];
         label.font=[UIFont systemFontOfSize:18.0];
         label.textAlignment=NSTextAlignmentCenter;
         label.text=@"您购物车中还没有商品哦！";
@@ -148,6 +149,8 @@ NSMutableDictionary* detail;
         
         [self.view addSubview:label];
     }else{
+        label.hidden=YES;
+        _tableView.hidden=NO;
         _carts=[array mutableCopy];
         [_tableView reloadData];
         [self caculateDeductionAndTotal];

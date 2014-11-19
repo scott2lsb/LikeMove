@@ -408,23 +408,23 @@ sectionForSectionIndexTitle:(NSString *)title
 {
     DLog(@"点击了第%ld组的 第%ld列",(long)indexPath.section,(long)indexPath.row);
     
-    NSUInteger section = [indexPath section];
-    NSString *key = [keys objectAtIndex:section];
-    NSArray *nameSection = [names objectForKey:key];
+//    NSUInteger section = [indexPath section];
+//    NSString *key = [keys objectAtIndex:section];
+//    NSArray *nameSection = [names objectForKey:key];
     
-    NSString* str1 = [nameSection objectAtIndex:indexPath.row];
-    
-    NSRange range=[str1 rangeOfString:@"+"];
-    
-    NSString* str2=[str1 substringFromIndex:range.location];
-    
-    NSString* areaCode=[str2 stringByReplacingOccurrencesOfString:@"+" withString:@""];
-    
-    NSString* countryName=[str1 substringToIndex:range.location];
+//    NSString* str1 = [nameSection objectAtIndex:indexPath.row];
+//    
+//    NSRange range=[str1 rangeOfString:@"+"];
+//    
+//    NSString* str2=[str1 substringFromIndex:range.location];
+//    
+//    NSString* areaCode=[str2 stringByReplacingOccurrencesOfString:@"+" withString:@""];
+//    
+//    NSString* countryName=[str1 substringToIndex:range.location];
     
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
 
-    DLog(@"%@ %@",countryName,areaCode);
+//    DLog(@"%@ %@",countryName,areaCode);
 }
 
 #pragma mark -

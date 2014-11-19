@@ -25,7 +25,7 @@
     // 创建、并初始化NSArray对象。
 
 //	_books = [NSArray arrayWithObjects:@"兰山区",@"河东区", @"罗庄区", @"郯城",@"苍山",@"莒南",@"临沭", @"费县",@"蒙阴","平邑",@"沂南",@"沂水",nil];
-    _books=[[NSArray alloc] initWithObjects:@"兰山区",@"河东区", @"罗庄区",nil];
+    _books=[[NSArray alloc] initWithObjects:@"兰山区",@"河东区", @"罗庄区",@"沂水县",@"郯城县",@"兰陵县",@"莒南县",@"临沭县",@"费县",@"蒙阴县",@"平邑县",@"沂南县",nil];
     //, @"郯城",@"苍山",@"莒南",@"临沭", @"费县",@"蒙阴","平邑",@"沂南",@"沂水"
 	// 为UIPickerView控件设置dataSource和delegate
 	self.districtPickView.dataSource = self;
@@ -94,14 +94,14 @@ numberOfRowsInComponent:(NSInteger)component
 {
     district=[_books objectAtIndex:row];
 	// 使用一个UIAlertView来显示用户选中的列表项
-	UIAlertView* alert = [[UIAlertView alloc]
-                          initWithTitle:@"提示"
-                          message:[NSString stringWithFormat:@"你选中的地区是：%@"
-                                   , [_books objectAtIndex:row]]
-                          delegate:nil
-                          cancelButtonTitle:@"确定"
-                          otherButtonTitles:nil];
-	[alert show];
+//	UIAlertView* alert = [[UIAlertView alloc]
+//                          initWithTitle:@"提示"
+//                          message:[NSString stringWithFormat:@"你选中的地区是：%@"
+//                                   , [_books objectAtIndex:row]]
+//                          delegate:nil
+//                          cancelButtonTitle:@"确定"
+//                          otherButtonTitles:nil];
+//	[alert show];
 }
 - (IBAction)addReceiver:(id)sender {
     NSString* name=_receiverName.text;

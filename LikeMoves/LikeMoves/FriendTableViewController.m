@@ -26,7 +26,7 @@ RTSpinKitView* spinner;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor whiteColor]];
+    spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor orangeColor]];
     spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
     [self.view addSubview:spinner];
     [spinner startAnimating];
@@ -73,6 +73,7 @@ RTSpinKitView* spinner;
     _segmentedControl.frame = CGRectMake(0, 0 +44+ yDelta, 320, 44);
     _segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     _segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+    _segmentedControl.selectionIndicatorColor=[UIColor orangeColor];
     [_segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_segmentedControl];
     
@@ -89,7 +90,8 @@ RTSpinKitView* spinner;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.contentSize = CGSizeMake(640, [[UIScreen mainScreen]bounds].size.height-20-44-44-49);
-    self.scrollView.delegate = self;
+//    self.scrollView.delegate = self;
+    self.scrollView.scrollEnabled=NO;
     [self.scrollView scrollRectToVisible:CGRectMake(0, 0, 320, [[UIScreen mainScreen]bounds].size.height-20-44-44-49) animated:NO];
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:_tableView];
@@ -197,27 +199,6 @@ RTSpinKitView* spinner;
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSDictionary* dict=[_crowdfundFriends objectAtIndex:indexPath.row];
-        NSString* friend_id=[dict objectForKey:@"id"];
-        [_bl delFriend:friend_id];
-        
-        [_rankFriends removeObjectAtIndex:indexPath.row];
-        
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
-        DLog(@"delete");
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-}
 #pragma mark - UITableViewDelegate
 NSString* friendID;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -235,14 +216,28 @@ NSString* friendID;
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         // 设置第1个文本框关联的键盘只是数字键盘
         [alert textFieldAtIndex:0].keyboardType = UIKeyboardTypeNumberPad;
+        alert.tag=1;
         // 显示UIAlertView
+        [alert show];
+    }else{
+        NSDictionary* dict=[_rankFriends objectAtIndex:indexPath.row];
+        NSString* name=[dict objectForKey:@"nickname"];
+        friendID=[dict objectForKey:@"id"];
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:[NSString stringWithFormat:@"确定要删除好友“%@”吗？",name]
+                              message:nil
+                              delegate:self
+                              cancelButtonTitle:@"取消"
+                              otherButtonTitles:@"确定" , nil];
+        alert.tag=2;
+        alert.alertViewStyle=UIAlertViewStyleDefault;
         [alert show];
     }
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
 }
 #pragma mark - AlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(buttonIndex==1){
+    if(buttonIndex==1&alertView.tag==1){
         // 获取UIAlertView中第1个输入框
 		UITextField* nameField = [alertView textFieldAtIndex:0];
         User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
@@ -259,6 +254,9 @@ NSString* friendID;
             // 显示UIAlertView
             [alert show];
         }
+    }else if(buttonIndex==1&alertView.tag==2){
+        [_bl delFriend:friendID];
+        [spinner startAnimating];
     }
 }
 #pragma mark - 界面元素监听方法
@@ -351,15 +349,50 @@ NSString* friendID;
         _rankFriends=nil;
     }else{
         _rankFriends=[rank mutableCopy];
+        
+        //TODO：排名进行处理
+        User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults                                                            standardUserDefaults] objectForKey:mUserInfo]];
+        NSString* rankDefault=[[NSUserDefaults standardUserDefaults]  objectForKey:mUserRank];
+        if (rankDefault==nil) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:mUserRank];
+            rankDefault=@"1";
+        }
+        int changeRank;
+        int userRank;
+        if (_rankFriends.count>1) {
+            for (int i=0; i<_rankFriends.count; i++) {
+                                NSString* userID=[[_rankFriends objectAtIndex:i ] objectForKey:@"id"];
+                if ([user.userId isEqualToString:userID]) {
+                    userRank=i+1;
+                    changeRank=i+1-[rankDefault intValue];
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",userRank] forKey:mUserRank];
+                }
+            }
+        }
+        DXAlertView * alert;
+        if (changeRank<0) {
+            alert = [[DXAlertView alloc] initWithTitle:nil contentText:[NSString stringWithFormat:@"你的排名上升了%d位！",-changeRank] leftButtonTitle:nil rightButtonTitle:@"知道了"];
+        }else if(changeRank>0){
+            alert = [[DXAlertView alloc] initWithTitle:nil contentText:[NSString stringWithFormat:@"你的排名下降了%d位！",changeRank] leftButtonTitle:nil rightButtonTitle:@"知道了"];
+        }
+        
+        [alert show];
+        alert.rightBlock = ^() {
+            DLog(@"right button clicked");
+        };
+        alert.dismissBlock = ^() {
+            DLog(@"Do something interesting after dismiss block");
+        };
     }
     //    DLog(@"%@",_rankFriends);
     [self.tableView reloadData];
 }
 -(void) getCrowdfundFriendsSuccess:(NSArray *)friends{
+    UILabel* label;
     if([friends isKindOfClass:[NSNull class]]){
         _crowdfundFriends=nil;
         _crowdfundFriendTableView.hidden=YES;
-        UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(320, 0, 320, [UIScreen mainScreen].bounds.size.height-108-49)];
+         label=[[UILabel alloc] initWithFrame:CGRectMake(320, 0, 320, [UIScreen mainScreen].bounds.size.height-108-49)];
         label.font=[UIFont systemFontOfSize:18.0];
         label.textAlignment=NSTextAlignmentCenter;
         label.text=@"还没有人众筹哦！";
@@ -367,18 +400,39 @@ NSString* friendID;
         label.textColor=[UIColor grayColor];
         [self.scrollView addSubview:label];
     }else{
+        label.hidden=YES;
+        _crowdfundFriendTableView.hidden=NO;
         _crowdfundFriends=[friends mutableCopy];
     }
     [self.crowdfundFriendTableView reloadData];
 }
+-(void)delFriendByIDSuccess:(NSInteger)status{
+    [spinner stopAnimating];
+    switch (status) {
+        case 1:
+        {
+            //实例化一个NSDateFormatter对象
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            //设定时间格式,这里可以设置成自己需要的格式
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            //用[NSDate date]可以获取系统当前时间
+            NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+            [_bl getFriendSportRank:currentDateStr];
+        
+            break;
+        }
+        default:
+            break;
+    }
+}
 #pragma mark - UIScrollDelegate
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    CGFloat pageWidth = scrollView.frame.size.width;
-    NSInteger page = scrollView.contentOffset.x / pageWidth;
-    
-    [self.segmentedControl setSelectedSegmentIndex:page animated:YES];
-}
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+//    CGFloat pageWidth = scrollView.frame.size.width;
+//    NSInteger page = scrollView.contentOffset.x / pageWidth;
+//    
+//    [self.segmentedControl setSelectedSegmentIndex:page animated:YES];
+//}
 -(NSString*)timeFormat:(NSString*)time{
     int sportTime=[time intValue];
     int hour=sportTime/60;

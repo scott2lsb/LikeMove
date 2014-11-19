@@ -122,12 +122,19 @@ RTSpinKitView* spinnerIndicator;
             UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"添加好友成功！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alert show];
             break;}
+        case 6201:{
+            //TODO: 已经添加此好友
+            [spinnerIndicator stopAnimating];
+            UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"已请求添加好友，请耐心等待对方回应！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+            break;}
         case 6202:{
             //TODO: 已经添加此好友
             [spinnerIndicator stopAnimating];
             UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"此好友已添加！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alert show];
             break;}
+
         default:
             break;
     }

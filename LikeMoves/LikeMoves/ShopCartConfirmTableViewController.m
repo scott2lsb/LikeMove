@@ -43,6 +43,20 @@ NSString* shipingMethod=@"2";
     _sumCoins.text=[NSString stringWithFormat:@"%@个",user.coins];
     _coinNum.clearsOnInsertion=YES;
     _realPrice.text=[NSString stringWithFormat:@"￥%0.2f",[[_detail objectForKey:@"totalPrice"] floatValue]];
+    float maxDeduction=[[_detail objectForKey:@"maxDeduction"] floatValue]*100;
+    float coinNum=[user.coins floatValue];
+    if (maxDeduction>coinNum) {
+        _coinNum.text=[NSString stringWithFormat:@"%ld",lroundf(coinNum)];
+        //计算显示金额
+        _deduction.text=[NSString stringWithFormat:@"￥%0.2f",coinNum/100];
+        _realPrice.text=[NSString stringWithFormat:@"￥%0.2f",([[_detail objectForKey:@"totalPrice"] floatValue]-coinNum/100 )];
+    }else{
+        _coinNum.text=[NSString stringWithFormat:@"%ld",lroundf(maxDeduction)];
+        //计算显示金额
+        _deduction.text=[NSString stringWithFormat:@"￥%0.2f",maxDeduction/100];
+        _realPrice.text=[NSString stringWithFormat:@"￥%0.2f",([[_detail objectForKey:@"totalPrice"] floatValue]-maxDeduction/100 )];
+
+    }
 }
 -(void)dismissKeyboard {
 //    [_coinNum resignFirstResponder];
@@ -73,7 +87,7 @@ NSString* shipingMethod=@"2";
 #pragma mark - Table View Delegate
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     DLog(@"%d,%d,%d",indexPath.row,indexPath.section,[[_detail objectForKey:@"totalPrice"] intValue]);
-    if(indexPath.row==1&indexPath.section==0&[[_detail objectForKey:@"totalPrice"] intValue]>59){
+    if(indexPath.row==1&indexPath.section==0&[[_detail objectForKey:@"totalPrice"] intValue]>39){
         shipingMethod=@"1";
         UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReceiverPage"];
@@ -92,15 +106,26 @@ NSString* shipingMethod=@"2";
 #pragma mark - TextField Delegate
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
+
+    NSString* deduction=[_maxDeduction.text stringByReplacingOccurrencesOfString:@"￥" withString:@""];
     //NSUserDefaults刷新金币数量，使用NSUserDefaults中的数据
     User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults                                                            standardUserDefaults] objectForKey:mUserInfo]];
-    if([textField.text intValue]>[user.coins intValue]&[textField.text intValue]>[[_detail objectForKey:@""] floatValue]*100 ){
+    if([textField.text intValue]>[user.coins intValue] ){
         
         textField.text=@"0";
         
         UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"金币数量不足" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
-        
+        //计算显示金额
+        _deduction.text=[NSString stringWithFormat:@"￥%0.2f",[textField.text floatValue]/100];
+        _realPrice.text=[NSString stringWithFormat:@"￥%0.2f",([[_detail objectForKey:@"totalPrice"] floatValue]-[textField.text floatValue]/100 )];
+    }else if([_coinNum.text intValue]>lroundf([deduction floatValue]*100)){
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"超过最大可抵扣额度" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+        textField.text=@"0";
+        //计算显示金额
+        _deduction.text=[NSString stringWithFormat:@"￥%0.2f",[textField.text floatValue]/100];
+        _realPrice.text=[NSString stringWithFormat:@"￥%0.2f",([[_detail objectForKey:@"totalPrice"] floatValue]-[textField.text floatValue]/100 )];
     }else{
         _deduction.text=[NSString stringWithFormat:@"￥%0.2f",[textField.text floatValue]/100];
         _realPrice.text=[NSString stringWithFormat:@"￥%0.2f",([[_detail objectForKey:@"totalPrice"] floatValue]-[textField.text floatValue]/100 )];

@@ -108,11 +108,21 @@ NSDictionary* selectProduct;
         selectProduct=[_products objectAtIndex:indexPath.row];
     return indexPath;
 }
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return 100.0;
-//}
-//
 
+//-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+//    _companyMap.hidden=YES;
+//    _companyIntro.hidden=YES;
+//    _companyIntro.alpha=0.1;
+//}
+//-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+//    _companyIntro.alpha=0.0;
+//    
+//}
+//-(void)scrollViewDidScrollToTop:(UIScrollView *)scrollView{
+//    _companyMap.hidden=NO;
+//    _companyIntro.hidden=NO;
+//    _companyIntro.alpha=1.0;
+//}
 
  #pragma mark - Navigation
  
@@ -122,5 +132,10 @@ NSDictionary* selectProduct;
      UIViewController* view = segue.destinationViewController;
     [view setValue:selectProduct forKey:@"selectProduct"];
  }
+}
+- (IBAction)pushToShopCart:(id)sender {
+    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"ShopCartPage"];
+    [self.navigationController pushViewController:tabVC animated:YES];
 }
 @end

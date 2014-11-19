@@ -29,4 +29,5 @@
 //添加到购物车
 - (IBAction)addToCart:(id)sender;
 
+- (IBAction)pushToShopCart:(id)sender;
 @end

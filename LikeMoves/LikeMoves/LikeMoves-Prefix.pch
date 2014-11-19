@@ -43,6 +43,10 @@
 #define mSportTime  @"sport_time"
 #define mUseTime    @"user_use_time"
 /**
+ *  NSUserDefaults用户排名
+ */
+#define mUserRank @"sport_rank"
+/**
  *  短信key和secret
  */
 #define sms_appKey @"3d246c910e92"

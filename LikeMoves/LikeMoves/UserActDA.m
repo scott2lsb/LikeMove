@@ -124,11 +124,11 @@
 
         NSString* suffix=[NSString stringWithFormat:@"?m=user&a=search&username=%@",username];
     NSString* requestUrl                                                 =[BaseURLString stringByAppendingString:suffix];
-    
+    DLog(@"更新用户信息-request-url=%@",requestUrl);
     [manager POST:requestUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"更新用户信息-json:%@",operation.responseString);
         // 使用jsonkit进行json解析
-        [self jsonToUserDefault:operation];
+        [self jsonToDefaultUser:operation];
         //使用BL的delegate loginFinished方法udObject
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -202,8 +202,7 @@ User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardU
     NSDictionary* resInfo=[operation.responseString objectFromJSONString];
     NSArray* userInfos=[resInfo objectForKey:@"list"];
 NSDictionary* userInfo=    [userInfos objectAtIndex:0];
-    
-    User* user=[[User alloc]init];
+    User* user=[[User alloc] init];
     user.userId=[userInfo objectForKey:@"id"];
     user.nickName=[userInfo objectForKey:@"nickname"];
     user.password=[userInfo objectForKey:@"password"];

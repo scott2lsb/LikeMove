@@ -116,8 +116,10 @@
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"JSON: %@", operation.responseString);
+        NSDictionary*dict=[operation.responseString objectFromJSONString];
+NSString* status=        [dict objectForKey:@"result"];
         //编辑成功BL的delegate editSuccess
-        //        [_delegate editUserInfoSuccess];
+        [_delegate delFriendByIDSuccess:[status intValue]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail

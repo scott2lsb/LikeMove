@@ -10,7 +10,8 @@
 #import "User.h"
 #import "LMShopBL.h"
 #import "LMShopBLDelegate.h"
-
+#import <CommonCrypto/CommonDigest.h>
+#import "LMUserActBL.h"
 
 @interface PayToOrderTableViewController : UITableViewController<LMShopBLDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *userBalance;
@@ -18,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *deduction;
 @property (weak, nonatomic) IBOutlet UILabel *realPrice;
 @property (strong,nonatomic) LMShopBL* bl;
+@property LMUserActBL* userBl;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelPay;
 
 - (IBAction)cancelPayTo:(id)sender;

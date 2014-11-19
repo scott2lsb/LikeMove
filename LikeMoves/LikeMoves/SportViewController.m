@@ -36,6 +36,7 @@ static int sportSec;
     _bl=[[LMSportBL alloc]init];
     _bl.delegate=self;
     _userBL=[[LMUserActBL alloc] init];
+    [_userBL refreshMyself];
     [_bl startMotionDetect];
     /**
      能量环

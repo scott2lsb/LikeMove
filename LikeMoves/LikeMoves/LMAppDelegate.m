@@ -233,8 +233,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     if ([BPushRequestMethod_Bind isEqualToString:method])
     {
-        NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
-        DLog(@"BDPush-%@",res);
+//        NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
+//        DLog(@"BDPush-%@",res);
     }
 }
 - (void)application:(UIApplication *)application

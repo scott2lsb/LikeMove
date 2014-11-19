@@ -58,6 +58,7 @@
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.contentSize = CGSizeMake(1280, [[UIScreen mainScreen]bounds].size.height-20-44-44-49);
     self.scrollView.delegate = self;
+    self.scrollView.scrollEnabled=NO;
     [self.scrollView scrollRectToVisible:CGRectMake(0, 0, 320, [[UIScreen mainScreen]bounds].size.height-20-44-44-49) animated:NO];
     [self.view addSubview:self.scrollView];
     
@@ -118,12 +119,12 @@
 }
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    CGFloat pageWidth = scrollView.frame.size.width;
-    NSInteger page = scrollView.contentOffset.x / pageWidth;
-    
-    [self.segmentedControl setSelectedSegmentIndex:page animated:YES];
-}
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+//    CGFloat pageWidth = scrollView.frame.size.width;
+//    NSInteger page = scrollView.contentOffset.x / pageWidth;
+//    
+//    [self.segmentedControl setSelectedSegmentIndex:page animated:YES];
+//}
 #pragma mark - TableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
