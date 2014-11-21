@@ -74,7 +74,7 @@ NSArray* carts;
     UILabel* num=(UILabel*)[cell viewWithTag:4];
     NSDictionary* friend=[carts objectAtIndex:indexPath.row];
     name.text=[friend objectForKey:@"name"];
-    price.text=[NSString stringWithFormat:@"￥%@",[friend objectForKey:@"price"]];
+    price.text=[NSString stringWithFormat:@"￥%0.2f",[[friend objectForKey:@"price"] floatValue]];
     size.text=[friend objectForKey:@"comment"];
     num.text=[NSString stringWithFormat:@"X%@",[friend objectForKey:@"number"]];
     UIImageView* img=(UIImageView*)[cell viewWithTag:5];

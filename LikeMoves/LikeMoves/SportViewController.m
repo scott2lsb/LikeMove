@@ -168,11 +168,11 @@ static int sportSec;
         //        //userBL更新本地用户NSUserDefaults中的信息
         //        [_userBL refreshMyself];
         //userBL更新服务器中的金币信息
-        SMS_MBProgressHUD *hud = [SMS_MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        SMS_MBProgressHUD *hud = [SMS_MBProgressHUD showHUDAddedTo:self.tabBarController.view animated:YES];
         
         // Configure for text only and offset down
-        hud.mode = MBProgressHUDModeDeterminate;
-        UIView*view =[ [UIView alloc]init];
+        hud.mode = MBProgressHUDModeCustomView;
+        UIView*view =[ [UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 10)];
         view.backgroundColor= [UIColor clearColor];
         
         [hud setCustomView:view];
@@ -180,7 +180,9 @@ static int sportSec;
         hud.removeFromSuperViewOnHide = YES;
         hud.backgroundColor=[UIColor clearColor];
         hud.tintColor=[UIColor orangeColor];
+        hud.dimBackground=YES;
         
+
         
         if(sportCircleNumber>3600){
             [_bl addCoins:@"36"];

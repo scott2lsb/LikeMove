@@ -17,7 +17,9 @@
 #import "AlixPayResult.h"
 #import "DataVerifier.h"
 #import "PartnerConfig.h"
-@interface LMAppDelegate : UIResponder <UIApplicationDelegate,EAIntroDelegate>{
+#import "LMShopBL.h"
+#import "LMShopBLDelegate.h"
+@interface LMAppDelegate : UIResponder <UIApplicationDelegate,EAIntroDelegate,LMShopBLDelegate>{
     UIView *rootView;
     UIImageView *_wallpaperView;
     FBShimmeringView *_shimmeringView;
@@ -36,6 +38,6 @@
 @property (strong, nonatomic) NSString *appId;
 @property (strong, nonatomic) NSString *channelId;
 @property (strong, nonatomic) NSString *userId;
-
+@property LMShopBL* bl;
 
 @end

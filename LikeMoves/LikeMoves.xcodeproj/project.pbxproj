@@ -227,6 +227,8 @@
 		8AE4E4421A08A7D000E6C473 /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE4E4381A08A7D000E6C473 /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8AE4E4441A08A7D000E6C473 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE4E43C1A08A7D000E6C473 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8AE4E4471A08AC7100E6C473 /* BPushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8AE4E4461A08AC7100E6C473 /* BPushConfig.plist */; };
+		8AE560EC1A1DD0AC00F6DB00 /* AlipaySuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE560EB1A1DD0AC00F6DB00 /* AlipaySuccessViewController.m */; };
+		8AE560EF1A1E1D8200F6DB00 /* EditPwdTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE560EE1A1E1D8200F6DB00 /* EditPwdTableViewController.m */; };
 		8AEBEE911A076FC50003D91A /* com_detail.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AEBEE8F1A076FC50003D91A /* com_detail.png */; };
 		8AEBEE921A076FC50003D91A /* com_earth.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AEBEE901A076FC50003D91A /* com_earth.png */; };
 		F2195B7CB90086FB1E60C8F2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6772DCDF65961186F47E45BF /* libPods.a */; };
@@ -598,6 +600,10 @@
 		8AE4E43B1A08A7D000E6C473 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		8AE4E43C1A08A7D000E6C473 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		8AE4E4461A08AC7100E6C473 /* BPushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BPushConfig.plist; sourceTree = "<group>"; };
+		8AE560EA1A1DD0AC00F6DB00 /* AlipaySuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipaySuccessViewController.h; sourceTree = "<group>"; };
+		8AE560EB1A1DD0AC00F6DB00 /* AlipaySuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipaySuccessViewController.m; sourceTree = "<group>"; };
+		8AE560ED1A1E1D8200F6DB00 /* EditPwdTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPwdTableViewController.h; sourceTree = "<group>"; };
+		8AE560EE1A1E1D8200F6DB00 /* EditPwdTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPwdTableViewController.m; sourceTree = "<group>"; };
 		8AEBEE8F1A076FC50003D91A /* com_detail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = com_detail.png; sourceTree = "<group>"; };
 		8AEBEE901A076FC50003D91A /* com_earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = com_earth.png; sourceTree = "<group>"; };
 		BB5C4D6F910CC83B04D77B3C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -1153,6 +1159,8 @@
 				8AAABDD01A01E16F006BF58A /* AddReceiverViewController.m */,
 				8AAABDD21A021023006BF58A /* CrowdfundViewController.h */,
 				8AAABDD31A021023006BF58A /* CrowdfundViewController.m */,
+				8AE560ED1A1E1D8200F6DB00 /* EditPwdTableViewController.h */,
+				8AE560EE1A1E1D8200F6DB00 /* EditPwdTableViewController.m */,
 				8AE377BB1A1204DB0017118C /* Order */,
 				8AAABDDD1A0348A1006BF58A /* CustomTableCell */,
 			);
@@ -1431,6 +1439,8 @@
 				8AE377BD1A1205400017118C /* PayToOrderTableViewController.m */,
 				8AE377BF1A123ABC0017118C /* NoPaidTableViewController.h */,
 				8AE377C01A123ABC0017118C /* NoPaidTableViewController.m */,
+				8AE560EA1A1DD0AC00F6DB00 /* AlipaySuccessViewController.h */,
+				8AE560EB1A1DD0AC00F6DB00 /* AlipaySuccessViewController.m */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -1788,6 +1798,7 @@
 				8AC7F82719DF8FA6008C2934 /* RTSpinKitThreeBounceAnimation.m in Sources */,
 				8AC7F81D19DF8FA6008C2934 /* RTSpinKitArcAltAnimation.m in Sources */,
 				8A8504D819E415FB00CB730E /* ResetPwdViewController.m in Sources */,
+				8AE560EF1A1E1D8200F6DB00 /* EditPwdTableViewController.m in Sources */,
 				8AE377B41A11BFD50017118C /* ReceiverOrderDetailTableViewController.m in Sources */,
 				8AB1AC1319D5388200017485 /* DKCircleButton.m in Sources */,
 				8AAABDCE1A01C7D9006BF58A /* ReceiverViewController.m in Sources */,
@@ -1795,6 +1806,7 @@
 				8A85054319E8217B00CB730E /* AcceptFriendViewController.m in Sources */,
 				8A8504CB19E23D2E00CB730E /* SportDAO.m in Sources */,
 				8A41C8E019FA199600FBAD37 /* Reachability.m in Sources */,
+				8AE560EC1A1DD0AC00F6DB00 /* AlipaySuccessViewController.m in Sources */,
 				8AE4E4441A08A7D000E6C473 /* OpenUDID.m in Sources */,
 				8AE378141A12D9E60017118C /* NSString+SBJSON.m in Sources */,
 				8AAABDD41A021023006BF58A /* CrowdfundViewController.m in Sources */,

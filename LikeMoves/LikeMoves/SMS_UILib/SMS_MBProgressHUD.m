@@ -256,7 +256,7 @@
 		[NSException raise:@"MBProgressHUDViewIsNillException" 
 					format:@"The view used in the MBProgressHUD initializer is nil."];
 	}
-	id me = [self initWithFrame:CGRectMake(view.bounds.origin.x, view.bounds.origin.y+80, view.bounds.size.width, view.bounds.size.height)];
+	id me = [self initWithFrame:CGRectMake(view.bounds.origin.x, view.bounds.origin.y, view.bounds.size.width, view.bounds.size.height)];
 	// We need to take care of rotation ourselfs if we're adding the HUD to a window
 	if ([view isKindOfClass:[UIWindow class]]) {
 		[self setTransformForCurrentOrientation:NO];
@@ -385,7 +385,7 @@
 		
         // Set the label position and dimensions
         CGRect lFrame = CGRectMake(floorf((frame.size.width - lWidth) / 2) + xOffset,
-                                   floorf(indFrame.origin.y + indFrame.size.height + PADDING),
+                                   floorf(indFrame.origin.y + indFrame.size.height + PADDING)+70,
                                    lWidth, lHeight);
         label.frame = lFrame;
 		
@@ -643,7 +643,7 @@
         //Gradient colours
         size_t gradLocationsNum = 2;
         CGFloat gradLocations[2] = {0.0f, 1.0f};
-        CGFloat gradColors[8] = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.75f}; 
+        CGFloat gradColors[8] = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f};
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
         CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, gradColors, gradLocations, gradLocationsNum);
 		CGColorSpaceRelease(colorSpace);

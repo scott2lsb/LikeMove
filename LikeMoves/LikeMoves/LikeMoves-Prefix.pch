@@ -47,8 +47,18 @@
  */
 #define mUserRank @"sport_rank"
 /**
+ *  为用户准备的支付宝正在付款的订单
+ */
+#define mUserPayingOrder @"paying_order"
+/**
  *  短信key和secret
  */
 #define sms_appKey @"3d246c910e92"
 #define sms_appSecret @"19c3b610ddc6f09839359996d60ce47d"
 #define um_appkey @"5440d3aafd98c5a72a00567b"
+/**
+ *  Alipay订单支付成功通知
+ */
+#define shop_alipay_success_notification @"alipay_order_pay_success"
+//Alipay订单失败
+#define shop_alipay_fail_notification @"alipay_order_pay_fail"

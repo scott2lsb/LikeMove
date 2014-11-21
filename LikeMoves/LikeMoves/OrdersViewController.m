@@ -190,7 +190,7 @@
             NSDictionary* dictNO=            [_noPayArray objectAtIndex:indexPath.row];
             cell.orderNO.text=[NSString stringWithFormat:@"订单号:%@",[dictNO objectForKey:@"order_no"]];
             cell.createTime.text=[NSString stringWithFormat:@"创建时间:%@",[dictNO objectForKey:@"create_time"]];
-            cell.totalPrice.text=[NSString stringWithFormat:@"总价:%@",[dictNO objectForKey:@"total_price"]];
+            cell.totalPrice.text=[NSString stringWithFormat:@"总价:%0.2f",[[dictNO objectForKey:@"need_cash"] floatValue]];
             NSArray* num=(NSArray*)[dictNO objectForKey:@"shopping_carts"];
             if(![num isKindOfClass:[NSNull class]]){
             cell.productNO.text=[NSString stringWithFormat:@"商品数量:%d",num.count];
@@ -209,7 +209,7 @@
             NSDictionary* dictNO=            [_paidArray objectAtIndex:indexPath.row];
             cell.orderNO.text=[NSString stringWithFormat:@"订单号:%@",[dictNO objectForKey:@"order_no"]];
             cell.createTime.text=[NSString stringWithFormat:@"创建时间:%@",[dictNO objectForKey:@"create_time"]];
-            cell.totalPrice.text=[NSString stringWithFormat:@"总价:%@",[dictNO objectForKey:@"total_price"]];
+            cell.totalPrice.text=[NSString stringWithFormat:@"总价:%0.2f",[[dictNO objectForKey:@"need_cash"] floatValue]];
             NSArray* num=(NSArray*)[dictNO objectForKey:@"shopping_carts"];
             if(![num isKindOfClass:[NSNull class]]){
                 cell.productNO.text=[NSString stringWithFormat:@"商品数量:%d",num.count];
@@ -228,7 +228,7 @@
             NSDictionary* dictNO=            [_sendArray objectAtIndex:indexPath.row];
             cell.orderNO.text=[NSString stringWithFormat:@"订单号:%@",[dictNO objectForKey:@"order_no"]];
             cell.createTime.text=[NSString stringWithFormat:@"创建时间：%@",[dictNO objectForKey:@"create_time"]];
-            cell.totalPrice.text=[NSString stringWithFormat:@"总价:%@",[dictNO objectForKey:@"total_price"]];
+            cell.totalPrice.text=[NSString stringWithFormat:@"总价:%0.2f",[[dictNO objectForKey:@"need_cash"] floatValue]];
             NSArray* num=(NSArray*)[dictNO objectForKey:@"shopping_carts"];
             if(![num isKindOfClass:[NSNull class]]){
                 cell.productNO.text=[NSString stringWithFormat:@"商品数量:%d",num.count];
@@ -245,7 +245,7 @@
             NSDictionary* dictNO=            [_receivedArray objectAtIndex:indexPath.row];
             cell.orderNO.text=[NSString stringWithFormat:@"订单号:%@",[dictNO objectForKey:@"order_no"]];
             cell.createTime.text=[NSString stringWithFormat:@"创建时间:%@",[dictNO objectForKey:@"create_time"]];
-            cell.totalPrice.text=[NSString stringWithFormat:@"总价:%@",[dictNO objectForKey:@"total_price"]];
+            cell.totalPrice.text=[NSString stringWithFormat:@"总价:%0.2f",[[dictNO objectForKey:@"need_cash"] floatValue]];
             NSArray* num=(NSArray*)[dictNO objectForKey:@"shopping_carts"];
             if(![num isKindOfClass:[NSNull class]]){
                 cell.productNO.text=[NSString stringWithFormat:@"商品数量:%d",num.count];

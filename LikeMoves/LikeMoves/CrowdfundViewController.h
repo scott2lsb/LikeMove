@@ -19,8 +19,8 @@
 @property(strong,nonatomic)UITableView* receivedTableView;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic,strong)HMSegmentedControl*segmentedControl;
-@property(strong,nonatomic)NSArray* givedArray;
-@property(strong,nonatomic)NSArray* receivedArray;
+@property(strong,nonatomic)NSMutableArray* givedArray;
+@property(strong,nonatomic)NSMutableArray* receivedArray;
 @property(strong,nonatomic)LMShopBL* bl;
 
 

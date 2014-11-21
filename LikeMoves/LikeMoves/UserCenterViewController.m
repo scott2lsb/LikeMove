@@ -30,15 +30,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *trainBtn;
 @property (weak, nonatomic) IBOutlet UILabel *showLbl;
 //选择 区 的pickerview
-@property (weak, nonatomic) IBOutlet UIPickerView *districtPickerView;
+
 @property (weak, nonatomic) IBOutlet UITextField *editAge;
 @property (weak, nonatomic) IBOutlet UILabel *editPhone;
 
 @property (weak, nonatomic) IBOutlet UITextField *editNickname;
 
-@property (weak, nonatomic) IBOutlet UITextField *oldPwd;
-@property (weak, nonatomic) IBOutlet UITextField *nPwd;
-@property (weak, nonatomic) IBOutlet UITextField *confirmPwd;
+
 
 - (IBAction)finishComplete:(id)sender;
 
@@ -243,8 +241,5 @@ NSArray* books;
     [_editPhone resignFirstResponder];
     [_editAge resignFirstResponder];
     [_editNickname resignFirstResponder];
-    [_oldPwd resignFirstResponder];
-    [_nPwd resignFirstResponder];
-    [_confirmPwd resignFirstResponder];
 }
 @end

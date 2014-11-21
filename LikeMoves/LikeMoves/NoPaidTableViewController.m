@@ -73,7 +73,7 @@ NSArray* carts;
 
     NSDictionary* friend=[carts objectAtIndex:indexPath.row];
     name.text=[friend objectForKey:@"name"];
-    price.text=[NSString stringWithFormat:@"￥%@",[friend objectForKey:@"price"]];
+    price.text=[NSString stringWithFormat:@"￥%0.2f",[[friend objectForKey:@"price"] floatValue]];
     size.text=[friend objectForKey:@"comment"];
     num.text=[NSString stringWithFormat:@"X%@",[friend objectForKey:@"number"]];
         UIImageView* img=(UIImageView*)[cell viewWithTag:5];
@@ -106,6 +106,7 @@ NSArray* carts;
     [dict setValue:[_dict objectForKey:@"id"]  forKey:@"order_id"];
     [dict setValue:[_dict objectForKey:@"need_coins"]  forKey:@"deduction_coins"];
     [dict setValue:[_dict objectForKey:@"need_cash"]  forKey:@"real_price" ];
+    [dict setValue:[_dict objectForKey:@"order_no"]  forKey:@"order_no" ];
     
     UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PayToOrderTableViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"PayToOrderPage"];

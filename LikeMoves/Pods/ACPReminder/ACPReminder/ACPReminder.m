@@ -277,7 +277,7 @@ static NSString *const kACPNotificationPeriodIndex = @"kACPNotificationPeriodInd
 
 #if !DEBUG
     
-    NSLog(@"WARNING: TestFlag attribute is YES");
+//    DLog(@"WARNING: TestFlag attribute is YES");
     
 #endif
     

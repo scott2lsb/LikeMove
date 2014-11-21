@@ -158,7 +158,7 @@ NSString* shipingMethod=@"2";
     [dict setValue:[data objectForKey:@"id"]  forKey:@"order_id"];
     [dict setValue:[data objectForKey:@"need_coins"]  forKey:@"deduction_coins"];
     [dict setValue:[data objectForKey:@"need_cash"]  forKey:@"real_price" ];
-    
+    [dict setValue:[data objectForKey:@"order_no"] forKey:@"order_no"];
     UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PayToOrderTableViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"PayToOrderPage"];
     tabVC.dict=dict;

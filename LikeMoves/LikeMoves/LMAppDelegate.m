@@ -317,10 +317,16 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 
 
 - (void)parse:(NSURL *)url application:(UIApplication *)application {
+    NSString* orderInfo=[[NSUserDefaults standardUserDefaults] objectForKey:mUserPayingOrder];
+    NSArray* orderInfoArray=[orderInfo componentsSeparatedByString:@","];
+    
+    NSString* orderID=orderInfoArray[0];
+    NSString* orderPayPrice=[orderInfoArray[1] stringByReplacingOccurrencesOfString:@"￥" withString:@""];
     
     //结果处理
     AlixPayResult* result = [self handleOpenURL:url];
-    
+    _bl=[[LMShopBL alloc] init];
+    _bl.delegate=self;
 	if (result)
     {
 		
@@ -339,7 +345,9 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
             {
                 //验证签名成功，交易结果无篡改
                 //交易成功
-                DLog(@"客户端交易成功");
+                DLog(@"客户端交易成功-%@-resultString:%@",orderInfo,result.resultString);
+                
+                [_bl payOrderWithOrderID:orderID alipay:orderPayPrice];
                 
             }
             
@@ -347,11 +355,17 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
         else
         {
             //交易失败
+            NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
+            NSNotification* noti=[NSNotification notificationWithName:shop_alipay_fail_notification object:nil];
+            [nc postNotification:noti];
         }
     }
     else
     {
         //失败
+        NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
+        NSNotification* noti=[NSNotification notificationWithName:shop_alipay_fail_notification object:nil];
+        [nc postNotification:noti];
     }
     
 }
@@ -370,5 +384,11 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 }
 
 
-
+-(void)payWithAlipaySuccess{
+    DLog(@"alipay-delegate-success");
+    NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
+    NSNotification* noti=[NSNotification notificationWithName:shop_alipay_success_notification object:nil];
+    [nc postNotification:noti];
+    
+}
 @end

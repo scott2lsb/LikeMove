@@ -486,7 +486,8 @@
         if (result==1) {
             [_delegate payWithAlipaySuccess];
             DLog(@"pay-with-alipay-success");
-        }    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
         //请求失败，回调BL的delegate
         //[_delegate XXX];

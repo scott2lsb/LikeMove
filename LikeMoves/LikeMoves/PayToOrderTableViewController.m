@@ -43,6 +43,8 @@ User* user;
     realPrice=[[_dict objectForKey:@"real_price"] floatValue];
     _realPrice.text=[NSString stringWithFormat:@"￥%0.2f",realPrice];
     orderID=[_dict objectForKey:@"order_id"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payWithAlipaySuccess) name:shop_alipay_success_notification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payWithAlipayFail) name:shop_alipay_fail_notification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,9 +60,6 @@ User* user;
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     if (indexPath.section==1&indexPath.row==0) {
         //TODO:余额支付
-        NSString* md5=@"111111";
-        NSString*pwd=[self md5:md5];
-        DLog(@"余额支付=%@=%@",user.password,pwd);
         UIAlertView* alertDesc=[[UIAlertView alloc] initWithTitle:@"请输入登陆密码" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alertDesc.alertViewStyle=UIAlertViewStyleSecureTextInput;
         alertDesc.delegate=self;
@@ -82,7 +81,8 @@ User* user;
         
         NSString *orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                                  orderInfo, signedStr, @"RSA"];
-
+        NSString* orderInfor=[NSString stringWithFormat:@"%@,%@,%@",orderID,_realPrice.text,[_dict objectForKey:@"order_no"] ];
+        [[NSUserDefaults standardUserDefaults] setObject:orderInfor forKey:mUserPayingOrder];
         [AlixLibService payOrder:orderString AndScheme:appScheme seletor:_result target:self];
 
     }else{
@@ -90,16 +90,6 @@ User* user;
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)cancelPayTo:(id)sender {
     int index=[[self.navigationController viewControllers]indexOfObject:self];
@@ -112,6 +102,7 @@ User* user;
     alert.tag=1025;
     [alert show];
 }
+
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag==1025&buttonIndex==0) {
         
@@ -131,9 +122,16 @@ User* user;
 
 }
 -(void)payWithAlipaySuccess{
-    UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"付款成功!" message:nil delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
-    alert.tag=0;
-    [alert show];
+    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"AlipaySuccessPage"];
+    [self presentViewController:tabVC animated:YES completion:Nil];
+
+}
+-(void)payWithAlipayFail{
+    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"AlipayFailPage"];
+    [self presentViewController:tabVC animated:YES completion:Nil];
+
 }
 #pragma mark - alipay-method
 
@@ -158,7 +156,7 @@ User* user;
 
 - (NSString *)generateTradeNO
 {
-	return orderID;
+	return [_dict objectForKey:@"order_no"];
 }
 
 -(NSString*)doRsa:(NSString*)orderInfo
@@ -198,7 +196,8 @@ User* user;
             {
                 //验证签名成功，交易结果无篡改
                 DLog(@"交易成功！");
-                [_bl payOrderWithOrderID:orderID alipay:_realPrice.text];
+                [_bl payOrderWithOrderID:orderID alipay:[_realPrice.text stringByReplacingOccurrencesOfString:@"￥" withString:@""]];
+                 [[NSUserDefaults standardUserDefaults] setObject:nil forKey:mUserPayingOrder];
 //                int index=[[self.navigationController viewControllers]indexOfObject:self];
 //                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2]animated:YES];
 			}
@@ -206,11 +205,17 @@ User* user;
         else
         {
             //TODO:交易失败
+            NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
+            NSNotification* noti=[NSNotification notificationWithName:shop_alipay_fail_notification object:nil];
+            [nc postNotification:noti];
         }
     }
     else
     {
         //失败
+        NSNotificationCenter* nc=[NSNotificationCenter defaultCenter];
+        NSNotification* noti=[NSNotification notificationWithName:shop_alipay_fail_notification object:nil];
+        [nc postNotification:noti];
     }
     
 }

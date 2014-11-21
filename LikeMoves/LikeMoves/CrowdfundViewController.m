@@ -82,7 +82,8 @@
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.contentSize = CGSizeMake(640, [[UIScreen mainScreen]bounds].size.height-20-44-44-49);
-    self.scrollView.delegate = self;
+    self.scrollView.delegate = nil;
+    self.scrollView.scrollEnabled=NO;
     [self.scrollView scrollRectToVisible:CGRectMake(0, 0, 320, [[UIScreen mainScreen]bounds].size.height-20-44-44-49) animated:NO];
     [self.view addSubview:self.scrollView];
     [_scrollView addSubview:_givedTableView];
@@ -173,12 +174,47 @@
 }
 #pragma mark - ShopBLDelegate
 -(void)getReceivedCoinsRecordSuccess:(NSArray *)array{
-    _receivedArray=[array copy];
-    [_receivedTableView reloadData];
+
+    
+    if ([array isKindOfClass:[NSNull class]]) {
+        _receivedTableView.hidden=YES;
+        UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(320, 0, 320, [UIScreen mainScreen].bounds.size.height-64-49)];
+        label.textAlignment=NSTextAlignmentCenter;
+        label.text=@"你还没有众筹哦！";
+        label.textColor=[UIColor grayColor];
+        label.backgroundColor=[UIColor whiteColor];
+        [self.scrollView addSubview:label];
+        
+        
+        _receivedArray=nil;
+        
+    }else{
+        _receivedTableView.hidden=NO;
+        _receivedArray=[array mutableCopy];
+        [_receivedTableView reloadData];
+    }
+
 }
 -(void)getGivedCoinsRecordSuccess:(NSArray *)array{
-    _givedArray=[array copy];
-    [_givedTableView reloadData];
+    
+    if ([array isKindOfClass:[NSNull class]]) {
+        _givedTableView.hidden=YES;
+        UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height-64-49)];
+        label.textAlignment=NSTextAlignmentCenter;
+        label.text=@"你还没有众筹哦！";
+        label.textColor=[UIColor grayColor];
+        label.backgroundColor=[UIColor whiteColor];
+        [self.scrollView addSubview:label];
+        
+        
+        _givedArray=nil;
+        
+    }else{
+        _givedTableView.hidden=NO;
+        _givedArray=[array mutableCopy];
+        [_givedTableView reloadData];
+    }
+
 }
 - (IBAction)share:(id)sender {
     [_bl startCrowdfund];
