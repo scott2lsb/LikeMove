@@ -33,6 +33,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *editAge;
 @property (weak, nonatomic) IBOutlet UILabel *editPhone;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *sexSegment;
 
 @property (weak, nonatomic) IBOutlet UITextField *editNickname;
 
@@ -66,6 +67,7 @@
 
 @implementation UserCenterViewController
 NSArray* books;
+User* user;
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -130,7 +132,29 @@ NSArray* books;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
+    user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
+    /**
+     *  信息编辑页面
+     */
+    _editPhone.text=user.phone;
+    _editNickname.text=user.nickName;
+    _editAge.text=user.age;
+    _showLbl.text=user.trainAddress;
+
+    switch ([user.sex intValue]) {
+        case 0:
+            [_sexSegment setSelectedSegmentIndex:0];
+            break;
+        case 1 :
+            [_sexSegment setSelectedSegmentIndex:0];
+            break;
+        case 2:
+            [_sexSegment setSelectedSegmentIndex:1];
+            break;
+        default:
+            break;
+    }
+
     /**
      *  个人中心信息
      */
@@ -195,7 +219,16 @@ NSArray* books;
     //    [self dismissViewControllerAnimated:NO completion:nil];
 }
 - (IBAction)finishComplete:(id)sender {
-    [_bl editUserInfo:_editNickname.text sex:_editAge.text age:_editAge.text];
+    NSString* nickname=_editNickname.text;
+    NSString* age=_editAge.text;
+    NSString* sex=[NSString stringWithFormat:@"%d",_sexSegment.selectedSegmentIndex+1 ];
+    NSString* trainAddr=_showLbl.text;
+    if ([nickname isEqualToString:@""]|[age isEqualToString:@""]|[sex isEqualToString:@""]|[trainAddr isEqualToString:@""]) {
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"您的信息不能为空！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }else{
+    [_bl editUserInfo:nickname sex:sex age:age trainAddr:trainAddr];
+    }
 }
 
 #pragma mark - Training_Place_Delegate
@@ -220,10 +253,17 @@ NSArray* books;
 }
 
 -(void)editUserInfoSuccess{
-    
+    UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"修改成功！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
+    [_bl refreshMyself];
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)editUserInfoFail{
-    
+    UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"修改信息失败！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
+
 }
 - (IBAction)editCancel:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

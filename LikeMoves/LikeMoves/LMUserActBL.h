@@ -21,7 +21,7 @@
 
 -(BOOL)regist:(NSString *)phone withPassword:(NSString *)pwd withTrainPlace:(NSString *)trainPlace;
 
--(void)editUserInfo:(NSString*)nickName sex:(NSString*)sex age:(NSString*)age;
+-(void)editUserInfo:(NSString*)nickName sex:(NSString*)sex age:(NSString*)age trainAddr:(NSString *)trainAdr;
 
 -(void)resetPwd:(NSString*)phone withNewPwd:(NSString *)pwd;
 -(void)refreshMyself;

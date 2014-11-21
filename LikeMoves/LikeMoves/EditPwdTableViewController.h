@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CommonCrypto/CommonDigest.h>
+#import "User.h"
+#import "LMUserActBL.h"
+#import "LMUserBLDelegate.h"
+@interface EditPwdTableViewController : UITableViewController<LMUserBLDelegate,UIAlertViewDelegate>
 
-@interface EditPwdTableViewController : UITableViewController
+@property (weak, nonatomic) IBOutlet UILabel *phone;
+
+@property (weak, nonatomic) IBOutlet UITextField *oldPwd;
+@property (weak, nonatomic) IBOutlet UITextField *rePwd;
+@property (weak, nonatomic) IBOutlet UITextField *comfirmPwd;
+- (IBAction)comfirmTo:(id)sender;
+
+@property LMUserActBL* bl;
 
 @end

@@ -29,10 +29,10 @@
     return 1;
 }
 
--(void)editUserInfo:(NSString *)nickName sex:(NSString *)sex age:(NSString *)age{
+-(void)editUserInfo:(NSString *)nickName sex:(NSString *)sex age:(NSString *)age trainAddr:(NSString *)trainAdr{
     _da.delegate=self;
   
-    [_da editUserInfo:nickName sex:sex age:age];
+    [_da editUserInfo:nickName sex:sex age:age trainAddr:trainAdr];
 }
 
 -(void)resetPwd:(NSString *)phone withNewPwd:(NSString *)pwd{

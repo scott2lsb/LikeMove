@@ -11,7 +11,7 @@
 #import "ALPickerView.h"
 #import "LMComBoxView.h"
 #import "LMUserActBL.h"
-@interface UserCenterViewController : UITableViewController <CYCustomMultiSelectPickerViewDelegate,LMUserBLDelegate,UITableViewDelegate>
+@interface UserCenterViewController : UITableViewController <CYCustomMultiSelectPickerViewDelegate,LMUserBLDelegate,UITableViewDelegate,UIAlertViewDelegate>
 @property (nonatomic,strong) LMUserActBL* bl;
 
 - (IBAction)editCancel:(id)sender;

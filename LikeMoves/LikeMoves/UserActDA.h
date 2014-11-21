@@ -48,7 +48,7 @@
  *
  *  @return 是否修改成功
  */
--(BOOL) editUserInfo:(NSString*)nickName sex:(NSString*)sex age:(NSString*)age ;
+-(BOOL) editUserInfo:(NSString*)nickName sex:(NSString*)sex age:(NSString*)age          trainAddr:(NSString*)trainAdr;
 
 -(void)refreshMyself;
 /**

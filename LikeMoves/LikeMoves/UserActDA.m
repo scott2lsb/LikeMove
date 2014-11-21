@@ -74,19 +74,26 @@
     }];
     return 1;
 }
--(BOOL)editUserInfo:(NSString *)nickName sex:(NSString*)sex age:(NSString*)age{
+-(BOOL)editUserInfo:(NSString *)nickName sex:(NSString*)sex age:(NSString*)age trainAddr:(NSString *)trainAdr{
     AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer                       = [AFJSONResponseSerializer serializer];
       [manager.requestSerializer setValue: [[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]forHTTPHeaderField:@"Cookie"];
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
-    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=edit&nickname=%@&age=%@",nickName,age];
+    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=edit&nickname=%@&age=%@&sex=%@&training_address=%@",nickName,age,sex,trainAdr];
     NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
 
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        DLog(@"JSON: %@", operation.responseString);
-        //编辑成功BL的delegate editSuccess
-        [_delegate editUserInfoSuccess];
+        NSDictionary* resInfo=[operation.responseString objectFromJSONString];
+        int result=[[resInfo objectForKey:@"result"] intValue];
+        
+        //使用BL的delegate loginFinished方法udObject
+        if (result==1) {
+            [_delegate editUserInfoSuccess];
+        }else{
+            [_delegate editUserInfoFail];
+        }
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
@@ -105,7 +112,17 @@
     [manager POST:requestUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"JSON: %@", operation.responseString);
         //修改密码成功BL的delegate editSuccess
-        [_delegate resetPwdSuccess];
+        // 使用jsonkit进行json解析
+        NSDictionary* resInfo=[operation.responseString objectFromJSONString];
+        int result=[[resInfo objectForKey:@"result"] intValue];
+
+        //使用BL的delegate loginFinished方法udObject
+        if (result==1) {
+            [_delegate resetPwdSuccess];
+        }else{
+            [_delegate resetPwdFail];
+        }
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         //修改密码失败BL的delegate editFail
