@@ -86,7 +86,7 @@
 -(UIViewController*)showLaunchImage{
     UIViewController* introPage=[[UIViewController alloc]init];
     UIImageView* imgView=[[UIImageView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [imgView setImage:[UIImage imageNamed:@"launchP-568h@2x.png"]];
+    [imgView setImage:[UIImage imageNamed:@"launch-568h@2x.png"]];
     [introPage.view addSubview:imgView];
     
     /**
@@ -162,10 +162,6 @@
     [viewForPage addSubview:labelForPage];
     EAIntroPage *page1 = [EAIntroPage pageWithCustomView:viewForPage];
     page1.bgImage = [UIImage imageNamed:@"launch"];
-    
-    
-    
-    
     
     EAIntroPage *page2 = [EAIntroPage page];
     page2.title = @"为能量充值";

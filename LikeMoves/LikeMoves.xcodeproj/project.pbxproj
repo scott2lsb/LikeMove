@@ -209,7 +209,6 @@
 		8AE377BA1A11E1510017118C /* PaidOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE377B91A11E1510017118C /* PaidOrderTableViewController.m */; };
 		8AE377BE1A1205400017118C /* PayToOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE377BD1A1205400017118C /* PayToOrderTableViewController.m */; };
 		8AE377C11A123ABC0017118C /* NoPaidTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE377C01A123ABC0017118C /* NoPaidTableViewController.m */; };
-		8AE3780D1A12D9E60017118C /* AlipayRsaLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE377F11A12D9E60017118C /* AlipayRsaLib.a */; };
 		8AE3780E1A12D9E60017118C /* Alixpay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AE377F31A12D9E60017118C /* Alixpay.bundle */; };
 		8AE378101A12D9E60017118C /* AlixPaylib_arc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE377F51A12D9E60017118C /* AlixPaylib_arc.a */; };
 		8AE378111A12D9E60017118C /* AlixPayOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE377F71A12D9E60017118C /* AlixPayOrder.m */; };
@@ -231,6 +230,8 @@
 		8AE560EF1A1E1D8200F6DB00 /* EditPwdTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE560EE1A1E1D8200F6DB00 /* EditPwdTableViewController.m */; };
 		8AEBEE911A076FC50003D91A /* com_detail.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AEBEE8F1A076FC50003D91A /* com_detail.png */; };
 		8AEBEE921A076FC50003D91A /* com_earth.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AEBEE901A076FC50003D91A /* com_earth.png */; };
+		8AEFC8621A201A2F00703863 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEFC8611A201A2F00703863 /* Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8AEFC8641A201C3000703863 /* AlipayRsaLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEFC8631A201C3000703863 /* AlipayRsaLib.a */; };
 		F2195B7CB90086FB1E60C8F2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6772DCDF65961186F47E45BF /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -564,7 +565,6 @@
 		8AE377BF1A123ABC0017118C /* NoPaidTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoPaidTableViewController.h; sourceTree = "<group>"; };
 		8AE377C01A123ABC0017118C /* NoPaidTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoPaidTableViewController.m; sourceTree = "<group>"; };
 		8AE377C41A1261DD0017118C /* PartnerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PartnerConfig.h; path = ../PartnerConfig.h; sourceTree = "<group>"; };
-		8AE377F11A12D9E60017118C /* AlipayRsaLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AlipayRsaLib.a; sourceTree = "<group>"; };
 		8AE377F21A12D9E60017118C /* AlixLibService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixLibService.h; sourceTree = "<group>"; };
 		8AE377F31A12D9E60017118C /* Alixpay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Alixpay.bundle; sourceTree = "<group>"; };
 		8AE377F51A12D9E60017118C /* AlixPaylib_arc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AlixPaylib_arc.a; sourceTree = "<group>"; };
@@ -606,6 +606,8 @@
 		8AE560EE1A1E1D8200F6DB00 /* EditPwdTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPwdTableViewController.m; sourceTree = "<group>"; };
 		8AEBEE8F1A076FC50003D91A /* com_detail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = com_detail.png; sourceTree = "<group>"; };
 		8AEBEE901A076FC50003D91A /* com_earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = com_earth.png; sourceTree = "<group>"; };
+		8AEFC8611A201A2F00703863 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		8AEFC8631A201C3000703863 /* AlipayRsaLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AlipayRsaLib.a; sourceTree = "<group>"; };
 		BB5C4D6F910CC83B04D77B3C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -621,6 +623,7 @@
 				8A264FD619F8E13E003893E1 /* SystemConfiguration.framework in Frameworks */,
 				8AE378191A12D9E60017118C /* libcrypto.a in Frameworks */,
 				8A264FD419F8E11D003893E1 /* libiconv.dylib in Frameworks */,
+				8AEFC8641A201C3000703863 /* AlipayRsaLib.a in Frameworks */,
 				8A264FD219F8E0EB003893E1 /* Security.framework in Frameworks */,
 				8A3AF28319F178DB008E3CD3 /* libsqlite3.dylib in Frameworks */,
 				8A3AF27819F176E2008E3CD3 /* libSocialSina.a in Frameworks */,
@@ -635,7 +638,6 @@
 				8A04AF5519C85455000212E7 /* AddressBook.framework in Frameworks */,
 				8A04AF5619C85455000212E7 /* AddressBookUI.framework in Frameworks */,
 				8A33783B19C5C656008B9AF5 /* CoreGraphics.framework in Frameworks */,
-				8AE3780D1A12D9E60017118C /* AlipayRsaLib.a in Frameworks */,
 				8A33783D19C5C656008B9AF5 /* UIKit.framework in Frameworks */,
 				8A3AF27A19F176E2008E3CD3 /* TencentOpenAPI.framework in Frameworks */,
 				8A3AF28119F176E2008E3CD3 /* libWeChatSDK.a in Frameworks */,
@@ -1449,8 +1451,8 @@
 			isa = PBXGroup;
 			children = (
 				8AE377C41A1261DD0017118C /* PartnerConfig.h */,
-				8AE377F11A12D9E60017118C /* AlipayRsaLib.a */,
 				8AE377F21A12D9E60017118C /* AlixLibService.h */,
+				8AEFC8631A201C3000703863 /* AlipayRsaLib.a */,
 				8AE377F31A12D9E60017118C /* Alixpay.bundle */,
 				8AE377F51A12D9E60017118C /* AlixPaylib_arc.a */,
 				8AE377F61A12D9E60017118C /* AlixPayOrder.h */,
@@ -1508,6 +1510,7 @@
 			isa = PBXGroup;
 			children = (
 				8AE3781B1A12DB8E0017118C /* Base64.h */,
+				8AEFC8611A201A2F00703863 /* Base64.m */,
 				8AE4E4341A08A7D000E6C473 /* Base64Defines.h */,
 				8AE4E4351A08A7D000E6C473 /* BPushClass.h */,
 				8AE4E4361A08A7D000E6C473 /* BPushClass.m */,
@@ -1817,6 +1820,7 @@
 				8AB1ABE019CFA79900017485 /* yuan2_zj.m in Sources */,
 				8A4113F119D92EA8002F2575 /* SportDetailViewController.m in Sources */,
 				8AC7F82419DF8FA6008C2934 /* RTSpinKitFadingCircleAnimation.m in Sources */,
+				8AEFC8621A201A2F00703863 /* Base64.m in Sources */,
 				8A04AF3F19C839E6000212E7 /* SectionsViewControllerFriends.m in Sources */,
 				8A04AF0B19C5D2E0000212E7 /* LMSportBL.m in Sources */,
 				8AC7F82819DF8FA6008C2934 /* RTSpinKitWanderingCubesAnimation.m in Sources */,

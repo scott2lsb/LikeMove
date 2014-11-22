@@ -225,7 +225,7 @@
     [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
     NSArray* array;
     if ([WXApi isWXAppInstalled]) {
-        array=[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone,nil];
+        array=[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,nil];
     }else{
         array=[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToQQ,nil];
     }

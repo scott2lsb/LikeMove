@@ -30,8 +30,8 @@
         //编辑成功BL的delegate editSuccess
         NSDictionary* dict=[operation.responseString objectFromJSONString];
         int result=        [[dict objectForKey:@"result"] intValue];
-
-            [_delegate addFriendByIDSuccess:(NSInteger)result];
+        
+        [_delegate addFriendByIDSuccess:(NSInteger)result];
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -117,7 +117,7 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"JSON: %@", operation.responseString);
         NSDictionary*dict=[operation.responseString objectFromJSONString];
-NSString* status=        [dict objectForKey:@"result"];
+        NSString* status=        [dict objectForKey:@"result"];
         //编辑成功BL的delegate editSuccess
         [_delegate delFriendByIDSuccess:[status intValue]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -11,8 +11,12 @@
 #import "PNLineChartData.h"
 #import "PNLineChartDataItem.h"
 #import "PNBar.h"
+#import "UMSocial.h"
+#import "UMSocial_Sdk_Extra_Frameworks/UMSocial_ScreenShot_Sdk/UMSocialScreenShoter.h"
+#import "WXApi.h"
+#import "LMShopBL.h"
 @interface SportDetailViewController ()
-
+@property LMShopBL* shopBL;
 @end
 
 @implementation SportDetailViewController
@@ -23,14 +27,15 @@
     _bl=[[LMSportBL alloc] init];
     [_bl getMoveWeekRecords];
     _bl.delegate=self;
+    _shopBL=[[LMShopBL alloc] init];
     UILabel * barChartLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 90, SCREEN_WIDTH, 30)];
     barChartLabel.text = @"一星期运动量";
     barChartLabel.textColor = PNFreshGreen;
     barChartLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:23.0];
     barChartLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:barChartLabel];
+    [self.view addSubview:barChartLabel];
     
-
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -43,13 +48,13 @@
     [super didReceiveMemoryWarning];
 }
 -(void) refreshCoinsAndMonthDays{
-//    //实例化一个NSDateFormatter对象
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    //设定时间格式,这里可以设置成自己需要的格式
-//    [dateFormatter setDateFormat:@"yyyy-MM"];
-//    //用[NSDate date]可以获取系统当前时间
-//    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
-//    [_bl getMonthMoveDays:currentDateStr];
+    //    //实例化一个NSDateFormatter对象
+    //    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //    //设定时间格式,这里可以设置成自己需要的格式
+    //    [dateFormatter setDateFormat:@"yyyy-MM"];
+    //    //用[NSDate date]可以获取系统当前时间
+    //    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+    //    [_bl getMonthMoveDays:currentDateStr];
     [_bl getThirtyDaysOfMove];
     //NSUserDefaults刷新金币数量，使用NSUserDefaults中的数据
     User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
@@ -61,7 +66,7 @@
     
     DLog(@"Click on bar %@", @(barIndex));
     
-//    PNBar * bar = [self.barChart.bars objectAtIndex:barIndex];
+    //    PNBar * bar = [self.barChart.bars objectAtIndex:barIndex];
     
     CABasicAnimation *animation= [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     
@@ -81,7 +86,7 @@
     
     animation.fillMode=kCAFillModeForwards;
     
-//    [bar.layer addAnimation:animation forKey:@"Float"];
+    //    [bar.layer addAnimation:animation forKey:@"Float"];
 }
 
 -(void)userClickedOnLineKeyPoint:(CGPoint)point lineIndex:(NSInteger)lineIndex andPointIndex:(NSInteger)pointIndex{
@@ -104,49 +109,72 @@
     self.barChart.yLabelFormatter = ^(CGFloat yValue){
         NSString * labelText;
         if(yValue>600){
-        int sporttime=yValue;
-        int min=sporttime/60;
-
-        labelText = [NSString stringWithFormat:@"%dm",min];
+            int sporttime=yValue;
+            int min=sporttime/60;
+            
+            labelText = [NSString stringWithFormat:@"%dm",min];
         }else{
             int sporttime=yValue;
             int min=sporttime/60;
             int sec=sporttime%60;
             labelText = [NSString stringWithFormat:@"%dm%ds",min,sec];
-
+            
         }
         return labelText;
     };
     self.barChart.labelMarginTop = 15.0;
-
+    
     self.barChart.yChartLabelWidth=35.0;
-
-//    self.barChart.barWidth=10.0;
+    
+    //    self.barChart.barWidth=10.0;
     //    self.barChart.barRadius=5.0;
     [self.barChart setXLabels:weeks];
     [self.barChart setYValues:steps];
     [self.barChart setStrokeColors:@[PNFreshGreen,PNFreshGreen,PNFreshGreen,PNFreshGreen,PNFreshGreen,PNFreshGreen,PNFreshGreen]];
     // Adding gradient
-//    self.barChart.barColorGradientStart = [UIColor blueColor];
+    //    self.barChart.barColorGradientStart = [UIColor blueColor];
     
     [self.barChart strokeChart];
     self.barChart.delegate = self;
     
-
+    
     [self.view addSubview:self.barChart];
-
-
-
+    
+    
+    
 }
 -(void)getMonthMoveDaysSuccess:(NSInteger)days{
-
-        _monthMoveDays.text=[NSString stringWithFormat:@"%ld天",(long)days];
-
+    
+    _monthMoveDays.text=[NSString stringWithFormat:@"%ld天",(long)days];
+    
 }
 - (IBAction)backTo:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES ];
 }
 
 - (IBAction)toMarket:(id)sender {
+}
+
+- (IBAction)shareToSNS:(id)sender {
+    [_shopBL startCrowdfund];
+    
+    [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
+    NSArray* array;
+    if ([WXApi isWXAppInstalled]) {
+        array=[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,nil];
+    }else{
+        array=[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToQQ,nil];
+    }
+    UIImage *image = [[UMSocialScreenShoterDefault screenShoter] getScreenShot];
+    
+    //注意：分享到微信好友、微信朋友圈、微信收藏、QQ空间、QQ好友、来往好友、来往朋友圈、易信好友、易信朋友圈、Facebook、Twitter、Instagram等平台需要参考各自的集成方法
+    User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
+    NSString* name=user.nickName;
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:nil
+                                      shareText:[NSString stringWithFormat:@"每天给自己一个奖励，快来加入里环王吧！%@",name]
+                                     shareImage:image                                shareToSnsNames:array
+                                       delegate:nil];
 }
 @end

@@ -16,7 +16,7 @@ int main(int argc, char * argv[])
         @try{
             return UIApplicationMain(argc, argv, nil, NSStringFromClass([LMAppDelegate class]));
         }@catch(NSException* except){
-            DLog(@"name:%@,\nreason:%@,\nuserInfo:%@",except.name,except.reason,except.userInfo);
+            DLog(@"name:%@,\n--reason:%@,\n--userInfo:%@",except.name,except.reason,except.userInfo);
         }
     }
 }

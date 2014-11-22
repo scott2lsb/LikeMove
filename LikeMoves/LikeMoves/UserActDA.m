@@ -28,8 +28,9 @@
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
     NSString* suffix=[NSString stringWithFormat:@"?m=user&a=login&login_name=%@&login_password=%@",phone,pwd];
     NSString* requestUrl                                                 =[BaseURLString stringByAppendingString:suffix];
-    
-    [manager POST:requestUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
+
+    [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         /**
          *  从response的HeaderField获得头文件，从头文件中通过NSHTTPCookie的cookiesWithResponseHeaderFields组成cookie的NSArray，将生成cookie的array，使用NSHttpCookie的reqeustHeaderFieldsWithCookies方法拼接成合法的http header field。最后set到request中即可。
          [manager.requestSerializer setValue:[requestFields objectForKey:@"Cookie"] forHTTPHeaderField:@"Cookie"];
@@ -42,10 +43,16 @@
         
 
         // 使用jsonkit进行json解析
-        int result=[self jsonToUserDefault:operation];
+        NSDictionary*dict=[operation.responseString objectFromJSONString];
+        NSString* status=        [dict objectForKey:@"result"];
+
+        
         //使用BL的delegate loginFinished方法udObject
-        if (result==1) {
+        if ([status intValue]==1) {
             [_delegate loginSuccess];
+            [self jsonToUserDefault:operation];
+        }else{
+            [_delegate loginFail];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DLog(@"Error: %@", error);
@@ -63,7 +70,9 @@
     manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
     NSString* suffix=[NSString stringWithFormat:@"?m=user&a=register&phone=%@&password=%@&training_address=%@&user_type=4",phone,pwd,[trainPlace stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
-    [manager POST:requestUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
+
+    [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"JSON: %@", operation.responseString);
         //注册成功BL的delegate registSuccess
         [_delegate registSuccess];

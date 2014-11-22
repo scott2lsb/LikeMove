@@ -26,10 +26,6 @@ RTSpinKitView* spinner;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor orangeColor]];
-    spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
-    [self.view addSubview:spinner];
-    [spinner startAnimating];
     //初始化
     _bl=[[LMContactBL alloc] init];
     _bl.delegate=self;
@@ -90,12 +86,16 @@ RTSpinKitView* spinner;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.contentSize = CGSizeMake(640, [[UIScreen mainScreen]bounds].size.height-20-44-44-49);
-//    self.scrollView.delegate = self;
+    //    self.scrollView.delegate = self;
     self.scrollView.scrollEnabled=NO;
     [self.scrollView scrollRectToVisible:CGRectMake(0, 0, 320, [[UIScreen mainScreen]bounds].size.height-20-44-44-49) animated:NO];
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:_tableView];
     [self.scrollView addSubview:_crowdfundFriendTableView];
+    spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor orangeColor]];
+    spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
+    [self.navigationController.view addSubview:spinner];
+    [spinner startAnimating];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -189,8 +189,8 @@ RTSpinKitView* spinner;
         nickname.text=[friend objectForKey:@"nickname"];
         duration.text=[self timeFormat:[friend objectForKey:@"day_move_duration"]];
         cell.detailTextLabel.text=@"江湖救急，快点我捐金币啦！";
-                cell.textLabel.text=[NSString stringWithFormat:@"%@ :",[friend objectForKey:@"nickname"] ];
-;
+        cell.textLabel.text=[NSString stringWithFormat:@"%@ :",[friend objectForKey:@"nickname"] ];
+        ;
         //        helpWords.text=[NSString stringWithFormat:@"%@",[friend objectForKey:@"month_move_days"]];
         
         //        rank.text=[NSString stringWithFormat:@"%d",indexPath.row+1];
@@ -241,7 +241,7 @@ NSString* friendID;
         // 获取UIAlertView中第1个输入框
 		UITextField* nameField = [alertView textFieldAtIndex:0];
         User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:mUserInfo]];
-
+        
         if([user.coins intValue]>[nameField.text intValue]){
             [_shopBL giveCoinsToFriend:friendID withCoins:nameField.text];
         }else{
@@ -349,34 +349,41 @@ NSString* friendID;
         _rankFriends=nil;
     }else{
         _rankFriends=[rank mutableCopy];
-        
+        int changeRank=0;
+        int userRank=0;
+        DXAlertView * alert;
         //TODO：排名进行处理
         User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults                                                            standardUserDefaults] objectForKey:mUserInfo]];
         NSString* rankDefault=[[NSUserDefaults standardUserDefaults]  objectForKey:mUserRank];
+        
         if (rankDefault==nil) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:mUserRank];
-            rankDefault=@"1";
-        }
-        int changeRank;
-        int userRank;
-        if (_rankFriends.count>1) {
             for (int i=0; i<_rankFriends.count; i++) {
-                                NSString* userID=[[_rankFriends objectAtIndex:i ] objectForKey:@"id"];
+                NSString* userID=[[_rankFriends objectAtIndex:i ] objectForKey:@"id"];
+                if ([user.userId isEqualToString:userID]) {
+                    userRank=i+1;
+
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",userRank] forKey:mUserRank];
+                }
+            }
+        }else{
+            for (int i=0; i<_rankFriends.count; i++) {
+                NSString* userID=[[_rankFriends objectAtIndex:i ] objectForKey:@"id"];
                 if ([user.userId isEqualToString:userID]) {
                     userRank=i+1;
                     changeRank=i+1-[rankDefault intValue];
                     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",userRank] forKey:mUserRank];
                 }
             }
+            
+            if (changeRank<0) {
+                alert = [[DXAlertView alloc] initWithTitle:nil contentText:[NSString stringWithFormat:@"你的排名上升了%d位！",-changeRank] leftButtonTitle:nil rightButtonTitle:@"知道了"];
+            }else if(changeRank>0){
+                alert = [[DXAlertView alloc] initWithTitle:nil contentText:[NSString stringWithFormat:@"你的排名下降了%d位！",changeRank] leftButtonTitle:nil rightButtonTitle:@"知道了"];
+            }
+            
+            [alert show];
         }
-        DXAlertView * alert;
-        if (changeRank<0) {
-            alert = [[DXAlertView alloc] initWithTitle:nil contentText:[NSString stringWithFormat:@"你的排名上升了%d位！",-changeRank] leftButtonTitle:nil rightButtonTitle:@"知道了"];
-        }else if(changeRank>0){
-            alert = [[DXAlertView alloc] initWithTitle:nil contentText:[NSString stringWithFormat:@"你的排名下降了%d位！",changeRank] leftButtonTitle:nil rightButtonTitle:@"知道了"];
-        }
-        
-        [alert show];
+       
         alert.rightBlock = ^() {
             DLog(@"right button clicked");
         };
@@ -392,12 +399,13 @@ NSString* friendID;
     if([friends isKindOfClass:[NSNull class]]){
         _crowdfundFriends=nil;
         _crowdfundFriendTableView.hidden=YES;
-         label=[[UILabel alloc] initWithFrame:CGRectMake(320, 0, 320, [UIScreen mainScreen].bounds.size.height-108-49)];
+        label=[[UILabel alloc] initWithFrame:CGRectMake(320, 0, 320, [UIScreen mainScreen].bounds.size.height-108-49)];
         label.font=[UIFont systemFontOfSize:18.0];
         label.textAlignment=NSTextAlignmentCenter;
         label.text=@"还没有人众筹哦！";
         label.backgroundColor=[UIColor whiteColor];
         label.textColor=[UIColor grayColor];
+        label.enabled=NO;
         [self.scrollView addSubview:label];
     }else{
         label.hidden=YES;
@@ -418,7 +426,7 @@ NSString* friendID;
             //用[NSDate date]可以获取系统当前时间
             NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
             [_bl getFriendSportRank:currentDateStr];
-        
+            
             break;
         }
         default:
@@ -430,7 +438,7 @@ NSString* friendID;
 //- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
 //    CGFloat pageWidth = scrollView.frame.size.width;
 //    NSInteger page = scrollView.contentOffset.x / pageWidth;
-//    
+//
 //    [self.segmentedControl setSelectedSegmentIndex:page animated:YES];
 //}
 -(NSString*)timeFormat:(NSString*)time{

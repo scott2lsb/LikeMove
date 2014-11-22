@@ -19,4 +19,6 @@
 - (IBAction)backTo:(id)sender;
 - (IBAction)toMarket:(id)sender;
 
+- (IBAction)shareToSNS:(id)sender;
+
 @end

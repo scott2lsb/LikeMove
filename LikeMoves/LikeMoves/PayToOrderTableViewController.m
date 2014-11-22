@@ -73,7 +73,10 @@ User* user;
          *生成订单信息及签名
          *由于demo的局限性，采用了将私钥放在本地签名的方法，商户可以根据自身情况选择签名方法(为安全起见，在条件允许的前提下，我们推荐从商户服务器获取完整的订单信息)
          */
-        
+        if (realPrice==0.0) {
+            UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"不能使用支付宝支付全额抵扣订单！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+        }else{
         NSString *appScheme = @"LikeMoves";
         NSString* orderInfo = [self getOrderInfo:indexPath.row];
         NSString* signedStr = [self doRsa:orderInfo];
@@ -84,7 +87,7 @@ User* user;
         NSString* orderInfor=[NSString stringWithFormat:@"%@,%@,%@",orderID,_realPrice.text,[_dict objectForKey:@"order_no"] ];
         [[NSUserDefaults standardUserDefaults] setObject:orderInfor forKey:mUserPayingOrder];
         [AlixLibService payOrder:orderString AndScheme:appScheme seletor:_result target:self];
-
+        }
     }else{
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow]animated:YES];
     }

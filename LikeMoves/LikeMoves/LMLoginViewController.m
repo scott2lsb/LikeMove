@@ -65,6 +65,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //指示框
+    spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor emerlandColor]];
+    spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
     if ([[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]) {
         [self performSelector:@selector(presentMainTabPage) withObject:nil afterDelay:1.5];
         //TODO: 添加等待指示框
@@ -193,10 +196,9 @@
 }
 #pragma mark - 用户逻辑操作
 - (IBAction)login:(id)sender {
-    //指示框
-    spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor emerlandColor]];
-    spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
+    
     [self.view addSubview:spinner];
+    [spinner startAnimating];
     //登陆逻辑
     [_bl login:_loginPhone.text withPassword:_loginPwd.text];
 }
@@ -249,7 +251,10 @@
 }
 
 -(void)loginFail{
-    
+    [spinner stopAnimating];
+    UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"账号或密码错误！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
+
 }
 -(void)registSuccess{
     [spinner stopAnimating];

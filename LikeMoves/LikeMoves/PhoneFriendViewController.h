@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "LMContactBLDelegate.h"
 #import "LMContactBL.h"
+#import "RTSpinKitView.h"
 @interface PhoneFriendViewController : UIViewController<LMContactBLDelegate>
 @property (strong,nonatomic) LMContactBL* bl;
+@property RTSpinKitView* spinner;
 @property (weak, nonatomic) IBOutlet UITextField *phoneInput;
 - (IBAction)back:(id)sender;
 - (IBAction)searchFriend:(id)sender;

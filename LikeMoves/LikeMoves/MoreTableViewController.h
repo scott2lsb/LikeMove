@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMailComposeViewController.h>
+@interface MoreTableViewController : UITableViewController<MFMailComposeViewControllerDelegate>
 
-@interface MoreTableViewController : UITableViewController
+- (IBAction)emailUS:(id)sender;
 
+- (IBAction)commentAPP:(id)sender;
 @end

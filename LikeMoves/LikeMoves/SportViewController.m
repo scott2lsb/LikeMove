@@ -13,11 +13,13 @@
 #import "WXApi.h"
 #import "SMS_MBProgressHUD+Add.h"
 #import "SMS_MBProgressHUD.h"
+#import "LMShopBL.h"
 #define kCoinCountKey   100
 #define mFireBtnH 120
 @interface SportViewController ()
 @property (nonatomic) NSTimer* stopTimer;
 @property (nonatomic) NSTimer* countSportTime;
+@property LMShopBL* shopBL;
 @end
 
 @implementation SportViewController
@@ -35,6 +37,7 @@ static int sportSec;
      */
     _bl=[[LMSportBL alloc]init];
     _bl.delegate=self;
+    _shopBL=[[LMShopBL alloc] init];
     _userBL=[[LMUserActBL alloc] init];
     [_userBL refreshMyself];
     [_bl startMotionDetect];
@@ -76,7 +79,7 @@ static int sportSec;
     if([UIScreen mainScreen].bounds.size.height<500){
         DLog(@"size-fit-test-3.5inch");
         _calCount=[[UILabel alloc]initWithFrame:CGRectMake(123 , 380, 77, 44)];
-        _calCount.text=@"0千卡";
+        _calCount.text=@"0卡";
         _calCount.font=[UIFont systemFontOfSize:15];
         _calCount.textAlignment=NSTextAlignmentCenter;
         
@@ -88,7 +91,7 @@ static int sportSec;
     }else{
         DLog(@"size-fit-test-4.0inch");
         _calCount=[[UILabel alloc]initWithFrame:CGRectMake(123, 419, 77, 44)];
-        _calCount.text=@"0千卡";
+        _calCount.text=@"0卡";
         _calCount.font=[UIFont systemFontOfSize:15];
         _calCount.textAlignment=NSTextAlignmentCenter;
         
@@ -125,8 +128,9 @@ static int sportSec;
 }
 -(void) stepCountChange:(NSString *)stepCount {
     _stepCount.text=[NSString stringWithFormat:@"%@步",stepCount ];
-    kCal=kCal+755;
-    _calCount.text=[NSString stringWithFormat:@"%d千卡",kCal/1000];
+    int calPerStep = (arc4random() % 5) + 35;
+    kCal=kCal+calPerStep;
+    _calCount.text=[NSString stringWithFormat:@"%d卡",kCal];
 }
 -(void)sportTimeChange:(int)sportTime{
     if(sportCircleNumber<10000){
@@ -182,7 +186,7 @@ static int sportSec;
         hud.tintColor=[UIColor orangeColor];
         hud.dimBackground=YES;
         
-
+        
         
         if(sportCircleNumber>3600){
             [_bl addCoins:@"36"];
@@ -295,18 +299,16 @@ static int coinCount = 0;
         
         //动画完成后把金币和数组对应位置上的tag移除
         UIView *coinView = (UIView *)[self.view viewWithTag:[[_coinTagsArr firstObject] intValue]];
-        
-        
-        
         if (!isBag) {
             
             [coinView removeFromSuperview];
-            [_coinTagsArr removeObjectAtIndex:0];                    }else{
-                
-                [_bagView removeFromSuperview];
-                isBag=false;
-                
-            }
+            [_coinTagsArr removeObjectAtIndex:0];
+        }else{
+            
+            [_bagView removeFromSuperview];
+            isBag=false;
+            
+        }
         //全部金币完成动画后执行的动作
         if (++coinCount == kCoinCountKey) {
             isBag=true;
@@ -333,12 +335,12 @@ static int coinCount = 0;
 }
 
 - (IBAction)share:(id)sender {
-    
+    [_shopBL startCrowdfund];
     [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
     [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
     NSArray* array;
     if ([WXApi isWXAppInstalled]) {
-        array=[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone,nil];
+        array=[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,nil];
     }else{
         array=[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToQQ,nil];
     }
