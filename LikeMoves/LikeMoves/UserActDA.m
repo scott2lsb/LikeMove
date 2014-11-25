@@ -227,7 +227,7 @@ User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardU
     //TODO: 使用jsonkit进行json解析
     NSDictionary* resInfo=[operation.responseString objectFromJSONString];
     NSArray* userInfos=[resInfo objectForKey:@"list"];
-NSDictionary* userInfo=    [userInfos objectAtIndex:0];
+    NSDictionary* userInfo=    [userInfos objectAtIndex:0];
     User* user=[[User alloc] init];
     user.userId=[userInfo objectForKey:@"id"];
     user.nickName=[userInfo objectForKey:@"nickname"];

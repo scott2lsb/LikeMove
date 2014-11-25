@@ -15,6 +15,7 @@
 #import "UMSocial_Sdk_Extra_Frameworks/UMSocial_ScreenShot_Sdk/UMSocialScreenShoter.h"
 #import "WXApi.h"
 #import "LMShopBL.h"
+#import "Reachability.h"
 @interface SportDetailViewController ()
 @property LMShopBL* shopBL;
 @end
@@ -34,7 +35,57 @@
     barChartLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:23.0];
     barChartLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:barChartLabel];
-    
+    Reachability* reach=[Reachability reachabilityWithHostName:@"www.baidu.com"];
+    NSArray* week=        [[NSUserDefaults standardUserDefaults] objectForKey:mWeekDateDetail];
+    NSArray* steps=[[NSUserDefaults standardUserDefaults] objectForKey:mWeekStepDetail];
+    if (![reach isReachable]) {
+        _monthMoveDays.text=[NSString stringWithFormat:@"%@天",[[NSUserDefaults standardUserDefaults] objectForKey:mUserMonthMoveDays]];
+        if (week==nil) {
+            UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"网络连接失败，请检查网络设置！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+        }else{
+            CGFloat height;
+            if ([[UIScreen mainScreen] bounds].size.height>500) {
+                height=250.0;
+            }else{
+                height=200.0;
+            }
+            self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, 120.0, SCREEN_WIDTH, height)];
+            self.barChart.backgroundColor = [UIColor clearColor];
+            self.barChart.yLabelFormatter = ^(CGFloat yValue){
+                NSString * labelText;
+                if(yValue>600){
+                    int sporttime=yValue;
+                    int min=sporttime/60;
+                    
+                    labelText = [NSString stringWithFormat:@"%dm",min];
+                }else{
+                    int sporttime=yValue;
+                    int min=sporttime/60;
+                    int sec=sporttime%60;
+                    labelText = [NSString stringWithFormat:@"%dm%ds",min,sec];
+                    
+                }
+                return labelText;
+            };
+            self.barChart.labelMarginTop = 15.0;
+            
+            self.barChart.yChartLabelWidth=35.0;
+            
+            //    self.barChart.barWidth=10.0;
+            //    self.barChart.barRadius=5.0;
+            [self.barChart setXLabels:week];
+            [self.barChart setYValues:steps];
+            [self.barChart setStrokeColors:@[PNFreshGreen,PNFreshGreen,PNFreshGreen,PNFreshGreen,PNFreshGreen,PNFreshGreen,PNFreshGreen]];
+            // Adding gradient
+            //    self.barChart.barColorGradientStart = [UIColor blueColor];
+            
+            [self.barChart strokeChart];
+            self.barChart.delegate = self;
+            
+            [self.view addSubview:self.barChart];
+        }
+    }
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -98,6 +149,8 @@
 }
 #pragma mark - SportBLDelegate
 -(void)getWeekRecordSuccess:(NSArray *)steps withWeeks:(NSArray *)weeks{
+    [[NSUserDefaults standardUserDefaults] setObject:steps forKey:mWeekStepDetail];
+    [[NSUserDefaults standardUserDefaults] setObject:weeks forKey:mWeekDateDetail];
     CGFloat height;
     if ([[UIScreen mainScreen] bounds].size.height>500) {
         height=250.0;

@@ -124,11 +124,12 @@
     return 1;
 }
 #pragma mark - ShopBLDelegate
+UILabel* label;
 -(void)getReceiversSuccess:(NSArray *)array{
     if([array isKindOfClass:[NSNull class]]){
         _receivers=nil;
         _tableView.hidden=YES;
-        UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(10, 200, 300, 44)];
+ label=[[UILabel alloc] initWithFrame:CGRectMake(10, 200, 300, 44)];
         label.textAlignment=NSTextAlignmentCenter;
         label.text=@"您还没有添加收货地址哦！";
         label.textColor=[UIColor grayColor];
@@ -136,6 +137,7 @@
     }
     else{
         _tableView.hidden=NO;
+        label.hidden=YES;
           _receivers=[array mutableCopy];
         [_tableView reloadData];
     }

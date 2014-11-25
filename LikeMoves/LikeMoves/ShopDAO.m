@@ -444,16 +444,20 @@
     NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
     
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
+    DLog(@"cart-order-url--%@",utf8);
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"将购物车添加到订单JSON: %@", operation.responseString);
         //请求成功，回调的BL的delegate
         NSDictionary* dict=[self jsonToDict:operation.responseString];
         int d=        [[dict objectForKey:@"result"] intValue];
+
         if (d ==1) {
             NSDictionary* detail=[dict objectForKey:@"data"];
             [_delegate addCartToOrderSuccess:detail];
         }else{
             //TODO 失败调用
+            [_delegate addCartToOrderFail];
+            DLog(@"购买失败！");
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

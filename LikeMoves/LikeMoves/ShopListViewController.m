@@ -28,8 +28,17 @@ NSDictionary* selectProduct;
     view.backgroundColor = [UIColor clearColor];
     [self.productTable setTableFooterView:view];
 
-    
-    [_bl getProductsInPromotion];
+    Reachability* reach=[Reachability reachabilityWithHostName:@"www.baidu.com"];
+    if ([reach isReachable]) {
+        [_bl getProductsInPromotion];
+        //指示框
+        _spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor orangeColor]];
+        _spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
+        [self.view addSubview:_spinner];
+    }else{
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"网络连接失败，请检查网络！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,11 +100,15 @@ NSDictionary* selectProduct;
         url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
     }
     [proImg sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"UMS_email_off"]];
+    proImg.layer.cornerRadius=15.0;
+    proImg.layer.masksToBounds=YES;
+
     return cell;
 }
 
 #pragma mark - ShopBlDelegate
 -(void)getProductInPromotionSuccess:(NSArray *)array{
+    [_spinner stopAnimating];
     _products=array;
     [_productTable reloadData];
 }
@@ -108,21 +121,6 @@ NSDictionary* selectProduct;
         selectProduct=[_products objectAtIndex:indexPath.row];
     return indexPath;
 }
-
-//-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-//    _companyMap.hidden=YES;
-//    _companyIntro.hidden=YES;
-//    _companyIntro.alpha=0.1;
-//}
-//-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-//    _companyIntro.alpha=0.0;
-//    
-//}
-//-(void)scrollViewDidScrollToTop:(UIScrollView *)scrollView{
-//    _companyMap.hidden=NO;
-//    _companyIntro.hidden=NO;
-//    _companyIntro.alpha=1.0;
-//}
 
  #pragma mark - Navigation
  

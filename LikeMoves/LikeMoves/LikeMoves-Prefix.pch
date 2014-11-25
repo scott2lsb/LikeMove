@@ -38,14 +38,38 @@
  */
 #define mUserInfo  @"user_info"
 /**
- *  NSUserDefaults用来存储user的运动时间
+ *  检测用户是否为第一次登陆使用
+ */
+#define mUseTime @"user_user_time"
+/**
+ *  NSUserDefaults用来存储user的当天运动时间，运动步数和运动消耗热量
  */
 #define mSportTime  @"sport_time"
-#define mUseTime    @"user_use_time"
+#define mSportStep    @"step_count"
+#define mSportCal   @"sport_cal"
+#define mCurrentSportDate @"current_sport_date"
+/**
+ *  运动能量条数目，3600为满,不释放可以进行缓存下次打开不联网也能看到。
+ */
+#define mSportCircleNum @"sport_circle_num"
+/**
+ *  每天燃烧三次
+ */
+#define mFirePerDay @"fire_per_day"
+#define mFireDate   @"past_fire_date" //上次燃烧的日期
+/**
+ *  周运动详情
+ */
+#define mWeekStepDetail @"week_step_detail"
+#define mWeekDateDetail @"week_date_detail"
 /**
  *  NSUserDefaults用户排名
  */
 #define mUserRank @"sport_rank"
+/**
+ *  缓存月运动天数
+ */
+#define mUserMonthMoveDays @"month_move_days"
 /**
  *  为用户准备的支付宝正在付款的订单
  */

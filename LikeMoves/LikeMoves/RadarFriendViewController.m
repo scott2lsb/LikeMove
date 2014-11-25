@@ -60,12 +60,16 @@ RTSpinKitView* spinnerIndicator;
 }
 
 - (IBAction)addRadarFriend:(id)sender {
-    
-    NSInteger row=[self.radarTable indexPathForCell:((UITableViewCell*)[[sender superview]superview])].row;
-    NSDictionary*dict=[_radarFriends objectAtIndex:row];
-    NSString* user_id=[dict objectForKey:@"id"];
-    [_bl addFriendByID:user_id];
     UIButton* btn=(UIButton*)sender;
+    NSInteger row=[self.radarTable indexPathForCell:(UITableViewCell*)[[btn superview]superview]].row;
+    NSDictionary*dict=[_radarFriends objectAtIndex:row];
+    DLog(@"row:%d",row);
+//    NSString* user_id=[dict objectForKey:@"id"];
+//    [_bl addFriendByID:user_id];
+//    
+    NSString* phone=[dict objectForKey:@"phone"];
+    [_bl addFriendByPhone:phone];
+    
     btn.titleLabel.text=@"已添加";
     [spinnerIndicator startAnimating];
     btn.enabled=NO;
@@ -92,34 +96,48 @@ RTSpinKitView* spinnerIndicator;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"radarFriend";
+    static NSString *cellIdentifier = @"radarFriend1";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+    RadarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
                              cellIdentifier ];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+        cell = [[RadarTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                       reuseIdentifier: cellIdentifier ];
+        cell.delegate=self;
     }
     //昵称、当天运动时长、当月已运动天数、金币数量
-    UILabel* nickname=(UILabel*)[cell viewWithTag:1];
-    UILabel* phone=(UILabel*)[cell viewWithTag:2];
-    
+
+    UILabel* nickname=cell.nickname;
+    UILabel* phone=cell.phone;
     NSDictionary* friend=[_radarFriends objectAtIndex:indexPath.row];
     nickname.text=[friend objectForKey:@"nickname"];
     phone.text=[friend objectForKey:@"phone"];
+    
+    cell.section=indexPath.section;
+    cell.index=indexPath.row;
     return cell;
+}
+-(void)RadarCellBtnClick:(RadarTableViewCell *)cell{
+    DLog(@"雷达界面添加好友-row:%ld,section:%ld",cell.index,cell.index);
+    NSDictionary*dict=[_radarFriends objectAtIndex:cell.index];
+    NSString* phone=[dict objectForKey:@"phone"];
+    [_bl addFriendByPhone:phone];
+    
+    [spinnerIndicator startAnimating];
+    cell.addFriendBtn.enabled=NO;
+    
 }
 #pragma mark - ContactBLDelegate
 -(void)scanFriendSuccess:(NSArray *)scanFriend{
     _radarFriends=scanFriend;
     [_radarTable reloadData];
 }
--(void)addFriendByIDSuccess:(NSInteger)status{
+-(void)addFriendByPhoneSuccess:(NSInteger)status{
     switch (status) {
         case 1:{
             //TODO: 成功加好友
             [spinnerIndicator stopAnimating];
-            UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"添加好友成功！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"已请求添加好友!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alert show];
             break;}
         case 6201:{

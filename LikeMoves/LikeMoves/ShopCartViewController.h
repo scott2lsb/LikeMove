@@ -11,6 +11,8 @@
 #import "LMShopBLDelegate.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ShopCartConfirmTableViewController.h"
+#import "FUIButton.h"
+#import "UIColor+FlatUI.h"
 @interface ShopCartViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,LMShopBLDelegate>
 
 @property(strong,nonatomic) LMShopBL* bl;
@@ -23,6 +25,6 @@
 
 - (IBAction)payTo:(id)sender;
 - (IBAction)stepperValueChanged:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *payBtn;
+@property (weak, nonatomic) IBOutlet FUIButton *payBtn;
 
 @end

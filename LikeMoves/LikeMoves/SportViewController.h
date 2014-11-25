@@ -13,6 +13,8 @@
 #import "DKCircleButton.h"
 #import "LMUserActBL.h"
 #import "ZenPlayerButton.h"
+#import "Reachability.h"
+#import "DXAlertView.h"
 @interface SportViewController : UIViewController<LMSportBLDelegate>{
     UIButton        *_getBtn;
     UIImageView     *_bagView;      //福袋图层
@@ -20,10 +22,11 @@
     BOOL  isBag;
     CAAnimationGroup* group;
     CABasicAnimation* shake;
-    //全局运动环控制数据
-    double sportCircleNumber;
     
-    
+    Reachability * reach;
+//    DXAlertView* alert;
+   
+
 }
 @property (weak, nonatomic) IBOutlet UIView *sportCircle;
 @property(nonatomic) wendu_yuan2 * wdSport;

@@ -27,11 +27,13 @@ static int kCal;
 static int stepNum;
 //static int coinNum;
 static int sportSec;
+//全局运动环控制数据
+static int sportCircleNumber;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    sportCircleNumber=0.0;
+    
     /**
      逻辑层实例化
      */
@@ -102,12 +104,115 @@ static int sportSec;
         [self.view addSubview:_calCount];
         
     }
+    /**
+     *  缓存或读取能量环数量，运动时间，月运动天数，步数和卡路里
+     */
+    NSString* sportNum=[[NSUserDefaults standardUserDefaults] objectForKey:mSportCircleNum];
+    if (sportNum==nil) {
+        sportCircleNumber=0;
+        DLog(@"运动能量化为空");
+    }else{
+        sportCircleNumber=[sportNum intValue];
+        DLog(@"运动能量环参数有");
+    }
+    _wdSport.z=sportCircleNumber/3600;
+    //网络是否能够连接
+    reach = [Reachability reachabilityWithHostname:@"www.baidu.com"];
+    
+    reach.reachableBlock = ^(Reachability * reachability)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //当网络改变时，调用block
+        });
+    };
+    
+    reach.unreachableBlock = ^(Reachability * reachability)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        });
+    };
+    
+    /**
+     *  注册系统通知
+     */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveSportCircleNum) name:UIApplicationWillTerminateNotification object:[UIApplication sharedApplication]];
+    
+}
+-(void)saveSportCircleNum{
+    DLog(@"save sport detail");
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",sportCircleNumber] forKey:mSportCircleNum];
+    /**
+     *  保存时保存日期，当取出来用时，相等则继续使用，不相等则重新计数。
+     */
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",kCal]  forKey:mSportCal];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",sportSec]  forKey:mSportTime];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",stepNum]  forKey:mSportStep];
+    
+//    //实例化一个NSDateFormatter对象
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    //设定时间格式,这里可以设置成自己需要的格式
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+//    //用[NSDate date]可以获取系统当前时间
+//    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+   
     
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if ([reach isReachable]) {
+        [self refreshCoinsAndMonthDays];
+    }else{
+        NSString* sportMonthMoveDay=[[NSUserDefaults standardUserDefaults]objectForKey:mUserMonthMoveDays];
+        
+        if (sportMonthMoveDay==nil) {
+            _monthMoveDays.text=[NSString stringWithFormat:@"%d天",0];
+        }else{
+            _monthMoveDays.text=sportMonthMoveDay;
+        }
+        
+    }
+    NSString* currentSportDate=[[NSUserDefaults standardUserDefaults] objectForKey:mCurrentSportDate];
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+    NSString* pastSportStep=[[NSUserDefaults standardUserDefaults] objectForKey:mSportStep];
+    NSString* pastSportCal=[[NSUserDefaults standardUserDefaults] objectForKey:mSportCal];
+    NSString* pastSportSec=[[NSUserDefaults standardUserDefaults] objectForKey:mSportTime];
+    if ([currentDateStr isEqualToString:currentSportDate]) {
+        if(pastSportCal==nil){
+            kCal=0;
+        }else{
+            kCal=[pastSportCal intValue];
+        }
+        if(pastSportStep==nil){
+            stepNum=0;
+        }else{
+            stepNum=[pastSportStep intValue];
+        }
+        if(pastSportSec==nil){
+            sportSec=0;
+        }else{
+            sportSec=[pastSportSec intValue];
+        }
+    }else{
+        kCal=0;
+        stepNum=0;
+        sportSec=0;
+         [[NSUserDefaults standardUserDefaults] setObject:currentDateStr forKey:mCurrentSportDate];
+    }
     
-    [self refreshCoinsAndMonthDays];
+    //设置时间label
+    int min=sportSec/60;
+    int second=sportSec%60;
+    [self setSportTime:[NSString stringWithFormat:@"%dm %ds",min,second]];
+    //设置热量cal-label
+    _calCount.text=[NSString stringWithFormat:@"%d卡",kCal];
+    //设置步数label
+    _stepCount.text=[NSString stringWithFormat:@"%d步",stepNum ];
     
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -124,23 +229,29 @@ static int sportSec;
 
 #pragma mark - SportDelegate
 -(void)getMonthMoveDaysSuccess:(NSInteger)days{
-    _monthMoveDays.text=[NSString stringWithFormat:@"%ld天",(long)days];
+    NSString* monthsMoveDays=[NSString stringWithFormat:@"%ld天",(long)days];
+    _monthMoveDays.text=monthsMoveDays;
+    [[NSUserDefaults standardUserDefaults] setObject:monthsMoveDays forKey:mUserMonthMoveDays];
 }
 -(void) stepCountChange:(NSString *)stepCount {
-    _stepCount.text=[NSString stringWithFormat:@"%@步",stepCount ];
+    stepNum=stepNum+1;
+    _stepCount.text=[NSString stringWithFormat:@"%d步",stepNum ];
+    
     int calPerStep = (arc4random() % 5) + 35;
     kCal=kCal+calPerStep;
     _calCount.text=[NSString stringWithFormat:@"%d卡",kCal];
+    [self saveSportCircleNum];
 }
 -(void)sportTimeChange:(int)sportTime{
-    if(sportCircleNumber<10000){
+    if(sportCircleNumber<3600){
         sportCircleNumber=sportCircleNumber+1;
     }
-    _wdSport.z=sportCircleNumber/10000;
-    sportSec=sportTime;
-    int hour=sportTime/60;
-    int second=sportTime%60;
-    [self setSportTime:[NSString stringWithFormat:@"%dm %ds",hour,second]];
+    _wdSport.z=sportCircleNumber/3600;
+    sportSec=sportSec+1;
+    int min=sportSec/60;
+    int second=sportSec%60;
+    [self setSportTime:[NSString stringWithFormat:@"%dm %ds",min,second]];
+    [self saveSportCircleNum];
 }
 #pragma mark - custom-method
 -(void)setSportTime:(NSString*)time{
@@ -163,52 +274,79 @@ static int sportSec;
 /**
  *  当能量条清空时，调用此方法。
  */
+int fireTime;
 -(void) sportCircleClear{
     self.fireBtn.progress = 0.4f;
     
-    if(sportCircleNumber>5){
-        //添加运动记录
-        [_bl addMoveRecord:sportSec withSteps:stepNum];
-        //        //userBL更新本地用户NSUserDefaults中的信息
-        //        [_userBL refreshMyself];
-        //userBL更新服务器中的金币信息
-        SMS_MBProgressHUD *hud = [SMS_MBProgressHUD showHUDAddedTo:self.tabBarController.view animated:YES];
-        
-        // Configure for text only and offset down
-        hud.mode = MBProgressHUDModeCustomView;
-        UIView*view =[ [UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 10)];
-        view.backgroundColor= [UIColor clearColor];
-        
-        [hud setCustomView:view];
-        hud.margin = 10.f;
-        hud.removeFromSuperViewOnHide = YES;
-        hud.backgroundColor=[UIColor clearColor];
-        hud.tintColor=[UIColor orangeColor];
-        hud.dimBackground=YES;
-        
-        
-        
-        if(sportCircleNumber>3600){
-            [_bl addCoins:@"36"];
-            hud.labelText = [NSString stringWithFormat:@"恭喜您获得了%@个金币",@"36"];
-        }else{
-            double i=floor(sportCircleNumber/10);
-            [_bl addCoins:[NSString stringWithFormat:@"%f",i]];
-            hud.labelText = [NSString stringWithFormat:@"恭喜您获得了%0.0f个金币",i];
-        }
-        [hud hide:YES afterDelay:3];
-        
-        [self refreshCoinsAndMonthDays];
-        sportCircleNumber=0;
-        _wdSport.z=sportCircleNumber/3600;
-        [self getCoinAction];
-    }else{
-        //        [_userBL addCoins:100];
-        
-        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:nil message:@"能量条超过四分之一才能释放" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+    NSString* fireDate=[[NSUserDefaults standardUserDefaults] objectForKey:mFireDate]==nil?currentDateStr:[[NSUserDefaults standardUserDefaults] objectForKey:mFireDate];
+    NSString* firePerTime=[[NSUserDefaults standardUserDefaults] objectForKey:mFirePerDay]==nil?@"0":[[NSUserDefaults standardUserDefaults] objectForKey:mFirePerDay];
+    
+    if ([currentDateStr isEqualToString:fireDate]) {
+        fireTime=[firePerTime intValue]+1;
+    }else if (![currentDateStr isEqualToString:fireDate]){
+        fireTime=1;
+    }
+    
+    
+    if (fireTime>3) {
+        DXAlertView* alert = [[DXAlertView alloc] initWithTitle:nil contentText:@"您今天已经释放三次能量，不能够再释放能量了" leftButtonTitle:nil rightButtonTitle:@"知道了"];
         [alert show];
         
-        
+    }else{
+        if(sportCircleNumber>900){
+            //添加运动记录
+            [_bl addMoveRecord:sportSec withSteps:stepNum];
+            //        //userBL更新本地用户NSUserDefaults中的信息
+            //        [_userBL refreshMyself];
+            //userBL更新服务器中的金币信息
+            SMS_MBProgressHUD *hud = [SMS_MBProgressHUD showHUDAddedTo:self.tabBarController.view animated:YES];
+            
+            // Configure for text only and offset down
+            hud.mode = MBProgressHUDModeCustomView;
+            UIView*view =[ [UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 10)];
+            view.backgroundColor= [UIColor clearColor];
+            
+            [hud setCustomView:view];
+            hud.margin = 10.f;
+            hud.removeFromSuperViewOnHide = YES;
+            hud.backgroundColor=[UIColor clearColor];
+            hud.tintColor=[UIColor orangeColor];
+            hud.dimBackground=YES;
+            
+            
+            
+            if(sportCircleNumber>3600){
+                [_bl addCoins:@"36"];
+                hud.labelText = [NSString stringWithFormat:@"恭喜您获得了%@个金币",@"36"];
+            }else{
+                double i=floor(sportCircleNumber/100);
+                [_bl addCoins:[NSString stringWithFormat:@"%f",i]];
+                hud.labelText = [NSString stringWithFormat:@"恭喜您获得了%0.0f个金币",i];
+            }
+            [hud hide:YES afterDelay:3];
+            
+            [self refreshCoinsAndMonthDays];
+            sportCircleNumber=0;
+            _wdSport.z=sportCircleNumber/3600;
+            [self getCoinAction];
+            //保存记录燃烧次数和日期
+            [[NSUserDefaults standardUserDefaults]setObject:currentDateStr forKey:mFireDate];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",fireTime] forKey:mFirePerDay];
+        }else{
+            //        [_userBL addCoins:100];
+            
+            
+            DXAlertView* alert = [[DXAlertView alloc] initWithTitle:nil contentText:@"能量条超过四分之一才能释放" leftButtonTitle:nil rightButtonTitle:@"知道了"];
+            [alert show];
+            
+            
+        }
     }
 }
 #pragma mark - coins_bags

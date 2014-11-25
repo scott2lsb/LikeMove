@@ -254,6 +254,9 @@
 -(void)addCartToOrderSuccess:(NSDictionary*)data{
     [_delegate addCartToOrderSuccess:(NSDictionary*)data];
 }
+-(void)addCartToOrderFail{
+    [_delegate addCartToOrderFail];
+}
 -(void)payWithBalanceSuccess{
     [_delegate payWithBalanceSuccess];
 }

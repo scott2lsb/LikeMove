@@ -10,7 +10,8 @@
 #import "LMContactBL.h"
 #import "LMContactBLDelegate.h"
 #import "RTSpinKitView.h"
-@interface AcceptFriendViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,LMContactBLDelegate>{
+#import "AcceptFriendTableViewCell.h"
+@interface AcceptFriendViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,LMContactBLDelegate,AcceptFriendCellDelegate>{
     NSMutableArray* acceptFriends;
 }
 @property (weak, nonatomic) IBOutlet UITableView *acceptFriend;

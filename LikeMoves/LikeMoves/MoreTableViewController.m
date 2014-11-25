@@ -40,6 +40,34 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ((indexPath.section==1)&(indexPath.row==1)) {
+        if (![MFMailComposeViewController canSendMail]) {
+            UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"用户没有设置邮件账户" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+        }else{
+            MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
+            mailPicker.mailComposeDelegate=self;
+            //设置主题
+            [mailPicker setSubject: @"里环王应用相关"];
+            //添加收件人
+            NSArray *toRecipients = [NSArray arrayWithObject: @"lihuanone@yeah.net"];
+            [mailPicker setToRecipients: toRecipients];
+            //添加抄送
+            //            NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
+            [mailPicker setCcRecipients:nil];
+            //添加密送
+            //            NSArray *bccRecipients = [NSArray arrayWithObjects:@"fourth@example.com", nil];
+            [mailPicker setBccRecipients:nil];
+            
+            NSString *emailBody = @"<font color='orange'>里环王</font>";
+            [mailPicker setMessageBody:emailBody isHTML:YES];
+            [self presentViewController:mailPicker animated:YES completion:nil];
+        }
+
+    }else if (indexPath.section==1&indexPath.row==2){
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/cn/app/jia-zai-lin-yi/id792621424?mt=8"]];
+
+    }
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
 }
 
@@ -56,11 +84,9 @@
             //添加收件人
             NSArray *toRecipients = [NSArray arrayWithObject: @"lihuanone@yeah.net"];
             [mailPicker setToRecipients: toRecipients];
-            //添加抄送
-//            NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil];
+
             [mailPicker setCcRecipients:nil];
-            //添加密送
-//            NSArray *bccRecipients = [NSArray arrayWithObjects:@"fourth@example.com", nil];
+
             [mailPicker setBccRecipients:nil];
         
             NSString *emailBody = @"<font color='orange'>里环王</font>";

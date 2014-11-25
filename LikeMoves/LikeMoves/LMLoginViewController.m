@@ -11,6 +11,7 @@
 #import "FUIButton.h"
 #import "UIColor+FlatUI.h"
 #import "RTSpinKitView.h"
+
 /// 登陆界面和注册界面
 @interface LMLoginViewController (){
     RTSpinKitView* spinner;
@@ -23,8 +24,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *loginPwd;
 @property (strong, nonatomic) IBOutlet UIView *loginView;
 @property (weak, nonatomic) IBOutlet FUIButton *loginFUI;
-@property (weak, nonatomic) IBOutlet FUIButton *resetPwdFUI;
-@property (weak, nonatomic) IBOutlet FUIButton *registFUI;
+@property (weak, nonatomic) IBOutlet UIButton *resetPwdFUI;
+@property (weak, nonatomic) IBOutlet UIButton *registFUI;
 /**
  *  Yes为regist
  No为reset
@@ -71,7 +72,7 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]) {
         [self performSelector:@selector(presentMainTabPage) withObject:nil afterDelay:1.5];
         //TODO: 添加等待指示框
-        spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor whiteColor]];
+        spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor orangeColor]];
         spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
         [self.view addSubview:spinner];
         self.view.layer.opaque=YES;
@@ -82,7 +83,7 @@
     _registPhoneNum.text=phoneNum;
     //背景图片设置
     UIImageView* img=[[UIImageView alloc] initWithFrame:_loginView.bounds];
-    img.image=[[UIImage imageNamed:@"launch"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
+    img.image=[[UIImage imageNamed:@"launch2"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
     [_loginView addSubview:img];
     [_loginView sendSubviewToBack:img];
     
@@ -91,25 +92,18 @@
      */
     
     //登陆按钮配置
-    self.loginFUI.buttonColor = [UIColor turquoiseColor];
-    self.loginFUI.shadowColor = [UIColor greenSeaColor];
-    self.loginFUI.shadowHeight = 5.0f;
+    self.loginFUI.buttonColor = [UIColor orangeColor];
+    self.loginFUI.shadowColor = [UIColor pumpkinColor];
+    self.loginFUI.shadowHeight = 3.0f;
     self.loginFUI.cornerRadius = 6.0f;
     [self.loginFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
     [self.loginFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
     //忘记密码按钮配置
-    self.resetPwdFUI.buttonColor = [UIColor turquoiseColor];
-    self.resetPwdFUI.shadowColor = [UIColor greenSeaColor];
-    self.resetPwdFUI.shadowHeight = 3.0f;
-    self.resetPwdFUI.cornerRadius = 6.0f;
-    [self.resetPwdFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
+    [self.resetPwdFUI setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [self.resetPwdFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
     //注册按钮配置
-    self.registFUI.buttonColor = [UIColor turquoiseColor];
-    self.registFUI.shadowColor = [UIColor greenSeaColor];
-    self.registFUI.shadowHeight = 3.0f;
-    self.registFUI.cornerRadius = 6.0f;
-    [self.registFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
+ 
+    [self.registFUI setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [self.registFUI setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
     
     /**
@@ -213,7 +207,7 @@
         [alert show];
     }else{
         //指示框
-        spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor emerlandColor]];
+        spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor orangeColor]];
         spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
         [self.view addSubview:spinner];
         //注册逻辑

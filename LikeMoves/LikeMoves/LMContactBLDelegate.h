@@ -22,6 +22,7 @@
 -(void)scanFriendSuccess:(NSArray*)scanFriend;
 -(void)addFriendByPhoneSuccess:(NSInteger)status;
 -(void)acceptFriendSuccess;
+-(void)rejectFriendSuccess;
 -(void)addFriendByIDSuccess:(NSInteger)status;
 -(void)delFriendByIDSuccess:(NSInteger)status;
 @end

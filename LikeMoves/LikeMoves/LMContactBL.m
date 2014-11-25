@@ -97,6 +97,9 @@
 -(void)acceptFriendSuccess{
     [_delegate acceptFriendSuccess];
 }
+-(void)rejectFriendSuccess{
+    [_delegate rejectFriendSuccess];
+}
 -(void)addFriendByIDSuccess:(NSInteger)status{
     [_delegate addFriendByIDSuccess:(NSInteger)status];
 }

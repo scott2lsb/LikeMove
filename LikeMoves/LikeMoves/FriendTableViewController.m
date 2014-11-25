@@ -95,8 +95,9 @@ RTSpinKitView* spinner;
     spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor orangeColor]];
     spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
     [self.navigationController.view addSubview:spinner];
-    [spinner startAnimating];
+    [spinner stopAnimating];
 }
+UILabel* label;
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //实例化一个NSDateFormatter对象
@@ -105,10 +106,27 @@ RTSpinKitView* spinner;
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     //用[NSDate date]可以获取系统当前时间
     NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
-    [_bl getFriendSportRank:currentDateStr];
-    //    [_bl getFriends:@"1" perPage:@"20"];
-    [_bl getCrowdfundFriends];
-    
+    Reachability* reach=[Reachability reachabilityWithHostName:@"www.baidu.com"];
+    if (![reach isReachable]) {
+        _crowdfundFriendTableView.hidden=YES;
+        label=[[UILabel alloc] initWithFrame:CGRectMake(320, 0, 320, [UIScreen mainScreen].bounds.size.height-108-49)];
+        label.font=[UIFont systemFontOfSize:18.0];
+        label.textAlignment=NSTextAlignmentCenter;
+        label.text=@"还没有人众筹哦！";
+        label.backgroundColor=[UIColor whiteColor];
+        label.textColor=[UIColor grayColor];
+        label.enabled=NO;
+        [self.scrollView addSubview:label];
+
+            UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"网络连接失败，请检查网络连接！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alert show];
+        
+    }else{
+        [_bl getFriendSportRank:currentDateStr];
+        //    [_bl getFriends:@"1" perPage:@"20"];
+        [_bl getCrowdfundFriends];
+        [spinner startAnimating];
+    }
 }
 - (void)didReceiveMemoryWarning
 {
@@ -220,20 +238,41 @@ NSString* friendID;
         // 显示UIAlertView
         [alert show];
     }else{
-        NSDictionary* dict=[_rankFriends objectAtIndex:indexPath.row];
-        NSString* name=[dict objectForKey:@"nickname"];
-        friendID=[dict objectForKey:@"id"];
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:[NSString stringWithFormat:@"确定要删除好友“%@”吗？",name]
-                              message:nil
-                              delegate:self
-                              cancelButtonTitle:@"取消"
-                              otherButtonTitles:@"确定" , nil];
-        alert.tag=2;
-        alert.alertViewStyle=UIAlertViewStyleDefault;
-        [alert show];
+//        NSDictionary* dict=[_rankFriends objectAtIndex:indexPath.row];
+//        NSString* name=[dict objectForKey:@"nickname"];
+//        friendID=[dict objectForKey:@"id"];
+//        UIAlertView *alert = [[UIAlertView alloc]
+//                              initWithTitle:[NSString stringWithFormat:@"确定要删除好友“%@”吗？",name]
+//                              message:nil
+//                              delegate:self
+//                              cancelButtonTitle:@"取消"
+//                              otherButtonTitles:@"确定" , nil];
+//        alert.tag=2;
+//        alert.alertViewStyle=UIAlertViewStyleDefault;
+//        [alert show];
     }
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+}
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView.tag==0) {
+        return YES;
+    }else {
+        return NO;
+    }
+}
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView.tag==0&editingStyle==UITableViewCellEditingStyleDelete) {
+        NSDictionary* dict=[_rankFriends objectAtIndex:indexPath.row];
+        friendID=[dict objectForKey:@"id"];
+        [_bl delFriend:friendID];
+        [spinner startAnimating];
+        [_rankFriends removeObjectAtIndex:indexPath.row];
+        NSMutableArray *array = [[ NSMutableArray alloc] init ];
+        [ array addObject: indexPath ];
+        [ self.tableView deleteRowsAtIndexPaths: array
+                               withRowAnimation: UITableViewRowAnimationFade
+         ];
+    }
 }
 #pragma mark - AlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -267,6 +306,11 @@ NSString* friendID;
         UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UIViewController *radarVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"RadarFriend"];
         [self.navigationController pushViewController:radarVC animated:YES];
+    }];
+    [menuView addMenuItemWithTitle:@"手机号" andIcon:[UIImage imageNamed:@"phone_friend.png"] andSelectedBlock:^{
+        UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *phoneVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"PhoneFriend"];
+        [self.navigationController pushViewController:phoneVC animated:YES];
     }];
     [menuView addMenuItemWithTitle:@"通讯录" andIcon:[UIImage imageNamed:@"contact_friend2.png"] andSelectedBlock:^{
         DLog(@"show my friends");
@@ -308,11 +352,7 @@ NSString* friendID;
         
         
     }];
-    [menuView addMenuItemWithTitle:@"手机号" andIcon:[UIImage imageNamed:@"phone_friend.png"] andSelectedBlock:^{
-        UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController *phoneVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"PhoneFriend"];
-        [self.navigationController pushViewController:phoneVC animated:YES];
-    }];
+    
     [menuView show];
 }
 #pragma mark - ContactBLDelegate 代理
@@ -345,10 +385,12 @@ NSString* friendID;
 #pragma mark - 运动模块Delegate
 -(void) getSportRankSuccess:(NSArray *)rank{
     [spinner stopAnimating];
+    DLog(@"%@",rank);
     if([rank isKindOfClass:[NSNull class]]){
         _rankFriends=nil;
     }else{
         _rankFriends=[rank mutableCopy];
+
         int changeRank=0;
         int userRank=0;
         DXAlertView * alert;

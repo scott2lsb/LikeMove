@@ -9,12 +9,16 @@
 #import "ShopDetailViewController.h"
 #import "ProductCommentTableViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "FUIButton.h"
+#import "UIColor+FlatUI.h"
 @interface ShopDetailViewController ()
 @property(strong,nonatomic)HMSegmentedControl* segmentedControl;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic,weak)NSDictionary* selectProduct;
 @property(nonatomic,strong)NSMutableArray* commentsArray;
+@property (weak, nonatomic) IBOutlet FUIButton *addToCartBtn;
+
 @end
 
 @implementation ShopDetailViewController
@@ -94,7 +98,7 @@ NSString* selectedSize;
     desc.editable=NO;
     desc.text=(NSString*)[_selectProduct objectForKey:@"desc"];
     desc.textAlignment=NSTextAlignmentCenter;
-    UIImageView* img1=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
+    UIImageView* img1=[[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, 200)];
     UIImageView* img2=[[UIImageView alloc] initWithFrame:CGRectMake(10, 320, 300, 200)];
     UIImageView* img3=[[UIImageView alloc] initWithFrame:CGRectMake(10, 530, 300, 200)];
     UIImageView* img4=[[UIImageView alloc] initWithFrame:CGRectMake(10, 740, 300, 200)];
@@ -149,6 +153,17 @@ NSString* selectedSize;
     [img3 setContentMode:UIViewContentModeScaleToFill];
     [img4 setContentMode:UIViewContentModeScaleToFill];
     [img5 setContentMode:UIViewContentModeScaleToFill];
+    
+    img1.layer.cornerRadius=15.0;
+    img1.layer.masksToBounds=YES;
+    img2.layer.cornerRadius=15.0;
+    img2.layer.masksToBounds=YES;
+    img3.layer.cornerRadius=15.0;
+    img3.layer.masksToBounds=YES;
+    img4.layer.cornerRadius=20.0;
+    img4.layer.masksToBounds=YES;
+    img5.layer.cornerRadius=25.0;
+    img5.layer.masksToBounds=YES;
     
     [_imgDetail addSubview:img1];
     [_imgDetail addSubview:img2];
@@ -229,6 +244,13 @@ NSString* selectedSize;
     self.pageControl.tintColor=[UIColor grayColor];
     self.pageControl.currentPageIndicatorTintColor=[UIColor orangeColor];
     self.pageControl.pageIndicatorTintColor=[UIColor grayColor];
+    //设置接入购物车按钮颜色
+    self.addToCartBtn.buttonColor = [UIColor orangeColor];
+    self.addToCartBtn.shadowColor = [UIColor pumpkinColor];
+    self.addToCartBtn.shadowHeight = 3.0f;
+    self.addToCartBtn.cornerRadius = 6.0f;
+    [self.addToCartBtn setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
+    [self.addToCartBtn setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

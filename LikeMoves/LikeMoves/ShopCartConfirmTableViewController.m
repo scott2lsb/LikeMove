@@ -31,8 +31,8 @@ NSString* shipingMethod=@"2";
     _bl=[[LMShopBL alloc] init];
     _bl.delegate=self;
     
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]   initWithTarget:self action:@selector(dismissKeyboard)];
-//    [self.view addGestureRecognizer:tap];
+    //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]   initWithTarget:self action:@selector(dismissKeyboard)];
+    //    [self.view addGestureRecognizer:tap];
     
     
     _coinNum.delegate=self;
@@ -55,12 +55,12 @@ NSString* shipingMethod=@"2";
         //计算显示金额
         _deduction.text=[NSString stringWithFormat:@"￥%0.2f",maxDeduction/100];
         _realPrice.text=[NSString stringWithFormat:@"￥%0.2f",([[_detail objectForKey:@"totalPrice"] floatValue]-maxDeduction/100 )];
-
+        
     }
 }
 -(void)dismissKeyboard {
-//    [_coinNum resignFirstResponder];
-     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    //    [_coinNum resignFirstResponder];
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -106,7 +106,7 @@ NSString* shipingMethod=@"2";
 #pragma mark - TextField Delegate
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-
+    
     NSString* deduction=[_maxDeduction.text stringByReplacingOccurrencesOfString:@"￥" withString:@""];
     //NSUserDefaults刷新金币数量，使用NSUserDefaults中的数据
     User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults                                                            standardUserDefaults] objectForKey:mUserInfo]];
@@ -130,38 +130,60 @@ NSString* shipingMethod=@"2";
         _deduction.text=[NSString stringWithFormat:@"￥%0.2f",[textField.text floatValue]/100];
         _realPrice.text=[NSString stringWithFormat:@"￥%0.2f",([[_detail objectForKey:@"totalPrice"] floatValue]-[textField.text floatValue]/100 )];
     }
-
+    
 }
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (IBAction)confirmTo:(id)sender {
     NSString* ids=(NSString*)[_detail objectForKey:@"shopping_ids"];
     NSString* coinNum=_coinNum.text;
-
-    [_bl addOrderWithShopIds:ids receiverID:_receiverID coins:coinNum comment:nil shipingMethod:shipingMethod phoneConfirm:nil userID:nil];
+    User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults                                                            standardUserDefaults] objectForKey:mUserInfo]];
+    float balance=[user.balance floatValue];
+    float realPrice=([[_detail objectForKey:@"totalPrice"] floatValue]-[_coinNum.text floatValue]/100 );
+    //余额不足时，不能够创建订单
+    if (realPrice>balance) {
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"账户余额不足！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+        
+    }else{
+        [_bl addOrderWithShopIds:ids receiverID:_receiverID coins:coinNum comment:@" " shipingMethod:shipingMethod phoneConfirm:nil userID:nil];
+    }
 }
 -(void)addCartToOrderSuccess:(NSDictionary *)data{
     //TODO: 跳转支付页面
-    NSMutableDictionary* dict=[[NSMutableDictionary alloc] init];
-    [dict setValue:[data objectForKey:@"total_price"] forKey:@"total_price"];
-    [dict setValue:[data objectForKey:@"id"]  forKey:@"order_id"];
-    [dict setValue:[data objectForKey:@"need_coins"]  forKey:@"deduction_coins"];
-    [dict setValue:[data objectForKey:@"need_cash"]  forKey:@"real_price" ];
-    [dict setValue:[data objectForKey:@"order_no"] forKey:@"order_no"];
-    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    PayToOrderTableViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"PayToOrderPage"];
-    tabVC.dict=dict;
-    [self.navigationController pushViewController:tabVC animated:YES];
+
+
+//    if (1) {
+//        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"库存不足，请选购其他商品！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+//        [alert show];
+//        
+//    }else{
+        NSMutableDictionary* dict=[[NSMutableDictionary alloc] init];
+        [dict setValue:[data objectForKey:@"total_price"] forKey:@"total_price"];
+        [dict setValue:[data objectForKey:@"id"]  forKey:@"order_id"];
+        [dict setValue:[data objectForKey:@"need_coins"]  forKey:@"deduction_coins"];
+        [dict setValue:[data objectForKey:@"need_cash"]  forKey:@"real_price" ];
+        [dict setValue:[data objectForKey:@"order_no"] forKey:@"order_no"];
+        UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PayToOrderTableViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"PayToOrderPage"];
+        tabVC.dict=dict;
+        [self.navigationController pushViewController:tabVC animated:YES];
+    
+}
+-(void)addCartToOrderFail{
+    UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"购买失败，请选购其他商品！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
+
 }
 @end

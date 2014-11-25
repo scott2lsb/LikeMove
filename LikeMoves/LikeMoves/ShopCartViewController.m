@@ -26,6 +26,14 @@ NSMutableDictionary* detail;
     _tableView.dataSource=self;
     UIView* view =[ [UIView alloc]init];
     view.backgroundColor= [UIColor clearColor];
+    //设置结算按钮颜色
+    self.payBtn.buttonColor = [UIColor orangeColor];
+    self.payBtn.shadowColor = [UIColor pumpkinColor];
+    self.payBtn.shadowHeight = 3.0f;
+    self.payBtn.cornerRadius = 6.0f;
+    [self.payBtn setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
+    [self.payBtn setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
+
     [self.tableView setTableFooterView:view];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -101,13 +109,16 @@ NSMutableDictionary* detail;
     UILabel* sizeColor=(UILabel*)[cell viewWithTag:7];
     NSDictionary* cart=[_carts objectAtIndex:indexPath.row];
     title.text=[cart objectForKey:@"name"];
-    price.text=[NSString stringWithFormat:@"￥ %@",[cart objectForKey:@"price"]];
+    price.text=[NSString stringWithFormat:@"￥ %0.2f",[(NSString*)[cart objectForKey:@"price"] floatValue]];
     num.text=[NSString stringWithFormat:@"x %@",[cart objectForKey:@"number"]];
     NSArray* roll=(NSArray*)[cart objectForKey:@"roll_pics" ];
     NSDictionary* dict=[roll objectAtIndex:0];
     NSString* url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
     
     [productImg sd_setImageWithURL:[NSURL URLWithString:url ] placeholderImage:[UIImage imageNamed:@"img_nil.png"]];
+    productImg.layer.cornerRadius=15.0;
+    productImg.layer.masksToBounds=YES;
+
     stepper.value=[[cart objectForKey:@"number"] doubleValue];
     sizeColor.text=[NSString stringWithFormat:@"%@",[cart objectForKey:@"comment"]];
     
@@ -129,8 +140,9 @@ NSMutableDictionary* detail;
 }
 
 #pragma mark BLDelegate
+UILabel* label;
 -(void)getShopingCartsSuccess:(NSArray *)array{
-    UILabel* label;
+
     if([array isKindOfClass:[NSNull class]]){
         _carts=nil;
         _tableView.hidden=YES;
@@ -151,6 +163,7 @@ NSMutableDictionary* detail;
     }else{
         label.hidden=YES;
         _tableView.hidden=NO;
+        _payBtn.enabled=YES;
         _carts=[array mutableCopy];
         [_tableView reloadData];
         [self caculateDeductionAndTotal];

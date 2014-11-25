@@ -11,7 +11,8 @@
 #import "UIColor+FlatUI.h"
 #import "LMContactBL.h"
 #import "LMContactBLDelegate.h"
-@interface RadarFriendViewController : UIViewController<LMContactBLDelegate,UITableViewDelegate,UITableViewDataSource>
+#import "RadarTableViewCell.h"
+@interface RadarFriendViewController : UIViewController<LMContactBLDelegate,UITableViewDelegate,UITableViewDataSource,RadarCellDelegate>
 {
     RTSpinKitView *spinner;}
 @property (strong,nonatomic) LMContactBL* bl;

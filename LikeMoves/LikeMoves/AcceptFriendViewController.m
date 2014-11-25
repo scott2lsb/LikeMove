@@ -24,14 +24,14 @@
     UIView*view =[ [UIView alloc]init];
     view.backgroundColor= [UIColor clearColor];
     [self.acceptFriend setTableFooterView:view];
-//    [_bl getMyAccepts:@"1" perPage:@"20"];
+    //    [_bl getMyAccepts:@"1" perPage:@"20"];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     _spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor orangeColor]];
     _spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
     [self.view addSubview:_spinner];
-
+    
     [_bl getMyAccepts:@"1" perPage:@"20"];
 }
 - (void)didReceiveMemoryWarning
@@ -39,7 +39,24 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - tableViewCell-Delegate
+-(void)AcceptFriendCellBtnClick:(AcceptFriendTableViewCell *)cell{
+    [_spinner startAnimating];
+    
+    NSInteger row=cell.index;
+    NSDictionary*dict=[acceptFriends objectAtIndex:row];
+    NSString* user_id=[dict objectForKey:@"id"];
+    [_bl acceptFriend:user_id];
+}
+-(void)RejectFriendCellBtnClick:(AcceptFriendTableViewCell *)cell{
+    [_spinner startAnimating];
+    
+    NSInteger row=cell.index;
+    NSDictionary*dict=[acceptFriends objectAtIndex:row];
+    NSString* user_id=[dict objectForKey:@"id"];
+    [_bl rejectFriend:user_id];
 
+}
 /*
  #pragma mark - Navigation
  
@@ -52,23 +69,24 @@
  */
 #pragma mark - TableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellIdentifier = @"acceptFriend";
+    static NSString *cellIdentifier = @"acceptFriend1";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
-                             cellIdentifier ];
+    AcceptFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                                       cellIdentifier ];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                      reuseIdentifier: cellIdentifier ];
+        cell = [[AcceptFriendTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                                reuseIdentifier: cellIdentifier ];
+        cell.delegate=self;
     }
-    UILabel* nickname=(UILabel*)[cell viewWithTag:1];
-    UILabel* phone=(UILabel*)[cell viewWithTag:2];
-//    UIButton* reject=(UIButton*)[cell viewWithTag:3];
-//    UIButton* accept=(UIButton*)[cell viewWithTag:4];
-//    [accept addTarget:self action:@selector(acceptFriendRequest:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel* nickname=    cell.nickname;
+    UILabel* phone=cell.phone;
     NSDictionary* dict=[acceptFriends objectAtIndex:indexPath.row];
     DLog(@"%@",[dict objectForKey:@"nickname"]);
     nickname.text=[dict objectForKey:@"nickname"];
     phone.text=[dict objectForKey:@"phone"];
+    cell.index=indexPath.row;
+    cell.section=indexPath.section;
     return cell;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -88,11 +106,13 @@
 }
 
 #pragma mark - ContactBLDelegate
+UILabel* label;
 -(void)getAcceptFriendSuccess:(NSArray *)friends{
     [_spinner stopAnimating];
+    
     if([friends isKindOfClass:[NSNull class]]){
         _acceptFriend.hidden=YES;
-        UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(10, 200, 300, 44)];
+        label=[[UILabel alloc] initWithFrame:CGRectMake(10, 200, 300, 44)];
         label.textAlignment=NSTextAlignmentCenter;
         label.text=@"你还没有任何好友请求哦！";
         label.textColor=[UIColor grayColor];
@@ -100,6 +120,7 @@
     }
     else{
         _acceptFriend.hidden=NO;
+        label.hidden=YES;
         acceptFriends=[friends mutableCopy];
         [_acceptFriend reloadData];
     }
@@ -112,11 +133,14 @@
     NSDictionary*dict=[acceptFriends objectAtIndex:row];
     NSString* user_id=[dict objectForKey:@"id"];
     [_bl acceptFriend:user_id];
-//    [acceptFriends removeObjectAtIndex:row];
-//    [_acceptFriend deleteRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
--(void)acceptFriendSuccess{
     
+}
+-(void)acceptFriendSuccess{
+    [_spinner stopAnimating];
+    [_bl getMyAccepts:@"1" perPage:@"20"];
+}
+-(void)rejectFriendSuccess{
+    [_spinner stopAnimating];
     [_bl getMyAccepts:@"1" perPage:@"20"];
 }
 @end

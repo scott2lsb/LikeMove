@@ -25,6 +25,7 @@
     NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
     
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
+    DLog(@"add-friend-by-id:%@",utf8);
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"JSON: %@", operation.responseString);
         //编辑成功BL的delegate editSuccess
@@ -51,6 +52,7 @@
     NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
     
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
+    DLog(@"add-friend-by-phone:%@",utf8);
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         DLog(@"JSON: %@", operation.responseString);
         //编辑成功BL的delegate editSuccess
@@ -97,7 +99,7 @@
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //        DLog(@"JSON: %@", operation.responseString);
         //编辑成功BL的delegate editSuccess
-        //        [_delegate editUserInfoSuccess];
+[_delegate rejectFriendSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
