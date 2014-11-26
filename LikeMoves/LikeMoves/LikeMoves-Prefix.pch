@@ -71,6 +71,10 @@
  */
 #define mUserMonthMoveDays @"month_move_days"
 /**
+ *  已经上传了的运动时间
+ */
+#define mUploadedSportTime @"uploaded_sport_time"
+/**
  *  为用户准备的支付宝正在付款的订单
  */
 #define mUserPayingOrder @"paying_order"

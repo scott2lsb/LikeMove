@@ -18,6 +18,7 @@
 @property (strong,nonatomic) LMContactBL* bl;
 @property (strong,nonatomic) NSArray* radarFriends;
 @property (weak, nonatomic) IBOutlet UITableView *radarTable;
+@property (weak, nonatomic) IBOutlet UILabel *radarDetail;
 
 - (IBAction)backTo:(id)sender;
 

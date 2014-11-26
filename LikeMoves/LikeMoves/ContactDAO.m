@@ -36,7 +36,7 @@
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
@@ -60,7 +60,7 @@
         NSInteger status=[[dict objectForKey:@"result"] integerValue];
         [_delegate addFriendByPhoneSuccess:status];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
@@ -81,7 +81,7 @@
         //编辑成功BL的delegate editSuccess
         [_delegate acceptFriendSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
@@ -101,7 +101,7 @@
         //编辑成功BL的delegate editSuccess
 [_delegate rejectFriendSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
@@ -123,7 +123,7 @@
         //编辑成功BL的delegate editSuccess
         [_delegate delFriendByIDSuccess:[status intValue]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
@@ -144,7 +144,7 @@
         //编辑成功BL的delegate editSuccess
         [_delegate getFriendsSuccess:friends];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
@@ -164,7 +164,7 @@
         //编辑成功BL的delegate editSuccess
         //        [_delegate editUserInfoSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
@@ -191,7 +191,7 @@
         //编辑成功BL的delegate editSuccess
         [_delegate getAcceptFriendSuccess:[self jsonToFriendArray:operation.responseString]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
@@ -211,7 +211,7 @@
         //编辑成功BL的delegate editSuccess
         [_delegate scanFriendSuccess:[self jsonToFriendArray:operation.responseString]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
@@ -227,11 +227,11 @@
     
     NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
     [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DLog(@"JSON: %@", operation.responseString);
+        DLog(@"stop-scan-JSON: %@", operation.responseString);
         //编辑成功BL的delegate editSuccess
         //        [_delegate editUserInfoSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
@@ -260,7 +260,7 @@
         //编辑成功BL的delegate editSuccess
         [_delegate getSportRankSuccess:rankFriend];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];
@@ -286,7 +286,7 @@
         //编辑成功BL的delegate editSuccess
         [_delegate getCrowdfundFriendSuccess:friends];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
         //        [_delegate editUserInfoFail];
     }];

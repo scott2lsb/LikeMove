@@ -264,7 +264,7 @@
     [nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
     NSString *icon = [NSString stringWithFormat:@"smssdk.bundle/button4.png"];
     [nextBtn setBackgroundImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
-    nextBtn.frame=CGRectMake(7, 200+statusBarHeight, 305, 42);
+    nextBtn.frame=CGRectMake(7, 250+statusBarHeight, 305, 42);
     [nextBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [nextBtn addTarget:self action:@selector(nextStep) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:nextBtn];
@@ -297,9 +297,30 @@
         }
         
     }];
+    UILabel* regist=[[UILabel alloc] init];
+    regist.frame=CGRectMake(7, 210+statusBarHeight, 113, 21);
+    regist.textAlignment = NSTextAlignmentCenter;
+    regist.font = [UIFont fontWithName:@"Helvetica" size:12];
+    regist.textColor=[UIColor darkGrayColor];
+    regist.text=@"注册视为同意里环王";
+    [self.view addSubview:regist];
+    
+    UIButton* policyBtn=[UIButton buttonWithType:UIButtonTypeSystem];
+    [policyBtn setTitle:@"用户隐私政策" forState:UIControlStateNormal];
+    policyBtn.frame=CGRectMake(120, 208+statusBarHeight, 93, 22);
+    [policyBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [policyBtn addTarget:self action:@selector(presentPolicyVC) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:policyBtn];
+
+
     
 }
-
+-(void)presentPolicyVC{
+    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"PolicyPage"];
+    [self presentViewController:tabVC animated:YES completion:^(void){
+    }];
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;

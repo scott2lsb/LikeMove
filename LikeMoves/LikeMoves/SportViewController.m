@@ -203,6 +203,7 @@ static int sportCircleNumber;
         stepNum=0;
         sportSec=0;
          [[NSUserDefaults standardUserDefaults] setObject:currentDateStr forKey:mCurrentSportDate];
+        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:mUploadedSportTime];
     }
     
     //设置时间label
@@ -301,7 +302,11 @@ int fireTime;
     }else{
         if(sportCircleNumber>900){
             //添加运动记录
-            [_bl addMoveRecord:sportSec withSteps:stepNum];
+            NSString* pastSportTime= (NSString*)[[NSUserDefaults standardUserDefaults] objectForKey:mUploadedSportTime];
+            int pastSaveSportTime=[pastSportTime intValue];
+            int currentUploadSportTime=  sportSec-pastSaveSportTime;
+            [_bl addMoveRecord:currentUploadSportTime withSteps:stepNum];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",sportSec] forKey:mUploadedSportTime];
             //        //userBL更新本地用户NSUserDefaults中的信息
             //        [_userBL refreshMyself];
             //userBL更新服务器中的金币信息
@@ -339,8 +344,6 @@ int fireTime;
             [[NSUserDefaults standardUserDefaults]setObject:currentDateStr forKey:mFireDate];
             [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",fireTime] forKey:mFirePerDay];
         }else{
-            //        [_userBL addCoins:100];
-            
             
             DXAlertView* alert = [[DXAlertView alloc] initWithTitle:nil contentText:@"能量条超过四分之一才能释放" leftButtonTitle:nil rightButtonTitle:@"知道了"];
             [alert show];

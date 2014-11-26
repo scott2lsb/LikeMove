@@ -92,6 +92,9 @@
 		8A3AF28019F176E2008E3CD3 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3AF27319F176E2008E3CD3 /* libSocialWechat.a */; };
 		8A3AF28119F176E2008E3CD3 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3AF27419F176E2008E3CD3 /* libWeChatSDK.a */; };
 		8A3AF28319F178DB008E3CD3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3AF28219F178DB008E3CD3 /* libsqlite3.dylib */; };
+		8A3E8BFE1A24A28A00B7DC16 /* PolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3E8BFD1A24A28A00B7DC16 /* PolicyViewController.m */; };
+		8A3E8C001A24A36000B7DC16 /* policy.html in Resources */ = {isa = PBXBuildFile; fileRef = 8A3E8BFF1A24A36000B7DC16 /* policy.html */; };
+		8A3E8C031A255A4500B7DC16 /* CompanyIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3E8C021A255A4500B7DC16 /* CompanyIntroViewController.m */; };
 		8A4113E519D8F6C6002F2575 /* navi.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A4113E419D8F6C6002F2575 /* navi.png */; };
 		8A4113E919D903F9002F2575 /* chartBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A4113E819D903F9002F2575 /* chartBtn.png */; };
 		8A4113EB19D90453002F2575 /* shareBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A4113EA19D90453002F2575 /* shareBtn.png */; };
@@ -395,6 +398,11 @@
 		8A3AF27619F176E2008E3CD3 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		8A3AF27719F176E2008E3CD3 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		8A3AF28219F178DB008E3CD3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		8A3E8BFC1A24A28A00B7DC16 /* PolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolicyViewController.h; sourceTree = "<group>"; };
+		8A3E8BFD1A24A28A00B7DC16 /* PolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolicyViewController.m; sourceTree = "<group>"; };
+		8A3E8BFF1A24A36000B7DC16 /* policy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = policy.html; sourceTree = "<group>"; };
+		8A3E8C011A255A4500B7DC16 /* CompanyIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyIntroViewController.h; sourceTree = "<group>"; };
+		8A3E8C021A255A4500B7DC16 /* CompanyIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyIntroViewController.m; sourceTree = "<group>"; };
 		8A4113E419D8F6C6002F2575 /* navi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navi.png; sourceTree = "<group>"; };
 		8A4113E819D903F9002F2575 /* chartBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chartBtn.png; path = ../chartBtn.png; sourceTree = "<group>"; };
 		8A4113EA19D90453002F2575 /* shareBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareBtn.png; sourceTree = "<group>"; };
@@ -945,6 +953,7 @@
 			children = (
 				8AD3A49819C92A6F00B615A5 /* images */,
 				8A04AF4F19C83A2D000212E7 /* country.plist */,
+				8A3E8BFF1A24A36000B7DC16 /* policy.html */,
 				8A33784019C5C656008B9AF5 /* LikeMoves-Info.plist */,
 				8A33784119C5C656008B9AF5 /* InfoPlist.strings */,
 				8A33784419C5C656008B9AF5 /* main.m */,
@@ -1179,6 +1188,10 @@
 				8AAABDD31A021023006BF58A /* CrowdfundViewController.m */,
 				8AE560ED1A1E1D8200F6DB00 /* EditPwdTableViewController.h */,
 				8AE560EE1A1E1D8200F6DB00 /* EditPwdTableViewController.m */,
+				8A3E8BFC1A24A28A00B7DC16 /* PolicyViewController.h */,
+				8A3E8BFD1A24A28A00B7DC16 /* PolicyViewController.m */,
+				8A3E8C011A255A4500B7DC16 /* CompanyIntroViewController.h */,
+				8A3E8C021A255A4500B7DC16 /* CompanyIntroViewController.m */,
 				8AE377BB1A1204DB0017118C /* Order */,
 				8AAABDDD1A0348A1006BF58A /* CustomTableCell */,
 			);
@@ -1717,6 +1730,7 @@
 				8AB1AC0B19D51B0800017485 /* share.png in Resources */,
 				8AB1AC0A19D51B0800017485 /* sec.png in Resources */,
 				8AB1AC4319D8270500017485 /* share-568h@2x.png in Resources */,
+				8A3E8C001A24A36000B7DC16 /* policy.html in Resources */,
 				8A1D4C0B19CD234000F27A3C /* frame_middle@2x.png in Resources */,
 				8A4113E919D903F9002F2575 /* chartBtn.png in Resources */,
 				8AAABDD91A0229C3006BF58A /* coins@100.png in Resources */,
@@ -1812,6 +1826,7 @@
 				8AAABDDC1A030D42006BF58A /* OrdersViewController.m in Sources */,
 				8AE377BA1A11E1510017118C /* PaidOrderTableViewController.m in Sources */,
 				8A4113EE19D90B1D002F2575 /* MainTabViewController.m in Sources */,
+				8A3E8BFE1A24A28A00B7DC16 /* PolicyViewController.m in Sources */,
 				8AB867851A2405E400B4BB23 /* AcceptFriendTableViewCell.m in Sources */,
 				8AB1ABE319CFA79900017485 /* wendu_yuan2.m in Sources */,
 				8A04AF2219C6D42A000212E7 /* LMLoginViewController.m in Sources */,
@@ -1871,6 +1886,7 @@
 				8AC7F81E19DF8FA6008C2934 /* RTSpinKitArcAnimation.m in Sources */,
 				8AE378171A12D9E60017118C /* SBJsonParser.m in Sources */,
 				8AE377B71A11DBC00017118C /* SendOrderTableViewController.m in Sources */,
+				8A3E8C031A255A4500B7DC16 /* CompanyIntroViewController.m in Sources */,
 				8AE378181A12D9E60017118C /* SBJsonWriter.m in Sources */,
 				8A04AF3E19C839E6000212E7 /* SectionsViewController.m in Sources */,
 				8AAABDB51A00BAFB006BF58A /* MoreTableViewController.m in Sources */,

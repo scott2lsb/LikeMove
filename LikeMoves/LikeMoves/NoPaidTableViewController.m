@@ -80,7 +80,10 @@ NSArray* carts;
     NSArray* roll=(NSArray*)[friend objectForKey:@"roll_pics" ];
     NSDictionary* dict=[roll objectAtIndex:0];
     NSString* url=[NSString stringWithFormat:PicUrlString,[dict objectForKey:@"pic"]];
-    [img sd_setImageWithURL:[NSURL URLWithString:url ] placeholderImage:[UIImage imageNamed:@"img_nil.png"]];    return cell;
+    [img sd_setImageWithURL:[NSURL URLWithString:url ] placeholderImage:[UIImage imageNamed:@"img_nil.png"]];
+    img.layer.cornerRadius = 15;
+    img.layer.masksToBounds = YES;
+    return cell;
 }
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {

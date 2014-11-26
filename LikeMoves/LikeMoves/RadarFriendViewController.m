@@ -83,7 +83,7 @@ RTSpinKitView* spinnerIndicator;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if([_radarFriends isKindOfClass:[NSNull class]]){
+    if([_radarFriends isKindOfClass:[NSNull class]]|(_radarFriends==nil)){
         return 0;
     }
     return _radarFriends.count;
@@ -129,7 +129,13 @@ RTSpinKitView* spinnerIndicator;
 }
 #pragma mark - ContactBLDelegate
 -(void)scanFriendSuccess:(NSArray *)scanFriend{
-    _radarFriends=scanFriend;
+    if ([scanFriend isKindOfClass:[NSNull class]]) {
+        _radarFriends=nil;
+        _radarDetail.text=[NSString stringWithFormat:@"当前开启雷达人数：0 人"];
+    }else{
+        _radarFriends=scanFriend;
+        _radarDetail.text=[NSString stringWithFormat:@"当前开启雷达人数：%d 人",scanFriend.count];
+    }
     [_radarTable reloadData];
 }
 -(void)addFriendByPhoneSuccess:(NSInteger)status{

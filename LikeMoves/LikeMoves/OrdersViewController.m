@@ -165,6 +165,9 @@
                 ReceiverOrderDetailTableViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReceiverOrderPage"];
                 tabVC.dict=received;
                 [self.navigationController pushViewController:tabVC animated:YES];
+            }else{
+                UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"此订单为充值订单！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alert show];
             }
             break;
         }

@@ -87,12 +87,16 @@ NSString* shipingMethod=@"2";
 #pragma mark - Table View Delegate
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     DLog(@"%d,%d,%d",indexPath.row,indexPath.section,[[_detail objectForKey:@"totalPrice"] intValue]);
-    if(indexPath.row==1&indexPath.section==0&[[_detail objectForKey:@"totalPrice"] intValue]>39){
+    if(indexPath.row==1&indexPath.section==0&[[_detail objectForKey:@"totalPrice"] intValue]>=39){
         shipingMethod=@"1";
         UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UIViewController *tabVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReceiverPage"];
         
         [self.navigationController pushViewController:tabVC animated:YES];
+    }else if(indexPath.row==1&indexPath.section==0&[[_detail objectForKey:@"totalPrice"] intValue]<39){
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"临沂城区购物满39元可选择收货地址享受送货上门服务" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+
     }else{
         [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
     }
