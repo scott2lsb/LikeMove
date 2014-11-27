@@ -77,7 +77,7 @@
         //注册成功BL的delegate registSuccess
         [_delegate registSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //注册失败BL的delegate registFail
         [_delegate registFail];
     }];
@@ -104,7 +104,7 @@
         }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //编辑失败BL的delegate editFail
         [_delegate editUserInfoFail];
     }];
@@ -133,7 +133,7 @@
         }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         //修改密码失败BL的delegate editFail
         [_delegate resetPwdFail];
     }];
@@ -183,12 +183,44 @@ User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardU
             //编辑成功BL的delegate editSuccess
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
+            DLog(@"Error: %@", error);
             //编辑失败BL的delegate editFail
 
         }];
 
 };
+/**
+ *  查询用户手机号是否已经注册
+ *
+ *  @param phoneNum 手机号
+ */
+-(void)phoneIsExist:(NSString*)phoneNum{
+    AFHTTPRequestOperationManager *manager           = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer                       = [AFJSONResponseSerializer serializer];
+    [manager.requestSerializer setValue: [[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]forHTTPHeaderField:@"Cookie"];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObject:@"text/html"];
+    NSString* suffix=[NSString stringWithFormat:@"?m=user&a=getPhoneInfo&phone=%@",phoneNum];
+    NSString* requestUrl                             =[BaseURLString stringByAppendingString:suffix];
+    
+    NSString* utf8=[requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//将请求地址转换为utf8编码，使用默认unicode进行请求会报编码错误
+    [manager POST:utf8 parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+        //编辑成功BL的delegate editSuccess
+        NSDictionary* dict=[operation.responseString objectFromJSONString];
+        int isExist=[[dict objectForKey:@"phone_registered"] intValue];
+        DLog(@"是否存在；%d",isExist);
+        if (isExist==0) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:phone_user_no_exist_notification object:nil];
+        }else{
+            [[NSNotificationCenter defaultCenter] postNotificationName:phone_user_exist_notification object:nil];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+        //编辑失败BL的delegate editFail
+        
+    }];
+};
+
 /**
  *  将获得的json形式user信息转化为user对象，存入NSUserDefaults中
  *
@@ -248,4 +280,5 @@ User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardU
     [[NSUserDefaults standardUserDefaults] synchronize];//同步NSUserDefaults中的数据
     
 }
+
 @end

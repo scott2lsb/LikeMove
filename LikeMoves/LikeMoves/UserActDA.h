@@ -57,4 +57,10 @@
  *  @param coins 将要增加的金币
  */
 -(void)addCoins:(NSInteger)coins;
+/**
+ *  查询用户手机号是否已经注册
+ *
+ *  @param phoneNum 手机号
+ */
+-(void)phoneIsExist:(NSString*)phoneNum;
 @end

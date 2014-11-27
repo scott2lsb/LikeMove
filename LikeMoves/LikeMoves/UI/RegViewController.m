@@ -80,6 +80,14 @@
 
 -(void)nextStep
 {
+    
+    SMS_SRReachability* reach=[SMS_SRReachability reachabilityWithHostName:@"www.baidu.com"];
+    if (![reach isReachable]) {
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"网络连接失败，请检查网络设置！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+
+        return;
+    }
     int compareResult = 0;
     for (int i=0; i<_areaArray.count; i++) {
         NSDictionary* dict1=[_areaArray objectAtIndex:i];
@@ -112,21 +120,9 @@
     //TODO: 服务器验证是否已经注册，分为注册和重置密码两种情况进行判断
     //判断服务器是否存在此手机号
     //弹出提示框提示此号码已经存在
+    [_da phoneIsExist:self.telField.text];
+   
     
-    if (self.registOrReset) {
-        //regist手机号已经注册
-        
-        
-        
-    }else{
-        //reset手机号还未注册
-        
-        
-    }
-    NSString* str=[NSString stringWithFormat:@"我们将发送验证码短信到这个号码:%@ %@",self.areaCodeField.text,self.telField.text];
-    _str=[NSString stringWithFormat:@"%@",self.telField.text];
-    UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"确认手机号码" message:str delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    [alert show];
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -192,11 +188,42 @@
     [self.view endEditing:YES];
 }
 
+-(void)phoneIsExist:(NSNotification*) noti{
+    if (self.registOrReset) {
+        //regist
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"手机号已经注册！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }else{
+        //reset
+        NSString* str=[NSString stringWithFormat:@"我们将发送验证码短信到这个号码:%@ %@",self.areaCodeField.text,self.telField.text];
+        _str=[NSString stringWithFormat:@"%@",self.telField.text];
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"确认手机号码" message:str delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alert show];
+        
+    }
+}
+-(void)phoneIsNotExist:(NSNotification*) noti{
+    if (self.registOrReset) {
+        //regist
+        NSString* str=[NSString stringWithFormat:@"我们将发送验证码短信到这个号码:%@ %@",self.areaCodeField.text,self.telField.text];
+        _str=[NSString stringWithFormat:@"%@",self.telField.text];
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"确认手机号码" message:str delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alert show];
+    }else{
+        //reset
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"手机号还未注册里环王！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
 
+        
+    }
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _da=[[UserActDA alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(phoneIsExist:) name:phone_user_exist_notification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(phoneIsNotExist:) name:phone_user_no_exist_notification object:nil];
     // Do any additional setup after loading the view from its nib.
     
     self.view.backgroundColor=[UIColor whiteColor];
@@ -298,16 +325,16 @@
         
     }];
     UILabel* regist=[[UILabel alloc] init];
-    regist.frame=CGRectMake(7, 210+statusBarHeight, 113, 21);
+    regist.frame=CGRectMake(7, 210+statusBarHeight, 160, 21);
     regist.textAlignment = NSTextAlignmentCenter;
     regist.font = [UIFont fontWithName:@"Helvetica" size:12];
     regist.textColor=[UIColor darkGrayColor];
-    regist.text=@"注册视为同意里环王";
+    regist.text=@"点击下一步视为同意里环王";
     [self.view addSubview:regist];
     
     UIButton* policyBtn=[UIButton buttonWithType:UIButtonTypeSystem];
     [policyBtn setTitle:@"用户隐私政策" forState:UIControlStateNormal];
-    policyBtn.frame=CGRectMake(120, 208+statusBarHeight, 93, 22);
+    policyBtn.frame=CGRectMake(167, 208+statusBarHeight, 93, 22);
     [policyBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [policyBtn addTarget:self action:@selector(presentPolicyVC) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:policyBtn];

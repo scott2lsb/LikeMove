@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SectionsViewController.h"
+#import "UserActDA.h"
+#import "SMS_SDK/SMS_SRReachability.h"
 @protocol SecondViewControllerDelegate;
 
 @interface RegViewController : UIViewController <UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,SecondViewControllerDelegate,UITextFieldDelegate>
@@ -21,6 +23,7 @@
 @property(nonatomic,strong) UIWindow* window;
 
 @property(nonatomic,strong) UIButton* next;
+@property UserActDA* da;
 /**
  *  Yes为regist
  No为reset

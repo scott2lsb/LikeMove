@@ -119,7 +119,7 @@ enum {
 	kSRReachableViaWiFi
 	
 };
-typedef	uint32_t NetworkStatus;
+//typedef	enum NetworkStatus;
 
 enum {
 	
@@ -169,7 +169,7 @@ extern NSString *const kSRReachabilityChangedNotification;
 - (BOOL) isEqual: (SMS_SRReachability *) r;
 
 // These are the status tests.
-- (NetworkStatus) currentReachabilityStatus;
+//- (NetworkStatus) currentReachabilityStatus;
 
 // The main direct test of reachability.
 - (BOOL) isReachable;

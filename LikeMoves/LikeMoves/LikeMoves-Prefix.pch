@@ -90,3 +90,8 @@
 #define shop_alipay_success_notification @"alipay_order_pay_success"
 //Alipay订单失败
 #define shop_alipay_fail_notification @"alipay_order_pay_fail"
+/**
+ *  是否存在此手机用户
+ */
+#define phone_user_exist_notification @"phone_user_exist"
+#define phone_user_no_exist_notification @"phone_no_exist"

@@ -43,7 +43,7 @@
 -(void)sendInvite
 {
     //发送短信
-    NSLog(@"发送短信");
+    DLog(@"发送短信");
     if ([_phone2 length]>0) {
         UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"选择要发送邀请的号码" delegate:self cancelButtonTitle:_phone otherButtonTitles:_phone2, nil];
         [alert show];

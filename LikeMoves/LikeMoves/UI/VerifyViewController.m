@@ -100,12 +100,12 @@ static NSMutableArray* _userData2;
     }
     else
     {
-        NSLog(@"去服务端进行验证中...");
+        DLog(@"去服务端进行验证中...");
         
         //[[SMS_SDK sharedInstance] commitVerifyCode:self.verifyCodeField.text];
         [SMS_SDK commitVerifyCode:self.verifyCodeField.text result:^(enum SMS_ResponseState state) {
             if (1==state) {
-                NSLog(@"block 验证成功");
+                DLog(@"block 验证成功");
                 NSString* str=[NSString stringWithFormat:@"验证码正确"];
                 UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"验证成功" message:str delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
@@ -113,7 +113,7 @@ static NSMutableArray* _userData2;
             }
             else if(0==state)
             {
-                NSLog(@"block 验证失败");
+                DLog(@"block 验证失败");
                 NSString* str=[NSString stringWithFormat:@"验证码无效 请重新获取验证码"];
                 UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"验证失败" message:str delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
@@ -136,15 +136,15 @@ static NSMutableArray* _userData2;
     if (alertView==_alert1) {
         if (1==buttonIndex)
         {
-            NSLog(@"重发验证码");
+            DLog(@"重发验证码");
             //[[SMS_SDK sharedInstance] getVerifyCodeByPhoneNumber:_phone AndZone:_areaCode];
             [SMS_SDK getVerifyCodeByPhoneNumber:_phone AndZone:_areaCode result:^(enum SMS_GetVerifyCodeResponseState state) {
                 if (1==state) {
-                    NSLog(@"block 获取验证码成功");
+                    DLog(@"block 获取验证码成功");
                 }
                 else if(0==state)
                 {
-                    NSLog(@"block 获取验证码失败");
+                    DLog(@"block 获取验证码失败");
                     NSString* str=[NSString stringWithFormat:@"验证码发送失败 请稍后重试"];
                     UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"发送失败" message:str delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alert show];
@@ -331,12 +331,12 @@ static NSMutableArray* _userData2;
         [_timer2 invalidate];
         return;
     }
-    //NSLog(@"更新时间");
+    //DLog(@"更新时间");
     self.timeLabel.text=[NSString stringWithFormat:@"接受短信大约需要%i秒",60-count];
 }
 
 -(void)showRepeatButton{
-    NSLog(@"显示重复短信按钮");
+    DLog(@"显示重复短信按钮");
     self.timeLabel.hidden=YES;
     self.repeatSMSBtn.hidden=NO;
     
