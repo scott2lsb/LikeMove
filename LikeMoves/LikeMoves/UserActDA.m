@@ -210,9 +210,9 @@ User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardU
         int isExist=[[dict objectForKey:@"phone_registered"] intValue];
         DLog(@"是否存在；%d",isExist);
         if (isExist==0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:phone_user_no_exist_notification object:nil];
+            [_delegate phoneIsNotExist];
         }else{
-            [[NSNotificationCenter defaultCenter] postNotificationName:phone_user_exist_notification object:nil];
+            [_delegate phoneIsExist];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 

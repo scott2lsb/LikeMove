@@ -187,8 +187,8 @@
 {
     [self.view endEditing:YES];
 }
-
--(void)phoneIsExist:(NSNotification*) noti{
+#pragma mark - UserActdelegate
+-(void)phoneIsExist{
     if (self.registOrReset) {
         //regist
         UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"手机号已经注册！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -201,8 +201,9 @@
         [alert show];
         
     }
+
 }
--(void)phoneIsNotExist:(NSNotification*) noti{
+-(void)phoneIsNotExist{
     if (self.registOrReset) {
         //regist
         NSString* str=[NSString stringWithFormat:@"我们将发送验证码短信到这个号码:%@ %@",self.areaCodeField.text,self.telField.text];
@@ -213,17 +214,17 @@
         //reset
         UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"手机号还未注册里环王！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
-
+        
         
     }
-}
 
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     _da=[[UserActDA alloc] init];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(phoneIsExist:) name:phone_user_exist_notification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(phoneIsNotExist:) name:phone_user_no_exist_notification object:nil];
+    _da.delegate=self;
+    
     // Do any additional setup after loading the view from its nib.
     
     self.view.backgroundColor=[UIColor whiteColor];

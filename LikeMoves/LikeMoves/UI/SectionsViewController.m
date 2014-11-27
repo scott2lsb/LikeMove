@@ -244,7 +244,7 @@ sectionForSectionIndexTitle:(NSString *)title
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSLog(@"点击了第%i组的 第%i列",indexPath.section,indexPath.row);
+//    DLog(@"点击了第%i组的 第%i列",indexPath.section,indexPath.row);
     
     NSUInteger section = [indexPath section];
     NSString *key = [keys objectAtIndex:section];
@@ -264,7 +264,7 @@ sectionForSectionIndexTitle:(NSString *)title
     country.countryName=countryName;
     country.areaCode=areaCode;
     
-    NSLog(@"%@ %@",countryName,areaCode);
+    DLog(@"%@ %@",countryName,areaCode);
     
     
     [self.view endEditing:YES];
@@ -273,7 +273,7 @@ sectionForSectionIndexTitle:(NSString *)title
     for (int i=0; i<_areaArray.count; i++) {
         NSDictionary* dict1=[_areaArray objectAtIndex:i];
         NSString* code1=[dict1 valueForKey:@"zone"];
-        NSLog(@"%@",code1);
+        DLog(@"%@",code1);
         if ([code1 isEqualToString:areaCode]) {
             compareResult=1;
             break;

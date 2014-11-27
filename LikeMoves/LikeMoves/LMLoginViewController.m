@@ -184,7 +184,6 @@
     RegViewController* reg=[[RegViewController alloc] init];
     reg.registOrReset=NO;
     [self presentViewController:reg animated:YES completion:^{
-        
     }];
     
 }

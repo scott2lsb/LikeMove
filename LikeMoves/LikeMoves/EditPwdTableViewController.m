@@ -24,8 +24,15 @@ User* user;
     UIView*view =[ [UIView alloc]init];
     view.backgroundColor= [UIColor clearColor];
     [self.tableView setTableFooterView:view];
+    //收起键盘
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]   initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
 }
-
+-(void)dismissKeyboard {
+    [_oldPwd resignFirstResponder];
+    [_rePwd resignFirstResponder];
+    [_comfirmPwd resignFirstResponder];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -67,6 +74,9 @@ User* user;
 -(void)resetPwdFail{
     UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"密码修改失败！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alert show];
+}
+- (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
+    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow]animated:YES];
 }
 #pragma mark alert-delegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

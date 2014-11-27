@@ -28,10 +28,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //背景图片设置
-    UIImageView* img=[[UIImageView alloc] initWithFrame:self.view.bounds];
-    img.image=[[UIImage imageNamed:@"launch2"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
-    [self.view addSubview:img];
-    [self.view sendSubviewToBack:img];
+//    UIImageView* img=[[UIImageView alloc] initWithFrame:self.view.bounds];
+//    img.image=[[UIImage imageNamed:@"launch2"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
+//    [self.view addSubview:img];
+//    [self.view sendSubviewToBack:img];
 }
 
 - (void)didReceiveMemoryWarning

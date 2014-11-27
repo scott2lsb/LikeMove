@@ -84,6 +84,7 @@ static int sportCircleNumber;
         _calCount.text=@"0卡";
         _calCount.font=[UIFont systemFontOfSize:15];
         _calCount.textAlignment=NSTextAlignmentCenter;
+        _calCount.textColor=[UIColor lightGrayColor];
         
         _calImg=[[UIImageView alloc] initWithFrame:CGRectMake(139, 342, 44, 44)];
         _calImg.image=[UIImage imageNamed:@"fire.png"];
@@ -96,6 +97,7 @@ static int sportCircleNumber;
         _calCount.text=@"0卡";
         _calCount.font=[UIFont systemFontOfSize:15];
         _calCount.textAlignment=NSTextAlignmentCenter;
+        _calCount.textColor=[UIColor lightGrayColor];
         
         _calImg=[[UIImageView alloc] initWithFrame:CGRectMake(139, 380, 44, 44)];
         _calImg.image=[UIImage imageNamed:@"fire.png"];

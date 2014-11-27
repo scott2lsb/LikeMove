@@ -10,9 +10,10 @@
 #import "SectionsViewController.h"
 #import "UserActDA.h"
 #import "SMS_SDK/SMS_SRReachability.h"
+#import "LMUserActDADelegate.h"
 @protocol SecondViewControllerDelegate;
 
-@interface RegViewController : UIViewController <UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,SecondViewControllerDelegate,UITextFieldDelegate>
+@interface RegViewController : UIViewController <UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,SecondViewControllerDelegate,UITextFieldDelegate,LMUserActDADelegate>
 
 @property(nonatomic,strong) UITableView* tableView;
 

@@ -242,6 +242,8 @@
 		8AEBEE921A076FC50003D91A /* com_earth.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AEBEE901A076FC50003D91A /* com_earth.png */; };
 		8AEFC8621A201A2F00703863 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEFC8611A201A2F00703863 /* Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8AEFC8641A201C3000703863 /* AlipayRsaLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEFC8631A201C3000703863 /* AlipayRsaLib.a */; };
+		8AF10FAF1A26F562009FBC11 /* caiguoguo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AF10FAE1A26F562009FBC11 /* caiguoguo_icon.png */; };
+		8AF10FB11A26F575009FBC11 /* lihuanone_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AF10FB01A26F575009FBC11 /* lihuanone_icon.png */; };
 		F2195B7CB90086FB1E60C8F2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6772DCDF65961186F47E45BF /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -632,6 +634,8 @@
 		8AEBEE901A076FC50003D91A /* com_earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = com_earth.png; sourceTree = "<group>"; };
 		8AEFC8611A201A2F00703863 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		8AEFC8631A201C3000703863 /* AlipayRsaLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AlipayRsaLib.a; sourceTree = "<group>"; };
+		8AF10FAE1A26F562009FBC11 /* caiguoguo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = caiguoguo_icon.png; sourceTree = "<group>"; };
+		8AF10FB01A26F575009FBC11 /* lihuanone_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lihuanone_icon.png; sourceTree = "<group>"; };
 		BB5C4D6F910CC83B04D77B3C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1237,6 +1241,8 @@
 		8AAF82AF19D8ECCD000E118A /* PageElement */ = {
 			isa = PBXGroup;
 			children = (
+				8AF10FB01A26F575009FBC11 /* lihuanone_icon.png */,
+				8AF10FAE1A26F562009FBC11 /* caiguoguo_icon.png */,
 				8A99F49D1A21C91500BBA608 /* login_pwd.png */,
 				8A99F49E1A21C91500BBA608 /* login_username.png */,
 				8A41C8F819FB42B200FBAD37 /* chartBtn60.png */,
@@ -1702,6 +1708,7 @@
 				8A3AF25F19F17618008E3CD3 /* UMSShareListController.xib in Resources */,
 				8AAF82CB19D8ECCD000E118A /* contact@2x.png in Resources */,
 				8AE3780E1A12D9E60017118C /* Alixpay.bundle in Resources */,
+				8AF10FB11A26F575009FBC11 /* lihuanone_icon.png in Resources */,
 				8A3AF25519F17618008E3CD3 /* UMSocialLocalizable.strings in Resources */,
 				8A3AF26019F17618008E3CD3 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				8AB1AC4119D8270500017485 /* first-568h@2x.png in Resources */,
@@ -1712,6 +1719,7 @@
 				8AAF82C419D8ECCD000E118A /* more.png in Resources */,
 				8AAABE091A0656DE006BF58A /* friend_table_header.png in Resources */,
 				8A33784C19C5C656008B9AF5 /* Main.storyboard in Resources */,
+				8AF10FAF1A26F562009FBC11 /* caiguoguo_icon.png in Resources */,
 				8AAABDCA1A01C323006BF58A /* company_map.png in Resources */,
 				8A3AF25A19F17618008E3CD3 /* UMSCommentInputControlleriPad.xib in Resources */,
 				8AAF82C519D8ECCD000E118A /* sport.png in Resources */,

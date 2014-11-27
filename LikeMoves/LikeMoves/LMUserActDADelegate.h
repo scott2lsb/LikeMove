@@ -28,4 +28,6 @@
 
 -(void)editUserInfoSuccess;
 -(void)editUserInfoFail;
+-(void)phoneIsExist;
+-(void)phoneIsNotExist;
 @end
