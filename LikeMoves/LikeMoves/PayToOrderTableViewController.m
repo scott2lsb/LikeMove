@@ -116,7 +116,14 @@ User* user;
         NSString* pwd=[self md5:[alertView textFieldAtIndex:0].text];
         DLog(@"md5-----%@===%@",[alertView textFieldAtIndex:0].text,pwd);
         if([user.password isEqualToString:pwd]){
+            float balance=[user.balance floatValue];
+            if(balance<realPrice){
+                UIAlertView* alertWaring=[[UIAlertView alloc] initWithTitle:@"余额不足，请及时充值！" message:nil delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil];
+                [alertWaring show];
+
+            }else{
             [_bl payOrderWithOrderID:orderID];
+            }
         }else{
             UIAlertView* alertWaring=[[UIAlertView alloc] initWithTitle:@"密码错误!" message:nil delegate:self cancelButtonTitle:@"确认" otherButtonTitles: nil];
             [alertWaring show];

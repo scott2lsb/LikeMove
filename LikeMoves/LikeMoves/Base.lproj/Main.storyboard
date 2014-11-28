@@ -2437,7 +2437,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="请设置密码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xos-sB-GwE">
                                 <rect key="frame" x="106" y="176" width="173" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MvR-yq-AyS">
                                 <rect key="frame" x="13" y="377" width="295" height="44"/>
@@ -2836,12 +2836,11 @@
 牛人说Change begins with movement，
 穿上兽皮，拿起木棒，去城市的小树林奔跑吧！
 
-     本应用主要通过运动检测，记录用户运动时间和运动步数，根据运动参数生成金币，在运动的活动促销区域可以进行在线购物，并使用运动所获金币抵扣现金。
+本应用主要通过运动检测，记录用户运动时间和运动步数，根据运动参数生成金币，在运动的活动促销区域可以进行在线购物，并使用运动所获金币抵扣现金。
      本应用可以通过手机号，手机通讯录和雷达功能添加好友。通过手机通讯录添加好友，可以向手机通讯录中已经注册里环王的用户发送好友请求，对没有注册里环王的手机通讯录好友发送短信进行邀请。
-在好友列表中对当天好友的运动量进行排行，快去成为每天的运动达人吧！
+在好友列表中对当天好友的运动量进行排行，还可以看到过去30天的运动天数，快去成为每天的运动达人吧！
      还能够通过分享运动信息和我的众筹信息开启众筹模式，让您的好友可以向您赠送金币，您也可以向您的好友捐献您运动所得的宝贵金币。
-     通过运动增长您的能量条刻度，当您的能量条超过了4分之一（15分钟）时，您可以燃烧您运动产生的能量，来获得能量中的金币，一天您可以燃烧3次能量来获得金币。当天的能量可以累积到第二天，但是当能量条充满时，您运动产生的能量将消散于虚空之中。
-</string>
+     通过运动增长您的能量条刻度，当您的能量条超过了4分之一（15分钟）时，您可以燃烧您运动产生的能量，来获得能量中的金币，一天您可以燃烧3次能量来获得金币。当天的能量可以累积到第二天，但是当能量条充满时，您运动产生的能量将消散于虚空之中。</string>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
