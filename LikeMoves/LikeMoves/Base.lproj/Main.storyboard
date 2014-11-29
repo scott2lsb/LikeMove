@@ -143,13 +143,13 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70T-hU-bjG">
                                 <rect key="frame" x="240" y="445" width="60" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaS-mg-o2H">
                                 <rect key="frame" x="10" y="445" width="61" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32u-j1-Vow">
@@ -267,8 +267,8 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S15-sN-MkR">
                                 <rect key="frame" x="0.0" y="47" width="159" height="106"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-77"/>
-                                <state key="normal" title="企业介绍" backgroundImage="com_detail.png">
-                                    <color key="titleColor" red="0.0" green="1" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="采果果介绍" backgroundImage="com_detail.png">
+                                    <color key="titleColor" red="0.0" green="0.80000000000000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -278,7 +278,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blb-RF-zEw">
                                 <rect key="frame" x="158" y="47" width="162" height="106"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-77"/>
-                                <state key="normal" title="企业地图" backgroundImage="com_earth.png">
+                                <state key="normal" title="采果果地图" backgroundImage="com_earth.png">
                                     <color key="titleColor" red="0.0" green="0.80000000000000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -324,12 +324,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="企业介绍" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMp-JU-Jf3">
-                                <rect key="frame" x="96" y="94" width="129" height="22"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="      我是采果果。成立于2013年，以青春的名义创新，以青春的名义创意，以青春的名义颠覆。“屌丝型，文艺心，追求简单舒适的生活”的青春水果品牌——“我是采果果”，希望大家喜欢我，我会好好努力，把大自然的恩赐带到这里！" translatesAutoresizingMaskIntoConstraints="NO" id="8Fa-Kc-hdO">
                                 <rect key="frame" x="24" y="140" width="272" height="245"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -350,12 +344,20 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="caiguoguo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="oLX-nW-AKX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="caiguoguo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="oLX-nW-AKX">
                                 <rect key="frame" x="110" y="516" width="101" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="OHB-iQ-Fsg"/>
+                                    <constraint firstAttribute="width" constant="101" id="jiP-Ye-qdZ"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="oLX-nW-AKX" secondAttribute="centerX" constant="-0.5" id="9nd-QE-7Ss"/>
+                            <constraint firstItem="uWR-FX-fWs" firstAttribute="top" secondItem="oLX-nW-AKX" secondAttribute="bottom" constant="20" id="uZA-iu-tq6"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="企业介绍" id="Wum-Ix-Yl6"/>
                 </viewController>
@@ -475,7 +477,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f6L-dO-iyR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2934" y="-983"/>
+            <point key="canvasLocation" x="2957" y="-263"/>
         </scene>
         <!--Friend Table View Controller - 好友-->
         <scene sceneID="rJL-iK-B2A">
@@ -1060,7 +1062,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLk-9N-EXF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4197" y="52"/>
+            <point key="canvasLocation" x="2957" y="-1020"/>
         </scene>
         <!--Navigation Controller - 个人中心-->
         <scene sceneID="WvG-cs-Y7J">
@@ -2690,26 +2692,31 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Hno-Mr-Krt" kind="modal" id="wQx-GC-6ud"/>
+                                            <segue destination="oeL-bJ-pNC" kind="push" id="UEH-GJ-Wu3"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="more" id="EqE-xP-63f">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="more" id="zyw-Oq-VAR">
                                         <rect key="frame" x="0.0" y="130" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EqE-xP-63f" id="IxV-BR-OG0">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zyw-Oq-VAR" id="Lzd-s7-17V">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="企业地址" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rxO-l7-vdi">
-                                                    <rect key="frame" x="50" y="11" width="68" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="客服微信" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPj-k9-K2W">
+                                                    <rect key="frame" x="50" y="2" width="68" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="lihuanone" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPB-va-hOV">
+                                                    <rect key="frame" x="52" y="20" width="50" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" red="1" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="cte-Vn-6Tw" kind="push" id="cof-5x-8qg"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -2766,15 +2773,15 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="more" rowHeight="192" id="rdu-il-tmI">
-                                        <rect key="frame" x="0.0" y="328" width="320" height="192"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="more" rowHeight="190" id="rdu-il-tmI">
+                                        <rect key="frame" x="0.0" y="328" width="320" height="190"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rdu-il-tmI" id="bwr-Z4-ycq">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="191"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="189"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="301" translatesAutoresizingMaskIntoConstraints="NO" id="QhR-Aa-Mdk">
-                                                    <rect key="frame" x="10" y="89" width="301" height="76"/>
+                                                    <rect key="frame" x="10" y="91" width="301" height="76"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <string key="text">里环王 V1.0.1
 出品：中扬科技
@@ -2785,7 +2792,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lihuanone_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="okW-Ob-fMt">
-                                                    <rect key="frame" x="117" y="18" width="87" height="63"/>
+                                                    <rect key="frame" x="117" y="20" width="87" height="63"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -2817,32 +2824,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="里环王应用简介" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0G-xL-x6F">
-                                <rect key="frame" x="67" y="71" width="186" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLm-P1-hr2">
-                                <rect key="frame" x="5" y="94" width="310" height="404"/>
+                                <rect key="frame" x="5" y="82" width="310" height="416"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="310" id="dAL-DZ-K9X"/>
                                 </constraints>
-                                <string key="text">我们渴望在城市的蓝天下奔跑，
-就像祖先们那样，穿行于高山、丛林、草原，释放生命的活力！
-牛人说Change begins with movement，
-穿上兽皮，拿起木棒，去城市的小树林奔跑吧！
-
-本应用主要通过运动检测，记录用户运动时间和运动步数，根据运动参数生成金币，在运动的活动促销区域可以进行在线购物，并使用运动所获金币抵扣现金。
+                                <mutableString key="text">     本应用主要通过运动检测，记录用户运动时间和运动步数，根据运动参数生成金币，在运动的活动促销区域可以进行在线购物，并使用运动所获金币抵扣现金。
      本应用可以通过手机号，手机通讯录和雷达功能添加好友。通过手机通讯录添加好友，可以向手机通讯录中已经注册里环王的用户发送好友请求，对没有注册里环王的手机通讯录好友发送短信进行邀请。
 在好友列表中对当天好友的运动量进行排行，还可以看到过去30天的运动天数，快去成为每天的运动达人吧！
      还能够通过分享运动信息和我的众筹信息开启众筹模式，让您的好友可以向您赠送金币，您也可以向您的好友捐献您运动所得的宝贵金币。
-     通过运动增长您的能量条刻度，当您的能量条超过了4分之一（15分钟）时，您可以燃烧您运动产生的能量，来获得能量中的金币，一天您可以燃烧3次能量来获得金币。当天的能量可以累积到第二天，但是当能量条充满时，您运动产生的能量将消散于虚空之中。</string>
+     通过运动增长您的能量条刻度，当您的能量条超过了四分之一（15分钟）时，您可以燃烧您运动产生的能量，来获得能量中的金币，一天您可以燃烧3次能量来获得金币。当天的能量可以累积到第二天，但是当能量条充满时，您运动产生的能量将消散于虚空之中。</mutableString>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bms-8I-vgo">
@@ -2859,7 +2854,7 @@
                                 </items>
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lihuanone_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="e2Q-i7-Aur">
-                                <rect key="frame" x="117" y="500" width="87" height="62"/>
+                                <rect key="frame" x="117" y="473" width="87" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="npC-Ra-EcE"/>
@@ -2870,8 +2865,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="AM9-QU-qqh" firstAttribute="top" secondItem="YLm-P1-hr2" secondAttribute="bottom" constant="70" id="0mQ-nY-7HY"/>
-                            <constraint firstItem="YLm-P1-hr2" firstAttribute="top" secondItem="riJ-ep-3dW" secondAttribute="bottom" constant="74" id="CyF-Ve-5e1"/>
-                            <constraint firstItem="AM9-QU-qqh" firstAttribute="top" secondItem="e2Q-i7-Aur" secondAttribute="bottom" constant="6" id="S7f-3k-ud3"/>
+                            <constraint firstItem="YLm-P1-hr2" firstAttribute="top" secondItem="riJ-ep-3dW" secondAttribute="bottom" constant="62" id="CyF-Ve-5e1"/>
+                            <constraint firstItem="AM9-QU-qqh" firstAttribute="top" secondItem="e2Q-i7-Aur" secondAttribute="bottom" constant="33" id="S7f-3k-ud3"/>
                             <constraint firstAttribute="centerX" secondItem="YLm-P1-hr2" secondAttribute="centerX" constant="-0.5" id="Ujy-VX-YAy"/>
                             <constraint firstAttribute="centerX" secondItem="e2Q-i7-Aur" secondAttribute="centerX" constant="-0.5" id="zqa-OL-1W3"/>
                         </constraints>
@@ -2881,6 +2876,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMy-NV-fAw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1911" y="8485"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="9XF-cQ-U1b">
+            <objects>
+                <viewController id="oeL-bJ-pNC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ug6-Dh-LG7"/>
+                        <viewControllerLayoutGuide type="bottom" id="t5C-Cr-rI0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2f4-36-fPF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6y-b8-luW">
+                                <rect key="frame" x="20" y="64" width="280" height="283"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">我们渴望在城市的蓝天下奔跑，
+就像祖先们那样，穿行于高山、丛林、草原，释放生命的活力！
+牛人说Change begins with movement，
+穿上兽皮，拿起木棒，去城市的小树林奔跑吧！</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lihuanone_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="jC1-KV-8Zw">
+                                <rect key="frame" x="112" y="385" width="96" height="67"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="67" id="D70-9S-DeP"/>
+                                    <constraint firstAttribute="width" constant="96" id="vBc-zv-Sti"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="jC1-KV-8Zw" secondAttribute="centerX" id="3Fs-yV-f2t"/>
+                            <constraint firstItem="t5C-Cr-rI0" firstAttribute="top" secondItem="jC1-KV-8Zw" secondAttribute="bottom" constant="67" id="IRL-ME-T7E"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ILh-ul-fZ4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eE7-p7-0hF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1894" y="9150"/>
         </scene>
         <!--Orders View Controller - 订单管理-->
         <scene sceneID="eU0-OI-9oL">
@@ -3367,9 +3406,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="bfO-xO-zTJ"/>
-        <segue reference="7ov-pv-zSk"/>
         <segue reference="l37-Wq-HNo"/>
-        <segue reference="l26-0o-Wer"/>
+        <segue reference="5Qj-kA-btw"/>
     </inferredMetricsTieBreakers>
 </document>

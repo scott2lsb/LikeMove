@@ -332,7 +332,8 @@ int fireTime;
                 [_bl addCoins:@"36"];
                 hud.labelText = [NSString stringWithFormat:@"恭喜您获得了%@个金币",@"36"];
             }else{
-                double i=floor(sportCircleNumber/100);
+                int random=arc4random()%6;//随机数向上浮动5
+                double i=floor(sportCircleNumber/100)+random;
                 [_bl addCoins:[NSString stringWithFormat:@"%f",i]];
                 hud.labelText = [NSString stringWithFormat:@"恭喜您获得了%0.0f个金币",i];
             }

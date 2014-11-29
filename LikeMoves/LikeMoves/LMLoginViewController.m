@@ -72,7 +72,7 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:mUserDefaultsCookie]) {
         [self performSelector:@selector(presentMainTabPage) withObject:nil afterDelay:1.5];
         //TODO: 添加等待指示框
-        spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor orangeColor]];
+        spinner = [[RTSpinKitView alloc] initWithStyle:RTSpinKitViewStyleCircle color:[UIColor emerlandColor]];
         spinner.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
         [self.view addSubview:spinner];
         self.view.layer.opaque=YES;

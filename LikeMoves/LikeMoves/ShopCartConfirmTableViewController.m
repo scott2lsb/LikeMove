@@ -159,8 +159,6 @@ NSString* shipingMethod=@"2";
     NSString* ids=(NSString*)[_detail objectForKey:@"shopping_ids"];
     NSString* coinNum=_coinNum.text;
 //    User* user=[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults                                                            standardUserDefaults] objectForKey:mUserInfo]];
-//    float balance=[user.balance floatValue];
-//    float realPrice=([[_detail objectForKey:@"totalPrice"] floatValue]-[_coinNum.text floatValue]/100 );
     //余额不足时，不能够创建订单
 //    if (realPrice>balance) {
 //        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"账户余额不足！" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
