@@ -88,7 +88,7 @@
     // 创建MKPointAnnotation对象——代表一个锚点
 	MKPointAnnotation* annotation = [[MKPointAnnotation alloc] init];
 	annotation.title = @"采果果分店";
-	annotation.subtitle = @"临沂市兰山区香榭丽舍西门商铺3号";
+	annotation.subtitle = @"临沂市兰山区香榭丽都西门商铺3号";
 	CLLocationCoordinate2D coordinate = {latitude , longitude};
 	annotation.coordinate = coordinate;
 	// 添加锚点
